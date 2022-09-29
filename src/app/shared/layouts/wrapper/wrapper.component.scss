@@ -1,0 +1,14 @@
+.app_container {
+    width: 100vw;
+    background-color: #D6EDEC;
+}
+
+.main_container {
+    display: flex;
+}
+
+.content_container {
+    height: calc(100vh - 84px - 4rem);
+    padding: 2rem;
+    width: 100%;
+}

@@ -1,0 +1,24 @@
+<div class="table-filters_container">
+    <div class="table-filters-left">
+        <tui-select tuiTextfieldSize="m" class="tui-space_vertical-4" [formControl]="testValue"
+            [tuiTextfieldLabelOutside]="true">
+            Аккаунты
+            <input tuiTextfield placeholder="Choose your hero" />
+            <tui-data-list-wrapper *tuiDataList [items]="items"></tui-data-list-wrapper>
+        </tui-select>
+    </div>
+    <div class="table-filters-right">
+        <tui-select tuiTextfieldSize="m" class="tui-space_vertical-4 tui-space_right-1" [formControl]="testValue"
+            [tuiTextfieldLabelOutside]="true">
+            Статусы
+            <input tuiTextfield placeholder="Choose your hero" />
+            <tui-data-list-wrapper *tuiDataList [items]="items"></tui-data-list-wrapper>
+        </tui-select>
+        <tui-select tuiTextfieldSize="m" class="tui-space_vertical-4" [formControl]="testValue"
+            [tuiTextfieldLabelOutside]="true">
+            Типы
+            <input tuiTextfield placeholder="Choose your hero" />
+            <tui-data-list-wrapper *tuiDataList [items]="items"></tui-data-list-wrapper>
+        </tui-select>
+    </div>
+</div>

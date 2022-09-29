@@ -1,0 +1,25 @@
+.toolbar_container {
+    padding: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toolbar_left, .toolbar_right {
+    display: flex;
+    align-items: center;
+}
+
+.toolbar_logo {
+    height: 60px;
+    margin: 0 1rem;
+}
+
+.toolbar_priceplan {
+    margin: 0 1rem;
+    color: #2C7A77;
+}
+
+.toolbar_button, .toolbar_logo {
+    cursor: pointer;
+}
