@@ -11,3 +11,11 @@
 .table-filters-right {
     display: flex;
 }
+
+.b-form {
+    display: flex;
+}
+
+.b-form > * {
+    min-width: 160px;
+}

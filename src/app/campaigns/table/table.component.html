@@ -1,16 +1,16 @@
 <div class="table_container shadow(1)">
     <p tuiTextfieldSize="m" class="filters">
-    <span>Кампании (111)</span>
-    <tui-input class="input" [tuiTextfieldCleaner]="true" [(ngModel)]="search"
-        tuiTextfieldIconLeft="tuiIconSearchLarge">
-        Поиск
-    </tui-input>
-    &nbsp;
-    <button tuiButton type="button" size="m" iconRight="tuiIconRefresh" appearance="outline"
-        class="tui-space_right-3 tui-space_bottom-3 shadow(1)">
-        Загрузить из WB
-    </button>
-    <!-- <tui-hosted-dropdown [content]="dropdown">
+        <span>Кампании (111)</span>
+        <tui-input class="input" [tuiTextfieldCleaner]="true" [(ngModel)]="search"
+            tuiTextfieldIconLeft="tuiIconSearchLarge">
+            Поиск
+        </tui-input>
+        &nbsp;
+        <button tuiButton type="button" size="m" iconRight="tuiIconRefresh" appearance="outline"
+            class="tui-space_right-3 tui-space_bottom-3 shadow(1)">
+            Загрузить из WB
+        </button>
+        <!-- <tui-hosted-dropdown [content]="dropdown">
         <button
             tuiButton
             size="m"
@@ -34,27 +34,75 @@
             (tuiSortByChange)="sorter$.next($event!)" (directionChange)="direction$.next($event)">
             <thead>
                 <tr tuiThGroup>
+                    <th *tuiHead="'banner'" tuiTh [sorter]="null">
+                        Баннер
+                    </th>
                     <th *tuiHead="'name'" tuiTh tuiSortable>
-                        Name
+                        Кампания
                     </th>
-                    <th *tuiHead="'dob'" tuiTh tuiSortable>
-                        Date of Birth
+                    <th *tuiHead="'type'" tuiTh tuiSortable></th>
+                    <th *tuiHead="'target'" tuiTh tuiTh [sorter]="null">
+                        Цель
                     </th>
-                    <th *tuiHead="'age'" tuiTh tuiSortable>
-                        Age
+                    <th *tuiHead="'bid'" tuiTh tuiTh [sorter]="null">
+                        Ставка
+                    </th>
+                    <th *tuiHead="'budget'" tuiTh tuiSortable>
+                        Бюджет
+                    </th>
+                    <th *tuiHead="'status'" tuiTh tuiSortable>
+                        Статус
+                    </th>
+                    <th *tuiHead="'action'" tuiTh [sorter]="null">
+                    </th>
+                    <th *tuiHead="'onOffToogle'" tuiTh [sorter]="null">
+                        Вкл / выкл
+                    </th>
+                    <th *tuiHead="'menu'" tuiTh [sorter]="null">
+                        <button tuiIconButton appearance="flat" icon="tuiIconMoreVer" type="button"
+                        [pseudoHover]="null"></button>
                     </th>
                 </tr>
             </thead>
             <tbody tuiTbody [data]="data">
                 <tr *tuiRow="let item of data" tuiTr>
+                    <td *tuiCell="'banner'" tuiTd>
+                        <div class="table_banner"
+                            style="width: 60px; height: 30px; background-image: url('../../../assets/img/banner.jpg'); background-size: cover;">
+                        </div>
+                    </td>
                     <td *tuiCell="'name'" tuiTd [class.match]="isMatch(item.name)">
                         {{ item.name }}
                     </td>
-                    <td *tuiCell="'dob'" tuiTd [class.match]="isMatch(item.dob)">
-                        {{ item.dob }}
+                    <td *tuiCell="'type'" tuiTd>
+                        <i style="color: #929697">плакаты</i>
                     </td>
-                    <td *tuiCell="'age'" tuiTd [class.match]="isMatch(getAge(item))">
-                        {{ getAge(item) }}
+                    <td *tuiCell="'target'" tuiTd>
+                        <i>-/-</i>
+                    </td>
+                    <td *tuiCell="'bid'" tuiTd>
+                        <i>-/-</i>
+                    </td>
+                    <!-- <td *tuiCell="'dob'" tuiTd [class.match]="isMatch(item.dob)">
+                        {{ item.dob }} + ₽
+                    </td> -->
+                    <td *tuiCell="'budget'" tuiTd [class.match]="isMatch(getBudget(item))">
+                        {{ getBudget(item) }} ₽
+                    </td>
+                    <td *tuiCell="'status'" tuiTd>
+                        <tui-tag status="custom" class="tag support-3" [hoverable]="true" [value]="'Идут показы'">
+                        </tui-tag>
+                    </td>
+                    <td *tuiCell="'action'" tuiTd style="display: flex; align-items: center;">
+                        <tui-toggle [showIcons]="true"></tui-toggle>
+                    </td>
+                    <td *tuiCell="'onOffToogle'" tuiTd>
+                        <tui-tag status="custom" class="tag support-5" [hoverable]="true" [value]="'Выключен'">
+                        </tui-tag>
+                    </td>
+                    <td *tuiCell="'menu'" tuiTd>
+                        <button tuiIconButton size="m" appearance="flat" icon="tuiIconMoreVer" type="button"
+                            [pseudoHover]="null"></button>
                     </td>
                 </tr>
             </tbody>

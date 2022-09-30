@@ -1,8 +1,8 @@
 <div class="sidenav_container">
     <ul>
-        <li><img src="./../../../../assets/icons/campaigns.svg">Управление рекламной кампанией</li>
-        <li><img src="./../../../../assets/icons/position.svg">Позиция по запросу</li>
-        <li><img src="./../../../../assets/icons/calculation.svg">Рассчет выкупов</li>
-        <li><img src="./../../../../assets/icons/edit.svg">Исправление оценки карточки</li>
+        <li><img src="./../../../../assets/icons/campaigns.svg"><span *ngIf="appService.menuOpened">Управление рекламной кампанией</span></li>
+        <li><img src="./../../../../assets/icons/position.svg"><span *ngIf="appService.menuOpened">Позиция по запросу</span></li>
+        <li><img src="./../../../../assets/icons/calculation.svg"><span *ngIf="appService.menuOpened">Рассчет выкупов</span></li>
+        <li><img src="./../../../../assets/icons/edit.svg"><span *ngIf="appService.menuOpened">Исправление оценки карточки</span></li>
     </ul>
 </div>

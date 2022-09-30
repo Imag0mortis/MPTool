@@ -58,7 +58,7 @@ const DATA: readonly User[] = Array.from({length: 300}, () => ({
     name: `${LAST[Math.floor(Math.random() * 10)]}, ${
         FIRST[Math.floor(Math.random() * 10)]
     }`,
-    dob: TODAY.append({day: -Math.floor(Math.random() * 4000) - 7500}),
+    dob: TODAY.append({day: -Math.floor(Math.random() * 400000) - 7500}),
 }));
 const KEYS: Record<string, Key> = {
     Name: `name`,
@@ -94,11 +94,11 @@ export class TableComponent {
         share(),
     );
 
-    initial: readonly string[] = [`Name`, `Date of Birth`, `Age`];
+    initial: readonly string[] = [`Banner`, `Name`, `Type`, `Target`, `Bid`, `Budget`, `Status`, `Action`, `OnOffToogle`, `Menu`];
 
     enabled = this.initial;
 
-    columns = [`name`, `dob`, `age`];
+    columns = [`banner`, `name`, `type`, `target`, `bid`, `budget`, `status` , `action`, `onOffToogle`, `menu`];
 
     search = ``;
 
@@ -141,8 +141,8 @@ export class TableComponent {
         return !!this.search && TUI_DEFAULT_MATCHER(value, this.search);
     }
 
-    getAge(user: User): number {
-        return getAge(user);
+    getBudget(user: User): number {
+        return getBudget(user);
     }
 
     private getData(
@@ -158,22 +158,22 @@ export class TableComponent {
         const end = start + size;
         const result = [...DATA]
             .sort(sortBy(key, direction))
-            .filter(user => getAge(user) >= minAge)
+            .filter(user => getBudget(user) >= minAge)
             .map((user, index) => (index >= start && index < end ? user : null));
 
         // Imitating server response
-        return timer(3000).pipe(mapTo(result));
+        return timer(1000).pipe(mapTo(result));
     }
 }
 
 function sortBy(key: 'name' | 'dob' | 'age', direction: -1 | 1): TuiComparator<User> {
     return (a, b) =>
         key === `age`
-            ? direction * tuiDefaultSort(getAge(a), getAge(b))
+            ? direction * tuiDefaultSort(getBudget(a), getBudget(b))
             : direction * tuiDefaultSort(a[key], b[key]);
 }
 
-function getAge({dob}: User): number {
+function getBudget({dob}: User): number {
     const years = TODAY.year - dob.year;
     const months = TODAY.month - dob.month;
     const days = TODAY.day - dob.day;
