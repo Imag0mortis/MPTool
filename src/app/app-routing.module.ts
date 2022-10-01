@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { WrapperComponent } from './shared/layouts/wrapper/wrapper.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'campaigns', pathMatch: 'full' },
   {
     path: '',
     component: WrapperComponent,
@@ -12,6 +12,20 @@ const routes: Routes = [
         path: 'campaigns',
         loadChildren: () =>
           import('./campaigns/campaigns.module').then((m) => m.CampaignsModule),
+        // canActivate: [AuthGuard],
+        // canActivateChild: [AuthGuard],
+      },
+      {
+        path: 'position',
+        loadChildren: () =>
+          import('./position/position.module').then((m) => m.PositionModule),
+        // canActivate: [AuthGuard],
+        // canActivateChild: [AuthGuard],
+      },
+      {
+        path: 'realprice',
+        loadChildren: () =>
+          import('./real-price/real-price.module').then((m) => m.RealPriceModule),
         // canActivate: [AuthGuard],
         // canActivateChild: [AuthGuard],
       },

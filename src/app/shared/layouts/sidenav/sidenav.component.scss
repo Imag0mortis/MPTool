@@ -7,9 +7,24 @@
     align-items: center;
     color: #2C7A77;
     cursor: pointer;
+    line-height: 1;
 }
 
-.sidenav_container ul li img {
+.sidenav_container ul li svg {
     margin: 0.75rem 0.5rem 0.75rem 0;
     width: 15px;
+    min-width: 15px;
+}
+
+.sidenav_container ul li svg path {
+    fill: #56B4B0;
+}
+
+.activeIcon {
+    fill: #113836!important;
+}
+
+.activeTxt {
+    text-decoration: underline;
+    color: #113836;
 }

@@ -1,0 +1,17 @@
+<div class="table-filters_container">
+    <div class="table-filters-left">
+
+        <tui-input minlength="15" class="b-form" [tuiTextfieldCleaner]="true" [(ngModel)]="searchArticle"
+            tuiTextfieldIconLeft="tuiIconSearchLarge">
+            Поиск по артикулу
+        </tui-input>
+
+
+    </div>
+    <div class="table-filters-right">
+        <tui-input minlength="15" class="b-form" [tuiTextfieldCleaner]="true" [(ngModel)]="searchRequest"
+            tuiTextfieldIconLeft="tuiIconSearchLarge">
+            Поиск по запросу
+        </tui-input>
+    </div>
+</div>

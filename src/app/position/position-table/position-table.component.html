@@ -1,0 +1,35 @@
+<div class="table_container shadow(1)">
+    <div class="table_header">
+        <h3>История запросов</h3>
+        <a><span>Обучающее видео</span></a>
+    </div>
+    <table tuiTable class="table" [columns]="columns">
+        <thead>
+            <tr tuiThGroup>
+                <th tuiTh [resizable]="true">
+                    Артикул
+                </th>
+                <th tuiTh>Дата</th>
+                <th tuiTh>Позиция</th>
+                <th tuiTh>Запрос</th>
+            </tr>
+        </thead>
+        <tbody tuiTbody [data]="data">
+            <tr *tuiRow="let item of data; index as i" tuiTr>
+                <td *tuiCell="'article'" tuiTd>
+                    {{ item.article }}
+                </td>
+                <td *tuiCell="'date'" tuiTd>
+                    {{ item.date }}
+                </td>
+                <td *tuiCell="'position'" tuiTd>
+                    {{ item.position }}
+                </td>
+                <td *tuiCell="'request'" tuiTd>
+                    {{ item.request }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

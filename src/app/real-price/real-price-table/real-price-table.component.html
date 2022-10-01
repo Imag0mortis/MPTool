@@ -1,0 +1,60 @@
+<div class="table_container shadow(1)">
+    <div class="table_header">
+        <h3>Узнать реальную рекламную ставку</h3>
+        <a><span>Обучающее видео</span></a>
+    </div>
+    <table
+    tuiTable
+    class="table"
+    [columns]="columns"
+>
+    <thead>
+        <tr tuiThGroup>
+            <th
+                tuiTh
+                [resizable]="true"
+            >
+                Место
+            </th>
+            <th tuiTh>ID рекламодателя</th>
+            <th tuiTh>ID товара</th>
+            <th tuiTh>Реальная ставка</th>
+        </tr>
+    </thead>
+    <tbody
+        tuiTbody
+        [data]="data"
+    >
+        <tr
+            *tuiRow="let item of data; index as i"
+            tuiTr
+        >
+            <td
+                *tuiCell="'position'"
+                tuiTd
+            >
+                {{ i + 1 }}
+            </td>
+            <td
+                *tuiCell="'idAdvertiser'"
+                tuiTd
+            >
+                {{ item.idAdvertiser }}
+            </td>
+            <td
+                *tuiCell="'idProduct'"
+                tuiTd
+            >
+                {{ item.idProduct }}
+            </td>
+            <td
+                *tuiCell="'realBid'"
+                tuiTd
+            >
+                {{ item.realBid }}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</div>
