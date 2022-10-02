@@ -33,6 +33,20 @@ const routes: Routes = [
         // canActivate: [AuthGuard],
         // canActivateChild: [AuthGuard],
       },
+      {
+        path: 'ransom_calculation',
+        loadChildren: () =>
+          import('./ransom-calculation/ransom-calculation.module').then((m) => m.RansomCalculationModule),
+        // canActivate: [AuthGuard],
+        // canActivateChild: [AuthGuard],
+      },
+      {
+        path: 'score_correction',
+        loadChildren: () =>
+          import('./score-correction/score-correction.module').then((m) => m.ScoreCorrectionModule),
+        // canActivate: [AuthGuard],
+        // canActivateChild: [AuthGuard],
+      },
     ]
   }
 ];

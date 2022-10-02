@@ -5,6 +5,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { RouterModule } from '@angular/router';
 import {TuiMarkerIconModule} from '@taiga-ui/kit';
+import { TuiDropdownModule } from '@taiga-ui/core';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {TuiMarkerIconModule} from '@taiga-ui/kit';
   imports: [
     CommonModule,
     RouterModule,
-    TuiMarkerIconModule
+    TuiMarkerIconModule,
+    TuiDropdownModule
   ],
   exports: [SidenavComponent, ToolbarComponent, WrapperComponent],
 })

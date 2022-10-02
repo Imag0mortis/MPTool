@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -11,8 +11,7 @@ export class AppService {
   public menuSelector: BehaviorSubject<string> = new BehaviorSubject("");
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) { }
 
   init() {
@@ -36,7 +35,15 @@ export class AppService {
   }
   
   goPosition() {
-    this.router.navigate(['/position'])
+    this.router.navigate(['/position']);
+  }
+
+  goRansomCalculation() {
+    this.router.navigate(['/ransom_calculation']);
+  }
+
+  goScoreCorretion() {
+    this.router.navigate(['/score_correction']);
   }
 
 }

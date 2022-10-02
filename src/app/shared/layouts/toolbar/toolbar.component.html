@@ -1,23 +1,28 @@
-<div class="toolbar_container">
+<div class="toolbar_container" (tuiActiveZoneChange)="onActiveZone($event)">
     <div class="toolbar_left">
-        <tui-marker-icon (click)="appService.menuToogle()"
-            mode="success"
-            size="s"
-            src="tuiIconMenuLarge"
-            class="toolbar_button tui-space_right-2"
-        ></tui-marker-icon>
+        <tui-marker-icon (click)="appService.menuToogle()" mode="success" size="s" src="tuiIconMenuLarge"
+            class="toolbar_button tui-space_right-2"></tui-marker-icon>
         <img class="toolbar_logo" src="../../../../assets/img/logo.png">
     </div>
     <div class="toolbar_right">
         <div class="toolbar_priceplan">
             <span>Тариф: <strong>Free</strong></span>
         </div>
-        <tui-marker-icon
-            mode="success"
-            size="s"
-            src="tuiIconUser"
-            class="toolbar_button tui-space_right-2"
-        ></tui-marker-icon>
+        <tui-marker-icon [tuiDropdown]="dropdownContent" [tuiDropdownManual]="open" (tuiObscured)="onObscured($event)"
+            (click)="onClick()" mode="success" size="s" src="tuiIconUser" class="toolbar_button tui-space_right-2">
+        </tui-marker-icon>
     </div>
-    
+
+    <ng-template #dropdownContent>
+        <div class="dropdown">
+            <ul>
+                <li class="dropdown-el" (click)="authService.logout()">
+                    <tui-marker-icon mode="success" size="xs" src="tuiIconLogoutLarge"
+                        class="toolbar_button tui-space_right-2"></tui-marker-icon>
+                    Выйти
+                </li>
+            </ul>
+        </div>
+    </ng-template>
+
 </div>

@@ -5,7 +5,8 @@
     align-items: center;
 }
 
-.toolbar_left, .toolbar_right {
+.toolbar_left,
+.toolbar_right {
     display: flex;
     align-items: center;
 }
@@ -20,6 +21,20 @@
     color: #2C7A77;
 }
 
-.toolbar_button, .toolbar_logo {
+.toolbar_button,
+.toolbar_logo {
     cursor: pointer;
 }
+
+.dropdown-el {
+    display: flex;
+    padding: 0.25rem 0.35rem;
+    cursor: pointer;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.dropdown-el:hover {
+    background-color: #e9f8f3;
+    transition: 0.3s;
+} 
