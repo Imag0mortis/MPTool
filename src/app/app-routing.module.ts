@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './shared/authorization/login/login.component';
 import { WrapperComponent } from './shared/layouts/wrapper/wrapper.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'campaigns', pathMatch: 'full' },
+  {
+    path: 'login', component: LoginComponent
+  },
   {
     path: '',
     component: WrapperComponent,

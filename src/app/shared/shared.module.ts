@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LayoutsModule } from './layouts/layouts.module';
+import { AuthorizationModule } from './authorization/authorization.module';
 
 
 
@@ -9,6 +10,6 @@ import { LayoutsModule } from './layouts/layouts.module';
   imports: [
     CommonModule
   ],
-  exports: [LayoutsModule],
+  exports: [LayoutsModule, AuthorizationModule],
 })
 export class SharedModule { }
