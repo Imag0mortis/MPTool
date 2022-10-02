@@ -19,6 +19,7 @@ import {
     startWith,
     switchMap,
 } from 'rxjs/operators';
+import { AppService } from 'src/app/shared/services/app.service';
 
 interface User {
     readonly name: string;
@@ -73,6 +74,11 @@ const KEYS: Record<string, Key> = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent {
+
+    constructor(
+        public appService: AppService
+    ) {}
+    
     private readonly size$ = new BehaviorSubject(10);
     private readonly page$ = new BehaviorSubject(0);
 

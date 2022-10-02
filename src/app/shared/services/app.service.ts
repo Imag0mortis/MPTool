@@ -46,4 +46,8 @@ export class AppService {
     this.router.navigate(['/score_correction']);
   }
 
+  goCampaign(id: number) {
+    this.router.navigate([`/campaigns/${id}`]);
+  }
+
 }

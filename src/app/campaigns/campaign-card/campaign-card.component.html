@@ -1,0 +1,158 @@
+<div class="card_container shadow(1)">
+    <div class="card_header">
+        <h3>Кампании / плакат (70 руб.) оставляем</h3>
+        <div class="navigation-back" (click)="appService.goCampaigns()">
+            <tui-marker-icon mode="success" size="xs" src="tuiIconArrowLeftLarge" class="tui-space_right-2">
+            </tui-marker-icon>
+            <span>Назад</span>
+        </div>
+    </div>
+    <div class="card-row">
+        <div class="card-row-col1">
+            <form class="b-form" [formGroup]="testForm">
+                <div class="tui-form__row tui-form__row_multi-fields">
+                    <div class="tui-form__multi-field">
+                        <tui-input formControlName="account">
+                            Аккаунт
+                            <input tuiTextfield type="text" />
+                        </tui-input>
+                    </div>
+                    <div class="tui-form__multi-field">
+                        <tui-input formControlName="id">
+                            ID Кампании
+                            <input tuiTextfield type="number" />
+                        </tui-input>
+                    </div>
+
+                    <div class="tui-form__multi-field">
+                        <tui-input formControlName="budget">
+                            Бюджет
+                            <input tuiTextfield type="number" />
+                        </tui-input>
+                    </div>
+                    <div class="tui-form__multi-field">
+                        <tui-input formControlName="category">
+                            Категория
+                            <input tuiTextfield type="text" />
+                        </tui-input>
+                    </div>
+                    <div class="tui-form__multi-field">
+                        <tui-input formControlName="delivery">
+                            Срок доставки
+                            <input tuiTextfield type="text" />
+                        </tui-input>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-row-col2">
+            <tui-toggle ngModel="onnOff" [showIcons]="true"></tui-toggle>
+            <span>&nbsp;Вкл/Выкл</span>
+        </div>
+    </div>
+    <div class="card-info">
+        <div class="card-info-header">
+            <h3>Плакаты</h3>
+            <a><span>Обучающее видео</span></a>
+        </div>
+        <div class="card-info-main">
+            <div class="card-info-main-row1">
+                <form class="b-form" [formGroup]="testForm2">
+                    <div class="tui-form__row tui-form__row_multi-fields">
+                        <div class="tui-form__multi-field">
+                            <tui-input formControlName="place" tuiHintContent="Целевое место">
+                                Целевое место
+                                <input tuiTextfield type="number" />
+                            </tui-input>
+                        </div>
+                        <div class="tui-form__multi-field">
+                            <tui-input formControlName="bid" tuiHintContent="Максимальная ставка">
+                                Максимальная ставка
+                                <input tuiTextfield type="number" />
+                            </tui-input>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-info-main-row2">
+                <div style="display: flex; align-items: center;">
+                    <h3>Выходные ставки для других мест</h3>
+                    <tui-tooltip direction="bottom-right" [content]="'some info..'"></tui-tooltip>
+                </div>
+                <table class="bid_table">
+                    <tr>
+                        <td>1-е 457 (+1)</td>
+                        <td>1-е 457 (+1)</td>
+                    </tr>
+                    <tr>
+                        <td>1-е 457 (+1)</td>
+                        <td>1-е 457 (+1)</td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+        <div class="card_toggle-container">
+            <tui-toggle ngModel="onnOff" [showIcons]="true"></tui-toggle>
+            <span>&nbsp;Включить реальные ставки</span>
+        </div>
+        <div class="card_toggle-container">
+            <tui-toggle ngModel="onnOff" [showIcons]="true"></tui-toggle>
+            <span>&nbsp;Использовать проверенные слова</span>
+        </div>
+    </div>
+    <table tuiTable class="table" [columns]="columns">
+        <thead>
+            <tr tuiThGroup>
+                <th tuiTh>Товар</th>
+                <th tuiTh>Просмотров</th>
+                <th tuiTh>Пользователей</th>
+                <th tuiTh>Просмотров на 1 пользователя</th>
+                <th tuiTh>Кликов</th>
+                <th tuiTh>% Клика</th>
+                <th tuiTh>За клик</th>
+                <th tuiTh>В корзине</th>
+                <th tuiTh>Заказов</th>
+                <th tuiTh>Сумма</th>
+                <th tuiTh>Конверсия</th>
+            </tr>
+        </thead>
+        <tbody tuiTbody [data]="data">
+            <tr *tuiRow="let item of data; index as i" tuiTr>
+                <td *tuiCell="'article'" tuiTd>
+                    {{ item.product }}
+                </td>
+                <td *tuiCell="'article'" tuiTd>
+                    {{ item.views }}
+                </td>
+                <td *tuiCell="'article'" tuiTd>
+                    {{ item.users }}
+                </td>
+                <td *tuiCell="'article'" tuiTd>
+                    {{ item.viewsByOne }}
+                </td>
+                <td *tuiCell="'article'" tuiTd>
+                    {{ item.clicks }}
+                </td>
+                <td *tuiCell="'article'" tuiTd>
+                    {{ item.clickPer }}
+                </td>
+                <td *tuiCell="'article'" tuiTd>
+                    {{ item.byClick }}
+                </td>
+                <td *tuiCell="'article'" tuiTd>
+                    {{ item.inBin }}
+                </td>
+                <td *tuiCell="'article'" tuiTd>
+                    {{ item.orders }}
+                </td>
+                <td *tuiCell="'article'" tuiTd>
+                    {{ item.sum }}
+                </td>
+                <td *tuiCell="'article'" tuiTd>
+                    {{ item.conversion }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

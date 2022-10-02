@@ -71,8 +71,8 @@
                             style="width: 60px; height: 30px; background-image: url('../../../assets/img/banner.jpg'); background-size: cover;">
                         </div>
                     </td>
-                    <td *tuiCell="'name'" tuiTd [class.match]="isMatch(item.name)">
-                        {{ item.name }}
+                    <td *tuiCell="'name'" tuiTd [class.match]="isMatch(item.name)" style="cursor: pointer" (click)="appService.goCampaign(234)">
+                        <u>{{ item.name }}</u>
                     </td>
                     <td *tuiCell="'type'" tuiTd>
                         <i style="color: #929697">плакаты</i>

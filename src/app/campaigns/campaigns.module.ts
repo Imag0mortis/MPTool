@@ -4,17 +4,19 @@ import { TableComponent } from './table/table.component';
 import { CampaignsComponent } from './campaigns.component';
 import { CampaignsRoutes } from './campaigns.routing';
 import { TuiReorderModule, TuiTableModule, TuiTablePaginationModule } from '@taiga-ui/addon-table';
-import { TuiDataListWrapperModule, TuiInputModule, TuiSelectModule, TuiTagModule, TuiToggleModule } from '@taiga-ui/kit';
-import { TuiButtonModule, TuiDataListModule, TuiDropdownModule, TuiHostedDropdownModule, TuiLoaderModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { TuiDataListWrapperModule, TuiInputModule, TuiMarkerIconModule, TuiSelectModule, TuiTagModule, TuiToggleModule } from '@taiga-ui/kit';
+import { TuiButtonModule, TuiDataListModule, TuiDropdownModule, TuiHintModule, TuiHostedDropdownModule, TuiLoaderModule, TuiTextfieldControllerModule, TuiTooltipModule } from '@taiga-ui/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiPortalModule } from '@taiga-ui/cdk';
 import { TableFiltersComponent } from './table-filters/table-filters.component';
+import { CampaignCardComponent } from './campaign-card/campaign-card.component';
 
 @NgModule({
   declarations: [
     TableComponent,
     CampaignsComponent,
     TableFiltersComponent,
+    CampaignCardComponent,
   ],
   imports: [
     CommonModule, 
@@ -38,7 +40,10 @@ import { TableFiltersComponent } from './table-filters/table-filters.component';
     TuiSelectModule,
     TuiPortalModule,
     TuiTagModule,
-    TuiToggleModule
+    TuiToggleModule,
+    TuiMarkerIconModule,
+    TuiTooltipModule,
+    TuiHintModule,
   ]
 })
 export class CampaignsModule { }

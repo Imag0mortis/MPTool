@@ -1,0 +1,68 @@
+.card_container {
+    background-color: #fff;
+    margin: 0 2rem;
+    border-radius: 16px;
+}
+
+.card_header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 2rem;
+}
+
+.navigation-back {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+}
+
+.card-row {
+    display: flex;
+    padding: 2rem 2rem;
+    background: #eaf9f8;
+}
+
+.card-row-col1 {
+    width: calc(100% - 100px);
+}
+
+.card-row-col2 {
+    width: 100px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.card-info {
+    padding: 0.5rem 2rem;
+}
+
+.card-info-main-row2 {
+    padding: 2rem 0;
+}
+
+.bid_table tr td {
+    width: 100px;
+}
+
+.card-info-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-info-header a span {
+    text-decoration: underline;
+    cursor: pointer;
+    color: blue;
+}
+
+.card_toggle-container {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 0;
+}
+
+.table {
+    padding: 2rem;
+}
