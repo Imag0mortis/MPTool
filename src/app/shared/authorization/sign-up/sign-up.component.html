@@ -1,0 +1,43 @@
+<div class="login_container" *ngIf="loginForm">
+    <div class="login_form shadow(1)">
+        <div class="tui-container">
+            <form [formGroup]="loginForm">
+                <div style="width: 460px" class="tui-row tui-row_sme">
+                    <div class="tui-col_12">
+                        <h3 class="tui-form__header tui-form__header_margin-top_none">Регистрация</h3>
+                        <div class="tui-form__row">
+                            <tui-input tuiTextfieldExampleText="Field placeholder" formControlName="emailValue">
+                                E-mail
+                                <span class="tui-required"></span>
+                            </tui-input>
+                            <tui-error formControlName="emailValue" [error]="[] | tuiFieldError | async"></tui-error>
+                        </div>
+                        <div class="tui-form__row">
+                            <tui-input-password [tuiTextfieldCustomContent]="loginForm.valid ? success : ''"
+                                formControlName="passwordValue">Введите пароль
+                            </tui-input-password>
+                        </div>
+                        <div class="tui-form__row">
+                            <tui-input-password [tuiTextfieldCustomContent]="loginForm.valid ? success : ''"
+                                formControlName="passwordConfirmValue">Повторите пароль
+                            </tui-input-password>
+                        </div>
+                        <span *ngIf="!loginForm.valid" style="color: red">Пароли не совпадают!</span>
+                        <div class="tui-form__buttons">
+                            <button (click)="register()" [disabled]="!loginForm.valid" tuiButton size="l" type="submit"
+                                class="tui-form__button">
+                                Регистрация
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+            <p>Уже зарегистрированы? Тогда <u (click)="appService.goLogin()">войдите</u></p>
+        </div>
+    </div>
+</div>
+
+<ng-template #success>
+    <tui-svg src="tuiIconCheckLarge" class="success tui-space_left-3"></tui-svg>
+</ng-template>

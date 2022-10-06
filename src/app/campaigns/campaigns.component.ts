@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../shared/services/user.service';
 
 @Component({
   selector: 'app-campaigns',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CampaignsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public user: UserService
+  ) { }
 
   ngOnInit(): void {
   }

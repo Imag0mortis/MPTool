@@ -71,33 +71,30 @@
                             style="width: 60px; height: 30px; background-image: url('../../../assets/img/banner.jpg'); background-size: cover;">
                         </div>
                     </td>
-                    <td *tuiCell="'name'" tuiTd [class.match]="isMatch(item.name)" style="cursor: pointer" (click)="appService.goCampaign(234)">
-                        <u>{{ item.name }}</u>
+                    <td *tuiCell="'name'" tuiTd [class.match]="isMatch(item.campaignName)" style="cursor: pointer" (click)="appService.goCampaign(234)">
+                        <u>{{ item.campaignName}}</u>
                     </td>
                     <td *tuiCell="'type'" tuiTd>
-                        <i style="color: #929697">плакаты</i>
+                        <i style="color: #929697">{{ item.type }}</i>
                     </td>
                     <td *tuiCell="'target'" tuiTd>
-                        <i>-/-</i>
+                        <i>{{item.targetPlace}}/{{item.targetBid}}</i>
                     </td>
                     <td *tuiCell="'bid'" tuiTd>
-                        <i>-/-</i>
+                        <i>{{item.currentPlace}}/{{item.currentBid}}</i>
                     </td>
-                    <!-- <td *tuiCell="'dob'" tuiTd [class.match]="isMatch(item.dob)">
-                        {{ item.dob }} + ₽
-                    </td> -->
-                    <td *tuiCell="'budget'" tuiTd [class.match]="isMatch(getBudget(item))">
-                        {{ getBudget(item) }} ₽
+                    <td *tuiCell="'budget'" tuiTd [class.match]="isMatch(item.budget)">
+                        {{ item.budget }} ₽
                     </td>
                     <td *tuiCell="'status'" tuiTd>
-                        <tui-tag status="custom" class="tag support-3" [hoverable]="true" [value]="'Идут показы'">
+                        <tui-tag status="custom" class="tag support-3" [hoverable]="true" [value]="item.currentState">
                         </tui-tag>
                     </td>
                     <td *tuiCell="'action'" tuiTd style="display: flex; align-items: center;">
                         <tui-toggle [showIcons]="true"></tui-toggle>
                     </td>
                     <td *tuiCell="'onOffToogle'" tuiTd>
-                        <tui-tag status="custom" class="tag support-5" [hoverable]="true" [value]="'Выключен'">
+                        <tui-tag status="custom" class="tag support-5" [hoverable]="true" [value]="item.isEnabled ? 'Включен' : 'Выключен'">
                         </tui-tag>
                     </td>
                     <td *tuiCell="'menu'" tuiTd>

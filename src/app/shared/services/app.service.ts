@@ -50,4 +50,12 @@ export class AppService {
     this.router.navigate([`/campaigns/${id}`]);
   }
 
+  goLogin() {
+    this.router.navigate(['/login']);
+  }
+
+  goSignup() {
+    this.router.navigate(['/signup']);
+  }
+
 }

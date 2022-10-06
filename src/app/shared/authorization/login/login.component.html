@@ -26,7 +26,7 @@
                                 ></tui-error>
                         </div>
                         <div class="tui-form__buttons">
-                            <button
+                            <button (click)="login()"
                                 tuiButton
                                 size="l"
                                 type="submit"
@@ -39,6 +39,7 @@
                 </div>
 
             </form>
+            <p>Нету учётной записи? Тогда <u (click)="appService.goSignup()">зарегистрируйтесь</u></p>
         </div> 
     </div>
 </div>

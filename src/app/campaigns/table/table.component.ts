@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {TuiComparator, tuiDefaultSort} from '@taiga-ui/addon-table';
 import {
@@ -9,7 +9,7 @@ import {
     tuiToInt,
 } from '@taiga-ui/cdk';
 import {TUI_ARROW} from '@taiga-ui/kit';
-import {BehaviorSubject, combineLatest, Observable, timer} from 'rxjs';
+import {BehaviorSubject, combineLatest, Observable, of, timer} from 'rxjs';
 import {
     debounceTime,
     filter,
@@ -20,6 +20,8 @@ import {
     switchMap,
 } from 'rxjs/operators';
 import { AppService } from 'src/app/shared/services/app.service';
+import { RequestService } from 'src/app/shared/services/request.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 interface User {
     readonly name: string;
@@ -73,10 +75,12 @@ const KEYS: Record<string, Key> = {
   styleUrls: ['./table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableComponent {
+export class TableComponent implements OnInit {
 
     constructor(
-        public appService: AppService
+        public appService: AppService,
+        private user: UserService,
+        private request: RequestService
     ) {}
     
     private readonly size$ = new BehaviorSubject(10);
@@ -95,9 +99,9 @@ export class TableComponent {
         tuiControlValue<number>(this.minAge),
     ]).pipe(
         // zero time debounce for a case when both key and direction change
-        debounceTime(0),
+        /*debounceTime(0),
         switchMap(query => this.getData(...query).pipe(startWith(null))),
-        share(),
+        share(),*/
     );
 
     initial: readonly string[] = [`Banner`, `Name`, `Type`, `Target`, `Bid`, `Budget`, `Status`, `Action`, `OnOffToogle`, `Menu`];
@@ -112,17 +116,9 @@ export class TableComponent {
 
     readonly loading$ = this.request$.pipe(map(value => !value));
 
-    readonly total$ = this.request$.pipe(
-        filter(tuiIsPresent),
-        map(({length}) => length),
-        startWith(1),
-    );
+    readonly total$ = new BehaviorSubject(0)
 
-    readonly data$: Observable<readonly User[]> = this.request$.pipe(
-        filter(tuiIsPresent),
-        map(users => users.filter(tuiIsPresent)),
-        startWith([]),
-    );
+    readonly data$ = new BehaviorSubject(null);
 
     onEnabled(enabled: readonly string[]): void {
         this.enabled = enabled;
@@ -141,6 +137,8 @@ export class TableComponent {
 
     onPage(page: number): void {
         this.page$.next(page);
+
+        this.getData(page, 10)
     }
 
     isMatch(value: unknown): boolean {
@@ -151,7 +149,33 @@ export class TableComponent {
         return getBudget(user);
     }
 
-    private getData(
+    ngOnInit(): void {  
+        this.getData(0, 10)
+    }
+
+
+
+    private getData(pageNum: number, pageSize: number) {
+        this.user.userSubj$.pipe(
+            switchMap(
+                r => {
+                    if(r) {
+                        return this.request.getAds(r.user_wb_companies[0].lk_id, pageNum, pageSize)
+                    }
+                    return of(r)
+                }
+            )
+        ).subscribe(
+            r => {
+                console.log(r.adsData)
+                this.data$.next(r.adsData)
+                this.page$.next(r.tableData.page)
+                this.total$.next(r.tableData.campaignsTotal)
+            }
+        )
+    }
+
+   /* private getData(
         key: 'name' | 'dob' | 'age',
         direction: -1 | 1,
         page: number,
@@ -168,8 +192,8 @@ export class TableComponent {
             .map((user, index) => (index >= start && index < end ? user : null));
 
         // Imitating server response
-        return timer(1000).pipe(mapTo(result));
-    }
+        return timer(10).pipe(mapTo(result));
+    }*/
 }
 
 function sortBy(key: 'name' | 'dob' | 'age', direction: -1 | 1): TuiComparator<User> {

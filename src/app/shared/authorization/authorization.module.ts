@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
-import { TuiButtonModule, TuiErrorModule, TUI_SANITIZER } from '@taiga-ui/core';
+import { TuiButtonModule, TuiErrorModule, TuiSvgModule, TuiTextfieldCleanerDirective, TuiTextfieldControllerModule, TUI_SANITIZER } from '@taiga-ui/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiFieldErrorPipeModule, TuiInputModule, TuiInputPasswordModule } from '@taiga-ui/kit';
 import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 import { TuiForAsyncModule } from '@taiga-ui/cdk';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    SignUpComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,10 @@ import { TuiForAsyncModule } from '@taiga-ui/cdk';
     TuiFieldErrorPipeModule,
     TuiForAsyncModule,
     TuiInputPasswordModule,
-    TuiButtonModule
+    TuiButtonModule,
+    TuiSvgModule,
+    TuiErrorModule,
+    TuiTextfieldControllerModule
   ],
   providers: [
     {
