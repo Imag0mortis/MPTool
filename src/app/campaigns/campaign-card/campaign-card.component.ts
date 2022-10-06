@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { first, switchMap } from 'rxjs';
 import { AppService } from 'src/app/shared/services/app.service';
+import { RequestService } from 'src/app/shared/services/request.service';
 
 @Component({
   selector: 'app-campaign-card',
@@ -9,11 +12,27 @@ import { AppService } from 'src/app/shared/services/app.service';
 })
 export class CampaignCardComponent implements OnInit {
 
-  constructor(
-    public appService: AppService
-  ) { }
+  firstForm: FormGroup;
 
-  data = [
+  constructor(
+    public appService: AppService,
+    private request: RequestService,
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
+    this.firstForm = fb.group({
+      account: new FormControl(``),
+      id: new FormControl(0),
+      budget: new FormControl(0),
+      category: new FormControl(``),
+      delivery: new FormControl(``),
+    })
+  }
+
+  data: any = undefined;
+
+  mockData = [
     {
       product: 'Плакат Арии',
       views: 12344,
@@ -29,29 +48,43 @@ export class CampaignCardComponent implements OnInit {
     },
   ] as const;
 
-  columns = Object.keys(this.data[0]);
+  columns = Object.keys(this.mockData[0]);
 
   ngOnInit(): void {
-    console.log(this.data)
+    this.route.params.pipe(first(), switchMap(
+      params => this.request.getCampaign(params['id'], false)
+    )).subscribe((result: any) => {
+      console.log(result);
+      // тут явно другое поле и возможно их несколько, надо уточнять
+      this.firstForm.get('account')?.reset(result.campaignName)
+      this.firstForm.get('id')?.reset(result.campaignID)
+      this.firstForm.get('budget')?.reset(result.budget)
+      this.firstForm.get('category')?.reset(result.mainKeyword)
+
+      this.data = result
+    });
   }
 
   onnOff: boolean = true;
-
-  readonly testForm = new FormGroup({
-    account: new FormControl(`Эмеральд`),
-    id: new FormControl(458432),
-    budget: new FormControl(30000),
-    category: new FormControl(`плакаты`),
-    delivery: new FormControl(`24 часа`),
-  });
 
   readonly testForm2 = new FormGroup({
     place: new FormControl(`112`),
     bid: new FormControl(`230`),
   });
 
-  
- 
+  save() {
 
-
+    console.log(this.data.isUseOptimizer)
+    this.request.saveCampaign({
+      "campaign_id": this.firstForm.get('id')!.value,
+      "enable": this.data.isEnabled,
+      "use_optimizer": this.data.isUseOptimizer,
+      "dynamic_keyword": false,
+      "keyword": null,
+      "target_bid": this.data.allTargetBids
+    }).subscribe(
+      r => this.router.navigate(['']),
+      e => alert('ошибка сохранения')
+    );
+  }
 }

@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {TuiComparator, tuiDefaultSort} from '@taiga-ui/addon-table';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { TuiComparator, tuiDefaultSort } from '@taiga-ui/addon-table';
 import {
     TUI_DEFAULT_MATCHER,
     tuiControlValue,
@@ -8,8 +8,8 @@ import {
     tuiIsPresent,
     tuiToInt,
 } from '@taiga-ui/cdk';
-import {TUI_ARROW} from '@taiga-ui/kit';
-import {BehaviorSubject, combineLatest, Observable, of, timer} from 'rxjs';
+import { TUI_ARROW } from '@taiga-ui/kit';
+import { BehaviorSubject, combineLatest, Observable, of, Subscription, timer } from 'rxjs';
 import {
     debounceTime,
     filter,
@@ -57,11 +57,10 @@ const LAST = [
 
 type Key = 'name' | 'dob' | 'age';
 
-const DATA: readonly User[] = Array.from({length: 300}, () => ({
-    name: `${LAST[Math.floor(Math.random() * 10)]}, ${
-        FIRST[Math.floor(Math.random() * 10)]
-    }`,
-    dob: TODAY.append({day: -Math.floor(Math.random() * 400000) - 7500}),
+const DATA: readonly User[] = Array.from({ length: 300 }, () => ({
+    name: `${LAST[Math.floor(Math.random() * 10)]}, ${FIRST[Math.floor(Math.random() * 10)]
+        }`,
+    dob: TODAY.append({ day: -Math.floor(Math.random() * 400000) - 7500 }),
 }));
 const KEYS: Record<string, Key> = {
     Name: `name`,
@@ -70,19 +69,20 @@ const KEYS: Record<string, Key> = {
 };
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-table',
+    templateUrl: './table.component.html',
+    styleUrls: ['./table.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, OnDestroy {
+
 
     constructor(
         public appService: AppService,
         private user: UserService,
         private request: RequestService
-    ) {}
-    
+    ) { }
+    subscription: Subscription = new Subscription;
     private readonly size$ = new BehaviorSubject(10);
     private readonly page$ = new BehaviorSubject(0);
 
@@ -108,7 +108,7 @@ export class TableComponent implements OnInit {
 
     enabled = this.initial;
 
-    columns = [`banner`, `name`, `type`, `target`, `bid`, `budget`, `status` , `action`, `onOffToogle`, `menu`];
+    columns = [`banner`, `name`, `type`, `target`, `bid`, `budget`, `status`, `action`, `onOffToogle`, `menu`];
 
     search = ``;
 
@@ -138,7 +138,7 @@ export class TableComponent implements OnInit {
     onPage(page: number): void {
         this.page$.next(page);
 
-        this.getData(page, 10)
+        this.getData(page + 1, 10)
     }
 
     isMatch(value: unknown): boolean {
@@ -149,17 +149,25 @@ export class TableComponent implements OnInit {
         return getBudget(user);
     }
 
-    ngOnInit(): void {  
-        this.getData(0, 10)
+    ngOnInit(): void {
+        this.getData(1, 10)
     }
 
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+    }
 
+    public syncAdd() {
+        this.request.syncAds(this.user.userSubj$.value.user_wb_companies[0].lk_id).subscribe(
+            r => alert('Кампании обновятся в течении минимум 5 минут')
+        )
+    }
 
     private getData(pageNum: number, pageSize: number) {
-        this.user.userSubj$.pipe(
+        this.subscription = this.user.userSubj$.pipe(
             switchMap(
                 r => {
-                    if(r) {
+                    if (r) {
                         return this.request.getAds(r.user_wb_companies[0].lk_id, pageNum, pageSize)
                     }
                     return of(r)
@@ -167,33 +175,37 @@ export class TableComponent implements OnInit {
             )
         ).subscribe(
             r => {
-                console.log(r.adsData)
-                this.data$.next(r.adsData)
-                this.page$.next(r.tableData.page)
-                this.total$.next(r.tableData.campaignsTotal)
+
+                if (r) {
+                    this.data$.next(r.adsData)
+
+                    this.page$.next(r.tableData.page)
+                    this.total$.next(r.tableData.campaignsTotal)
+                }
+
             }
         )
     }
 
-   /* private getData(
-        key: 'name' | 'dob' | 'age',
-        direction: -1 | 1,
-        page: number,
-        size: number,
-        minAge: number,
-    ): Observable<ReadonlyArray<User | null>> {
-        console.info(`Making a request`);
-
-        const start = page * size;
-        const end = start + size;
-        const result = [...DATA]
-            .sort(sortBy(key, direction))
-            .filter(user => getBudget(user) >= minAge)
-            .map((user, index) => (index >= start && index < end ? user : null));
-
-        // Imitating server response
-        return timer(10).pipe(mapTo(result));
-    }*/
+    /* private getData(
+         key: 'name' | 'dob' | 'age',
+         direction: -1 | 1,
+         page: number,
+         size: number,
+         minAge: number,
+     ): Observable<ReadonlyArray<User | null>> {
+         console.info(`Making a request`);
+ 
+         const start = page * size;
+         const end = start + size;
+         const result = [...DATA]
+             .sort(sortBy(key, direction))
+             .filter(user => getBudget(user) >= minAge)
+             .map((user, index) => (index >= start && index < end ? user : null));
+ 
+         // Imitating server response
+         return timer(10).pipe(mapTo(result));
+     }*/
 }
 
 function sortBy(key: 'name' | 'dob' | 'age', direction: -1 | 1): TuiComparator<User> {
@@ -203,7 +215,7 @@ function sortBy(key: 'name' | 'dob' | 'age', direction: -1 | 1): TuiComparator<U
             : direction * tuiDefaultSort(a[key], b[key]);
 }
 
-function getBudget({dob}: User): number {
+function getBudget({ dob }: User): number {
     const years = TODAY.year - dob.year;
     const months = TODAY.month - dob.month;
     const days = TODAY.day - dob.day;
