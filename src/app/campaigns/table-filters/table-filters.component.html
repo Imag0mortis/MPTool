@@ -1,33 +1,42 @@
 <div class="table-filters_container">
     <div class="table-filters-left">
 
-        <form class="b-form">
+        <form class="b-form" [formGroup]="filtersBind">
             <tui-select
-                tuiTextfieldSize="m"
-                class="tui-space_vertical-4"
-                [formControl]="testValue"
-                [tuiTextfieldLabelOutside]="true"
-            >
-                Аккаунты
-                <input
-                    tuiTextfield
-                    placeholder="Выберите аккаунт"
-                />
-                <tui-data-list-wrapper
-                    *tuiDataList
-                    [items]="items"
-                ></tui-data-list-wrapper>
-            </tui-select>
+            tuiTextfieldSize="m"
+            *tuiLet="filters.accounts$ | async as items"
+            [tuiTextfieldLabelOutside]="true"
+            (pressedChange)="test()"
+            [valueContent]="items ? stringify(items) : loading"
+            formControlName="account"
+        >
+            <ng-template tuiDataList>
+                <tui-data-list *ngIf="items; else loading">
+                    <button
+                        *ngFor="let item of items"
+                        tuiOption
+                        (click)="test"
+                        [value]="item.lk_id"
+                    >
+                        {{ item.company_name }}
+                    </button>
+                </tui-data-list>
+            </ng-template>
+            <ng-template #loading>
+                <tui-loader class="tui-space_vertical-3 loader"></tui-loader>
+            </ng-template>
+        </tui-select>
         </form>
 
 
     </div>
     <div class="table-filters-right">
-        <form class="b-form">
+        <form [formGroup]="filtersBind" class="b-form">
             <tui-select
                 tuiTextfieldSize="m"
                 class="tui-space_vertical-4"
-                [formControl]="testValue"
+                formControlName="status"
+                (pressedChange)="test()"
                 [tuiTextfieldLabelOutside]="true"
             >
                 Статусы
@@ -36,15 +45,18 @@
                     placeholder="Выберите статус"
                 />
                 <tui-data-list-wrapper
+                (click)="test()"
                     *tuiDataList
-                    [items]="items"
+                    [items]="filters.statuses$ | async"
                 ></tui-data-list-wrapper>
             </tui-select>
             &nbsp;
             <tui-select
                 tuiTextfieldSize="m"
                 class="tui-space_vertical-4"
-                [formControl]="testValue"
+                formControlName="type"
+                
+                (pressedChange)="test()"
                 [tuiTextfieldLabelOutside]="true"
             >
                 Типы
@@ -54,7 +66,8 @@
                 />
                 <tui-data-list-wrapper
                     *tuiDataList
-                    [items]="items"
+                    (click)="test()"
+                    [items]="filters.types$ | async"
                 ></tui-data-list-wrapper>
             </tui-select>
         </form>

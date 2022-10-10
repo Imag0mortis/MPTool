@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { RequestService } from './request.service';
 
@@ -10,7 +11,8 @@ export class UserService {
   public userSubj$: BehaviorSubject<any> = new BehaviorSubject(null);
 
   constructor(
-    private request: RequestService
+    private request: RequestService,
+    private router: Router
   ) { }
 
   set setUserSubj(arg: any) {
@@ -22,6 +24,10 @@ export class UserService {
       r => {
         console.log(r)
         this.setUserSubj = r;
+      },
+      e => {
+        localStorage.removeItem("token");
+        this.router.navigate(['/login']);
       }
     )
   }

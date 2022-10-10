@@ -20,6 +20,7 @@ import {
     switchMap,
 } from 'rxjs/operators';
 import { AppService } from 'src/app/shared/services/app.service';
+import { FiltersService } from 'src/app/shared/services/filters.service';
 import { RequestService } from 'src/app/shared/services/request.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -76,11 +77,11 @@ const KEYS: Record<string, Key> = {
 })
 export class TableComponent implements OnInit, OnDestroy {
 
-
     constructor(
         public appService: AppService,
         private user: UserService,
-        private request: RequestService
+        private request: RequestService,
+        public filtersService: FiltersService
     ) { }
     subscription: Subscription = new Subscription;
     private readonly size$ = new BehaviorSubject(10);
@@ -168,6 +169,8 @@ export class TableComponent implements OnInit, OnDestroy {
             switchMap(
                 r => {
                     if (r) {
+                        console.log(r.user_wb_companies)
+                        this.filtersService.accounts$.next(r.user_wb_companies)
                         return this.request.getAds(r.user_wb_companies[0].lk_id, pageNum, pageSize)
                     }
                     return of(r)
@@ -175,12 +178,12 @@ export class TableComponent implements OnInit, OnDestroy {
             )
         ).subscribe(
             r => {
-
                 if (r) {
-                    this.data$.next(r.adsData)
-
-                    this.page$.next(r.tableData.page)
-                    this.total$.next(r.tableData.campaignsTotal)
+                    this.filtersService.statuses$.next(['Все'].concat(r.stateList));
+                    this.filtersService.types$.next(['Все'].concat(r.typeList));
+                    this.data$.next(r.adsData);
+                    this.page$.next(r.tableData.page);
+                    this.total$.next(r.tableData.campaignsTotal);
                 }
 
             }
