@@ -17,7 +17,7 @@ export class AppService {
   init() {
     this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
-        this.menuSelector.next(e.url.substring(1));
+        this.menuSelector.next(e.url.split('?')[0].substring(1));
       }
     });
   }
@@ -27,7 +27,15 @@ export class AppService {
   }
 
   goCampaigns() {
-    this.router.navigate(['/campaigns']);
+    this.router.navigate(['/campaigns'], {
+      queryParams: {
+        page: 1,
+        pagesize: 10
+      },
+      queryParamsHandling: 'merge',
+    });
+    
+    //this.router.navigate(['/campaigns']);
   }
 
   goRealPrice() {

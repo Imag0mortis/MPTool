@@ -28,9 +28,9 @@ export class RequestService {
   public getUserInfo() {
     return this.http.get(environment.api + '/lk/v1/get_user_info.php')
   }
-
-  public getAds(userId: number, page: number, pagesize: number) {
-    return this.http.get(environment.api + `/lk/v1/get_ads.php?lk=${userId}&page=${page}&pagesize=${pagesize}`)
+ 
+  public getAds(userId: number, page: number, pagesize: number, state: string, type: string) {
+    return this.http.get(environment.api + `/lk/v1/get_ads.php?lk=${userId}&page=${page}&pagesize=${pagesize}${state ? "&state=" + JSON.stringify(state) : ""}${type ? "&type=" + JSON.stringify(type) : ""}`)
   }
 
   public getCampaign(ad_campaign: number, sync: boolean) {

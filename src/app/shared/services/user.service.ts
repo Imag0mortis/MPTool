@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { FiltersService } from './filters.service';
 import { RequestService } from './request.service';
 
 @Injectable({
@@ -12,7 +13,8 @@ export class UserService {
 
   constructor(
     private request: RequestService,
-    private router: Router
+    private router: Router,
+    private filter: FiltersService
   ) { }
 
   set setUserSubj(arg: any) {
@@ -21,8 +23,8 @@ export class UserService {
 
   initUsersData() {
     this.request.getUserInfo().subscribe(
-      r => {
-        console.log(r)
+      (r: any) => {
+        this.filter.accounts$.next(r.user_wb_companies)
         this.setUserSubj = r;
       },
       e => {

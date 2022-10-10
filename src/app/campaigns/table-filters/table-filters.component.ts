@@ -25,7 +25,6 @@ export class TableFiltersComponent implements OnInit, OnDestroy {
     items: readonly Python[],
   ): TuiStringHandler<TuiContextWithImplicit<string>> {
     const map = new Map(items.map(({ lk_id, company_name }) => [lk_id, company_name] as [string, string]));
-
     return ({ $implicit }: TuiContextWithImplicit<string>) => map.get($implicit) || ``;
   }
 
@@ -43,29 +42,24 @@ export class TableFiltersComponent implements OnInit, OnDestroy {
     })
   }
 
-  testValue = new FormControl();
-
   ngOnInit(): void {
-    
-  this.subscriptions[0] = this.filters.accounts$.subscribe(
+
+    this.subscriptions[0] = this.filters.accounts$.subscribe(
       r => {
-        if(this.filtersBind.get('account')?.value === '') {
+        if (this.filtersBind.get('account')?.value === '') {
           this.filtersBind.get('account')?.reset(r[0].lk_id);
-          setTimeout(() => {
-            this.subscriptions[1] = this.filtersBind.valueChanges.subscribe(
-              changes => {
-                  console.log(changes);
-              }
-            )
-          }, 300)
-          
         }
       }
     )
-  }
-
-  test() {
-    console.log('filters changed')
+    this.subscriptions[1] = this.filtersBind.valueChanges.subscribe(
+      changes => {
+        this.filters.updateTable(
+          this.filtersBind.get('account')?.value,
+          this.filtersBind.get('type')?.value,
+          this.filtersBind.get('status')?.value,
+        )
+      }
+    )
   }
 
   ngOnDestroy(): void {

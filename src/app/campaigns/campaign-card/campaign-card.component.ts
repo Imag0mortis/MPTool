@@ -54,7 +54,6 @@ export class CampaignCardComponent implements OnInit {
     this.route.params.pipe(first(), switchMap(
       params => this.request.getCampaign(params['id'], false)
     )).subscribe((result: any) => {
-      console.log(result);
       // тут явно другое поле и возможно их несколько, надо уточнять
       this.firstForm.get('account')?.reset(result.campaignName)
       this.firstForm.get('id')?.reset(result.campaignID)
@@ -73,8 +72,6 @@ export class CampaignCardComponent implements OnInit {
   });
 
   save() {
-
-    console.log(this.data.isUseOptimizer)
     this.request.saveCampaign({
       "campaign_id": this.firstForm.get('id')!.value,
       "enable": this.data.isEnabled,

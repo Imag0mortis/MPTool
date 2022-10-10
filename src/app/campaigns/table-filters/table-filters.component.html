@@ -6,7 +6,6 @@
             tuiTextfieldSize="m"
             *tuiLet="filters.accounts$ | async as items"
             [tuiTextfieldLabelOutside]="true"
-            (pressedChange)="test()"
             [valueContent]="items ? stringify(items) : loading"
             formControlName="account"
         >
@@ -15,7 +14,6 @@
                     <button
                         *ngFor="let item of items"
                         tuiOption
-                        (click)="test"
                         [value]="item.lk_id"
                     >
                         {{ item.company_name }}
@@ -36,7 +34,6 @@
                 tuiTextfieldSize="m"
                 class="tui-space_vertical-4"
                 formControlName="status"
-                (pressedChange)="test()"
                 [tuiTextfieldLabelOutside]="true"
             >
                 Статусы
@@ -45,7 +42,6 @@
                     placeholder="Выберите статус"
                 />
                 <tui-data-list-wrapper
-                (click)="test()"
                     *tuiDataList
                     [items]="filters.statuses$ | async"
                 ></tui-data-list-wrapper>
@@ -55,8 +51,6 @@
                 tuiTextfieldSize="m"
                 class="tui-space_vertical-4"
                 formControlName="type"
-                
-                (pressedChange)="test()"
                 [tuiTextfieldLabelOutside]="true"
             >
                 Типы
@@ -66,7 +60,6 @@
                 />
                 <tui-data-list-wrapper
                     *tuiDataList
-                    (click)="test()"
                     [items]="filters.types$ | async"
                 ></tui-data-list-wrapper>
             </tui-select>

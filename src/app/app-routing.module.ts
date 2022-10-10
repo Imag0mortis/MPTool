@@ -6,7 +6,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { WrapperComponent } from './shared/layouts/wrapper/wrapper.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'campaigns', pathMatch: 'full' },
+  { path: '', redirectTo: '/campaigns?page=1&pagesize=10', pathMatch: 'full' },
   {
     path: 'login', component: LoginComponent
   },

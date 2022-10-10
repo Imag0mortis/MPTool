@@ -1,24 +1,19 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TuiComparator, tuiDefaultSort } from '@taiga-ui/addon-table';
 import {
     TUI_DEFAULT_MATCHER,
     tuiControlValue,
     TuiDay,
-    tuiIsPresent,
     tuiToInt,
 } from '@taiga-ui/cdk';
 import { TUI_ARROW } from '@taiga-ui/kit';
 import { BehaviorSubject, combineLatest, Observable, of, Subscription, timer } from 'rxjs';
 import {
-    debounceTime,
-    filter,
-    map,
-    mapTo,
-    share,
-    startWith,
-    switchMap,
+    map
 } from 'rxjs/operators';
+import { AdsService } from 'src/app/shared/services/ads.service';
 import { AppService } from 'src/app/shared/services/app.service';
 import { FiltersService } from 'src/app/shared/services/filters.service';
 import { RequestService } from 'src/app/shared/services/request.service';
@@ -81,29 +76,17 @@ export class TableComponent implements OnInit, OnDestroy {
         public appService: AppService,
         private user: UserService,
         private request: RequestService,
-        public filtersService: FiltersService
+        public filtersService: FiltersService,
+        public ads: AdsService,
+        private router: Router
     ) { }
     subscription: Subscription = new Subscription;
     private readonly size$ = new BehaviorSubject(10);
-    private readonly page$ = new BehaviorSubject(0);
 
     readonly direction$ = new BehaviorSubject<-1 | 1>(-1);
     readonly sorter$ = new BehaviorSubject<Key>(`name`);
 
     readonly minAge = new FormControl(21);
-
-    readonly request$ = combineLatest([
-        this.sorter$,
-        this.direction$,
-        this.page$,
-        this.size$,
-        tuiControlValue<number>(this.minAge),
-    ]).pipe(
-        // zero time debounce for a case when both key and direction change
-        /*debounceTime(0),
-        switchMap(query => this.getData(...query).pipe(startWith(null))),
-        share(),*/
-    );
 
     initial: readonly string[] = [`Banner`, `Name`, `Type`, `Target`, `Bid`, `Budget`, `Status`, `Action`, `OnOffToogle`, `Menu`];
 
@@ -115,11 +98,8 @@ export class TableComponent implements OnInit, OnDestroy {
 
     readonly arrow = TUI_ARROW;
 
-    readonly loading$ = this.request$.pipe(map(value => !value));
+    //readonly loading$ = this.request$.pipe(map(value => !value));
 
-    readonly total$ = new BehaviorSubject(0)
-
-    readonly data$ = new BehaviorSubject(null);
 
     onEnabled(enabled: readonly string[]): void {
         this.enabled = enabled;
@@ -137,9 +117,13 @@ export class TableComponent implements OnInit, OnDestroy {
     }
 
     onPage(page: number): void {
-        this.page$.next(page);
-
-        this.getData(page + 1, 10)
+        this.ads.page$.next(page);
+        this.router.navigate(['/campaigns'], {
+            queryParams: {
+              page: page + 1
+            },
+            queryParamsHandling: 'merge',
+        });
     }
 
     isMatch(value: unknown): boolean {
@@ -150,9 +134,7 @@ export class TableComponent implements OnInit, OnDestroy {
         return getBudget(user);
     }
 
-    ngOnInit(): void {
-        this.getData(1, 10)
-    }
+    ngOnInit(): void {}
 
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
@@ -163,52 +145,6 @@ export class TableComponent implements OnInit, OnDestroy {
             r => alert('Кампании обновятся в течении минимум 5 минут')
         )
     }
-
-    private getData(pageNum: number, pageSize: number) {
-        this.subscription = this.user.userSubj$.pipe(
-            switchMap(
-                r => {
-                    if (r) {
-                        console.log(r.user_wb_companies)
-                        this.filtersService.accounts$.next(r.user_wb_companies)
-                        return this.request.getAds(r.user_wb_companies[0].lk_id, pageNum, pageSize)
-                    }
-                    return of(r)
-                }
-            )
-        ).subscribe(
-            r => {
-                if (r) {
-                    this.filtersService.statuses$.next(['Все'].concat(r.stateList));
-                    this.filtersService.types$.next(['Все'].concat(r.typeList));
-                    this.data$.next(r.adsData);
-                    this.page$.next(r.tableData.page);
-                    this.total$.next(r.tableData.campaignsTotal);
-                }
-
-            }
-        )
-    }
-
-    /* private getData(
-         key: 'name' | 'dob' | 'age',
-         direction: -1 | 1,
-         page: number,
-         size: number,
-         minAge: number,
-     ): Observable<ReadonlyArray<User | null>> {
-         console.info(`Making a request`);
- 
-         const start = page * size;
-         const end = start + size;
-         const result = [...DATA]
-             .sort(sortBy(key, direction))
-             .filter(user => getBudget(user) >= minAge)
-             .map((user, index) => (index >= start && index < end ? user : null));
- 
-         // Imitating server response
-         return timer(10).pipe(mapTo(result));
-     }*/
 }
 
 function sortBy(key: 'name' | 'dob' | 'age', direction: -1 | 1): TuiComparator<User> {
