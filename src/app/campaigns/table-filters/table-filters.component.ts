@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { TuiContextWithImplicit, TuiIdentityMatcher, tuiPure, TuiStringHandler } from '@taiga-ui/cdk';
 import { delay, of, Subscription } from 'rxjs';
+import { AdsService } from 'src/app/shared/services/ads.service';
 import { FiltersService } from 'src/app/shared/services/filters.service';
 
 
@@ -33,7 +34,8 @@ export class TableFiltersComponent implements OnInit, OnDestroy {
 
   constructor(
     public filters: FiltersService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private ads: AdsService
   ) {
     this.filtersBind = fb.group({
       account: new FormControl(this.filters.accounts$.value[0].lk_id),
@@ -53,6 +55,7 @@ export class TableFiltersComponent implements OnInit, OnDestroy {
     )
     this.subscriptions[1] = this.filtersBind.valueChanges.subscribe(
       changes => {
+        this.ads.page$.next(1);
         this.filters.updateTable(
           this.filtersBind.get('account')?.value,
           this.filtersBind.get('type')?.value,

@@ -52,6 +52,13 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard],
       },
+      {
+        path: 'liker',
+        loadChildren: () =>
+          import('./liker/liker.module').then((m) => m.LikerModule),
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
+      },
     ]
   }
 ];

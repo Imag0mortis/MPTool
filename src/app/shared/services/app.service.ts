@@ -66,4 +66,8 @@ export class AppService {
     this.router.navigate(['/signup']);
   }
 
+  goLiker() {
+    this.router.navigate(['/liker'])
+  }
+
 }

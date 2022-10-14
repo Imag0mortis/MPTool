@@ -44,4 +44,9 @@ export class RequestService {
   public saveCampaign(campaign: any) {
     return this.http.post(environment.api + "/lk/v1/save_ad.php", campaign)
   }
+
+  public getPositions() {
+    return this.http.get(environment.api + `/lk/v1/catalog_query.php?sku=1&query=%D1%83%D1%83&page=1&pagesize=10`)
+  } 
+
 }

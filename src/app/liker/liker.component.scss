@@ -29,6 +29,32 @@
 	background: var(--tui-selection);
 }
 
+.liker_content {
+    display: flex;
+}
+
+.liker-row-input {
+    margin-bottom: 1rem;
+}
+
+.liker-content-col1 {
+    width: 70%;
+    margin-right: 1rem;
+}
+
+.liker-content-col2 {
+    width: 30%;
+}
+
+.liker-toggle-container {
+    display: flex;
+    align-items: center;
+}
+
+.liker-toggle-container h4 {
+    margin: 0 0 0 1rem;
+}
+
 
 
 .table_container {
@@ -67,4 +93,16 @@ tr:nth-child(even) td {
     display: inline-block;
     margin-left: 0.25rem;
     background-color: #e5e7ea;
+}
+
+.table_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.table_header a span {
+    text-decoration: underline;
+    cursor: pointer;
+    color: blue;
 }

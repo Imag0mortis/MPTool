@@ -116,8 +116,7 @@
             <tfoot>
                 <tr>
                     <td [colSpan]="columns.length">
-                        <tui-table-pagination class="tui-space_top-2" [total]="(ads.total$ | async) || 0"
-                            (pageChange)="onPage($event)" (sizeChange)="onSize($event)"></tui-table-pagination>
+                        <tui-table-pagination class="tui-space_top-2" [total]="(ads.total$ | async) || 0" [page]="(ads.page$ | async) - 1" (pageChange)="onPage($event)" (sizeChange)="onSize($event)"></tui-table-pagination>
                     </td>
                 </tr>
             </tfoot>
