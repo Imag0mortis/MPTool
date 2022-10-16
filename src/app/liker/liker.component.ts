@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { BehaviorSubject, first } from 'rxjs';
+import { Liker } from '../shared/interfaces';
+import { RequestService } from '../shared/services/request.service';
 
 @Component({
   selector: 'app-liker',
@@ -9,6 +12,9 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 export class LikerComponent implements OnInit {
 
   form: FormGroup;
+
+  public tableData$: BehaviorSubject<any> = new BehaviorSubject(null);
+  tableControl$ = new BehaviorSubject({});
 
   data = [
     {
@@ -53,13 +59,14 @@ export class LikerComponent implements OnInit {
 
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private request: RequestService
   ) {
     this.form = fb.group({
       article: new FormControl(),
       name: new FormControl(''),
       request: new FormControl(''),
-      review: new FormControl(``),
+      review: new FormControl(''),
       likes: new FormControl(),
       likesToogle: new FormControl(false)
     })
@@ -68,6 +75,31 @@ export class LikerComponent implements OnInit {
   likeToogle: boolean = false;
 
   ngOnInit(): void {
+    this.request.getLiker(1, 20).pipe(first()).subscribe(
+      (r: any) => {
+        this.tableData$.next(r['taskList'])
+        this.tableControl$.next(r['tableData'])
+      }
+    )
+  }
+
+  newLikerPost() {
+    let body: Liker = {
+      sku: this.form.get('article')?.value,
+      name: this.form.get('name')?.value,
+      feedback: this.form.get('review')?.value,
+      likes: this.form.get('likes')?.value,
+      query: this.form.get('request')?.value,
+      isLike: this.form.get('likesToogle')?.value,
+    }
+    this.request.postLiker(body).subscribe(
+      r => alert('Задание создано!'),
+      e => alert('Что-то пошло не так...')
+    );
+  }
+
+  changeLikeDirection() {
+    this.form.get('likesToogle')?.setValue(!this.form.get('likesToogle')?.value)
   }
 
 }

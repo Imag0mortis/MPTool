@@ -20,7 +20,7 @@ export class SignUpComponent implements OnInit {
   ) {
     this.loginForm = fb.group({
       emailValue: fb.control('',[Validators.required, Validators.email]),
-      passwordValue: fb.control('', [Validators.required]),
+      passwordValue: fb.control('', [Validators.required, Validators.minLength(8)]),
       passwordConfirmValue: fb.control('', [Validators.required]),
     },
     { validators: this.checkPasswords });
@@ -28,7 +28,6 @@ export class SignUpComponent implements OnInit {
 
   checkPasswords: ValidatorFn = (group: AbstractControl):  ValidationErrors | null => {
 
-    console.log(group.valid)
     let pass = group.get('passwordValue')?.value;
     let confirmPass = group.get('passwordConfirmValue')?.value;
     

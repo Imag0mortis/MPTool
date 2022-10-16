@@ -24,14 +24,10 @@
                     <input tuiTextfield type="text" />
                 </tui-input>
             </form>
-            <button
-            tuiButton
-            type="button"
-            appearance="primary"
-            class="tui-space_right-3 tui-space_bottom-3"
-        >
-            Создать задание
-        </button>
+            <button tuiButton type="button" (click)="newLikerPost()" appearance="primary"
+                class="tui-space_right-3 tui-space_bottom-3">
+                Создать задание
+            </button>
         </div>
         <div class="liker-content-col2">
             <form class="b-form" [formGroup]="form">
@@ -40,13 +36,13 @@
                     <input tuiTextfield type="number" />
                 </tui-input>
                 <div class="liker-toggle-container">
-                    <svg style="cursor: pointer" (click)="likeToogle = !likeToogle" width="30" height="16"
+                    <svg style="cursor: pointer" (click)="changeLikeDirection()" width="30" height="16"
                         viewBox="0 0 30 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M21.8182 0H8.18182C3.66818 0 0 3.58667 0 8C0 12.4133 3.66818 16 8.18182 16H21.8182C26.3318 16 30 12.4133 30 8C30 3.58667 26.3318 0 21.8182 0ZM21.8182 13.3333H8.18182C5.16818 13.3333 2.72727 10.9467 2.72727 8C2.72727 5.05333 5.16818 2.66667 8.18182 2.66667H21.8182C24.8318 2.66667 27.2727 5.05333 27.2727 8C27.2727 10.9467 24.8318 13.3333 21.8182 13.3333Z"
                             fill="#2C7A77" />
-                        <circle *ngIf="!likeToogle" cx="8" cy="8" r="4" fill="#2C7A77" />
-                        <circle *ngIf="likeToogle" cx="21" cy="8" r="4" fill="#2C7A77" />
+                        <circle *ngIf="!form.get('likesToogle')?.value" cx="8" cy="8" r="4" fill="#2C7A77" />
+                        <circle *ngIf="form.get('likesToogle')?.value" cx="21" cy="8" r="4" fill="#2C7A77" />
                     </svg>
                     <h4>Лайки/Дизлайки</h4>
                 </div>
@@ -71,43 +67,45 @@
                 <th tuiTh>Статус</th>
             </tr>
         </thead>
-        <tbody tuiTbody [data]="data">
-            <tr *tuiRow="let item of data; index as i" tuiTr>
-                <td *tuiCell="'article'" tuiTd>
-                    {{ item.article }}
-                </td>
-                <td *tuiCell="'name'" tuiTd>
-                    {{ item.name }}
-                </td>
-                <td *tuiCell="'request'" tuiTd>
-                    {{ item.request }}
-                </td>
-                <td *tuiCell="'review'" tuiTd>
-                    {{ item.review }}
-                </td>
-                <td *tuiCell="'likes'" tuiTd>
-                    <div class="liker-toggle-container">
-                        <div>{{ item.likes.countLikes }}</div>
-                        &nbsp;&nbsp;
-                        <svg style="cursor: pointer" (click)="likeToogle = !likeToogle" width="30" height="16"
-                            viewBox="0 0 30 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M21.8182 0H8.18182C3.66818 0 0 3.58667 0 8C0 12.4133 3.66818 16 8.18182 16H21.8182C26.3318 16 30 12.4133 30 8C30 3.58667 26.3318 0 21.8182 0ZM21.8182 13.3333H8.18182C5.16818 13.3333 2.72727 10.9467 2.72727 8C2.72727 5.05333 5.16818 2.66667 8.18182 2.66667H21.8182C24.8318 2.66667 27.2727 5.05333 27.2727 8C27.2727 10.9467 24.8318 13.3333 21.8182 13.3333Z"
-                                fill="#2C7A77" />
-                            <circle *ngIf="!likeToogle" cx="8" cy="8" r="4" fill="#2C7A77" />
-                            <circle *ngIf="likeToogle" cx="21" cy="8" r="4" fill="#2C7A77" />
-                        </svg>
-                    </div>
-                </td>
-                <td *tuiCell="'actions'" tuiTd>
-                    <tui-tag [ngClass]="item.status === 'Отмена' ? 'support-5' : 'support-3'" status="custom" class="tag" [hoverable]="true"
-                            [value]="'Отмена'">
-                    </tui-tag>
-                </td>
-                <td *tuiCell="'status'" tuiTd>
-                    {{ item.status }}
-                </td>
-            </tr>
-        </tbody>
+        <ng-container *ngIf="(tableData$ | async) as data">
+            <tbody tuiTbody [data]="data">
+                <tr *tuiRow="let item of data; index as i" tuiTr>
+                    <td *tuiCell="'article'" tuiTd>
+                        {{ item.sku }}
+                    </td>
+                    <td *tuiCell="'name'" tuiTd>
+                        {{ item.name }}
+                    </td>
+                    <td *tuiCell="'request'" tuiTd>
+                        {{ item.query }}
+                    </td>
+                    <td *tuiCell="'review'" tuiTd>
+                        {{ item.feedback }}
+                    </td>
+                    <td *tuiCell="'likes'" tuiTd>
+                        <div class="liker-toggle-container">
+                            <div>{{ item.likesCount }}</div>
+                            &nbsp;&nbsp;
+                            <svg style="cursor: pointer" width="30" height="16" viewBox="0 0 30 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M21.8182 0H8.18182C3.66818 0 0 3.58667 0 8C0 12.4133 3.66818 16 8.18182 16H21.8182C26.3318 16 30 12.4133 30 8C30 3.58667 26.3318 0 21.8182 0ZM21.8182 13.3333H8.18182C5.16818 13.3333 2.72727 10.9467 2.72727 8C2.72727 5.05333 5.16818 2.66667 8.18182 2.66667H21.8182C24.8318 2.66667 27.2727 5.05333 27.2727 8C27.2727 10.9467 24.8318 13.3333 21.8182 13.3333Z"
+                                    fill="#2C7A77" />
+                                <circle *ngIf="!item.isLike" cx="8" cy="8" r="4" fill="#2C7A77" />
+                                <circle *ngIf="item.isLike" cx="21" cy="8" r="4" fill="#2C7A77" />
+                            </svg>
+                        </div>
+                    </td>
+                    <td *tuiCell="'actions'" tuiTd>
+                        <tui-tag [ngClass]="item.taskState === 'Отмена' ? 'support-5' : 'support-3'" status="custom"
+                            class="tag" [hoverable]="true" [value]="'Отмена'">
+                        </tui-tag>
+                    </td>
+                    <td *tuiCell="'status'" tuiTd>
+                        {{ item.taskState }}
+                    </td>
+                </tr>
+            </tbody>
+        </ng-container>
     </table>
 </div>

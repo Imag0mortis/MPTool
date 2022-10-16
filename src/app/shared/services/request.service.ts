@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Liker } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,16 @@ export class RequestService {
 
   public getPositions() {
     return this.http.get(environment.api + `/lk/v1/catalog_query.php?sku=1&query=%D1%83%D1%83&page=1&pagesize=10`)
+  }
+
+  public getLiker(page: number, size: number) {
+    return this.http.get(environment.api + `/lk/v1/wb_liker.php?page=${page}&pageSize=${size}`)
+  }
+  
+  public postLiker(body: Liker) {
+    return this.http.post(environment.api + `/lk/v1/wb_liker.php`, body)
   } 
 
 }
+
+
