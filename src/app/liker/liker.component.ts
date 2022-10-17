@@ -90,10 +90,15 @@ export class LikerComponent implements OnInit {
       feedback: this.form.get('review')?.value,
       likes: this.form.get('likes')?.value,
       query: this.form.get('request')?.value,
-      isLike: this.form.get('likesToogle')?.value,
+      isLike: !this.form.get('likesToogle')?.value,
     }
+
     this.request.postLiker(body).subscribe(
-      r => alert('Задание создано!'),
+      (r: any) => {
+        alert('Задание создано!')
+        let newData = this.tableData$.value.concat(r['taskList'])
+        this.tableData$.next(newData);
+      },
       e => alert('Что-то пошло не так...')
     );
   }
