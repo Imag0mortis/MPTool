@@ -56,6 +56,10 @@ export class RequestService {
   
   public postLiker(body: Liker) {
     return this.http.post(environment.api + `/lk/v1/wb_liker.php`, body)
+  }
+
+  public cancelLiker(body: any) {
+    return this.http.put(environment.api + `/lk/v1/wb_liker.php`, body)
   } 
 
 }

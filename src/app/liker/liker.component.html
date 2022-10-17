@@ -97,8 +97,10 @@
                         </div>
                     </td>
                     <td *tuiCell="'actions'" tuiTd>
-                        <tui-tag [ngClass]="item.taskState === 'Отмена' ? 'support-5' : 'support-3'" status="custom"
-                            class="tag" [hoverable]="true" [value]="'Отмена'">
+                        <tui-tag
+                            *ngIf="item.taskState ==='В работе' || item.taskState ==='Не в работе'; else disabledTag"
+                            (click)="cancelLikerTask(item.taskID)" status="custom" class="tag support-3"
+                            [hoverable]="true" [value]="'Отмена'">
                         </tui-tag>
                     </td>
                     <td *tuiCell="'status'" tuiTd>
@@ -109,3 +111,8 @@
         </ng-container>
     </table>
 </div>
+
+<ng-template #disabledTag>
+    <tui-tag status="custom" class="tag support-5" [hoverable]="false" [value]="'Отмена'">
+    </tui-tag>
+</ng-template>

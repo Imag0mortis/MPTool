@@ -75,6 +75,10 @@ export class LikerComponent implements OnInit {
   likeToogle: boolean = false;
 
   ngOnInit(): void {
+    this.getLikerTasks();
+  }
+
+  getLikerTasks() {
     this.request.getLiker(1, 20).pipe(first()).subscribe(
       (r: any) => {
         this.tableData$.next(r['taskList'])
@@ -105,6 +109,16 @@ export class LikerComponent implements OnInit {
 
   changeLikeDirection() {
     this.form.get('likesToogle')?.setValue(!this.form.get('likesToogle')?.value)
+  }
+
+  cancelLikerTask(id: number) {
+    this.request.cancelLiker({
+      "task_id": id,
+      "action": "cancel"
+    }).subscribe(
+      r => this.getLikerTasks(),
+      e => alert('Что-то пошло не так...')
+    )
   }
 
 }

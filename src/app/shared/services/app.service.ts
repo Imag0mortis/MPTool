@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class AppService {
   public menuSelector: BehaviorSubject<string> = new BehaviorSubject("");
 
   constructor(
-    private router: Router
+    private router: Router,
+    private user: UserService
   ) { }
 
   init() {
@@ -30,12 +32,11 @@ export class AppService {
     this.router.navigate(['/campaigns'], {
       queryParams: {
         page: 1,
-        pagesize: 10
+        pagesize: 10,
+        lk: this.user.userSubj$.value['user_wb_companies'][0]['lk_id']
       },
       queryParamsHandling: 'merge',
     });
-    
-    //this.router.navigate(['/campaigns']);
   }
 
   goRealPrice() {

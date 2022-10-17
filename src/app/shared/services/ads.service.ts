@@ -21,6 +21,7 @@ export class AdsService {
         private route: ActivatedRoute,
     ) {
         this.route.queryParams.subscribe(
+            
             (params: Params) => {
                 this.page$.next(params['page']);
                 if (params['lk']) {
