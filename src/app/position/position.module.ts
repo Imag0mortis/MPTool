@@ -5,7 +5,7 @@ import { PositionRoutes } from './position.routing';
 import { PositionTableComponent } from './position-table/position-table.component';
 import { PositionFiltersComponent } from './position-filters/position-filters.component';
 import { TuiInputModule } from '@taiga-ui/kit';
-import { TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { TuiButtonModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { FormsModule } from '@angular/forms';
 import { TuiTableModule } from '@taiga-ui/addon-table';
 
@@ -23,7 +23,8 @@ import { TuiTableModule } from '@taiga-ui/addon-table';
     TuiInputModule,
     TuiTextfieldControllerModule,
     FormsModule,
-    TuiTableModule
+    TuiTableModule,
+    TuiButtonModule
   ]
 })
 export class PositionModule { }

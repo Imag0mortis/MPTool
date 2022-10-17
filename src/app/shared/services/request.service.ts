@@ -46,8 +46,12 @@ export class RequestService {
     return this.http.post(environment.api + "/lk/v1/save_ad.php", campaign)
   }
 
-  public getPositions() {
-    return this.http.get(environment.api + `/lk/v1/catalog_query.php?sku=1&query=%D1%83%D1%83&page=1&pagesize=10`)
+  public getPositions(sku: any, query: any) {
+    return this.http.get(environment.api + `/lk/v1/catalog_query.php?page=1&pagesize=20${sku ? "&sku=" + JSON.stringify(sku) : ""}${query ? "&query=" + JSON.stringify(query) : ""}`)
+  }
+
+  public setNewSearchQuery(body: any) {
+    return this.http.post(environment.api + `/lk/v1/catalog_query.php`, body)
   }
 
   public getLiker(page: number, size: number) {
