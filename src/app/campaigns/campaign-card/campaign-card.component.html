@@ -2,6 +2,7 @@
     <div *ngIf="data" class="card_container shadow(1)">
         <div class="card_header">
             <h3>Кампании / {{data.campaignName}}</h3>
+            <tui-loader *ngIf="loading" [showLoader]="loading" [textContent]="'Синхронизация с Wildberries'" [size]="'s'"><div style="height: 100%; width: 200px"></div></tui-loader>
             <div class="navigation-back" (click)="appService.goCampaigns()">
                 <tui-marker-icon mode="success" size="xs" src="tuiIconArrowLeftLarge" class="tui-space_right-2">
                 </tui-marker-icon>

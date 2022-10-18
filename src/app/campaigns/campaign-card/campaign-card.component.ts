@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first, switchMap } from 'rxjs';
+import { concat, first, Subscription, switchMap, take } from 'rxjs';
 import { AppService } from 'src/app/shared/services/app.service';
 import { RequestService } from 'src/app/shared/services/request.service';
 
@@ -10,9 +10,10 @@ import { RequestService } from 'src/app/shared/services/request.service';
   templateUrl: './campaign-card.component.html',
   styleUrls: ['./campaign-card.component.scss']
 })
-export class CampaignCardComponent implements OnInit {
+export class CampaignCardComponent implements OnInit, OnDestroy {
 
   firstForm: FormGroup;
+  subscription: Subscription = new Subscription;
 
   constructor(
     public appService: AppService,
@@ -31,6 +32,7 @@ export class CampaignCardComponent implements OnInit {
   }
 
   data: any = undefined;
+  loading: boolean = true;
 
   mockData = [
     {
@@ -51,17 +53,27 @@ export class CampaignCardComponent implements OnInit {
   columns = Object.keys(this.mockData[0]);
 
   ngOnInit(): void {
-    this.route.params.pipe(first(), switchMap(
-      params => this.request.getCampaign(params['id'], false)
-    )).subscribe((result: any) => {
-      // тут явно другое поле и возможно их несколько, надо уточнять
-      this.firstForm.get('account')?.reset(result.campaignName)
-      this.firstForm.get('id')?.reset(result.campaignID)
-      this.firstForm.get('budget')?.reset(result.budget)
-      this.firstForm.get('category')?.reset(result.type)
-
-      this.data = result
-    });
+    this.subscription = this.route.params.pipe(first(), switchMap(
+      params => {
+        console.log(params);
+        return concat(
+          this.request.getCampaign(params['id'], false),
+          this.request.getCampaign(params['id'], true)
+        )
+      }
+    ), take(2)).subscribe(
+      (result: any) => {
+        console.log('HEY HEY HEY HEY', result)
+        // тут явно другое поле и возможно их несколько, надо уточнять
+        this.firstForm.get('account')?.reset(result.campaignName)
+        this.firstForm.get('id')?.reset(result.campaignID)
+        this.firstForm.get('budget')?.reset(result.budget)
+        this.firstForm.get('category')?.reset(result.type)
+        this.data = result
+      },
+      error => console.error('ошибка!'),
+      () => this.loading = false
+    );
   }
 
   onnOff: boolean = true;
@@ -83,5 +95,9 @@ export class CampaignCardComponent implements OnInit {
       r => this.router.navigate(['']),
       e => alert('ошибка сохранения')
     );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

@@ -4,7 +4,7 @@ import { TableComponent } from './table/table.component';
 import { CampaignsComponent } from './campaigns.component';
 import { CampaignsRoutes } from './campaigns.routing';
 import { TuiReorderModule, TuiTableModule, TuiTablePaginationModule } from '@taiga-ui/addon-table';
-import { TuiDataListWrapperModule, TuiInputModule, TuiMarkerIconModule, TuiSelectModule, TuiTagModule, TuiToggleModule } from '@taiga-ui/kit';
+import { TuiDataListWrapperModule, TuiInputModule, TuiMarkerIconModule, TuiProgressModule, TuiSelectModule, TuiTagModule, TuiToggleModule } from '@taiga-ui/kit';
 import { TuiButtonModule, TuiDataListModule, TuiDropdownModule, TuiHintModule, TuiHostedDropdownModule, TuiLoaderModule, TuiTextfieldControllerModule, TuiTooltipModule } from '@taiga-ui/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiLetModule, TuiPortalModule } from '@taiga-ui/cdk';
@@ -44,6 +44,7 @@ import { CampaignCardComponent } from './campaign-card/campaign-card.component';
     TuiMarkerIconModule,
     TuiTooltipModule,
     TuiHintModule,
+    TuiProgressModule,
     TuiLetModule
   ]
 })
