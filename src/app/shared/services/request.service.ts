@@ -46,8 +46,8 @@ export class RequestService {
     return this.http.post(environment.api + "/lk/v1/save_ad.php", campaign)
   }
 
-  public getPositions(sku: any, query: any) {
-    return this.http.get(environment.api + `/lk/v1/catalog_query.php?page=1&pagesize=20${sku ? "&sku=" + JSON.stringify(sku) : ""}${query ? "&query=" + JSON.stringify(query) : ""}`)
+  public getPositions(sku: any, query: any, page: any) {
+    return this.http.get(environment.api + `/lk/v1/catalog_query.php?page=${page || 1}&pagesize=10${sku ? "&sku=" + JSON.stringify(sku) : ""}${query ? "&query=" + JSON.stringify(query) : ""}`)
   }
 
   public setNewSearchQuery(body: any) {

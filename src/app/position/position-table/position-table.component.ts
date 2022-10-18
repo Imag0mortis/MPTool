@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { PositionsService } from 'src/app/shared/services/positions.service';
 
 @Component({
   selector: 'app-position-table',
@@ -7,74 +10,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PositionTableComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public positions: PositionsService,
+    private router: Router
+  ) { }
+
+  private readonly size$ = new BehaviorSubject(10);
 
   ngOnInit(): void {
+    
   }
 
-  data = [
-    {
-      article: 8965485,
-      date: "26.09.2022",
-      position: 3252,
-      request: "Таро Уэйта"
-    },
-    {
-      article: 8965485,
-      date: "26.09.2022",
-      position: 3252,
-      request: "Таро Уэйта"
-    },
-    {
-      article: 8965485,
-      date: "26.09.2022",
-      position: 3252,
-      request: "Таро Уэйта"
-    },
-    {
-      article: 8965485,
-      date: "26.09.2022",
-      position: 3252,
-      request: "Таро Уэйта"
-    },
-    {
-      article: 8965485,
-      date: "26.09.2022",
-      position: 3252,
-      request: "Таро Уэйта"
-    },
-    {
-      article: 8965485,
-      date: "26.09.2022",
-      position: 3252,
-      request: "Таро Уэйта"
-    },
-    {
-      article: 8965485,
-      date: "26.09.2022",
-      position: 3252,
-      request: "Таро Уэйта"
-    },
-    {
-      article: 8965485,
-      date: "26.09.2022",
-      position: 3252,
-      request: "Таро Уэйта"
-    },
-    {
-      article: 8965485,
-      date: "26.09.2022",
-      position: 3252,
-      request: "Таро Уэйта"
-    },
-    {
-      article: 8965485,
-      date: "26.09.2022",
-      position: 3252,
-      request: "Таро Уэйта"
-    }
-  ] as const;
+  columns = ["article", "date", "position", "request"]
 
-  columns = Object.keys(this.data[0]);
+  onPage(page: number): void {
+    this.positions.page$.next(page);
+    this.router.navigate(['/position'], {
+        queryParams: {
+          page: page + 1
+        },
+        queryParamsHandling: 'merge',
+    });
+}
 
+  onSize(event: any) {
+    this.size$.next(event);
+  }
+  
 }

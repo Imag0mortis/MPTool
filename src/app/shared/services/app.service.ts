@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, NavigationExtras, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { UserService } from './user.service';
 
@@ -44,7 +44,15 @@ export class AppService {
   }
   
   goPosition() {
-    this.router.navigate(['/position']);
+    this.router.navigate(['/position'], {
+      queryParams: {
+        page: 1,
+        pagesize: 10,
+        sku: null,
+        query: null
+      },
+      queryParamsHandling: 'merge',
+    })
   }
 
   goRansomCalculation() {
