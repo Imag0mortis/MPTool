@@ -70,6 +70,9 @@ export class RequestService {
     return this.http.get(environment.api + `/lk/v1/get_real_bids.php?query=${query}`)
   }
 
+  public getSelfpurchase(query: string, position: any) {
+    return this.http.get(environment.api + `/lk/v1/get_selfpurchase.php?query=${query}&pos=${position}`)
+  }
 }
 
 

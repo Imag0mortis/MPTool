@@ -3,43 +3,20 @@
         <h3>Рассчет позиции по запросу</h3>
         <a><span>Обучающее видео</span></a>
     </div>
-    <table tuiTable class="table">
+    <table *ngIf="(ransomCalculation.rancomCalculationData$ | async) as data; else noData" tuiTable class="table">
         <tbody tuiTbody>
             <tr>
                 <td>День</td>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>7</td>
-                <td>8</td>
-                <td>9</td>
-                <td>10</td>
-                <td>11</td>
-                <td>12</td>
-                <td>13</td>
-                <td>14</td>
+                <td *ngFor="let item of data">{{item.day}}</td>
             </tr>
             <tr>
                 <td>Сумма</td>
-                <td>100</td>
-                <td>200</td>
-                <td>400</td>
-                <td>500</td>
-                <td>800</td>
-                <td>900</td>
-                <td>700</td>
-                <td>800</td>
-                <td>900</td>
-                <td>1000</td>
-                <td>100</td>
-                <td>200</td>
-                <td>300</td>
-                <td>400</td>
+                <td *ngFor="let item of data">{{item.purchase}}</td>
             </tr>
         </tbody>
     </table>
-
 </div>
+
+<ng-template #noData>
+    <p>Введите искомый запрос и позицию...</p>
+</ng-template>

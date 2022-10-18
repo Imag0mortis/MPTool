@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RansomCalculationService } from 'src/app/shared/services/ransom-calculation.service';
 
 @Component({
   selector: 'app-ransom-calculation-table',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RansomCalculationTableComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public ransomCalculation: RansomCalculationService
+  ) { }
 
   ngOnInit(): void {
   }

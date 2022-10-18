@@ -5,7 +5,7 @@ import { RansomCalculationTableComponent } from './ransom-calculation-table/rans
 import { RansomCalculationComponent } from './ransom-calculation.component';
 import { RansomCalculationRoutes } from './ransom-calculation.routing';
 import { TuiInputModule } from '@taiga-ui/kit';
-import { TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { TuiButtonModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { FormsModule } from '@angular/forms';
 import { TuiTableModule } from '@taiga-ui/addon-table';
 
@@ -24,7 +24,8 @@ import { TuiTableModule } from '@taiga-ui/addon-table';
     TuiInputModule,
     TuiTextfieldControllerModule,
     FormsModule,
-    TuiTableModule
+    TuiTableModule,
+    TuiButtonModule
   ]
 })
 export class RansomCalculationModule { }

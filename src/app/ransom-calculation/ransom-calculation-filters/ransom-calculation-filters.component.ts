@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RansomCalculationService } from 'src/app/shared/services/ransom-calculation.service';
+import { RequestService } from 'src/app/shared/services/request.service';
 
 @Component({
   selector: 'app-ransom-calculation-filters',
@@ -7,12 +9,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RansomCalculationFiltersComponent implements OnInit {
 
-  constructor() { }
+  loading: boolean = false;
+
+  constructor(
+    private request: RequestService,
+    private ransomCalculation: RansomCalculationService
+  ) { }
 
   ngOnInit(): void {
+    
+  }
+
+  search() {
+    this.request.getSelfpurchase(this.searchRequest, this.searchPosition).subscribe(
+      r => {
+        this.ransomCalculation.rancomCalculationData$.next(r);
+      }
+    )
+  }
+
+  clear() {
+    this.ransomCalculation.rancomCalculationData$.next(null)
   }
 
   searchRequest: string = "";
-  searchPosition: string = "";
+  searchPosition: number = 1;
 
 }
