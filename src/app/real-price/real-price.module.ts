@@ -5,7 +5,7 @@ import { RealPriceFiltersComponent } from './real-price-filters/real-price-filte
 import { RealPriceTableComponent } from './real-price-table/real-price-table.component';
 import { RealPriceComponent } from './real-price.component';
 import { TuiInputModule } from '@taiga-ui/kit';
-import { TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { TuiButtonModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { FormsModule } from '@angular/forms';
 import { TuiTableModule } from '@taiga-ui/addon-table';
 
@@ -23,7 +23,8 @@ import { TuiTableModule } from '@taiga-ui/addon-table';
     TuiInputModule,
     TuiTextfieldControllerModule,
     FormsModule,
-    TuiTableModule
+    TuiTableModule,
+    TuiButtonModule
   ]
 })
 export class RealPriceModule { }

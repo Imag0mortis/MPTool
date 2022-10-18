@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RealBidService } from 'src/app/shared/services/real-bid.service';
 
 @Component({
   selector: 'app-real-price-table',
@@ -7,72 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RealPriceTableComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public realBid: RealBidService
+  ) { }
 
   ngOnInit(): void {
   }
 
-  data = [
-    {
-      position: 1,
-      idAdvertiser: 265684,
-      idProduct: 1323525,
-      realBid: 4146
-    },
-    {
-      position: 1,
-      idAdvertiser: 265684,
-      idProduct: 1323525,
-      realBid: 4146
-    },
-    {
-      position: 1,
-      idAdvertiser: 265684,
-      idProduct: 1323525,
-      realBid: 4146
-    }, {
-      position: 1,
-      idAdvertiser: 265684,
-      idProduct: 1323525,
-      realBid: 4146
-    }, {
-      position: 1,
-      idAdvertiser: 265684,
-      idProduct: 1323525,
-      realBid: 4146
-    }, {
-      position: 1,
-      idAdvertiser: 265684,
-      idProduct: 1323525,
-      realBid: 4146
-    }, {
-      position: 1,
-      idAdvertiser: 265684,
-      idProduct: 1323525,
-      realBid: 4146
-    }, {
-      position: 1,
-      idAdvertiser: 265684,
-      idProduct: 1323525,
-      realBid: 4146
-    }, {
-      position: 1,
-      idAdvertiser: 265684,
-      idProduct: 1323525,
-      realBid: 4146
-    }, {
-      position: 1,
-      idAdvertiser: 265684,
-      idProduct: 1323525,
-      realBid: 4146
-    }, {
-      position: 1,
-      idAdvertiser: 265684,
-      idProduct: 1323525,
-      realBid: 4146
-    }
-  ] as const;
-
-  columns = Object.keys(this.data[0]);
+  columns = ['position', 'idAdvertiser', 'idProduct', 'realBid'];
 
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RealBidService } from 'src/app/shared/services/real-bid.service';
+import { RequestService } from 'src/app/shared/services/request.service';
 
 @Component({
   selector: 'app-real-price-filters',
@@ -7,11 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RealPriceFiltersComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private request: RequestService,
+    private realBid: RealBidService
+  ) { }
 
   public searchRequest: string = "";
 
   ngOnInit(): void {
+  }
+
+  search() {
+    this.request.getRealBids(this.searchRequest).subscribe(
+      (r: any) => this.realBid.realBidData$.next(r.bid),
+      e => alert('Ошибка!')
+    )
   }
 
 }

@@ -3,7 +3,7 @@
         <h3>Узнать реальную рекламную ставку</h3>
         <a><span>Обучающее видео</span></a>
     </div>
-    <table
+    <table *ngIf="(realBid.realBidData$ | async) as data; else noData"
     tuiTable
     class="table"
     [columns]="columns"
@@ -33,28 +33,32 @@
                 *tuiCell="'position'"
                 tuiTd
             >
-                {{ i + 1 }}
+                {{ item.place }}
             </td>
             <td
                 *tuiCell="'idAdvertiser'"
                 tuiTd
             >
-                {{ item.idAdvertiser }}
+                {{ item.subject }}
             </td>
             <td
                 *tuiCell="'idProduct'"
                 tuiTd
             >
-                {{ item.idProduct }}
+                {{ item.sku }}
             </td>
             <td
                 *tuiCell="'realBid'"
                 tuiTd
             >
-                {{ item.realBid }}
+                {{ item.price }}
             </td>
         </tr>
     </tbody>
 </table>
 
 </div>
+
+<ng-template #noData>
+    <p>Введите искомый запрос...</p>
+</ng-template>

@@ -64,7 +64,11 @@ export class RequestService {
 
   public cancelLiker(body: any) {
     return this.http.put(environment.api + `/lk/v1/wb_liker.php`, body)
-  } 
+  }
+
+  public getRealBids(query: string) {
+    return this.http.get(environment.api + `/lk/v1/get_real_bids.php?query=${query}`)
+  }
 
 }
 
