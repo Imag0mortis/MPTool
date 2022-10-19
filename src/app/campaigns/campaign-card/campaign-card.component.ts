@@ -14,6 +14,9 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
 
   firstForm: FormGroup;
   subscription: Subscription = new Subscription;
+  allBids: any[] = [];
+
+  campaignStats: any;
 
   constructor(
     public appService: AppService,
@@ -34,23 +37,7 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
   data: any = undefined;
   loading: boolean = true;
 
-  mockData = [
-    {
-      product: 'Плакат Арии',
-      views: 12344,
-      users: 3252,
-      viewsByOne: 120,
-      clicks: 425,
-      clickPer: 20,
-      byClick: 23,
-      inBin: 20,
-      orders: 500,
-      sum: 45354354,
-      conversion: 365
-    },
-  ] as const;
-
-  columns = Object.keys(this.mockData[0]);
+  columns = ['SKUName', 'viewCount', 'users', 'viewsByUser', 'clicks', 'clickPercent', 'costPerClick', 'addedToBasket', 'adCampainCost', 'orders', 'conversionRate']
 
   ngOnInit(): void {
     this.subscription = this.route.params.pipe(first(), switchMap(
@@ -63,13 +50,15 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
       }
     ), take(2)).subscribe(
       (result: any) => {
-        console.log('HEY HEY HEY HEY', result)
         // тут явно другое поле и возможно их несколько, надо уточнять
         this.firstForm.get('account')?.reset(result.campaignName)
         this.firstForm.get('id')?.reset(result.campaignID)
         this.firstForm.get('budget')?.reset(result.budget)
         this.firstForm.get('category')?.reset(result.type)
         this.data = result
+        this.allBids = result.allBids;
+        result.campaignStats ? this.campaignStats = result.campaignStats : null;
+        console.log(this.campaignStats)
       },
       error => console.error('ошибка!'),
       () => this.loading = false

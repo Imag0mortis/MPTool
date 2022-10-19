@@ -2,7 +2,10 @@
     <div *ngIf="data" class="card_container shadow(1)">
         <div class="card_header">
             <h3>Кампании / {{data.campaignName}}</h3>
-            <tui-loader *ngIf="loading" [showLoader]="loading" [textContent]="'Синхронизация с Wildberries'" [size]="'s'"><div style="height: 100%; width: 200px"></div></tui-loader>
+            <tui-loader *ngIf="loading" [showLoader]="loading" [textContent]="'Синхронизация с Wildberries'"
+                [size]="'s'">
+                <div style="height: 100%; width: 200px"></div>
+            </tui-loader>
             <div class="navigation-back" (click)="appService.goCampaigns()">
                 <tui-marker-icon mode="success" size="xs" src="tuiIconArrowLeftLarge" class="tui-space_right-2">
                 </tui-marker-icon>
@@ -90,17 +93,13 @@
                         <h3>Выходные ставки для других мест</h3>
                         <tui-tooltip direction="bottom-right" [content]="'some info..'"></tui-tooltip>
                     </div>
-                    <table class="bid_table">
-                        <tr>
-                            <td>1-е 457 (+1)</td>
-                            <td>1-е 457 (+1)</td>
-                        </tr>
-                        <tr>
-                            <td>1-е 457 (+1)</td>
-                            <td>1-е 457 (+1)</td>
-                        </tr>
-                    </table>
-
+                    <tui-scrollbar class="box">
+                        <div class="bid_table">
+                            <div class="bid_table-el" *ngFor="let item of allBids">{{item.place}}-е
+                                <strong>{{item.price}} ₽</strong>
+                                (+{{item.count}} ₽)</div>
+                        </div>
+                    </tui-scrollbar>
                 </div>
             </div>
             <div class="card_toggle-container">
@@ -124,7 +123,7 @@
                 Сохранить
             </button>
         </div>
-        <table tuiTable class="table" [columns]="columns">
+        <table *ngIf="campaignStats" tuiTable class="table" [columns]="columns">
             <thead>
                 <tr tuiThGroup>
                     <th tuiTh>Товар</th>
@@ -135,45 +134,45 @@
                     <th tuiTh>% Клика</th>
                     <th tuiTh>За клик</th>
                     <th tuiTh>В корзине</th>
+                    <th tuiTh>Потрачено</th>
                     <th tuiTh>Заказов</th>
-                    <th tuiTh>Сумма</th>
                     <th tuiTh>Конверсия</th>
                 </tr>
             </thead>
-            <tbody tuiTbody [data]="mockData">
-                <tr *tuiRow="let item of mockData; index as i" tuiTr>
-                    <td *tuiCell="'article'" tuiTd>
-                        {{ item.product }}
+            <tbody tuiTbody [data]="campaignStats">
+                <tr tuiTr>
+                    <td *tuiCell="'SKUName'" tuiTd>
+                        {{ campaignStats.SKUName }}
                     </td>
-                    <td *tuiCell="'article'" tuiTd>
-                        {{ item.views }}
+                    <td *tuiCell="'viewCount'" tuiTd>
+                        {{ campaignStats.viewCount }}
                     </td>
-                    <td *tuiCell="'article'" tuiTd>
-                        {{ item.users }}
+                    <td *tuiCell="'users'" tuiTd>
+                        {{ campaignStats.users }}
                     </td>
-                    <td *tuiCell="'article'" tuiTd>
-                        {{ item.viewsByOne }}
+                    <td *tuiCell="'viewsByUser'" tuiTd>
+                        {{ campaignStats.viewsByUser }}
                     </td>
-                    <td *tuiCell="'article'" tuiTd>
-                        {{ item.clicks }}
+                    <td *tuiCell="'clicks'" tuiTd>
+                        {{ campaignStats.clicks }}
                     </td>
-                    <td *tuiCell="'article'" tuiTd>
-                        {{ item.clickPer }}
+                    <td *tuiCell="'clickPercent'" tuiTd>
+                        {{ campaignStats.clickPercent }}
                     </td>
-                    <td *tuiCell="'article'" tuiTd>
-                        {{ item.byClick }}
+                    <td *tuiCell="'costPerClick'" tuiTd>
+                        {{ campaignStats.costPerClick }}
                     </td>
-                    <td *tuiCell="'article'" tuiTd>
-                        {{ item.inBin }}
+                    <td *tuiCell="'addedToBasket'" tuiTd>
+                        {{ campaignStats.addedToBasket }}
                     </td>
-                    <td *tuiCell="'article'" tuiTd>
-                        {{ item.orders }}
+                    <td *tuiCell="'adCampainCost'" tuiTd>
+                        {{ campaignStats.adCampainCost }}
                     </td>
-                    <td *tuiCell="'article'" tuiTd>
-                        {{ item.sum }}
+                    <td *tuiCell="'orders'" tuiTd>
+                        {{ campaignStats.orders }}
                     </td>
-                    <td *tuiCell="'article'" tuiTd>
-                        {{ item.conversion }}
+                    <td *tuiCell="'conversionRate'" tuiTd>
+                        {{ campaignStats.conversionRate }}
                     </td>
                 </tr>
             </tbody>

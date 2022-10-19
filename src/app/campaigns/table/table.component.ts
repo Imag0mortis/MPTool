@@ -140,6 +140,15 @@ export class TableComponent implements OnInit, OnDestroy {
         this.subscription.unsubscribe();
     }
 
+    toggleCampaign(id: number, isEnabled: boolean) {
+        let body = {
+            "campaign_id": id, "enable": isEnabled
+        }
+        this.request.saveCampaign(body).subscribe(
+            r => console.log(r)
+        )
+    }
+
     public syncAdd() {
         this.request.syncAds(this.user.userSubj$.value.user_wb_companies[0].lk_id).subscribe(
             r => alert('Кампании обновятся в течении минимум 5 минут')

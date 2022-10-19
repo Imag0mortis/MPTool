@@ -41,8 +41,14 @@
     padding: 2rem 0;
 }
 
-.bid_table tr td {
-    width: 100px;
+.bid_table {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.bid_table-el {
+    margin: 0.2rem 1rem 0.2rem 0;
+    width: 120px;
 }
 
 .card-info-header {
@@ -69,4 +75,16 @@
 
 .progress {
     width: 50%;
+}
+
+.box {
+    width: 28rem;
+    height: 8rem;
+    border: 1px solid #d6edec;
+    padding: 0.25rem;
+}
+ 
+.line {
+    padding: 0 0.6875rem;
+    white-space: nowrap;
 }
