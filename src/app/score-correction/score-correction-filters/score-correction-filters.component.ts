@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RequestService } from 'src/app/shared/services/request.service';
+import { ScoreCorrectionService } from 'src/app/shared/services/score-correction.service';
 
 @Component({
   selector: 'app-score-correction-filters',
@@ -7,12 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScoreCorrectionFiltersComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private request: RequestService,
+    private scoreCorrection: ScoreCorrectionService
+  ) { }
 
-  searchRequest: string = "";
   searchArticle: string = "";
 
   ngOnInit(): void {
+  }
+
+  search() {
+    this.request.getCalcRating(this.searchArticle).subscribe(
+      (r: any) => this.scoreCorrection.scoreCorrectionData$.next(r),
+      e => alert('Ошибка!')
+    )
   }
 
 }

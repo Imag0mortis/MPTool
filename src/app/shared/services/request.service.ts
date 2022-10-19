@@ -73,6 +73,11 @@ export class RequestService {
   public getSelfpurchase(query: string, position: any) {
     return this.http.get(environment.api + `/lk/v1/get_selfpurchase.php?query=${query}&pos=${position}`)
   }
+
+  public getCalcRating(sku: string) {
+    return this.http.get(environment.api + `/lk/v1/calc_rating.php?sku=${sku}`)
+  }
+
 }
 
 

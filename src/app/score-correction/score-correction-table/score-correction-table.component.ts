@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ScoreCorrectionService } from 'src/app/shared/services/score-correction.service';
 
 @Component({
   selector: 'app-score-correction-table',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScoreCorrectionTableComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public scoreCorrection: ScoreCorrectionService
+  ) { }
+
+  columns = ['sku', 'mark', 'quantity'];
 
   ngOnInit(): void {
   }

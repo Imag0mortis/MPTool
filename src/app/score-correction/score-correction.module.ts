@@ -5,7 +5,7 @@ import { ScoreCorrectionFiltersComponent } from './score-correction-filters/scor
 import { ScoreCorrectionTableComponent } from './score-correction-table/score-correction-table.component';
 import { ScoreCorrectionRoutes } from './score-correction.routing';
 import { TuiInputModule } from '@taiga-ui/kit';
-import { TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { TuiButtonModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { FormsModule } from '@angular/forms';
 import { TuiTableModule } from '@taiga-ui/addon-table';
 
@@ -21,7 +21,8 @@ import { TuiTableModule } from '@taiga-ui/addon-table';
     TuiInputModule,
     TuiTextfieldControllerModule,
     FormsModule,
-    TuiTableModule
+    TuiTableModule,
+    TuiButtonModule
   ]
 })
 export class ScoreCorrectionModule { }
