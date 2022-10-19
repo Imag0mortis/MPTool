@@ -3,6 +3,8 @@
         <h3>Рассчет позиции по запросу</h3>
         <a><span>Обучающее видео</span></a>
     </div>
+    <tui-loader class="inline-flex tui-space_right-2" [showLoader]="loading" [inheritColor]="true" [overlay]="true">
+    
     <table *ngIf="(ransomCalculation.rancomCalculationData$ | async) as data; else noData" tuiTable class="table">
         <tbody tuiTbody>
             <tr>
@@ -15,6 +17,7 @@
             </tr>
         </tbody>
     </table>
+</tui-loader>
 </div>
 
 <ng-template #noData>

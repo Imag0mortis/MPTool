@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RansomCalculationComponent implements OnInit {
 
+  loading: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+  eventFromFilter(event: boolean) {
+    this.loading = event;
   }
 
 }

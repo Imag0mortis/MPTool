@@ -89,3 +89,7 @@ td:nth-child(even) {
     cursor: pointer;
     color: blue;
 }
+
+tr:first-child td {
+    border-bottom: 1px solid #ebf3f3;
+}

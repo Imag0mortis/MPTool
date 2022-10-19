@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RansomCalculationService } from 'src/app/shared/services/ransom-calculation.service';
 
 @Component({
@@ -7,6 +7,8 @@ import { RansomCalculationService } from 'src/app/shared/services/ransom-calcula
   styleUrls: ['./ransom-calculation-table.component.scss']
 })
 export class RansomCalculationTableComponent implements OnInit {
+
+  @Input() loading: boolean = false;
 
   constructor(
     public ransomCalculation: RansomCalculationService
