@@ -15,6 +15,7 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
   firstForm: FormGroup;
   subscription: Subscription = new Subscription;
   allBids: any[] = [];
+  listBids: any;
 
   campaignStats: any;
 
@@ -42,7 +43,6 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.route.params.pipe(first(), switchMap(
       params => {
-        console.log(params);
         return concat(
           this.request.getCampaign(params['id'], false),
           this.request.getCampaign(params['id'], true)
@@ -55,10 +55,19 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
         this.firstForm.get('id')?.reset(result.campaignID)
         this.firstForm.get('budget')?.reset(result.budget)
         this.firstForm.get('category')?.reset(result.type)
+        this.firstForm.get('account')?.disable()
+        this.firstForm.get('id')?.disable()
+        this.firstForm.get('budget')?.disable()
+        this.firstForm.get('category')?.disable()
+
         this.data = result
         this.allBids = result.allBids;
+        this.listBids = result.listBids.map((el: any) => {
+          let extendetEL = el;
+          el['useOptimazer'] = false;
+          return extendetEL
+        });
         result.campaignStats ? this.campaignStats = result.campaignStats : null;
-        console.log(this.campaignStats)
       },
       error => console.error('ошибка!'),
       () => this.loading = false
@@ -67,23 +76,37 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
 
   onnOff: boolean = true;
 
-  readonly testForm2 = new FormGroup({
-    place: new FormControl(`112`),
-    bid: new FormControl(`230`),
-  });
+  validate(): boolean {
+    let result: boolean = true;
+    this.listBids.forEach((element: any) => {
+      if(element.currentBid === 0 || element.currentPlace === 0) result = false;
+      else result = true;
+    });
+    return result;
+  }
 
   save() {
-    this.request.saveCampaign({
-      "campaign_id": this.firstForm.get('id')!.value,
-      "enable": this.data.isEnabled,
-      "use_optimizer": this.data.isUseOptimizer,
-      "dynamic_keyword": false,
-      "keyword": null,
-      "target_bid": this.data.allTargetBids
-    }).subscribe(
-      r => this.router.navigate(['']),
-      e => alert('ошибка сохранения')
-    );
+    if(this.validate()) {
+      this.request.saveCampaign({
+        "campaign_id": this.firstForm.get('id')!.value,
+        "enable": this.data.isEnabled,
+        "use_optimizer": false,
+        "dynamic_keyword": false,
+        "keyword": null,
+        "target_bid": this.listBids.map((el: any) => {
+          let newEl: any = {};
+          newEl['targetBid'] = el.currentBid
+          newEl['targetPlace'] = el.currentPlace
+          newEl['targetID'] = el.targetID
+          return newEl
+        })
+      }).subscribe(
+        r => this.appService.goCampaigns(),
+        e => alert('ошибка сохранения')
+      );
+    }
+    else alert('Целевая ставка или позиция не может быть равно 0!')
+    
   }
 
   ngOnDestroy(): void {

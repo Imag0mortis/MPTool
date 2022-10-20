@@ -41,12 +41,12 @@
                                 <input tuiTextfield type="text" />
                             </tui-input>
                         </div>
-                        <div class="tui-form__multi-field">
+                        <!-- <div class="tui-form__multi-field">
                             <tui-input formControlName="delivery">
                                 Срок доставки
                                 <input tuiTextfield type="text" />
                             </tui-input>
-                        </div>
+                        </div> -->
                     </div>
                 </form>
             </div>
@@ -61,7 +61,7 @@
                     <circle *ngIf="!data.isEnabled" cx="8" cy="8" r="4" fill="#2C7A77" />
                     <circle *ngIf="data.isEnabled" cx="21" cy="8" r="4" fill="#2C7A77" />
                 </svg>
-                <span>&nbsp;Вкл/Выкл</span>
+                <span>&nbsp;&nbsp;Выкл/Вкл</span>
             </div>
         </div>
         <div class="card-info">
@@ -69,60 +69,66 @@
                 <h3>{{data.mainKeyword}}</h3>
                 <a><span>Обучающее видео</span></a>
             </div>
-            <div class="card-info-main">
-                <div class="card-info-main-row1">
-                    <div *ngFor="let item of data.allTargetBids" class="b-form">
-                        <div class="tui-form__row tui-form__row_multi-fields">
-                            <div class="tui-form__multi-field">
-                                <tui-input [(ngModel)]="item.targetPlace" tuiHintContent="Целевое место">
+            <div class="card-info-main" *ngIf="listBids">
+                <div *ngFor="let item of listBids" class="bid_card">
+                    <h3>{{item.desc}}</h3>
+                    <div class="bid_card-content">
+                        <div class="bid_card-col1">
+                            <div class="bid_card-inputs">
+                                <tui-input class="bid_card-input" [(ngModel)]="item.currentBid"
+                                    tuiHintContent="Целевое место">
                                     Целевое место
                                     <input tuiTextfield type="number" />
                                 </tui-input>
-                            </div>
-                            <div class="tui-form__multi-field">
-                                <tui-input [(ngModel)]="item.targetBid" tuiHintContent="Максимальная ставка">
+                                <tui-input class="bid_card-input" [(ngModel)]="item.currentPlace"
+                                    tuiHintContent="Максимальная ставка">
                                     Максимальная ставка
                                     <input tuiTextfield type="number" />
                                 </tui-input>
                             </div>
+                            <div class="bid_cards-toggles">
+                                <div class="card_toggle-container">
+                                    <svg style="cursor: pointer" (click)="item.useOptimazer = !item.useOptimazer"
+                                        width="30" height="16" viewBox="0 0 30 16" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M21.8182 0H8.18182C3.66818 0 0 3.58667 0 8C0 12.4133 3.66818 16 8.18182 16H21.8182C26.3318 16 30 12.4133 30 8C30 3.58667 26.3318 0 21.8182 0ZM21.8182 13.3333H8.18182C5.16818 13.3333 2.72727 10.9467 2.72727 8C2.72727 5.05333 5.16818 2.66667 8.18182 2.66667H21.8182C24.8318 2.66667 27.2727 5.05333 27.2727 8C27.2727 10.9467 24.8318 13.3333 21.8182 13.3333Z"
+                                            fill="#2C7A77" />
+                                        <circle *ngIf="!item.useOptimazer" cx="8" cy="8" r="4" fill="#2C7A77" />
+                                        <circle *ngIf="item.useOptimazer" cx="21" cy="8" r="4" fill="#2C7A77" />
+                                    </svg>
+                                    <span>&nbsp;Включить реальные ставки</span>
+                                </div>
+                                <!-- <div *ngIf="data.type === 'Поиск'" class="card_toggle-container">
+                                    <tui-toggle ngModel="onnOff" [showIcons]="true"></tui-toggle>
+                                    <span>&nbsp;Использовать проверенные слова</span>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="bid_card-col2">
+                            <div style="display: flex; align-items: center;">
+                                <h4>Ставки конкурентов из кабинета Wildberries</h4>
+                                <tui-tooltip direction="bottom-right" [content]="'some info..'"></tui-tooltip>
+                            </div>
+                            <tui-scrollbar class="box">
+                                <div class="bid_table">
+                                    <div class="bid_table-el" *ngFor="let item of allBids">{{item.place}}-е
+                                        <strong>{{item.price}} ₽</strong>
+                                        (+{{item.count}} ₽)
+                                    </div>
+                                </div>
+                            </tui-scrollbar>
                         </div>
                     </div>
                 </div>
-                <div class="card-info-main-row2">
-                    <div style="display: flex; align-items: center;">
-                        <h3>Выходные ставки для других мест</h3>
-                        <tui-tooltip direction="bottom-right" [content]="'some info..'"></tui-tooltip>
-                    </div>
-                    <tui-scrollbar class="box">
-                        <div class="bid_table">
-                            <div class="bid_table-el" *ngFor="let item of allBids">{{item.place}}-е
-                                <strong>{{item.price}} ₽</strong>
-                                (+{{item.count}} ₽)</div>
-                        </div>
-                    </tui-scrollbar>
-                </div>
-            </div>
-            <div class="card_toggle-container">
-                <svg style="cursor: pointer" (click)="data.isUseOptimizer = !data.isUseOptimizer" width="30" height="16"
-                    viewBox="0 0 30 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M21.8182 0H8.18182C3.66818 0 0 3.58667 0 8C0 12.4133 3.66818 16 8.18182 16H21.8182C26.3318 16 30 12.4133 30 8C30 3.58667 26.3318 0 21.8182 0ZM21.8182 13.3333H8.18182C5.16818 13.3333 2.72727 10.9467 2.72727 8C2.72727 5.05333 5.16818 2.66667 8.18182 2.66667H21.8182C24.8318 2.66667 27.2727 5.05333 27.2727 8C27.2727 10.9467 24.8318 13.3333 21.8182 13.3333Z"
-                        fill="#2C7A77" />
-                    <circle *ngIf="!data.isUseOptimizer" cx="8" cy="8" r="4" fill="#2C7A77" />
-                    <circle *ngIf="data.isUseOptimizer" cx="21" cy="8" r="4" fill="#2C7A77" />
-                </svg>
-                <span>&nbsp;Включить реальные ставки</span>
-            </div>
-            <div class="card_toggle-container">
-                <tui-toggle ngModel="onnOff" [showIcons]="true"></tui-toggle>
-                <span>&nbsp;Использовать проверенные слова</span>
             </div>
         </div>
-        <div class="tui-form__buttons" style="padding: 0.5rem 2rem; margin-top: 0">
+        <div class="tui-form__buttons" style="padding: 0 2rem 1rem 2rem; margin-top: 0">
             <button (click)="save()" tuiButton size="l" class="tui-form__button">
                 Сохранить
             </button>
         </div>
+        <h3 *ngIf="campaignStats" style="padding: 0 2rem; margin: 2rem 0 0 0">Статистика кампании</h3>
         <table *ngIf="campaignStats" tuiTable class="table" [columns]="columns">
             <thead>
                 <tr tuiThGroup>

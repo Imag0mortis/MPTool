@@ -140,13 +140,17 @@ export class TableComponent implements OnInit, OnDestroy {
         this.subscription.unsubscribe();
     }
 
-    toggleCampaign(id: number, isEnabled: boolean) {
-        let body = {
-            "campaign_id": id, "enable": isEnabled
+    toggleCampaign(id: number, isEnabled: boolean, targetBid: number, targetPlace: number) {
+        if(targetBid > 0 && targetPlace > 0) {
+            let body = {
+                "campaign_id": id, "enable": isEnabled
+            }
+            this.request.saveCampaign(body).subscribe(
+                r => null/*console.log(r)*/
+            )
         }
-        this.request.saveCampaign(body).subscribe(
-            r => console.log(r)
-        )
+        else alert('Целевая ставка или позиция не может быть равно 0!')
+        
     }
 
     public syncAdd() {
