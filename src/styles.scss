@@ -68,3 +68,13 @@ p {
 .support-1 {
     background-color: var(--tui-support-1, var(--tui-support-01));
 }
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-thumb {
+    background: #56b4b0;
+}
+::-webkit-scrollbar-track {
+    background: #eaf9f8;
+}

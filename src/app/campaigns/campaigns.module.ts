@@ -4,10 +4,10 @@ import { TableComponent } from './table/table.component';
 import { CampaignsComponent } from './campaigns.component';
 import { CampaignsRoutes } from './campaigns.routing';
 import { TuiReorderModule, TuiTableModule, TuiTablePaginationModule } from '@taiga-ui/addon-table';
-import { TuiDataListWrapperModule, TuiInputModule, TuiMarkerIconModule, TuiProgressModule, TuiSelectModule, TuiTagModule, TuiToggleModule } from '@taiga-ui/kit';
+import { TuiComboBoxModule, TuiDataListWrapperModule, TuiInputModule, TuiMarkerIconModule, TuiProgressModule, TuiSelectModule, TuiTagModule, TuiToggleModule } from '@taiga-ui/kit';
 import { TuiButtonModule, TuiDataListModule, TuiDropdownModule, TuiHintModule, TuiHostedDropdownModule, TuiLoaderModule, TuiScrollbarModule, TuiTextfieldControllerModule, TuiTooltipModule } from '@taiga-ui/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TuiLetModule, TuiPortalModule } from '@taiga-ui/cdk';
+import { TuiLetModule, TuiPortalModule, TuiValidatorModule } from '@taiga-ui/cdk';
 import { TableFiltersComponent } from './table-filters/table-filters.component';
 import { CampaignCardComponent } from './campaign-card/campaign-card.component';
 
@@ -36,6 +36,7 @@ import { CampaignCardComponent } from './campaign-card/campaign-card.component';
     TuiPortalModule,
     TuiSelectModule,
     TuiDataListModule,
+    TuiComboBoxModule,
     TuiDataListWrapperModule,
     TuiSelectModule,
     TuiPortalModule,
@@ -46,7 +47,8 @@ import { CampaignCardComponent } from './campaign-card/campaign-card.component';
     TuiHintModule,
     TuiProgressModule,
     TuiLetModule,
-    TuiScrollbarModule
+    TuiScrollbarModule,
+    TuiValidatorModule
   ]
 })
 export class CampaignsModule { }

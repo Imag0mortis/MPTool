@@ -103,7 +103,7 @@ export class LikerComponent implements OnInit {
         let newData = this.tableData$.value.concat(r['taskList'])
         this.tableData$.next(newData);
       },
-      e => alert('Что-то пошло не так...')
+      e => alert('Укажите желаемое количество')
     );
   }
 
@@ -117,7 +117,7 @@ export class LikerComponent implements OnInit {
       "action": "cancel"
     }).subscribe(
       r => this.getLikerTasks(),
-      e => alert('Что-то пошло не так...')
+      e => alert('Ошибка сервера')
     )
   }
 

@@ -2,6 +2,8 @@
     background-color: #fff;
     margin: 0 2rem;
     border-radius: 16px;
+    max-height: 87vh;
+    overflow-y: scroll;
 }
 
 .card_header {
@@ -116,4 +118,31 @@
 .bid_card-input {
     width: 200px;
     margin-right: 0.75rem;
+}
+
+.dynamics_bids-container {
+    display: flex;
+}
+
+.dynamics_bids-col1 {
+    width: 60%
+}
+.dynamics_bids-col2 {
+    width: 40%;
+    margin-left: 1rem;
+    padding-left: 1rem;
+    border-left: 1px solid #d6edec;
+}
+
+.dynamics_bids-form {
+    margin-bottom: 1rem;
+}
+
+.dynamics_bids-col2 h4 {
+    margin: 0;
+}
+
+.dynamics_bids-toggle {
+    display: flex;
+    align-items: center;
 }

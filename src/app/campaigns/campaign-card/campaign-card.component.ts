@@ -1,21 +1,34 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { concat, first, Subscription, switchMap, take } from 'rxjs';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { TuiStringHandler } from '@taiga-ui/cdk';
+import { tuiItemsHandlersProvider } from '@taiga-ui/kit';
+import { concat, first, of, Subscription, switchMap, take } from 'rxjs';
 import { AppService } from 'src/app/shared/services/app.service';
 import { RequestService } from 'src/app/shared/services/request.service';
+
+interface Keywords {
+  count: number;
+  keyword: string;
+}
+
+const STRINGIFY_KEYWORD: TuiStringHandler<Keywords> = (item: Keywords) =>
+`${item.keyword} (${item.count})`;
 
 @Component({
   selector: 'app-campaign-card',
   templateUrl: './campaign-card.component.html',
-  styleUrls: ['./campaign-card.component.scss']
+  styleUrls: ['./campaign-card.component.scss'],
+  providers: [tuiItemsHandlersProvider({stringify: STRINGIFY_KEYWORD})],
 })
 export class CampaignCardComponent implements OnInit, OnDestroy {
 
   firstForm: FormGroup;
   subscription: Subscription = new Subscription;
-  allBids: any[] = [];
+  innerSubs: Subscription = new Subscription;
   listBids: any;
+  keywordValue: any = new FormControl(null);
+  keywordBids: any[] = [];
 
   campaignStats: any;
 
@@ -23,8 +36,7 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
     public appService: AppService,
     private request: RequestService,
     private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private router: Router
+    private fb: FormBuilder
   ) {
     this.firstForm = fb.group({
       account: new FormControl(``),
@@ -35,12 +47,17 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
     })
   }
 
+  validator(num: number) {
+    return Validators.min(num)
+  }
+
   data: any = undefined;
   loading: boolean = true;
-
+  dynamicKeyword: boolean = false;
   columns = ['SKUName', 'viewCount', 'users', 'viewsByUser', 'clicks', 'clickPercent', 'costPerClick', 'addedToBasket', 'adCampainCost', 'orders', 'conversionRate']
 
   ngOnInit(): void {
+
     this.subscription = this.route.params.pipe(first(), switchMap(
       params => {
         return concat(
@@ -59,14 +76,33 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
         this.firstForm.get('id')?.disable()
         this.firstForm.get('budget')?.disable()
         this.firstForm.get('category')?.disable()
+        if(result.allKeywords) this.keywordValue.setValue(result.allKeywords[0]);
+        this.data = result;
+        if (result.allTargetBids && result.listBids) {
+          this.listBids = result.allTargetBids.map((el: any) => {
+            let extendetEL = el;
+            el['minCPM'] = result.listBids.find((elem: any) => elem.targetID === el.targetID).minCPM;
+            return extendetEL
+          });
+        }
 
-        this.data = result
-        this.allBids = result.allBids;
-        this.listBids = result.listBids.map((el: any) => {
-          let extendetEL = el;
-          el['useOptimazer'] = false;
-          return extendetEL
-        });
+        this.dynamicKeyword = result.isUseDynamicKeyword
+        if(this.dynamicKeyword) {
+          this.keywordValue.setValue(this.data.allKeywords[0]);
+          this.keywordValue.disable(true);
+        }
+
+        if(this.data.type === "Поиск") {
+          this.innerSubs = this.keywordValue.valueChanges.pipe(switchMap(
+            (changes: Keywords) => {
+              if(changes) return this.request.getRealBids(changes.keyword)
+              else return of({bid: []})
+            }
+          )).subscribe((value: any) => {
+            this.keywordBids = value.bid
+          });
+        }
+
         result.campaignStats ? this.campaignStats = result.campaignStats : null;
       },
       error => console.error('ошибка!'),
@@ -74,42 +110,71 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
     );
   }
 
-  onnOff: boolean = true;
+  validateForNulls(): boolean {
+    if (this.listBids.find((element: any) =>
+      element.targetBid === 0 || element.targetPlace === 0)) {
+      return false;
+    }
+    else return true;
+  }
 
-  validate(): boolean {
-    let result: boolean = true;
-    this.listBids.forEach((element: any) => {
-      if(element.currentBid === 0 || element.currentPlace === 0) result = false;
-      else result = true;
-    });
-    return result;
+  validateMinCPM(): boolean {
+    if (this.listBids.find((element: any) =>
+      element.targetBid < element.minCPM)) {
+      return false;
+    }
+    else return true;
   }
 
   save() {
-    if(this.validate()) {
-      this.request.saveCampaign({
-        "campaign_id": this.firstForm.get('id')!.value,
-        "enable": this.data.isEnabled,
-        "use_optimizer": false,
-        "dynamic_keyword": false,
-        "keyword": null,
-        "target_bid": this.listBids.map((el: any) => {
-          let newEl: any = {};
-          newEl['targetBid'] = el.currentBid
-          newEl['targetPlace'] = el.currentPlace
-          newEl['targetID'] = el.targetID
-          return newEl
-        })
-      }).subscribe(
-        r => this.appService.goCampaigns(),
-        e => alert('ошибка сохранения')
-      );
+    if (this.validateForNulls()) {
+      if (this.validateMinCPM()) {
+        this.request.saveCampaign({
+          "campaign_id": this.firstForm.get('id')!.value,
+          "enable": this.data.isEnabled,
+          "use_optimizer": this.data.useOptimazer,
+          "dynamic_keyword": this.dynamicKeyword,
+          "keyword": this.keywordValue.value.keyword,
+          "target_bid": this.listBids.map((el: any) => {
+            let newEl: any = {};
+            newEl['targetBid'] = el.targetBid
+            newEl['targetPlace'] = el.targetPlace
+            newEl['targetID'] = el.targetID
+            newEl['minPlace'] = el.minPlace
+            return newEl
+          })
+        }).subscribe(
+          r => this.appService.goCampaigns(),
+          e => alert('ошибка сохранения')
+        );
+      }
+      else alert('Целевая ставка не может быть ниже минимальной ставки!')
     }
     else alert('Целевая ставка или позиция не может быть равно 0!')
-    
+  }
+
+  dynamicKeywordToggle() {
+    this.dynamicKeyword = !this.dynamicKeyword;
+    if(this.dynamicKeyword) {
+      this.keywordValue.setValue(this.data.allKeywords[0]);
+      this.keywordValue.disable(true);
+    }
+    else {
+      this.keywordValue.enable(true)
+    }
+  }
+
+  applyNewKeyword(event: any) {
+    let newValue = {
+      keyword: event.target.value,
+      count: 0
+    }
+    this.data.allKeywords.push(newValue);
+    this.keywordValue.setValue(newValue);
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.innerSubs.unsubscribe();
   }
 }
