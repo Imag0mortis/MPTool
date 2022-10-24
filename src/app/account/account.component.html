@@ -1,0 +1,72 @@
+<div class="account-container shadow(1)">
+    <div class="account-col1">
+        <h2>Редактирование профиля</h2>
+        <form [formGroup]="account">
+            <div class="account-input-row">
+                <tui-input class="account-input" formControlName="lastName">
+                    Фамилия
+                    <input tuiTextfield type="text" />
+                </tui-input>
+                <tui-input class="account-input" formControlName="firstName">
+                    Имя
+                    <input tuiTextfield type="text" />
+                </tui-input>
+                <tui-input class="account-input" formControlName="middleName">
+                    Отчество
+                    <input tuiTextfield type="text" />
+                </tui-input>
+            </div>
+            <div class="account-input-row">
+                <tui-input class="account-input" formControlName="job">
+                    Должность
+                    <input tuiTextfield type="text" />
+                </tui-input>
+            </div>
+            <div class="account-input-row">
+                <tui-input class="account-input" formControlName="company">
+                    Компания
+                    <input tuiTextfield type="text" />
+                </tui-input>
+            </div>
+            <div class="account-input-row">
+                <tui-input class="account-input" formControlName="phone">
+                    Телефон
+                    <input tuiTextfield type="text" />
+                </tui-input>
+                <tui-input class="account-input" formControlName="telegram">
+                    Телеграм
+                    <input tuiTextfield type="text" />
+                </tui-input>
+            </div>
+            <button tuiButton type="button" appearance="primary" class="tui-space_right-3 tui-space_bottom-3">
+                Сохранить
+            </button>
+        </form>
+    </div>
+    <div class="account-col2">
+        <h2>Смена пароля</h2>
+        <form [formGroup]="password">
+            <div class="account-input-row">
+                <tui-input class="account-input" formControlName="password">
+                    Старый пароль
+                    <input tuiTextfield type="password" />
+                </tui-input>
+            </div>
+            <div class="account-input-row">
+                <tui-input class="account-input" formControlName="oldPassword">
+                    Новый пароль
+                    <input tuiTextfield type="password" />
+                </tui-input>
+            </div>
+            <div class="account-input-row">
+                <tui-input class="account-input" formControlName="confirmPassword">
+                    Подтвердить
+                    <input tuiTextfield type="password" />
+                </tui-input>
+            </div>
+            <button tuiButton type="button" appearance="primary" class="tui-space_right-3 tui-space_bottom-3">
+                Изменить
+            </button>
+        </form>
+    </div>
+</div>

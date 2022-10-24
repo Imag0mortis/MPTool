@@ -42,6 +42,10 @@ export class AppService {
   goRealPrice() {
     this.router.navigate(['/realprice']);
   }
+
+  goAccount() {
+    this.router.navigate(['/account']);
+  }
   
   goPosition() {
     this.router.navigate(['/position'], {

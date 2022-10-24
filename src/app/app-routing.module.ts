@@ -39,6 +39,13 @@ const routes: Routes = [
         canActivateChild: [AuthGuard],
       },
       {
+        path: 'account',
+        loadChildren: () =>
+          import('./account/account.module').then((m) => m.AccountModule),
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
+      },
+      {
         path: 'ransom_calculation',
         loadChildren: () =>
           import('./ransom-calculation/ransom-calculation.module').then((m) => m.RansomCalculationModule),

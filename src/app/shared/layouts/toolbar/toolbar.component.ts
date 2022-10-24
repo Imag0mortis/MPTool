@@ -15,21 +15,21 @@ export class ToolbarComponent implements OnInit {
   ) { }
 
   open = false;
- 
-    onClick(): void {
-        this.open = !this.open;
-    }
- 
-    onObscured(obscured: any): void {
-        if (obscured) {
-            this.open = false;
-        }
-    }
- 
-    onActiveZone(active: any): void {
-        this.open = active && this.open;
-    }
 
+  onClick(): void {
+    this.open = !this.open;
+  }
+
+  onObscured(obscured: any): void {
+    if (obscured) {
+      this.open = false;
+    }
+  }
+
+  onActiveZone(active: any): void {
+    this.open = !this.open;
+    this.open = active && this.open;
+  }
 
   ngOnInit(): void {
   }

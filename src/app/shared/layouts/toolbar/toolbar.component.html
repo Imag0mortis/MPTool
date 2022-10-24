@@ -8,14 +8,19 @@
         <div class="toolbar_priceplan">
             <span>Тариф: <strong>Free</strong></span>
         </div>
-        <tui-marker-icon [tuiDropdown]="dropdownContent" [tuiDropdownManual]="open" (tuiObscured)="onObscured($event)"
+        <tui-marker-icon #toggleButton [tuiDropdown]="dropdownContent" [tuiDropdownManual]="open" (tuiObscured)="onObscured($event)"
             (click)="onClick()" mode="success" size="s" src="tuiIconUser" class="toolbar_button tui-space_right-2">
         </tui-marker-icon>
     </div>
 
     <ng-template #dropdownContent>
-        <div class="dropdown">
+        <div class="dropdown" #menu>
             <ul>
+                <li class="dropdown-el" (click)="this.open = false; appService.goAccount()">
+                    <tui-marker-icon mode="success" size="xs" src="tuiIconSettings"
+                        class="toolbar_button tui-space_right-2"></tui-marker-icon>
+                    Редактировать
+                </li>
                 <li class="dropdown-el" (click)="authService.logout()">
                     <tui-marker-icon mode="success" size="xs" src="tuiIconLogoutLarge"
                         class="toolbar_button tui-space_right-2"></tui-marker-icon>
