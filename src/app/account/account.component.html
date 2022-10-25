@@ -38,7 +38,7 @@
                     <input tuiTextfield type="text" />
                 </tui-input>
             </div>
-            <button tuiButton type="button" appearance="primary" class="tui-space_right-3 tui-space_bottom-3">
+            <button (click)="setNewProfileData()" tuiButton type="button" appearance="primary" class="tui-space_right-3 tui-space_bottom-3">
                 Сохранить
             </button>
         </form>
@@ -64,7 +64,7 @@
                     <input tuiTextfield type="password" />
                 </tui-input>
             </div>
-            <button tuiButton type="button" appearance="primary" class="tui-space_right-3 tui-space_bottom-3">
+            <button (click)="setNewPassword()" tuiButton type="button" appearance="primary" class="tui-space_right-3 tui-space_bottom-3">
                 Изменить
             </button>
         </form>

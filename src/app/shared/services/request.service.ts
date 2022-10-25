@@ -78,6 +78,14 @@ export class RequestService {
     return this.http.get(environment.api + `/lk/v1/calc_rating.php?sku=${sku}`)
   }
 
+  public setNewProfileData(body: any) {
+    return this.http.put(environment.api + `/lk/v1/update_profile.php`, body)
+  }
+
+  public setNewPassword(body: any) {
+    return this.http.put(environment.api + `/lk/v1/change_password.php`, body)
+  }
+
 }
 
 
