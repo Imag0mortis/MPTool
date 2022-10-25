@@ -12,8 +12,7 @@ export class RealPriceTableComponent implements OnInit {
     public realBid: RealBidService
   ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   columns = ['position', 'idAdvertiser', 'idProduct', 'realBid'];
 

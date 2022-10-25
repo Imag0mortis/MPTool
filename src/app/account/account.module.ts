@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AccountComponent } from './account.component';
 import { AccountRoutes } from './account.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TuiInputModule } from '@taiga-ui/kit';
+import { TuiInputModule, TuiInputPasswordModule } from '@taiga-ui/kit';
 import { TuiButtonModule } from '@taiga-ui/core';
 
 
@@ -18,7 +18,8 @@ import { TuiButtonModule } from '@taiga-ui/core';
     ReactiveFormsModule,
     TuiInputModule,
     TuiButtonModule,
-    AccountRoutes
+    AccountRoutes,
+    TuiInputPasswordModule
   ]
 })
 export class AccountModule { }

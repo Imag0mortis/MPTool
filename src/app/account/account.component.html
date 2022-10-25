@@ -47,22 +47,22 @@
         <h2>Смена пароля</h2>
         <form [formGroup]="password">
             <div class="account-input-row">
-                <tui-input class="account-input" formControlName="password">
+                <tui-input-password class="account-input" formControlName="oldPassword">
                     Старый пароль
                     <input tuiTextfield type="password" />
-                </tui-input>
+                </tui-input-password>
             </div>
             <div class="account-input-row">
-                <tui-input class="account-input" formControlName="oldPassword">
+                <tui-input-password class="account-input" formControlName="password">
                     Новый пароль
                     <input tuiTextfield type="password" />
-                </tui-input>
+                </tui-input-password>
             </div>
             <div class="account-input-row">
-                <tui-input class="account-input" formControlName="confirmPassword">
+                <tui-input-password class="account-input" formControlName="confirmPassword">
                     Подтвердить
                     <input tuiTextfield type="password" />
-                </tui-input>
+                </tui-input-password>
             </div>
             <button (click)="setNewPassword()" tuiButton type="button" appearance="primary" class="tui-space_right-3 tui-space_bottom-3">
                 Изменить
