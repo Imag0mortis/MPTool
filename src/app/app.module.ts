@@ -10,6 +10,7 @@ import { SharedModule } from "./shared/shared.module";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthGuard } from "./shared/guards/auth.guard";
 import { AuthInterceptor } from "./shared/interceptors/auth.interceptor";
+import { TariffsModule } from "./tariffs/tariffs.module";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AuthInterceptor } from "./shared/interceptors/auth.interceptor";
     TuiDialogModule,
     TuiAlertModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    TariffsModule
   ],
   providers: [
     { provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }, 

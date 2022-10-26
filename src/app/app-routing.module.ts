@@ -4,6 +4,7 @@ import { LoginComponent } from './shared/authorization/login/login.component';
 import { SignUpComponent } from './shared/authorization/sign-up/sign-up.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { WrapperComponent } from './shared/layouts/wrapper/wrapper.component';
+import { TariffsComponent } from './tariffs/tariffs.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/campaigns?page=1&pagesize=10', pathMatch: 'full' },
@@ -65,6 +66,10 @@ const routes: Routes = [
           import('./liker/liker.module').then((m) => m.LikerModule),
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard],
+      },
+      {
+        path: 'tariffs', component: TariffsComponent,
+        canActivate: [AuthGuard],
       },
     ]
   }

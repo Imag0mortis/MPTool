@@ -83,4 +83,8 @@ export class AppService {
     this.router.navigate(['/liker'])
   }
 
+  goTariffs() {
+    this.router.navigate(['/tariffs'])
+  }
+
 }

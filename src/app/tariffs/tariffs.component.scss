@@ -1,0 +1,140 @@
+.tariffs-container {
+    margin: 0 2rem;
+    max-width: 1400px;
+    margin: auto;
+}
+
+.tariffs-header {
+    color: #2C7A77;
+    text-align: center;
+}
+
+.tariffs-content {
+    display: flex;
+}
+
+.tariffs-header {
+    margin-bottom: 2rem;
+}
+
+
+
+.tariffs-col {
+    background: #fff;
+    box-shadow: 0 0.25rem 1.5rem rgb(0 0 0 / 12%);
+    width: calc(20%);
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    margin: 1rem;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: 0.75s;
+    transform: scale(1);
+    min-height: 45vh;
+}
+
+.tariffs-col:hover {
+    transition: 0.75s;
+    transform: scale(1.1);
+}
+
+.tarriphs_bg_0 {
+    background-image: url(../../assets/img/tariff_background.svg);
+}
+
+.tarriphs_bg_1 {
+    background-image: url(../../assets/img/tariff_background_1.svg);
+}
+
+.tarriphs_bg_2 {
+    background-image: url(../../assets/img/tariff_background_2.svg);
+}
+
+.tarriphs_bg_3 {
+    background-image: url(../../assets/img/tariff_background_3.svg);
+}
+
+.tariffs-col h4 {
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    margin: 0.5rem 0;
+}
+
+.tariffs-circle {
+    margin: auto;
+    background-color: #fff;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid rgb(209, 208, 208);
+}
+
+.tariffs-col ol {
+    margin: 1rem 0;
+    padding: 1rem 0;
+    border-top: 1px solid rgb(209, 208, 208);
+    border-bottom: 1px solid rgb(209, 208, 208);
+}
+
+.tariffs-el-button {
+    text-align: center;
+}
+
+.tariffs-footer {
+    background: #fff;
+    box-shadow: 0 0.25rem 1.5rem rgb(0 0 0 / 12%);
+    border-radius: 2rem;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.tariffs-footer h2 {
+    color:#2C7A77;
+    padding: 1rem 0 0 0;
+    margin-bottom: 0;
+}
+
+.tariffs-footer-content {
+    text-align: center;
+}
+
+.tariffs-footer-content h4 {
+    color:#2C7A77;
+    margin-top: 0;
+}
+
+.tariffs-footer-buttons {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0 1rem 0;
+}
+
+.tariffs-footer-button {
+    width: 200px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #56B4B0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.tariffs-footer-button:hover {
+    cursor: pointer;
+    transition: 0.5s;
+    background-color: #56B4B0;
+    color: #fff;
+}

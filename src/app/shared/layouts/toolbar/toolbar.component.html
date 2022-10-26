@@ -21,6 +21,11 @@
                         class="toolbar_button tui-space_right-2"></tui-marker-icon>
                     Редактировать
                 </li>
+                <li class="dropdown-el" (click)="this.open = false; appService.goTariffs()">
+                    <tui-marker-icon mode="success" size="xs" src="tuiIconStar"
+                        class="toolbar_button tui-space_right-2"></tui-marker-icon>
+                    Тарифы
+                </li>
                 <li class="dropdown-el" (click)="authService.logout()">
                     <tui-marker-icon mode="success" size="xs" src="tuiIconLogoutLarge"
                         class="toolbar_button tui-space_right-2"></tui-marker-icon>

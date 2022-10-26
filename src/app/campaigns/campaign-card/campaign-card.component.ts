@@ -86,6 +86,8 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
           });
         }
 
+        console.log(result)
+
         this.dynamicKeyword = result.isUseDynamicKeyword
         if(this.dynamicKeyword) {
           this.keywordValue.setValue(this.data.allKeywords[0]);
@@ -132,7 +134,7 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
         this.request.saveCampaign({
           "campaign_id": this.firstForm.get('id')!.value,
           "enable": this.data.isEnabled,
-          "use_optimizer": this.data.useOptimazer,
+          "use_optimizer": this.data.useOptimazer ? this.data.useOptimazer : false,
           "dynamic_keyword": this.dynamicKeyword,
           "keyword": this.keywordValue.value.keyword,
           "target_bid": this.listBids.map((el: any) => {
