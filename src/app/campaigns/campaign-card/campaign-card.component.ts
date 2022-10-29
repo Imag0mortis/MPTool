@@ -29,6 +29,7 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
   listBids: any;
   keywordValue: any = new FormControl(null);
   keywordBids: any[] = [];
+  bidLog: any[] = [];
 
   campaignStats: any;
 
@@ -93,6 +94,8 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
           this.keywordValue.setValue(this.data.allKeywords[0]);
           this.keywordValue.disable(true);
         }
+
+        this.bidLog = result.bidLog;
 
         if(this.data.type === "Поиск") {
           this.innerSubs = this.keywordValue.valueChanges.pipe(switchMap(

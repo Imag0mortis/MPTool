@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiLetModule, TuiPortalModule, TuiValidatorModule } from '@taiga-ui/cdk';
 import { TableFiltersComponent } from './table-filters/table-filters.component';
 import { CampaignCardComponent } from './campaign-card/campaign-card.component';
+import { LogTableComponent } from './campaign-card/log-table/log-table.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { CampaignCardComponent } from './campaign-card/campaign-card.component';
     CampaignsComponent,
     TableFiltersComponent,
     CampaignCardComponent,
+    LogTableComponent,
   ],
   imports: [
     CommonModule, 

@@ -1,0 +1,31 @@
+<div class="table_container">
+    <h3>История действий бота</h3>
+    <table tuiTable class="table" [columns]="columns">
+        <thead>
+            <tr tuiThGroup>
+                <th tuiTh [resizable]="true">
+                    Время изменения
+                </th>
+                <th tuiTh>На какую ставку поменяло</th>
+                <th tuiTh>Место, на которое поставило</th>
+                <th tuiTh>Id/Группа ставки</th>
+            </tr>
+        </thead>
+        <tbody tuiTbody [data]="data">
+            <tr *tuiRow="let row of data; index as i" tuiTr>
+                <td *tuiCell="'time'" tuiTd>
+                    {{ row.time | date:'dd/MM/YYYY hh:mm:ss' }}
+                </td>
+                <td *tuiCell="'bid'" tuiTd>
+                    {{ row.bid }}
+                </td>
+                <td *tuiCell="'place'" tuiTd>
+                    {{ row.place }}
+                </td>
+                <td *tuiCell="'subject'" tuiTd>
+                    {{ row.subject }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
