@@ -1,0 +1,56 @@
+<section id="reviews">
+    <div class="reviews__container">
+        <div class="reviews__wrapper">
+            <div class="reviews-content">
+                <h2>Отзывы</h2>
+                <div tuiCarouselButtons class="wrapper">
+                    <!-- <button tuiIconButton icon="tuiIconChevronLeftLarge" title="Previous"
+                        (click)="carousel.prev()"></button> -->
+                    <tui-carousel [itemsCount]="1" [duration]="4000" #carousel class="carousel">
+                        
+                        <ng-container *ngFor="let item of items">
+                            <tui-island *tuiItem>
+                                <h2 class="tui-island__title">{{item.name}}</h2>
+                                <p>
+                                    {{item.decription}}
+                                </p>
+                                <div>
+                                    <button tuiButton appearance="primary">
+                                        Buy $
+                                    </button>
+                                    <button tuiButton class="tui-space_left-2">
+                                        Rent $
+                                    </button>
+                                </div>
+                            </tui-island>
+                        </ng-container>
+
+                       <!--  <tui-island *tuiItem>
+                            <h2 class="tui-island__title">Monty Python and the Holy Grail</h2>
+                            <p>
+                                King Arthur and his Knights of the Round Table embark on a surreal, low-budget search
+                                for
+                                the Holy
+                                Grail, encountering many, very silly obstacles.
+                            </p>
+                            <div>
+                                <button tuiButton appearance="primary">
+                                    Buy $
+                                </button>
+                                <button tuiButton class="tui-space_left-2">
+                                    Rent $
+                                </button>
+                            </div>
+                        </tui-island> -->
+                    </tui-carousel>
+                    <!-- <button tuiIconButton icon="tuiIconChevronRightLarge" title="Next"
+                        (click)="carousel.next()"></button> -->
+                </div>
+                <div class="reviews-pagination">
+                    <tui-pagination size="s" class="pagination" [length]="items.length" [(index)]="index">
+                    </tui-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

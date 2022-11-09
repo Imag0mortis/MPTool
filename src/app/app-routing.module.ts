@@ -15,6 +15,11 @@ const routes: Routes = [
     path: 'signup', component: SignUpComponent
   },
   {
+    path: 'promo',
+    loadChildren: () =>
+      import('./promo/promo.module').then((m) => m.PromoModule),
+  },
+  {
     path: '',
     component: WrapperComponent,
     children: [
