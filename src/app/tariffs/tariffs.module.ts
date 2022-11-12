@@ -12,6 +12,9 @@ import { TuiButtonModule } from '@taiga-ui/core';
   imports: [
     CommonModule,
     TuiButtonModule
+  ],
+  exports: [
+    TariffsComponent
   ]
 })
 export class TariffsModule { }

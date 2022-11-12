@@ -34,6 +34,9 @@ import { SignUpComponent } from './sign-up/sign-up.component';
       provide: TUI_SANITIZER,
       useClass: NgDompurifySanitizer,
     },
+  ],
+  exports: [
+    SignUpComponent
   ]
 })
 export class AuthorizationModule { }
