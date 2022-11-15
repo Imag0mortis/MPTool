@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BasketComponent } from './basket/basket.component';
 import { LoginComponent } from './shared/authorization/login/login.component';
 import { SignUpComponent } from './shared/authorization/sign-up/sign-up.component';
 import { AuthGuard } from './shared/guards/auth.guard';
@@ -74,6 +75,10 @@ const routes: Routes = [
       },
       {
         path: 'tariffs', component: TariffsComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'basket', component: BasketComponent,
         canActivate: [AuthGuard],
       },
     ]
