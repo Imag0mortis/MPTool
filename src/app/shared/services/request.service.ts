@@ -176,12 +176,12 @@ export class RequestService {
   }
 
   public redactWbApi(body: WbApi) {
-    return this.http.put(environment.api + `/wbcampaigns/wbAPIKey.php`, body)
+    return this.http.put(environment.api + `/wbcampaigns/wbAPIKey.php`, body);
   }
 
   public deleteApi(lkId: number): Observable<any> {
     const url = `${environment.api}wbcampaigns/wbAPIKey.php?lkId=${lkId}`;
-    return this.http.delete(url)
+    return this.http.delete(url);
   }
 
   public syncAds(lkId: number) {
