@@ -1,22 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { TokenComponent } from './token.component';
+import { TokenComponent } from './token.component'
 
 describe('TokenComponent', () => {
-  let component: TokenComponent;
-  let fixture: ComponentFixture<TokenComponent>;
+  let component: TokenComponent
+  let fixture: ComponentFixture<TokenComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TokenComponent]
-    }).compileComponents();
+    }).compileComponents()
 
-    fixture = TestBed.createComponent(TokenComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(TokenComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

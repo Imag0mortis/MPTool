@@ -175,6 +175,15 @@ export class RequestService {
     return this.http.get<WbApi[]>(environment.api + 'wbcampaigns/wbAPIKey.php');
   }
 
+  public redactWbApi(body: WbApi) {
+    return this.http.put(environment.api + `/wbcampaigns/wbAPIKey.php`, body)
+  }
+
+  public deleteApi(lkId: number): Observable<any> {
+    const url = `${environment.api}wbcampaigns/wbAPIKey.php?lkId=${lkId}`;
+    return this.http.delete(url)
+  }
+
   public syncAds(lkId: number) {
     return this.http.get(environment.api + 'wbcampaigns/sync.php?lk');
   }
