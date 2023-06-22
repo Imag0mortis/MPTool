@@ -79,8 +79,6 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
       )
       .subscribe({
         next: (result: any) => {
-          console.log(result);
-          // тут явно другое поле и возможно их несколько, надо уточнять
           this.firstForm.get('account')?.reset(result.campaignName);
           this.firstForm.get('id')?.reset(result.campaignID);
           this.firstForm.get('budget')?.reset(result.budget);
@@ -122,7 +120,6 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
               )
               // eslint-disable-next-line rxjs/no-nested-subscribe
               .subscribe((value: any) => {
-                console.log(value);
                 this.keywordBids = value.bidLog;
               });
           }

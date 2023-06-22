@@ -6,13 +6,13 @@ $main_bg: '#fff';
   font-family: 'Roboto';
   font-weight: lighter;
   src: local('Roboto'),
-    url('../../MPTool/src/assets/fonts/Roboto-Regular.ttf') format(truetype);
+    url('../src/assets/fonts/Roboto-Regular.ttf') format(truetype);
 }
 
 @font-face {
   font-family: 'Montserrat';
   src: local('Montserrat'),
-    url('../../MPTool/src/fonts/Montserrat-Regular.ttf') format(truetype);
+    url('../src/assets/fonts/Roboto-Regular.ttf') format(truetype);
 }
 
 :root {
