@@ -1,0 +1,41 @@
+<div class="table_container shadow(1)">
+  <div class="table_header">
+    <h3>Узнать реальную рекламную ставку</h3>
+    <a><span>Обучающее видео</span></a>
+  </div>
+  <table
+    *ngIf="realBid.realBidData$ | async as data; else noData"
+    tuiTable
+    class="table"
+    [columns]="columns"
+  >
+    <thead>
+      <tr tuiThGroup>
+        <th tuiTh [resizable]="true">Место</th>
+        <th tuiTh>Группа товаров</th>
+        <th tuiTh>ID товара</th>
+        <th tuiTh>Реальная ставка</th>
+      </tr>
+    </thead>
+    <tbody tuiTbody [data]="data">
+      <tr *tuiRow="let item of data; index as i" tuiTr>
+        <td *tuiCell="'position'" tuiTd>
+          {{ item.place }}
+        </td>
+        <td *tuiCell="'idAdvertiser'" tuiTd>
+          {{ item.subject }}
+        </td>
+        <td *tuiCell="'idProduct'" tuiTd>
+          {{ item.sku }}
+        </td>
+        <td *tuiCell="'realBid'" tuiTd>
+          {{ item.price }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noData>
+  <p>Введите искомый запрос...</p>
+</ng-template>

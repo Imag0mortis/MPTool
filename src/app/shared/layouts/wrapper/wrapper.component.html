@@ -1,0 +1,23 @@
+<div class="app_container">
+  <div class="" style="display: flex">
+    <div class="sidenav" *ngIf="!appService.isMobile">
+      <img
+        class="toolbar_logo"
+        src="../../../../assets/img/LogoCabWhite.svg"
+        (click)="appService.goSelfRansom()"
+      />
+
+      <app-balance></app-balance>
+      <app-sidenav></app-sidenav>
+    </div>
+    <div class="content_container">
+      <div class="header">
+        <app-toolbar></app-toolbar>
+      </div>
+
+      <main role="main">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </div>
+</div>

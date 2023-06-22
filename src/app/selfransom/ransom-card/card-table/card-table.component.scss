@@ -1,0 +1,519 @@
+* {
+  box-sizing: border-box;
+}
+.ransom_number_main {
+  font-size: 20px;
+  margin-left: 3rem;
+}
+
+.card_content {
+  width: 100%;
+}
+
+svg {
+  margin-top: 1.8rem;
+  margin-left: 1rem;
+}
+
+.table_buttons {
+  margin-top: 2rem;
+  margin-right: 2rem;
+}
+
+.pay_status {
+  margin-top: 0.5rem;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: #ff0000;
+}
+
+.ransom_card {
+  margin: auto;
+  height: auto;
+  max-height: 80vh;
+  overflow: auto;
+  background: #ffffff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 15px;
+  padding-bottom: 1rem;
+}
+
+.ransom_number {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 33px;
+  color: #2c7a77;
+  padding-top: 2rem;
+  margin-left: 3rem;
+}
+
+.ransom_card_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 2rem;
+}
+
+.header_buttons {
+  margin-right: 2%;
+  padding-top: 2rem;
+}
+
+.sorting {
+  width: 12em;
+  margin-right: 2rem;
+}
+
+.autopay {
+  width: 12em;
+  margin-right: 2rem;
+}
+
+.all_ransoms {
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+.table {
+  margin-left: 3rem;
+  margin-right: 3rem;
+  margin-top: 2rem;
+}
+
+.table_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.table_header svg {
+  cursor: pointer;
+}
+
+.table-header-col1 {
+  display: flex;
+  align-items: center;
+}
+
+.tracking_button {
+  margin-left: 100%;
+}
+
+.ransom_status {
+  margin-left: 20%;
+}
+
+.status_update {
+  margin-left: 35%;
+}
+
+.ransom_number {
+  margin-left: 2rem;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 23px;
+  color: #000000;
+}
+
+.status {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  color: #929697;
+}
+
+.update {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  color: #929697;
+}
+
+.update_description {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 23px;
+  color: #929697;
+}
+
+.table_mid {
+  display: flex;
+  align-items: center;
+}
+
+.photo_placeholder {
+  width: 40px;
+  height: 60px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-left: 4rem;
+}
+
+.article {
+  margin-top: 0.5rem;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: #1976d2;
+  margin-left: 5%;
+}
+
+.ransom_description {
+  margin-top: 0.5rem;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: #000000;
+}
+
+.size {
+  margin-top: 0.5rem;
+  margin-left: 5%;
+  font-weight: 400;
+  font-size: 16px;
+  color: #000000;
+}
+
+.textfield {
+  margin-left: 2rem;
+  min-width: 180px;
+  margin-left: 5%;
+}
+
+.cost {
+  margin-left: 7.5%;
+  margin-top: 0.5rem;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: #000000;
+}
+
+.red_close_buttons {
+  margin-left: 12%;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  margin-right: 2rem;
+}
+
+.redaction_placeholder {
+  margin-left: 13em;
+}
+
+.table_footer {
+  width: 95%;
+  margin-top: 2rem;
+  margin-right: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section_left {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 55%;
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #2c7a77;
+}
+
+h4 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+}
+
+.adress_info {
+  margin-bottom: 3.5%;
+}
+
+.adress_fact {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #1980e6;
+}
+
+.section_right {
+  width: 45%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.payment-qr svg {
+  width: 240px;
+  height: 240px;
+}
+
+.sbp_icon {
+  width: 80px;
+}
+
+.delivery-block {
+  display: flex;
+  align-items: baseline;
+}
+.ransom_request {
+  text-align: center;
+  padding-bottom: 1rem;
+}
+
+.waiting {
+  margin-right: 2.5rem;
+  margin-top: 1rem;
+  width: 16.8rem;
+}
+
+.bot_search {
+  margin-right: 2rem;
+  font-size: 16px;
+  color: rgb(14, 183, 14);
+}
+
+.expanded {
+  height: 85px;
+  background: rgba(86, 180, 176, 0.24);
+  border-radius: 10px;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 1rem;
+}
+
+h5 {
+  margin-top: 0.5rem !important;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #2c7a77;
+}
+
+h6 {
+  margin-top: 0.2rem !important;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+}
+
+.recipient {
+  margin-left: 1rem;
+}
+
+.code {
+  margin-right: 1.5rem;
+}
+
+.phone {
+  margin-left: 3rem;
+}
+
+.modal_header {
+  text-align: center;
+  width: 500px;
+  height: 19px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  text-transform: uppercase;
+  color: #000000;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.modal_middle {
+  margin-top: 1rem;
+  width: 500px;
+  text-align: center;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+  padding-bottom: 0.5rem;
+}
+
+.cancel {
+  width: 147px;
+  height: 42px;
+  padding-right: 1rem;
+}
+
+.pay {
+  width: 147px;
+}
+
+.button_container {
+  margin-top: 2rem;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+}
+
+.tracking_modal button {
+  color: #000000;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 23px;
+}
+
+.line {
+  border: 1px solid #bababa;
+}
+
+.status_line {
+  background-color: #bababa;
+  height: 2rem;
+  width: 2px;
+  margin-left: 2.45rem;
+}
+
+.statusbar {
+  margin-top: 1rem;
+}
+
+.col1 {
+  width: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.status {
+  display: flex;
+}
+
+.circle {
+  height: 80px;
+  background-color: #adafb4;
+  width: 80px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.circle img {
+  margin: auto;
+  width: 40px;
+}
+
+.circle .delivery {
+  height: 40px;
+  margin-top: 1.3rem;
+}
+
+.date {
+  margin-top: 1.5rem;
+}
+
+.status p {
+  font-size: 16px;
+  color: #232323;
+  font-weight: 700;
+  margin-left: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .card_content {
+    width: auto;
+    overflow-x: hidden;
+  }
+  .mobile_table {
+    overflow-x: hidden;
+  }
+  .table-header-col1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .table_header {
+    display: flex;
+  }
+  .buttons_container {
+    width: 100%;
+    margin-left: 5%;
+  }
+  .mobile_cancel {
+    width: 47%;
+  }
+  .mobile_check_payment {
+    margin-left: 1rem;
+    width: 47%;
+  }
+  .mobile_get_qr {
+    width: 98%;
+    margin-top: 0.5rem;
+  }
+  .qr_search {
+    margin-top: 1rem;
+  }
+  .qr_search span {
+    margin-top: 0.5rem;
+  }
+  .mobile_qr_button {
+    margin-top: 0.5rem;
+    width: 98%;
+  }
+  .article {
+    margin-left: 0;
+    margin-top: 0;
+  }
+  .ransom_description {
+    margin-top: 0;
+  }
+  .cost {
+    margin-left: 0;
+    display: flex;
+    margin-top: 0;
+  }
+
+  .mobile_data {
+    font-size: 15px;
+    color: #2c7a77;
+  }
+
+  .mobile_data span {
+    font-size: 15px;
+    color: #000000;
+    font-weight: normal;
+  }
+
+  .modal_header {
+    text-align: center;
+    width: auto;
+    height: auto;
+  }
+  .modal_middle {
+    width: auto;
+  }
+  .button_container {
+    width: auto;
+  }
+
+  .tracking_button {
+    margin-left: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}

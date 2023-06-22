@@ -1,0 +1,48 @@
+<tui-island class="ransom_1">
+  <h3 class="tui-island__title">Группа выкупов № {{ item.taskID }}</h3>
+  <!-- <div class="tui-island__paragraph"><span class="completed"><div *ngFor="let state of item.taskStateNew">{{item.taskState}} : ({{state.count}})</div></span> </div> -->
+  <!-- <p class="tui-island__paragraph tui-island__paragraph_button"> -->
+  <div class="paid">
+    <p class="descript">Кол-во товаров в выкупе: {{ item.products.length }}</p>
+    <!-- <p class="count">{{item.price}} / {{item.priceTotal}} ₽</p> -->
+  </div>
+  <div class="Completed_buyouts">
+    <!-- <p class="descript">Завершенных выкупов:</p> -->
+    <!-- <p class="count">{{item.quantityTotal}} шт. / {{item.quantityRemaining}} шт.</p> -->
+  </div>
+  <!-- <div class="line">{{index}} {{item.products.length}} АААААА</div> -->
+  <div class="card_content">
+    <tui-carousel [(index)]="index" [duration]="0" style="width: 100%">
+      <ng-container *ngFor="let product of item.products">
+        <div *tuiItem>
+          <app-product-card [product]="product"></app-product-card>
+        </div>
+      </ng-container>
+    </tui-carousel>
+    <br />
+    <tui-pagination
+      *ngIf="item.products.length > 1"
+      size="s"
+      class="pagination"
+      [length]="item.products.length"
+      [(index)]="index"
+    ></tui-pagination>
+    <!-- 
+        <div class="content_left">
+            <div class="image_placeholder" [style.background-image]="'url(' + item.imgLink + ')'"></div>
+            <p>{{item.sku}}</p>
+        </div>-->
+    <!-- <div class="content_right">
+            <h2 class="right_description">{{item.description}}</h2>
+        </div> -->
+  </div>
+  <button
+    class="open_button"
+    tuiButton
+    type="button"
+    appearance="secondary"
+    (click)="appService.goSelfRansomCard(item.taskID)"
+  >
+    Открыть
+  </button>
+</tui-island>

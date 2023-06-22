@@ -1,0 +1,108 @@
+<div class="available">
+  <div class="searchbar" style="">
+    <tui-input
+      tuiTextfieldSize="s"
+      class="search-input"
+      style="margin-right: 1rem"
+      [(ngModel)]="searchSku"
+    >
+      Введите артикул.
+      <input tuiTextfield type="text" />
+    </tui-input>
+    <tui-input
+      tuiTextfieldSize="s"
+      class="search-input"
+      style="margin-right: 1rem"
+      [(ngModel)]="searchSkuName"
+    >
+      Введите название товара.
+      <input tuiTextfield type="text" />
+    </tui-input>
+
+    <button
+      style="margin-top: 0.8rem; margin-left: 1rem"
+      tuiButton
+      type="button"
+      appearance="primary"
+      size="s"
+      class="tui-space_right-3 tui-space_bottom-3 search-button"
+      (click)="searchReviews(1, searchSku, searchSkuName)"
+    >
+      Найти
+    </button>
+
+    <button
+      style="margin-top: 0.8rem; margin-left: 1rem"
+      tuiButton
+      type="button"
+      size="s"
+      appearance="primary"
+      class="tui-space_right-3 tui-space_bottom-3 search-button"
+      (click)="searchReviews(1, 0, ''); searchSku = ''; searchSkuName = ''"
+    >
+      Очистить
+    </button>
+  </div>
+  <div *ngIf="cards.length; else noContent" class="review_card-container">
+    <div class="review_card" *ngFor="let item of cards">
+      <div
+        class="image_placeholder"
+        [style.background-image]="'url(' + item.imgLink + ')'"
+      ></div>
+      <div class="review_card-content">
+        <h1>{{ item.skuName }}</h1>
+        <a
+          [attr.href]="
+            'https://www.wildberries.ru/catalog/' + item.sku + '/detail.aspx'
+          "
+          class="target-link"
+          target="_blank"
+        >
+          Арт. {{ item.sku }}
+        </a>
+        <div class="available-counter">
+          Доступно отзывов:
+          <b>{{ item.feedbacksRemaining }}</b>
+          ({{ item.maleFeedbacksRemaining }}♂/{{
+            item.femaleFeedbacksRemaining
+          }}♀)
+        </div>
+        <button
+          (click)="
+            showDialog(
+              item.skuName,
+              item.sku,
+              item.taskID,
+              {
+                male: item.maleFeedbacksRemaining,
+                female: item.femaleFeedbacksRemaining
+              },
+              item.taskIDMale,
+              item.taskIDFemale,
+              item.sized
+            )
+          "
+          tuiButton
+          size="m"
+          type="button"
+          appearance="primary"
+          class="task_button"
+        >
+          Написать отзыв
+        </button>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <tui-pagination
+      *ngIf="cards.length"
+      [length]="length"
+      [index]="index"
+      (indexChange)="goToPage($event)"
+    ></tui-pagination>
+  </footer>
+</div>
+
+<ng-template #noContent>
+  <p>У вас нет доступных к публикации отзывов товаров.</p>
+</ng-template>

@@ -1,0 +1,78 @@
+.login_form {
+  background-color: #fff;
+  padding: 2rem 1rem 3rem 4rem;
+  width: calc(460px + 2rem);
+  border-radius: 16px;
+  margin-bottom: 5rem;
+}
+
+.login_form p {
+  margin-top: 1rem;
+}
+
+.login_form p u {
+  cursor: pointer;
+}
+
+tui-input {
+  padding-bottom: 1rem;
+}
+.politics {
+  margin-top: 0.5rem;
+}
+.terms_of_use {
+  padding-bottom: 0.5rem;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.checkbox1 {
+  display: flex;
+  padding-bottom: 0.5rem;
+}
+
+.agree {
+  margin-top: 0.5rem;
+}
+
+.checkbox2 {
+  display: flex;
+  padding-bottom: 0.5rem;
+}
+
+.sign-up-box {
+  display: flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+@media screen and (max-width: 767px) {
+  .login_container {
+    // height: 120vh;
+    margin-top: 0;
+    width: auto;
+    padding-left: 5%;
+    align-items: start;
+    overflow-x: hidden;
+  }
+  .login_form {
+    padding: 2rem 1rem 3rem 4rem;
+    width: calc(460px + 2rem);
+  }
+
+  .checkbox1 {
+    width: 80%;
+  }
+  .logo-mini {
+    width: 110px;
+  }
+}
+
+@media screen and (max-height: 768px) {
+  .sign-up-box {
+    height: 768px;
+  }
+}

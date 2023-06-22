@@ -1,0 +1,199 @@
+.basket {
+  margin: 1rem 2rem;
+  background-color: #fff;
+  border-radius: 16px;
+  width: auto;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 15px;
+}
+.basket_header {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 28px;
+  color: #2c7a77;
+  padding-left: 2rem;
+  padding-top: 1rem;
+}
+.description {
+  margin-left: 2rem;
+  height: 19px;
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+}
+.content_block {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 2rem;
+  margin-top: 1rem;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: #2c7a77;
+}
+.article-input {
+  margin-top: 1rem;
+  width: 15rem;
+}
+.search-input {
+  margin-top: 1rem;
+  width: 25rem;
+}
+.amount-input {
+  margin-top: 1rem;
+  width: 12rem;
+  margin-left: 5%;
+}
+.time-input {
+  margin-top: 1rem;
+  width: 12em;
+}
+.cost {
+  padding-top: 2rem;
+  margin-right: 1rem;
+}
+.task_button {
+  margin-top: 2rem;
+  margin-left: 2rem;
+  width: 22rem;
+  color: #2c7a77;
+}
+tui-select {
+  margin-top: 0.5em;
+  width: 15rem;
+}
+.cost {
+  margin-right: 10%;
+}
+.table_content {
+  padding: 1rem;
+  text-align: center;
+}
+.body {
+  padding: 0.5rem;
+}
+th {
+  background: #d5ebea;
+  height: 3rem;
+  color: #2c7a77;
+}
+
+.pagination-container {
+  margin-top: 1rem;
+}
+td {
+  margin-top: 2rem;
+  height: 3rem;
+}
+.period {
+  margin-left: 1.1rem;
+  margin-top: auto;
+}
+h3 {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  display: flex;
+  margin-left: 0.5rem;
+}
+.costdesk {
+  white-space: nowrap;
+  margin-top: 1rem;
+  margin-left: 2rem;
+}
+.money {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+}
+svg {
+  margin-left: 0.2rem;
+  margin-top: 0.2rem;
+  width: 15px;
+  height: 18px;
+}
+
+@media only screen and (max-width: 768px) {
+  .basket {
+    margin: 0;
+    padding-right: 1rem;
+    width: auto;
+  }
+  .basket_header {
+    font-size: 20px;
+    padding-left: 1rem;
+  }
+  .description {
+    font-size: 14px;
+    margin-left: 1rem;
+  }
+  .content_block {
+    flex-direction: column;
+    margin: 3rem 1rem;
+  }
+  .article-input,
+  .search-input,
+  .amount-input,
+  .time-input {
+    width: 120%;
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+
+  .amount-input {
+    width: 102%;
+  }
+
+  .period {
+    margin-left: 0;
+    margin-top: auto;
+  }
+  tui-select {
+    width: 102%;
+  }
+
+  .task_button {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    width: 95%;
+  }
+  .costdesk {
+    margin-top: 1rem;
+    margin-left: 1rem;
+  }
+  th {
+    font-size: 14px;
+  }
+  td {
+    margin-top: 1rem;
+    height: auto;
+    font-size: 14px;
+  }
+  h3 {
+    font-size: 15px;
+    margin-left: 0.5rem;
+  }
+  .article_block {
+    width: 102%;
+  }
+  .question_block,
+  .search-input,
+  .sex_block {
+    width: 102%;
+  }
+  svg {
+    width: 12px;
+    height: 16px;
+  }
+  .costdesk {
+    margin-left: 0.2rem;
+  }
+  .table_content {
+    width: 100%;
+    overflow: scroll;
+  }
+}

@@ -1,0 +1,282 @@
+<div class="reviews">
+  <header>
+    <h1>Отзывы</h1>
+
+    <h2>
+      Отзывы можно создать только для выкупленных вами товаров в(разделе
+      самовыкупы), которые вы уже забрали из пункта выдачи.
+    </h2>
+    <header>
+      <div class="header_buttons" *ngIf="!appService.isMobile">
+        <div class="header_button" (click)="showDialog(template2)">
+          <p class="rev">
+            1
+            <span>отзыв</span>
+            50 ₽ / шт
+          </p>
+        </div>
+        <div class="header_button" (click)="showDialog(template)">
+          <p class="rev">
+            300
+            <span>отзывов</span>
+            45 ₽ / шт
+          </p>
+        </div>
+        <div class="header_button" (click)="showDialog(template3)">
+          <p class="rev">
+            400
+            <span>отзывов</span>
+            40 ₽ / шт
+          </p>
+        </div>
+        <div class="header_button" (click)="showDialog(template4)">
+          <p class="rev">
+            500
+            <span>отзывов</span>
+            35 ₽ / шт
+          </p>
+        </div>
+        <div class="header_button" (click)="showDialog(template5)">
+          <p class="rev">
+            1000
+            <span>отзывов</span>
+            25₽ / шт
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <nav>
+      <div class="header_navigation">
+        <div>
+          <tui-tabs
+            *ngIf="!appService.isMobile"
+            [(activeItemIndex)]="activeItemIndex"
+            [underline]="false"
+          >
+            <button
+              tuiTab
+              class="nav_tab"
+              (click)="filter = 1"
+              style="width: max-content"
+            >
+              <div class="tabdesk">Доступные товары для отзывов</div>
+            </button>
+            <button tuiTab class="nav_tab" (click)="filter = 3">
+              <div class="tabdesk">Ожидает публикации</div>
+            </button>
+            <button tuiTab class="nav_tab" (click)="filter = 2">
+              <div class="tabdesk">Опубликованные</div>
+            </button>
+            <button tuiTab class="nav_tab" (click)="filter = 4">
+              <div class="tabdesk">Отменённые</div>
+            </button>
+            <button tuiTab class="nav_tab" (click)="filter = 5">
+              <div class="tabdesk">Ошибка</div>
+            </button>
+            <!--<button tuiTab class="nav_tab" (click)="filter = -1"><div class="tabdesk">Все</div></button> -->
+          </tui-tabs>
+
+          <div class="mobile_buttons" *ngIf="appService.isMobile">
+            <button
+              tuiButton
+              (click)="filter = 1"
+              type="button"
+              appearance="secondary"
+              class="tui-space_right-3 tui-space_bottom-3"
+            >
+              Доступные
+            </button>
+
+            <button
+              tuiButton
+              (click)="filter = 3"
+              type="button"
+              appearance="secondary"
+              class="tui-space_right-3 tui-space_bottom-3"
+            >
+              Ожидает публикации
+            </button>
+            <button
+              tuiButton
+              (click)="filter = 2"
+              type="button"
+              appearance="secondary"
+              class="tui-space_right-3 tui-space_bottom-3"
+            >
+              Опубликованные
+            </button>
+          </div>
+        </div>
+        <div class="search">
+          <!-- <tui-input
+            formControlName="testValue1">
+            Артикул:
+            <input
+                tuiTextfield
+                inputmode="numeric"/>
+        </tui-input> -->
+          <!-- <button
+            tuiButton
+            type="button"
+            appearance="primary"
+            class="tui-space_right-3 tui-space_bottom-3">
+            Найти
+        </button> -->
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main [ngSwitch]="filter">
+    <app-available *ngSwitchCase="1"></app-available>
+    <app-published *ngSwitchCase="2"></app-published>
+    <app-awaiting *ngSwitchCase="3"></app-awaiting>
+    <app-canceled *ngSwitchCase="4"></app-canceled>
+    <app-error *ngSwitchCase="5"></app-error>
+  </main>
+</div>
+
+<ng-template #template let-observer>
+  <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>
+  <p class="modal_middle">
+    Вы действительно хотите подключить пакет на 300 отзывов?
+  </p>
+  <p class="modal_middle">С вашего счета спишется 13500 ₽</p>
+  <div class="button_container">
+    <button
+      class="cancel"
+      tuiButton
+      appearance="secondary"
+      type="button"
+      size="m"
+      (click)="observer.complete()"
+    >
+      Отмена
+    </button>
+    <button
+      tuiButton
+      type="button"
+      size="m"
+      class="pay"
+      (click)="observer.complete(); buyFeedbackPackages(300)"
+    >
+      Оплатить&nbsp;
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #template2 let-observer>
+  <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>
+  <p class="modal_middle">
+    Вы действительно хотите подключить пакет на 1 отзыв?
+  </p>
+  <p class="modal_middle">С вашего счета спишется 50 ₽</p>
+  <div class="button_container">
+    <button
+      class="cancel"
+      tuiButton
+      appearance="secondary"
+      type="button"
+      size="m"
+      (click)="observer.complete()"
+    >
+      Отмена
+    </button>
+    <button
+      tuiButton
+      type="button"
+      size="m"
+      class="pay"
+      (click)="observer.complete(); buyFeedbackPackages(1)"
+    >
+      Оплатить&nbsp;
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #template3 let-observer>
+  <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>
+  <p class="modal_middle">
+    Вы действительно хотите подключить пакет на 400 отзывов?
+  </p>
+  <p class="modal_middle">С вашего счета спишется 16000 ₽</p>
+  <div class="button_container">
+    <button
+      class="cancel"
+      tuiButton
+      appearance="secondary"
+      type="button"
+      size="m"
+      (click)="observer.complete()"
+    >
+      Отмена
+    </button>
+    <button
+      tuiButton
+      type="button"
+      size="m"
+      class="pay"
+      (click)="observer.complete(); buyFeedbackPackages(400)"
+    >
+      Оплатить&nbsp;
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #template4 let-observer>
+  <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>
+  <p class="modal_middle">
+    Вы действительно хотите подключить пакет на 500 отзывов?
+  </p>
+  <p class="modal_middle">С вашего счета спишется 17500 ₽</p>
+  <div class="button_container">
+    <button
+      class="cancel"
+      tuiButton
+      appearance="secondary"
+      type="button"
+      size="m"
+      (click)="observer.complete()"
+    >
+      Отмена
+    </button>
+    <button
+      tuiButton
+      type="button"
+      size="m"
+      class="pay"
+      (click)="observer.complete(); buyFeedbackPackages(500)"
+    >
+      Оплатить&nbsp;
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #template5 let-observer>
+  <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>
+  <p class="modal_middle">
+    Вы действительно хотите подключить пакет на 1000 отзывов?
+  </p>
+  <p class="modal_middle">С вашего счета спишется 25000 ₽</p>
+  <div class="button_container">
+    <button
+      class="cancel"
+      tuiButton
+      appearance="secondary"
+      type="button"
+      size="m"
+      (click)="observer.complete()"
+    >
+      Отмена
+    </button>
+    <button
+      tuiButton
+      type="button"
+      size="m"
+      class="pay"
+      (click)="observer.complete(); buyFeedbackPackages(1000)"
+    >
+      Оплатить&nbsp;
+    </button>
+  </div>
+</ng-template>

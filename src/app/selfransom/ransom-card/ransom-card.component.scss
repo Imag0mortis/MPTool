@@ -1,0 +1,468 @@
+.ransom_number_main {
+  font-size: 20px;
+  margin-left: 1rem;
+}
+
+svg {
+  margin-top: 1.8rem;
+  margin-left: 1rem;
+}
+
+.table_buttons {
+  margin-top: 2rem;
+}
+
+.pay_status {
+  margin-top: 0.5rem;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: #ff0000;
+}
+
+.ransom_card {
+  margin: auto;
+  height: auto;
+  max-height: 80vh;
+  overflow: auto;
+  background: #ffffff;
+
+  border-radius: 15px;
+  padding-bottom: 1rem;
+}
+
+.ransom_number {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 33px;
+  color: #2c7a77;
+  padding-top: 2rem;
+  margin-left: 3rem;
+}
+
+.ransom_card_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 2rem;
+}
+
+.header_buttons {
+  margin-right: 2%;
+  padding-top: 2rem;
+}
+
+.sorting {
+  width: 12em;
+  margin-right: 2rem;
+}
+
+.autopay {
+  width: 12em;
+  margin-right: 2rem;
+}
+
+.all_ransoms {
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+.table {
+  margin-left: 3rem;
+  margin-right: 3rem;
+  margin-top: 2rem;
+}
+
+.table_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.table_header svg {
+  cursor: pointer;
+}
+
+.table-header-col1 {
+  display: flex;
+  align-items: center;
+}
+
+.ransom_status {
+  margin-left: 20%;
+}
+
+.status_update {
+  margin-left: 35%;
+}
+
+.ransom_number {
+  margin-left: 2rem;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 23px;
+  color: #000000;
+}
+
+.status {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  color: #929697;
+}
+
+.update {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  color: #929697;
+}
+
+.update_description {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 23px;
+  color: #929697;
+}
+
+.table_mid {
+  display: flex;
+  align-items: center;
+}
+
+.photo_placeholder {
+  width: 40px;
+  height: 60px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0 1rem;
+}
+
+.article {
+  margin-top: 0.5rem;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: #1976d2;
+}
+
+.ransom_description {
+  margin-left: 3%;
+  margin-top: 0.5rem;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: #000000;
+}
+
+.size {
+  margin-top: 0.5rem;
+  margin-left: 3%;
+  font-weight: 400;
+  font-size: 16px;
+  color: #000000;
+}
+
+.textfield {
+  margin-left: 2rem;
+  min-width: 180px;
+}
+
+.cost {
+  margin-left: 3%;
+  margin-top: 0.5rem;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: #000000;
+}
+
+.red_close_buttons {
+  margin-left: 6.5%;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.redaction_placeholder {
+  margin-left: 13em;
+}
+
+.table_footer {
+  width: 100%;
+  height: 6rem;
+  margin-top: 2rem;
+  background: #d6edec;
+  display: flex;
+  align-items: center;
+}
+
+.section_left {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 55%;
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #2c7a77;
+}
+
+h4 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+}
+
+.adress_info {
+  margin-bottom: 3.5%;
+}
+
+.adress_fact {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #1980e6;
+}
+
+.section_right {
+  width: 45%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.payment-qr svg {
+  width: 240px;
+  height: 240px;
+}
+
+.sbp_icon {
+  width: 80px;
+}
+
+@media only screen and (max-width: 768px) {
+  .ransom_number_main {
+    font-size: 16px;
+    margin-left: 0.5rem;
+  }
+
+  svg {
+    margin-top: 1.2rem;
+    margin-left: 0.5rem;
+  }
+
+  .table_buttons {
+    margin-top: 1.5rem;
+  }
+
+  .pay_status {
+    margin-top: 0.3rem;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .ransom_card {
+    width: auto;
+    max-height: none;
+    overflow-x: hidden;
+  }
+
+  .ransom_number {
+    font-size: 24px;
+    line-height: 28px;
+    padding-top: 1rem;
+    margin-left: 1rem;
+  }
+
+  .ransom_card_header {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header_buttons {
+    margin-right: 0%;
+    padding-top: 1rem;
+    order: -1;
+  }
+
+  .header_buttons button {
+    width: 240%;
+    margin-left: auto;
+  }
+
+  .sorting {
+    width: 8em;
+    margin-right: 1rem;
+  }
+
+  .autopay {
+    width: 8em;
+    margin-right: 1rem;
+  }
+
+  .all_ransoms {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .table {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+  }
+
+  .table_header {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .table-header-col1 {
+    margin-bottom: 0.5rem;
+    align-items: baseline;
+  }
+
+  .ransom_status {
+    margin-left: 5%;
+  }
+
+  .status_update {
+    margin-left: 10%;
+  }
+
+  .ransom_number {
+    margin-left: 1rem;
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .status {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .update {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .update_description {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .table_mid {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .photo_placeholder {
+    width: 30px;
+    height: 45px;
+    margin: 0.3rem;
+  }
+
+  .article {
+    margin-top: 0.3rem;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .ransom_description {
+    margin-left: 1rem;
+    margin-top: 0.3rem;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .size {
+    margin-top: 0.3rem;
+    margin-left: 1rem;
+    font-size: 14px;
+  }
+
+  .textfield {
+    margin-left: 1rem;
+    min-width: 120px;
+  }
+
+  .cost {
+    margin-left: 1rem;
+    margin-top: 0.3rem;
+    font-size: 14px;
+  }
+
+  .red_close_buttons {
+    margin-left: 3%;
+    margin-top: 0.3rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .redaction_placeholder {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .table_footer {
+    height: auto;
+    padding: 1rem;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .section_left {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  h4 {
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .adress_info {
+    margin-top: 0.5rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .adress_fact {
+    font-size: 14px;
+  }
+
+  .section_right {
+    display: none;
+  }
+
+  .payment-qr svg {
+    width: 160px;
+    height: 160px;
+  }
+
+  .sbp_icon {
+    width: 40px;
+  }
+  .header_buttons button {
+    width: calc(20em + 35%);
+  }
+}

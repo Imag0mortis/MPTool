@@ -1,0 +1,157 @@
+<div class="toolbar_container" (tuiActiveZoneChange)="onActiveZone($event)">
+  <div class="toolbar_right" *ngIf="!appService.isMobile">
+    <div *ngIf="user.userSubj$ | async as user" class="toolbar_priceplan">
+      <span>
+        Тариф:
+        <strong>{{ user.tariff_info.tariff_name }}</strong>
+      </span>
+    </div>
+    <tui-marker-icon
+      #toggleButton
+      [tuiDropdown]="dropdownContent"
+      [tuiDropdownManual]="open"
+      (tuiObscured)="onObscured($event)"
+      (click)="onClick()"
+      mode="success"
+      size="s"
+      src="tuiIconUser"
+      class="toolbar_button tui-space_right-2"
+    >
+      <ng-template #dropdownContent>
+        <div class="dropdown" #menu>
+          <ul>
+            <li
+              class="dropdown-el"
+              (click)="this.open = false; appService.goAccount()"
+            >
+              <tui-marker-icon
+                mode="success"
+                size="xs"
+                src="tuiIconSettings"
+                class="toolbar_button tui-space_right-2"
+              ></tui-marker-icon>
+              Редактировать
+            </li>
+            <li
+              class="dropdown-el"
+              (click)="this.open = false; appService.goTariffs()"
+            >
+              <tui-marker-icon
+                mode="success"
+                size="xs"
+                src="tuiIconStar"
+                class="toolbar_button tui-space_right-2"
+              ></tui-marker-icon>
+              Тарифы
+            </li>
+            <li class="dropdown-el" (click)="authService.logout()">
+              <tui-marker-icon
+                mode="success"
+                size="xs"
+                src="tuiIconLogoutLarge"
+                class="toolbar_button tui-space_right-2"
+              ></tui-marker-icon>
+              Выйти
+            </li>
+          </ul>
+        </div>
+      </ng-template>
+    </tui-marker-icon>
+  </div>
+
+  <div *ngIf="appService.isMobile">
+    <div style="position: relative" (click)="toggleMobile(true)">
+      <img
+        class="toolbar_logo"
+        src="../../../../assets/img/LogoCab.svg"
+        (click)="appService.goSelfRansom()"
+      />
+
+      <tui-marker-icon
+        #toggleMobileButton
+        mode="success"
+        size="s"
+        src="tuiIconAlignJustifyLarge"
+        class="toolbar_button tui-space_right-2 mob-right"
+      ></tui-marker-icon>
+      <div *tuiSidebar="open; direction: 'left'">
+        <div *ngIf="user.userSubj$ | async as userInfo">
+          <h1 class="phone_number">
+            {{
+              userInfo.self_info.phone
+                ? userInfo.self_info.phone
+                : userInfo.user_name
+            }}
+          </h1>
+          <h2 class="balance_cash">
+            Баланс: {{ userInfo.self_info.balance }} ₽
+          </h2>
+        </div>
+        <div
+          *ngIf="user.userSubj$ | async as user"
+          class="toolbar_priceplan"
+          (click)="appService.goTariffs()"
+        >
+          <span>
+            Тариф:
+            <strong>{{ user.tariff_info.tariff_name }}</strong>
+          </span>
+        </div>
+
+        <!-- Вставим блок с отзывами и выкупами в меню -->
+
+        <div
+          class="ransoms_and_reviews"
+          style="margin-left: 1rem"
+          *ngIf="user.userSubj$ | async as userInfo"
+        >
+          <div class="ransoms">
+            <span class="count">
+              {{ userInfo.package_info.selfransoms_prepaid }}
+            </span>
+            &nbsp;
+            <span class="count">выкупов</span>
+          </div>
+          <div class="reviews">
+            <span class="count">
+              {{ userInfo.package_info.feedbacks_prepaid }}
+            </span>
+            &nbsp;
+            <span class="count">отзывов</span>
+          </div>
+        </div>
+
+        <app-sidenav></app-sidenav>
+        <div class="menu_buttons">
+          <button
+            tuiButton
+            type="button"
+            appearance="primary"
+            class="payment_button"
+            (click)="showDialog()"
+          >
+            Пополнение баланса
+          </button>
+          <button
+            tuiButton
+            type="button"
+            appearance="secondary"
+            class="reg_button"
+            (click)="appService.goAccount()"
+          >
+            Редактировать профиль
+          </button>
+          <button
+            tuiButton
+            type="button"
+            appearance="secondary-destructive"
+            class="quit_button"
+            (click)="authService.logout()"
+          >
+            Выйти
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

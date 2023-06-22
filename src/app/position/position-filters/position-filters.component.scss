@@ -1,0 +1,39 @@
+.table-filters_container {
+  margin-left: 0px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.positions_search-input {
+  width: 200px;
+  margin-right: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .table-filters_container {
+    margin: 0px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+  }
+  .input {
+    padding-bottom: 1rem;
+    width: auto;
+  }
+  .buttons {
+    width: auto;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-left: 5%;
+  }
+  button {
+    width: auto;
+  }
+}

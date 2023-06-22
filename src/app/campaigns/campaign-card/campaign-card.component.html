@@ -1,0 +1,302 @@
+<tui-loader [overlay]="true" [showLoader]="!data">
+  <div *ngIf="data" class="card_container shadow(1)">
+    <div class="card_header">
+      <h3>Кампании / {{ data.campaignName }}</h3>
+      <tui-loader
+        *ngIf="loading"
+        [showLoader]="loading"
+        [textContent]="'Синхронизация с Wildberries'"
+        [size]="'s'"
+      >
+        <div style="height: 100%; width: 200px"></div>
+      </tui-loader>
+      <div class="navigation-back" (click)="appService.goCampaigns()">
+        <tui-marker-icon
+          mode="success"
+          size="xs"
+          src="tuiIconArrowLeftLarge"
+          class="tui-space_right-2"
+        ></tui-marker-icon>
+        <span>Назад</span>
+      </div>
+    </div>
+    <div class="card-row">
+      <div class="card-row-col1">
+        <form class="b-form" [formGroup]="firstForm">
+          <div class="tui-form__row tui-form__row_multi-fields">
+            <div class="tui-form__multi-field">
+              <tui-input formControlName="account">
+                Аккаунт
+                <input tuiTextfield type="text" />
+              </tui-input>
+            </div>
+            <div class="tui-form__multi-field">
+              <tui-input formControlName="id">
+                ID Кампании
+                <input tuiTextfield type="number" />
+              </tui-input>
+            </div>
+
+            <div class="tui-form__multi-field">
+              <tui-input formControlName="budget">
+                Бюджет
+                <input tuiTextfield type="number" />
+              </tui-input>
+            </div>
+            <div class="tui-form__multi-field">
+              <tui-input formControlName="category">
+                Категория
+                <input tuiTextfield type="text" />
+              </tui-input>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-row-col2">
+        <svg
+          (click)="toggleCampaign()"
+          style="cursor: pointer"
+          width="30"
+          height="16"
+          viewBox="0 0 30 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M21.8182 0H8.18182C3.66818 0 0 3.58667 0 8C0 12.4133 3.66818 16 8.18182 16H21.8182C26.3318 16 30 12.4133 30 8C30 3.58667 26.3318 0 21.8182 0ZM21.8182 13.3333H8.18182C5.16818 13.3333 2.72727 10.9467 2.72727 8C2.72727 5.05333 5.16818 2.66667 8.18182 2.66667H21.8182C24.8318 2.66667 27.2727 5.05333 27.2727 8C27.2727 10.9467 24.8318 13.3333 21.8182 13.3333Z"
+            fill="#2C7A77"
+          />
+          <circle *ngIf="!isEnabled" cx="8" cy="8" r="4" fill="#2C7A77" />
+          <circle *ngIf="isEnabled" cx="21" cy="8" r="4" fill="#2C7A77" />
+        </svg>
+        <span>&nbsp;&nbsp;Выкл/Вкл</span>
+      </div>
+    </div>
+    <div class="card-info">
+      <div class="card-info-main">
+        <div *ngFor="let item of listBids" class="bid_card">
+          <h3>{{ item.desc }}</h3>
+          <div class="bid_card-content">
+            <div class="bid_card-col1">
+              <div class="bid_card-inputs">
+                <tui-input
+                  class="bid_card-input"
+                  [(ngModel)]="item.currentPlace"
+                  [readOnly]="true"
+                  tuiHintContent='"Текущее место" — рекламное место, на котором находимся.'
+                  tuiHintAppearance="onDark"
+                >
+                  Текущее место
+                  <input tuiTextfield type="number" />
+                </tui-input>
+                <tui-input
+                  class="bid_card-input"
+                  [(ngModel)]="item.currentBid"
+                  [tuiValidator]="validator(item.minCPM)"
+                  [readOnly]="true"
+                  tuiHintContent='"Текущая ставка" — текущая ставка, за которую вы платите за текущее место.'
+                  tuiHintAppearance="onDark"
+                >
+                  <ng-container tuiTextfieldWrapper>
+                    <input tuiTextfield type="number" />
+                    Текущая ставка
+                  </ng-container>
+                </tui-input>
+
+                <tui-input
+                  class="bid_card-input"
+                  [(ngModel)]="data.targetPlace"
+                  [readOnly]="true"
+                  tuiHintContent='"Заданное целевое место" — рекламное место, на котором хотим находиться.'
+                  tuiHintAppearance="onDark"
+                >
+                  Заданное целевое место
+                  <input tuiTextfield type="number" />
+                </tui-input>
+                <tui-input
+                  class="bid_card-input"
+                  [(ngModel)]="data.targetBid"
+                  [tuiValidator]="validator(item.minCPM)"
+                  [readOnly]="true"
+                  tuiHintContent='"Заданное целевая ставка" — целевая ставка, за которую вы платите за целевое рекламное место.'
+                  tuiHintAppearance="onDark"
+                >
+                  Заданное целевая ставка
+                  <input tuiTextfield type="number" />
+                </tui-input>
+                <tui-input
+                  class="bid_card-input"
+                  [readOnly]="true"
+                  [(ngModel)]="item.minCPM"
+                  tuiHintContent="Минимальная ставка"
+                >
+                Минимальная ставка
+                  <input tuiTextfield type="number" />
+                </tui-input>
+              </div>
+            </div>
+            <!-- <div *ngIf="false" class="bid_card-col2">
+              <div style="display: flex; align-items: center">
+                <h4>Ставки конкурентов из кабинета Wildberries</h4>
+                <tui-tooltip
+                  class="hint-icon"
+                  direction="bottom-right"
+                  tuiHintAppearance="onDark"
+                  [content]="tooltip"
+                ></tui-tooltip>
+                <ng-template #tooltip>
+                  <div>Some content</div>
+                </ng-template>
+              </div>
+              <tui-scrollbar class="box">
+                <div class="bid_table">
+                  <div
+                    class="bid_table-el"
+                    *ngFor="let itemBids of item.allBids.bidInfo"
+                  >
+                    {{ itemBids.place }}-е
+                    <strong>{{ itemBids.price }} ₽</strong>
+                    (+{{ itemBids.count }})
+                  </div>
+                </div>
+              </tui-scrollbar>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="data.type !== 'Каталог'">
+        <div class="card-info-main">
+          <div class="bid_card">
+            <h4>Задать</h4>
+            <div class="bid_card-content">
+              <div class="bid_card-col1">
+              <div class="bid_card-inputs">
+
+                <tui-input class="bid_card-input"
+                tuiHintContent='"Целевое место" — рекламное место, на котором хотим находиться.'
+                tuiHintAppearance="onDark"
+                [(ngModel)]="listBids[0].targetPlace"
+                >
+                 Целевое место
+                 <input value="listBids[0].targetPlace" tuiTextfield type="number" />
+              </tui-input>
+
+              <tui-input
+              class="bid_card-input"
+              tuiHintContent='"Целевая ставка" — целевая ставка, ставка за которую вы готовы заплатить за целевое рекламное место.'
+              tuiHintAppearance="onDark"
+              [(ngModel)]="listBids[0].targetBid"
+              >
+              Целевая ставка
+              <input tuiTextfield type="number" />
+              </tui-input>
+
+              <tui-input
+              class="bid_card-input"
+              tuiHintContent='"Минимальное целевое место" — минимальное рекламное место, при достижении или снижении которого кампания будет приостановлена.'
+              tuiHintAppearance="onDark"
+              [(ngModel)]="listBids[0].min_place"
+                >
+              Минимальное целевое место
+              <input tuiTextfield type="number" />
+              </tui-input>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+
+      </ng-container>
+    </div>
+    <div class="card-info">
+      <div
+        *ngIf="data.type !== 'Карточка товара'"
+        class="card_toggle-container"
+        style="margin-bottom: 1.5rem"
+      >
+        <svg
+          style="cursor: pointer"
+          (click)="toggleRealBids()"
+          width="30"
+          height="16"
+          viewBox="0 0 30 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M21.8182 0H8.18182C3.66818 0 0 3.58667 0 8C0 12.4133 3.66818 16 8.18182 16H21.8182C26.3318 16 30 12.4133 30 8C30 3.58667 26.3318 0 21.8182 0ZM21.8182 13.3333H8.18182C5.16818 13.3333 2.72727 10.9467 2.72727 8C2.72727 5.05333 5.16818 2.66667 8.18182 2.66667H21.8182C24.8318 2.66667 27.2727 5.05333 27.2727 8C27.2727 10.9467 24.8318 13.3333 21.8182 13.3333Z"
+            fill="#2C7A77"
+          />
+          <circle *ngIf="!useOptimazer" cx="8" cy="8" r="4" fill="#2C7A77" />
+          <circle *ngIf="useOptimazer" cx="21" cy="8" r="4" fill="#2C7A77" />
+        </svg>
+        <span>&nbsp;Включить реальные ставки</span>
+        <tui-tooltip
+          direction="right"
+          content=" MPTool начнет управлять рекламной кампанией на основе реальных данных по ставкам из выдачи WB."
+        ></tui-tooltip>
+      </div>
+      <div
+        *ngIf="data.type === 'Поиск'"
+        class="dynamics_bids-container"
+        style="margin-bottom: 1.5rem"
+      >
+        <div
+          class="dynamics_bids-col1"
+          *ngIf="data.type === 'Поиск'"
+          style="display: flex; justify-content: space-between"
+        >
+          <tui-text-area style="flex: 1">
+            Введите ключевое слово
+            <textarea
+              [disabled]="isTextareaDisabled"
+              tuiTextfield
+              [(ngModel)]="keywordValue"
+              maxlength="1000"
+            ></textarea>
+          </tui-text-area>
+          <button
+            tuiButton
+            type="button"
+            appearance="primary"
+            style="margin-left: 10px"
+            (click)="searchCompetitorsBids()"
+          >
+            Поиск
+          </button>
+        </div>
+
+        <div class="dynamics_bids-col2">
+          <div style="display: flex; align-items: center">
+            <h4>Ставки конкурентов по ключевому слову</h4>
+            <tui-tooltip
+              direction="bottom-right"
+              [content]="
+                'В этом разделе вы видите ставки конкурентов по конкретному ключевому слову. Если вы хотите показываться по этому ключу мы советуем удалить из кампании другие ключи, либо выбрать нужный ключ как приоритетный, включить управление рекламой по реальным ставкам ключа, и вы будете дешевле показывать рекламу по нужному ключу.'
+              "
+            ></tui-tooltip>
+          </div>
+          <tui-scrollbar class="box">
+            <div class="bid_table">
+              <div class="bid_table-el" *ngFor="let bid of keywordBids">
+                {{ bid.place }}-е
+                <strong>{{ bid.price }} ₽</strong>
+                (+{{ bid.count }})
+              </div>
+            </div>
+          </tui-scrollbar>
+        </div>
+      </div>
+    </div>
+    <div
+      class="tui-form__buttons"
+      style="padding: 0 2rem 1rem 2rem; margin-top: 0"
+    >
+      <button (click)="save()" tuiButton size="l" class="tui-form__button">
+        Сохранить
+      </button>
+    </div>
+
+    <app-log-table *ngIf="bidLog.length > 0" [data]="bidLog"></app-log-table>
+  </div>
+</tui-loader>

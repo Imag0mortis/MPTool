@@ -1,0 +1,60 @@
+<div *ngIf="hashValidate">
+  <div class="tui-container">
+    <div class="tui-row restore-box mobile-flex-container" *ngIf="loginForm">
+      <div class="width-90-percent">
+        <div class="logo-mini" style="margin-bottom: 10px">
+          <img class="logo-mini" src="../../../../assets/img/LogoCab.svg" />
+          <br />
+        </div>
+
+        <form [formGroup]="loginForm">
+          <h3 class="tui-form__header tui-form__header_margin-top_none">
+            Изменение пароля
+          </h3>
+
+          <div class="tui-form__row">
+            <tui-input-password
+              [tuiTextfieldCustomContent]="loginForm.valid ? success : ''"
+              formControlName="passwordValue"
+            >
+              Введите пароль
+            </tui-input-password>
+          </div>
+          <div class="tui-form__row">
+            <tui-input-password
+              [tuiTextfieldCustomContent]="loginForm.valid ? success : ''"
+              formControlName="passwordConfirmValue"
+            >
+              Повторите пароль
+            </tui-input-password>
+          </div>
+          <span *ngIf="!validateForMinLength" style="color: red">
+            Длинна пароля должна быть минимум 8 символов!
+          </span>
+          <span *ngIf="validateForSame" style="color: red">
+            Пароли не совпадают!
+          </span>
+
+          <div class="tui-form__buttons">
+            <button
+              (click)="restoreChange()"
+              [disabled]="!loginForm.valid"
+              tuiButton
+              size="l"
+              type="submit"
+              class="tui-form__button"
+            >
+              Отправить
+            </button>
+          </div>
+        </form>
+        <p><u (click)="appService.goLogin()">Вход</u></p>
+        <p><u (click)="appService.goSignup()">Регистрация</u></p>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #success>
+    <tui-svg src="tuiIconCheckLarge" class="success tui-space_left-3"></tui-svg>
+  </ng-template>
+</div>

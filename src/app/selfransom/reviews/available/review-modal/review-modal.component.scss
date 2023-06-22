@@ -1,0 +1,93 @@
+.review-modal {
+  width: 500px;
+  height: max-content;
+}
+.wrapper {
+  margin: 0 1rem 1rem 1rem;
+}
+h1 {
+  text-align: center;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  color: #2c7a77;
+  padding-bottom: 2rem;
+}
+h2 {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #929697;
+  margin-top: 1rem;
+}
+tui-rating {
+  color: #ff9a0c;
+  padding-bottom: 2rem;
+}
+.photo {
+  padding-right: 0.5rem;
+}
+
+.image_preview {
+  margin-top: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.buttons_container {
+  margin-top: 1rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  /*width: 147px;*/
+}
+
+.searchbar tui-select {
+  width: 15rem;
+}
+
+.searchbar tui-input {
+  width: 15rem;
+  padding-right: 1rem;
+}
+
+@media (max-width: 768px) {
+  .review-modal {
+    width: 100%;
+    height: auto;
+  }
+
+  .wrapper {
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 14px;
+    line-height: 16px;
+    padding-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  .buttons_container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}

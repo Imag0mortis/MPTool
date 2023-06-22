@@ -1,0 +1,54 @@
+<div class="modal-content__container">
+  <div class="modal-content-col1">
+    <div *ngIf="showDetails === 'ok'; else notShow" class="location-container">
+      <div
+        *ngFor="let item of placemarks"
+        class="location-item"
+        (click)="choosePVZ(item.id)"
+      >
+        <div class="location-item-address">{{ item.address }}</div>
+        <div class="location-item-schedule">
+          <i>{{ item.schedule }}</i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-content-col2">
+    <ya-map
+      *ngIf="placemarks"
+      [zoom]="zoom"
+      [center]="selfRansom.centerPoint$ | async"
+      (actionend)="onMapChanged($event)"
+    >
+      <ya-clusterer [options]="clustererOptions">
+        <ya-placemark
+          *ngFor="let placemark of placemarks"
+          [geometry]="placemark.geometry"
+          [properties]="placemark.properties"
+          [options]="placemark.options"
+          (balloonopen)="openBalloon($event, placemark.id)"
+          (balloonclose)="closeBalloon()"
+        ></ya-placemark>
+      </ya-clusterer>
+    </ya-map>
+  </div>
+</div>
+
+<ng-template #notShow>
+  <p
+    *ngIf="showDetails === 'tooMany'"
+    style="text-align: center; margin-top: 40%"
+  >
+    Увеличьте масштаб карты,
+    <br />
+    чтобы увидеть список ближайших ПВЗ
+  </p>
+  <tui-loader
+    style="margin-top: 40%"
+    *ngIf="showDetails === 'loading'"
+    class="inline-flex tui-space_right-2"
+    [showLoader]="true"
+    [inheritColor]="true"
+    [overlay]="true"
+  ></tui-loader>
+</ng-template>

@@ -1,0 +1,35 @@
+<div class="table_container shadow(1)">
+  <div class="table_header">
+    <h3>Рассчет позиции по запросу</h3>
+  </div>
+  <tui-loader
+    class="inline-flex tui-space_right-2"
+    [showLoader]="loading"
+    [inheritColor]="true"
+    [overlay]="true"
+  >
+    <table
+      *ngIf="
+        ransomCalculation.rancomCalculationData$ | async as data;
+        else noData
+      "
+      tuiTable
+      class="table"
+    >
+      <tbody tuiTbody>
+        <tr>
+          <td>День</td>
+          <td *ngFor="let item of data">{{ item.day }}</td>
+        </tr>
+        <tr>
+          <td>Сумма</td>
+          <td *ngFor="let item of data">{{ item.purchase }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </tui-loader>
+</div>
+
+<ng-template #noData>
+  <p>Введите искомый запрос и позицию...</p>
+</ng-template>

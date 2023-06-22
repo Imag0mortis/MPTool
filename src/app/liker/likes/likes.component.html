@@ -1,0 +1,183 @@
+<div class="liker">
+  <h1>MpLiker</h1>
+  <h2>
+    Позволяет вам сделать вашу карточку более привлекательной для покупателя.
+    Ставьте лайки на хорошие отзывы с красивыми фотографиями, дизлайки на
+    негативные отзывы. Это влияет на ранжирование фотографий и, как следствие,
+    продажи карточки.
+  </h2>
+
+  <div class="table_container shadow(1)">
+    <div class="liker_content">
+      <div class="liker-content-col1">
+        <form class="b-form" [formGroup]="form">
+          <tui-input
+            class="liker-row-input"
+            formControlName="article"
+            tuiHintContent="Укажите артикул товара, для отзыва которого вы хотите оставить лайки или дизлайки."
+          >
+            Артикул
+          </tui-input>
+          <tui-input
+            class="liker-row-input"
+            formControlName="name"
+            tuiHintContent="Укажите имя клиента, который оставил отзыв для того, чтобы бот нашел его."
+          >
+            Имя
+          </tui-input>
+          <tui-input
+            class="liker-row-input"
+            formControlName="request"
+            tuiHintContent="Укажите поисковый запрос, по которому данный товар легко найти."
+          >
+            Запрос
+          </tui-input>
+          <tui-input
+            class="liker-row-input"
+            formControlName="review"
+            tuiHintContent="Скопируйте отзыв или его часть, чтобы бот мог успешно найти необходимый отзыв."
+          >
+            Отзыв или часть отзыва
+          </tui-input>
+        </form>
+        <button
+          tuiButton
+          *ngIf="!appService.isMobile"
+          type="button"
+          (click)="newLikerPost()"
+          appearance="primary"
+          class="tui-space_right-3 tui-space_bottom-3"
+        >
+          Создать задание
+        </button>
+      </div>
+      <div class="liker-content-col2">
+        <h4>
+          Введите количество
+          <br />
+          лайков или дизлайков
+        </h4>
+        <form class="b-form" [formGroup]="form">
+          <tui-input class="liker-row-input_amount" formControlName="likes">
+            Количество
+            <input tuiTextfield type="number" />
+          </tui-input>
+          <div>
+            <tui-radio-labeled
+              formControlName="likesToogle"
+              class="tui-space_bottom-3"
+              [item]="true"
+            >
+              Лайки
+            </tui-radio-labeled>
+            <tui-radio-labeled
+              formControlName="likesToogle"
+              class="tui-space_bottom-3"
+              [item]="false"
+            >
+              Дизлайки
+            </tui-radio-labeled>
+          </div>
+        </form>
+        <div>
+          Стоимость:
+          {{
+            form.get('likes')!.value
+              | tariffsInfo : (form.get('likesToogle')!.value ? 4 : 5)
+          }}
+        </div>
+        <button
+          tuiButton
+          *ngIf="appService.isMobile"
+          type="button"
+          (click)="newLikerPost()"
+          appearance="primary"
+          class="tui-space_right-3 tui-space_bottom-3"
+        >
+          Создать задание
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="table_container shadow(1)">
+  <div class="footer_table_wrapper">
+    <table tuiTable class="table" [columns]="columns" *ngIf="tasks.length > 0">
+      <thead>
+        <tr tuiThGroup>
+          <th tuiTh [resizable]="true">Артикул</th>
+          <th tuiTh>Имя</th>
+          <th tuiTh>Запрос</th>
+          <th tuiTh>Отзыв</th>
+          <th tuiTh>
+            Количество
+            <br />
+            лайков/дизлайков
+          </th>
+          <th tuiTh>Изменить</th>
+          <th tuiTh>Статус</th>
+        </tr>
+      </thead>
+      <ng-container *ngIf="tableData$ | async as data">
+        <tbody tuiTbody [data]="data">
+          <tr *tuiRow="let item of data; index as i" tuiTr>
+            <td *tuiCell="'article'" tuiTd>
+              {{ item.sku }}
+            </td>
+            <td *tuiCell="'name'" tuiTd>
+              {{ item.name }}
+            </td>
+            <td *tuiCell="'request'" tuiTd>
+              {{ item.query }}
+            </td>
+            <td *tuiCell="'review'" tuiTd>
+              {{ item.feedback }}
+            </td>
+            <td *tuiCell="'likes'" tuiTd>
+              <div class="liker-toggle-container">
+                <img
+                  [ngStyle]="
+                    item.isLike ? null : { transform: 'rotate(180deg)' }
+                  "
+                  class="like_icon"
+                  src="../../../assets/icons/like.svg"
+                />
+                <div>{{ item.likesCount }}</div>
+              </div>
+            </td>
+            <td *tuiCell="'actions'" tuiTd>
+              <button
+                tuiButton
+                size="s"
+                type="button"
+                (click)="cancelLikerTask(item.buyID)"
+              >
+                Отменить
+              </button>
+            </td>
+            <td *tuiCell="'status'" tuiTd>
+              {{ item.taskState }}
+            </td>
+          </tr>
+        </tbody>
+      </ng-container>
+    </table>
+  </div>
+  <div class="pagination-container" *ngIf="tasks.length > 0">
+    <tui-pagination
+      [length]="length"
+      [index]="index"
+      (indexChange)="goToPage($event)"
+    ></tui-pagination>
+  </div>
+</div>
+
+<ng-template #disabledTag>
+  <tui-tag
+    status="custom"
+    class="tag support-5"
+    [hoverable]="false"
+    [value]="'Отмена'"
+  ></tui-tag>
+</ng-template>

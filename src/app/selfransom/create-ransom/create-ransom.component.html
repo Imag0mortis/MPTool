@@ -1,0 +1,401 @@
+<div class="create_ransom">
+  <div class="create_header">
+    <div class="left_head">
+      <h2>Создать выкуп</h2>
+      <span class="warning">
+        Внимание! В целях безопасности нельзя отправлять сразу больше пяти
+        товаров на один ПВЗ
+        <br />
+        до приёма предыдущих заказов!
+      </span>
+    </div>
+    <div class="right_head"></div>
+  </div>
+  <div class="mid_container">
+    <div class="mid_left">
+      <tui-input
+        class="sku-input"
+        [(ngModel)]="sku"
+        (keyup.enter)="checkNewSKU()"
+      >
+        Артикул
+        <input tuiTextfield type="number" />
+      </tui-input>
+      <button tuiButton size="l" class="head_button" (click)="checkNewSKU()">
+        ДОБАВИТЬ ВЫКУП
+      </button>
+    </div>
+    <div *ngIf="data.length > 0 && !appService.isMobile" class="mid_right">
+      <button tuiButton size="m" class="head_button2" (click)="showDialog()">
+        Заполнить адреса
+      </button>
+      <button
+        tuiButton
+        size="m"
+        class="head_button2"
+        (click)="clearAllAddresses()"
+      >
+        Сбросить адреса
+      </button>
+    </div>
+  </div>
+  <div class="ransom_table">
+    <div class="table_container shadow(1)">
+      <div class="table_header"></div>
+      <tui-loader
+        class="inline-flex tui-space_right-2"
+        [showLoader]="false"
+        [inheritColor]="true"
+        [overlay]="true"
+      >
+        <table
+          tuiTable
+          *ngIf="data.length > 0 && !appService.isMobile"
+          class="table"
+          [columns]="columns"
+        >
+          <thead>
+            <tr tuiThGroup>
+              <th tuiTh [resizable]="true">Фото</th>
+              <th tuiTh>Артикул</th>
+              <th tuiTh>Цена</th>
+              <th tuiTh>Название</th>
+              <th tuiTh>Количество</th>
+              <th tuiTh>Размер</th>
+              <th tuiTh>Пол</th>
+              <th tuiTh>
+                Поисковый запрос
+                <tui-tooltip
+                  content="Укажите запрос, по которому наш бот будет искать ваш товар в поиске"
+                  direction="bottom"
+                ></tui-tooltip>
+              </th>
+              <th tuiTh>Адрес</th>
+              <th tuiTh>Копировать задание</th>
+              <th tuiTh>Отменить</th>
+            </tr>
+          </thead>
+          <tbody tuiTbody [data]="data">
+            <tr tuiTr *ngFor="let item of data; index as i">
+              <td tuiTd *tuiCell="'imgLink'">
+                <div
+                  class="photo_placeholder"
+                  [style.background-image]="'url(' + item.imgLink + ')'"
+                ></div>
+              </td>
+              <td tuiTd *tuiCell="'sku'">{{ item.sku }}</td>
+              <td tuiTd *tuiCell="'price'">{{ item.price }} ₽</td>
+              <td tuiTd *tuiCell="'name'">{{ item.name }}</td>
+              <td tuiTd *tuiCell="'quantity'">
+                <tui-input class="account-input" [(ngModel)]="item.quantity">
+                  <input tuiTextfield type="number" min="1" />
+                </tui-input>
+              </td>
+              <td
+                style="max-width: 120px; width: 120px"
+                tuiTd
+                *tuiCell="'size'"
+              >
+                <div *ngIf="item.sizes.length === 1; else sizeSelect">
+                  {{ item.sizes[0].Key }}
+                </div>
+                <ng-template #sizeSelect>
+                  <tui-select
+                    tuiTextfieldSize="m"
+                    [tuiTextfieldLabelOutside]="true"
+                    [valueContent]="item.size!.name"
+                    [(ngModel)]="item.size"
+                  >
+                    <ng-template tuiDataList>
+                      <tui-data-list>
+                        <button
+                          *ngFor="let size of item.sizes"
+                          tuiOption
+                          [value]="{ name: size.Key, value: size.Value }"
+                        >
+                          {{ size.Key }}
+                        </button>
+                      </tui-data-list>
+                    </ng-template>
+                  </tui-select>
+                </ng-template>
+              </td>
+
+              <td style="max-width: 120px; width: 120px" tuiTd *tuiCell="'sex'">
+                <tui-select
+                  tuiTextfieldSize="m"
+                  [tuiTextfieldLabelOutside]="true"
+                  [valueContent]="item.sex!.name"
+                  [(ngModel)]="item.sex"
+                >
+                  <ng-template tuiDataList>
+                    <tui-data-list>
+                      <button
+                        *ngFor="let item of sexDict"
+                        tuiOption
+                        [value]="{ name: item.name, value: item.value }"
+                      >
+                        {{ item.name }}
+                      </button>
+                    </tui-data-list>
+                  </ng-template>
+                </tui-select>
+              </td>
+              <td
+                tuiTd
+                *tuiCell="'request'"
+                [ngStyle]="{
+                  border: item.request.length < 1 ? '3px solid red' : null
+                }"
+              >
+                <tui-input class="account-input" [(ngModel)]="item.request">
+                  <input tuiTextfield type="text" />
+                </tui-input>
+              </td>
+              <td tuiTd *tuiCell="'address'">
+                <button
+                  *ngIf="!item?.address?.addressId; else changeAddress"
+                  tuiButton
+                  size="s"
+                  (click)="showDialog(i)"
+                >
+                  Выбрать
+                </button>
+
+                <ng-template #changeAddress>
+                  <div class="change-address">
+                    <p>{{ item?.address?.addressName }}</p>
+                    <button tuiButton size="s" (click)="showDialog(i)">
+                      Изменить
+                    </button>
+                  </div>
+                </ng-template>
+              </td>
+              <td tuiTd *tuiCell="'copy'">
+                <div (click)="copySelfRansom(item)">
+                  <img
+                    class="copy"
+                    src="../../../assets/img/Copy-Icon-03ndfdkgff.png"
+                    alt=""
+                  />
+                </div>
+              </td>
+              <td tuiTd *tuiCell="'cancel'">
+                <div (click)="removeRow(i)">
+                  <img
+                    class="cancel"
+                    src="../../../assets/icons/a82bae8b4bf7487513ee9415b521b45d.svg"
+                    alt=""
+                  />
+                </div>
+              </td>
+            </tr>
+            <!-- <button (click)="test()">Тест</button> -->
+          </tbody>
+        </table>
+        <div
+          class="mobile_ransom"
+          *ngIf="data.length > 0 && appService.isMobile"
+        >
+          <!--Мобильная версия-->
+          <div *ngFor="let item of data; index as i">
+            <tui-island style="width: 92%">
+              <div class="mobile_content">
+                <div class="mobile_data_photo">
+                  <p class="desc">Фото:</p>
+                  <div
+                    class="photo_placeholder"
+                    [style.background-image]="'url(' + item.imgLink + ')'"
+                  ></div>
+                  <div class="footer_left">
+                    <span class="left_description" *ngIf="data.length > 0">
+                      Сумма выкупа:
+                    </span>
+                    <span class="right_description">
+                      {{ totalAmmount() }} ₽
+                    </span>
+                    <br />
+                    <br />
+                    <span class="left_description">Стоимость услуг:</span>
+                    <span class="right_description">
+                      {{ servicePrice() }} ₽
+                    </span>
+                  </div>
+                </div>
+                <div class="right_content">
+                  <div class="mobile_data">
+                    <p class="desc">Артикул:</p>
+                    <div class="content"></div>
+                    {{ item.sku }}
+                  </div>
+                  <div class="mobile_data">
+                    <p class="desc">Цена:</p>
+                    <div class="content"></div>
+                    {{ item.price }} ₽
+                  </div>
+                  <div class="mobile_data_name">
+                    <p class="desc">Название:</p>
+                    <div class="content"></div>
+                    {{ item.name }}
+                  </div>
+                  <div class="mobile_data_quantility">
+                    <p class="desc">Количество:</p>
+                    <tui-input
+                      tuiTextfieldSize="s"
+                      class="account-input"
+                      [(ngModel)]="item.quantity"
+                    >
+                      <input tuiTextfield type="number" min="1" />
+                    </tui-input>
+                  </div>
+                  <div class="mobile_data_size">
+                    <p class="desc">Размер:</p>
+                    <div class="content">
+                      <div *ngIf="item.sizes.length === 1; else sizeSelect">
+                        {{ item.sizes[0].Key }}
+                      </div>
+                      <ng-template #sizeSelect>
+                        <tui-select
+                          tuiTextfieldSize="m"
+                          [tuiTextfieldLabelOutside]="true"
+                          [valueContent]="item.size!.name"
+                          [(ngModel)]="item.size"
+                        >
+                          <ng-template tuiDataList>
+                            <tui-data-list>
+                              <button
+                                *ngFor="let size of item.sizes"
+                                tuiOption
+                                [value]="{ name: size.Key, value: size.Value }"
+                              >
+                                {{ size.Key }}
+                              </button>
+                            </tui-data-list>
+                          </ng-template>
+                        </tui-select>
+                      </ng-template>
+                    </div>
+                  </div>
+                  <div class="mobile_data_sex">
+                    <p class="desc">Пол:</p>
+                    <div class="content">
+                      <tui-select
+                        tuiTextfieldSize="s"
+                        [tuiTextfieldLabelOutside]="true"
+                        [valueContent]="item.sex!.name"
+                        [(ngModel)]="item.sex"
+                      >
+                        <ng-template tuiDataList>
+                          <tui-data-list>
+                            <button
+                              *ngFor="let item of sexDict"
+                              tuiOption
+                              [value]="{ name: item.name, value: item.value }"
+                            >
+                              {{ item.name }}
+                            </button>
+                          </tui-data-list>
+                        </ng-template>
+                      </tui-select>
+                    </div>
+                  </div>
+                  <div class="mobile_data_request">
+                    <p class="desc">Поисковый запрос:</p>
+                    <div class="content">
+                      <tui-input
+                        class="account-input"
+                        tuiTextfieldSize="s"
+                        [(ngModel)]="item.request"
+                      >
+                        <input tuiTextfield type="text" />
+                      </tui-input>
+                    </div>
+                  </div>
+                  <div class="mobile_data_adress">
+                    <p class="desc">Адрес:</p>
+                    <div class="content">
+                      <button
+                        *ngIf="!item?.address?.addressId; else changeAddress"
+                        tuiButton
+                        size="m"
+                        style="width: 100%"
+                        (click)="showDialog(i)"
+                      >
+                        Выбрать
+                      </button>
+
+                      <ng-template #changeAddress>
+                        <div class="change-address">
+                          <p>{{ item?.address?.addressName }}</p>
+                          <button
+                            tuiButton
+                            size="m"
+                            style="width: 90%"
+                            (click)="showDialog(i)"
+                          >
+                            Изменить
+                          </button>
+                        </div>
+                      </ng-template>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="button_container">
+                <button
+                  tuiButton
+                  (click)="removeRow(i)"
+                  type="button"
+                  appearance="secondary-destructive"
+                  class="tui-space_right-3 tui-space_bottom-3"
+                >
+                  Отменить
+                </button>
+                <button
+                  tuiButton
+                  (click)="copySelfRansom(item)"
+                  type="button"
+                  appearance="secondary"
+                  class="tui-space_right-3 tui-space_bottom-3"
+                >
+                  Копировать
+                </button>
+              </div>
+            </tui-island>
+          </div>
+        </div>
+      </tui-loader>
+    </div>
+  </div>
+  <div *ngIf="data.length > 0" class="footer">
+    <div class="footer_left">
+      <span
+        class="left_description"
+        *ngIf="data.length > 0 && !appService.isMobile"
+      >
+        Сумма выкупа:
+      </span>
+      <span class="right_description" *ngIf="!appService.isMobile">
+        {{ totalAmmount() }} ₽
+      </span>
+      <br />
+      <br />
+      <span class="left_description" *ngIf="!appService.isMobile">
+        Стоимость услуг:
+      </span>
+      <span *ngIf="!appService.isMobile" class="right_description">
+        {{ servicePrice() }} ₽
+      </span>
+    </div>
+    <div class="right_section" *ngIf="!appService.isMobile">
+      <button tuiButton size="m" class="footer_button" (click)="createTask()">
+        СОЗДАТЬ ЗАДАНИЕ
+      </button>
+    </div>
+  </div>
+  <div *ngIf="data.length > 0 && appService.isMobile">
+    <button tuiButton size="l" class="footer_button" (click)="createTask()">
+      СОЗДАТЬ ЗАДАНИЕ
+    </button>
+  </div>
+</div>

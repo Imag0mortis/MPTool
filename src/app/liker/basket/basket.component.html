@@ -1,0 +1,140 @@
+<div>
+  <h1 class="basket_header">MpLiker - Корзина</h1>
+  <h2 class="description">
+    Функция добавления в корзину отлично совмещается с функцией самовыкупов, но
+    и сама по себе способна положительно оказать влияние на карточку и ее
+    ранжирование. Наши роботы с реальных аккаунтов будут добавлять ваш товар в
+    корзину. Советуем на каждый самовыкуп заказывать как минимум одно добавление
+    в корзину
+  </h2>
+</div>
+
+<div class="">
+  <div class="">
+    <!--
+   
+    -->
+
+    <div class="content_block">
+      <div class="section_1">
+        <h4>
+          Артикул:
+          <tui-tooltip
+            direction="right"
+            content="Укажите артикул, который необходимо добавлять в корзину."
+          ></tui-tooltip>
+        </h4>
+        <tui-input class="article-input" [(ngModel)]="sku">
+          Артикул
+          <input tuiTextfield type="text" />
+        </tui-input>
+      </div>
+      <div class="inputs"></div>
+      <div class="section_1">
+        <h4>
+          Поисковый запрос:
+          <tui-tooltip
+            direction="right"
+            content="Укажите поисковый запрос, по которому наш робот будет искать ваш товар."
+          ></tui-tooltip>
+        </h4>
+        <tui-input class="search-input" [(ngModel)]="request">
+          Поисковый запрос
+          <input tuiTextfield type="text" />
+        </tui-input>
+      </div>
+      <div class="section_1">
+        <h4>
+          Количество:
+          <tui-tooltip
+            direction="right"
+            content="Укажите необходимое количество добавлений в корзину."
+          ></tui-tooltip>
+        </h4>
+        <tui-input class="amount-input" [(ngModel)]="quantity">
+          Количество
+          <input tuiTextfield type="text" />
+        </tui-input>
+      </div>
+      <div class="section_1">
+        <h4>
+          Период выполнения:
+          <tui-tooltip
+            direction="right"
+            content="Укажите срок, за который данное задание должно быть выполнено."
+          ></tui-tooltip>
+        </h4>
+        <tui-select
+          tuiTextfieldSize="l"
+          [tuiTextfieldLabelOutside]="true"
+          [valueContent]="period"
+          [(ngModel)]="period"
+          class="period-select"
+        >
+          <ng-template tuiDataList>
+            <tui-data-list>
+              <button
+                *ngFor="let item of periodDict"
+                tuiOption
+                [value]="item.days"
+              >
+                {{ item.name }}
+              </button>
+            </tui-data-list>
+          </ng-template>
+        </tui-select>
+      </div>
+      <div class="cost">Стоимость: {{ quantity | tariffsInfo : 6 }}</div>
+    </div>
+    <div>
+      <button class="task_button" (click)="create()" tuiButton>
+        СОЗДАТЬ ЗАДАНИЕ
+      </button>
+    </div>
+    <div class="table_content">
+      <table
+        *ngIf="tasks.length > 0"
+        tuiTable
+        class="table"
+        style="width: 100%"
+      >
+        <thead>
+          <th>Артикул</th>
+          <th>Запрос</th>
+          <th>Время создания</th>
+          <th>Статус</th>
+          <th>Время выполнени</th>
+          <th>Осталось</th>
+          <th>Отмена</th>
+        </thead>
+        <tbody tuiTbody>
+          <tr *ngFor="let task of tasks">
+            <td>{{ task.sku }}</td>
+            <td>{{ task.query }}</td>
+            <td>{{ task.timeCreated * 1000 | date : 'fullDate' }}</td>
+            <td>{{ task.taskState }}</td>
+            <td>{{ task.executionHours }}</td>
+            <td>{{ task.basketRemaining }}</td>
+            <td>
+              <button
+                tuiButton
+                size="s"
+                type="button"
+                (click)="cancelTask(task.taskID)"
+              >
+                Отменить
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pagination-container" *ngIf="tasks.length > 0">
+        <tui-pagination
+          [length]="length"
+          [index]="index"
+          (indexChange)="goToPage($event)"
+        ></tui-pagination>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+.table {
+  width: 100%;
+}
+.filters {
+  display: flex;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.filters:last-child {
+  margin-right: 0;
+}
+
+.filters > * {
+  margin-right: 1rem;
+}
+
+.filters span {
+  font-size: large;
+  margin-top: 0.8rem;
+  font-weight: 500;
+}
+.input {
+  flex: 1;
+}
+.columns {
+  width: 10.625rem;
+}
+.match {
+  background: var(--tui-selection);
+}
+
+.table_container {
+  background-color: #fff;
+  border-radius: 16px;
+  width: auto;
+}
+
+.table_container table {
+  width: 100%;
+}
+
+tbody,
+th,
+td {
+  border-color: transparent;
+}
+
+th {
+  color: #2c7a77;
+  background: rgba(86, 180, 176, 0.24);
+}
+
+tr:nth-child(even) td {
+  background: rgba(86, 180, 176, 0.24);
+}
+
+.tag {
+  margin: 0.25rem;
+}
+.light-mode {
+  display: inline-block;
+  background-color: #454e58;
+}
+.dark-mode {
+  display: inline-block;
+  margin-left: 0.25rem;
+  background-color: #e5e7ea;
+}
+
+.table_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.table_header a span {
+  text-decoration: underline;
+  cursor: pointer;
+  color: blue;
+}
+
+@media only screen and (max-width: 768px) {
+  .table_wrapper {
+    width: 100%;
+    overflow: scroll;
+  }
+  .table_container {
+    margin: 1rem 0;
+    padding: 1rem 1rem;
+    background-color: #fff;
+    border-radius: 16px;
+    width: auto;
+  }
+}

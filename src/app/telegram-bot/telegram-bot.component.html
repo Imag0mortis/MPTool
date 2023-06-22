@@ -1,0 +1,140 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="main">
+      <h1>Привязка Telegram бота</h1>
+
+      <h2>
+        Если вам необходимо привязать аккаунт Telegram, скопируйте код для
+        привязки
+      </h2>
+      <br />
+
+      <form [formGroup]="linkForm">
+        <div class="account-input-row">
+          <tui-input-copy class="account-input" formControlName="linkInput">
+            Код
+            <input tuiTextfield type="text" />
+          </tui-input-copy>
+        </div>
+      </form>
+
+      <br />
+
+      <p>
+        <span>
+          И перейдите в бота по ссылке
+          <a href="https://t.me/MARKETPLACETOOL_BOT" target="blank">
+            @marketplacetool_bot
+          </a>
+          ,
+        </span>
+        выберите привязать аккаунт MpTool и отправьте боту код для привязки.
+      </p>
+      <p>После этого привязка будет считаться успешно завершенной.</p>
+
+      <p>В этого бота будут приходить уведомления</p>
+      <br />
+      <br />
+      <ul>
+        <li>- О смене статуса выкупа</li>
+        <li>- QR код для доставки</li>
+        <li>- Полезные уведомления и новости нашего сервиса.</li>
+        <li>- Через бота также легко можно всегда связаться с поддержкой.</li>
+      </ul>
+
+      <p>Привязывайте бота к аккаунту и получайте 500 рублей на счет!</p>
+    </div>
+    <div class="accounts_control" *ngFor="let account of linkedTgAccounts">
+      <h2 style="margin-top: 2rem">Управление аккаунтами</h2>
+      <button
+        (click)="showDialog(templateAll)"
+        style="margin-top: 1rem"
+        tuiButton
+        type="button"
+        appearance="secondary-destructive"
+        class="tui-space_right-3 tui-space_bottom-3"
+      >
+        Отвязать все аккаунты
+      </button>
+      <ng-template #templateAll let-observer>
+        <p i18n class="modal_header">ВЫ УВЕРЕНЫ?</p>
+        <p class="modal_middle">
+          Вы действительно хотите все привязанные аккаунты?
+        </p>
+        <div class="button_container">
+          <button
+            class="cancel"
+            tuiButton
+            appearance="secondary"
+            type="button"
+            size="m"
+            (click)="observer.complete()"
+          >
+            Нет
+          </button>
+          <button
+            tuiButton
+            type="button"
+            size="m"
+            class="pay"
+            (click)="removeAllTg(); observer.complete()"
+          >
+            Да&nbsp;
+          </button>
+        </div>
+      </ng-template>
+      <table class="tui-table" style="margin-top: 1rem">
+        <tbody>
+          <tr class="tui-table__tr tui-table__tr_border_none">
+            <th class="tui-table__th">Telegram</th>
+            <th class="tui-table__th">Telegram id</th>
+            <th class="tui-table__th tui-table__th_last">Отвязка аккаунтов</th>
+          </tr>
+          <tr class="tui-table__tr tui-table__tr_border_none">
+            <td class="tui-table__td">{{ account.telegram }}</td>
+            <td class="tui-table__td">{{ account.telegram_id }}</td>
+            <td class="tui-table__td tui-table__td_last">
+              <button
+                (click)="showDialog(template)"
+                tuiButton
+                type="button"
+                appearance="accent"
+                class="tui-space_right-3 tui-space_bottom-3"
+                size="s"
+              >
+                Отвязать
+              </button>
+              <ng-template #template let-observer>
+                <p i18n class="modal_header">ВЫ УВЕРЕНЫ?</p>
+                <p class="modal_middle">
+                  Вы действительно хотите отвязать данный аккаунт?
+                </p>
+                <div class="button_container">
+                  <button
+                    class="cancel"
+                    tuiButton
+                    appearance="secondary"
+                    type="button"
+                    size="m"
+                    (click)="observer.complete()"
+                  >
+                    Нет
+                  </button>
+                  <button
+                    tuiButton
+                    type="button"
+                    size="m"
+                    class="pay"
+                    (click)="removeTg(account.telegram_id); observer.complete()"
+                  >
+                    Да&nbsp;
+                  </button>
+                </div>
+              </ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

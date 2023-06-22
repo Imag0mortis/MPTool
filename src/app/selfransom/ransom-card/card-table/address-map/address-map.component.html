@@ -1,0 +1,12 @@
+<div class="map_container">
+  <h4 style="margin-top: 0">{{ placemark.address }}</h4>
+  <div style="width: 60vw; height: 50vh">
+    <ya-map #map [zoom]="15" [center]="placemark.geometry">
+      <ya-placemark
+        [geometry]="placemark.geometry"
+        [properties]="placemark.properties"
+        [options]="placemark.options"
+      ></ya-placemark>
+    </ya-map>
+  </div>
+</div>

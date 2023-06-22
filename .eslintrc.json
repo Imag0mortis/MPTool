@@ -1,0 +1,49 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:jsdoc/recommended",
+    "plugin:prettier/recommended",
+    "prettier",
+    "plugin:@angular-eslint/template/process-inline-templates",
+    "plugin:sonarjs/recommended",
+    "plugin:eslint-plugin-rxjs/recommended",
+    "plugin:jasmine/recommended"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "jsdoc",
+    "prefer-arrow",
+    "sonarjs",
+    "eslint-plugin-rxjs",
+    "jasmine",
+    "html"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "project": [
+      "tsconfig.json"
+    ],
+    "createDefaultProgram": true
+  },
+  "rules": {
+    "import/no-unresolved": "off",
+    "sonarjs/no-duplicate-string": "off",
+    "prettier/prettier": "off",
+    "rxjs/no-implicit-any-catch": "off",
+    "@typescript-eslint/no-explicit-any": "warn"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".ts"]
+      }
+    }
+  }
+}

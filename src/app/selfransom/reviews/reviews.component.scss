@@ -1,0 +1,227 @@
+.reviews {
+  background-color: #fff;
+  margin: 0 1rem;
+  border-radius: 16px;
+  //max-width: 980px;
+  padding: 1rem;
+}
+
+h1 {
+  width: 79px;
+  height: 23px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 23px;
+  color: #2c7a77;
+}
+
+h2 {
+  width: 1028px;
+  height: 27px;
+  left: 489px;
+  top: 258px;
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+}
+
+.header_buttons {
+  width: 60rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header_button {
+  width: 180px;
+  height: 35px;
+  border: 1px solid #2c7a77;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.rev {
+  width: 153px;
+  height: 20px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  color: #2c7a77;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.5rem;
+}
+
+.rev span {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #000000;
+}
+
+.header_navigation {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+tui-tabs {
+  width: max-content;
+}
+
+.search {
+  display: flex;
+}
+
+.nav_tab {
+  height: 39px;
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+.tabdesk {
+  margin: auto;
+}
+
+.nav_tab:active {
+  height: 39px;
+  background: #ffffff;
+}
+
+tui-input {
+  width: 179px;
+  margin-right: 1rem;
+}
+.tui-space_right-3 {
+  width: 147px;
+}
+
+.modal_header {
+  text-align: center;
+  width: 500px;
+  height: 19px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  text-transform: uppercase;
+  color: #000000;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.modal_middle {
+  width: 500px;
+  text-align: center;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+  padding-bottom: 0.5rem;
+}
+
+.cancel {
+  width: 147px;
+  height: 42px;
+  padding-right: 1rem;
+}
+
+.pay {
+  width: 147px;
+}
+
+.button_container {
+  margin-top: 2rem;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .reviews {
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+
+  h2 {
+    width: 100%;
+    height: 4rem;
+    left: 0;
+    top: auto;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: start;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .header_buttons {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header_button {
+    width: 150px;
+    height: 30px;
+    font-size: 12px;
+  }
+
+  .header_navigation {
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .search {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  tui-input,
+  .tui-space_right-3 {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .modal_header {
+    width: 100%;
+    font-size: 14px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .modal_middle {
+    width: 100%;
+    font-size: 14px;
+    padding-bottom: 0.5rem;
+  }
+
+  .cancel,
+  .pay {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .button_container {
+    width: 100%;
+    justify-content: space-around;
+  }
+}

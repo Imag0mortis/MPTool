@@ -1,0 +1,203 @@
+$main_bg: '#fff';
+
+/* You can add global styles to this file, and also import other style files */
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight: lighter;
+  src: local('Roboto'),
+    url('../../MPTool/src/assets/fonts/Roboto-Regular.ttf') format(truetype);
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: local('Montserrat'),
+    url('../../MPTool/src/fonts/Montserrat-Regular.ttf') format(truetype);
+}
+
+:root {
+  --tui-primary: #389893;
+
+  --tui-primary-hover: #2e8061;
+
+  --tui-error-fill: #e12067;
+  --tui-negative: #e12067;
+  --tui-disabled-opacity: 0.66;
+  --tui-text-01: #333;
+  --tui-heading-font: 'Montserrat', 'Manrope', -apple-system,
+    'BlinkMacSystemFont', system-ui, 'Roboto', 'Segoe UI', 'Helvetica Neue',
+    sans-serif;
+  --tui-text-font: 'Montserrat', 'Manrope', -apple-system, 'BlinkMacSystemFont',
+    system-ui, 'Roboto', 'Segoe UI', 'Helvetica Neue', sans-serif;
+  --tui-secondary: rgb(56 201 149 / 20%);
+  --tui-link: #2e8061;
+
+  --tui-success-fill: #2e8061;
+}
+
+body {
+  font-family: 'Montserrat';
+  margin: 0;
+  height: max-content;
+  color: #333333;
+}
+
+p {
+  margin: 0;
+}
+
+.mobile-vis {
+  display: none;
+}
+
+.main_container {
+  padding-left: 20px;
+  margin-top: 3rem;
+}
+
+.header {
+  position: absolute;
+  right: 0px;
+}
+
+.support-20 {
+  background-color: var(--tui-support-20, var(--tui-support-020));
+}
+.support-19 {
+  background-color: var(--tui-support-19, var(--tui-support-019));
+}
+.support-18 {
+  background-color: var(--tui-support-18, var(--tui-support-018));
+}
+.support-17 {
+  background-color: var(--tui-support-17, var(--tui-support-017));
+}
+.support-16 {
+  background-color: var(--tui-support-16, var(--tui-support-016));
+}
+.support-15 {
+  background-color: var(--tui-support-15, var(--tui-support-015));
+}
+.support-14 {
+  background-color: var(--tui-support-14, var(--tui-support-014));
+}
+.support-13 {
+  background-color: var(--tui-support-13, var(--tui-support-013));
+}
+.support-12 {
+  background-color: var(--tui-support-12, var(--tui-support-012));
+}
+.support-11 {
+  background-color: var(--tui-support-11, var(--tui-support-011));
+}
+.support-10 {
+  background-color: var(--tui-support-10, var(--tui-support-010));
+}
+.support-9 {
+  background-color: var(--tui-support-9, var(--tui-support-09));
+}
+.support-8 {
+  background-color: var(--tui-support-8, var(--tui-support-08));
+}
+.support-7 {
+  background-color: var(--tui-support-7, var(--tui-support-07));
+}
+.support-6 {
+  background-color: var(--tui-support-6, var(--tui-support-06));
+}
+.support-5 {
+  background-color: var(--tui-support-5, var(--tui-support-05));
+}
+.support-4 {
+  background-color: var(--tui-support-4, var(--tui-support-04));
+}
+.support-3 {
+  background-color: var(--tui-support-3, var(--tui-support-03));
+}
+.support-2 {
+  background-color: var(--tui-support-2, var(--tui-support-02));
+}
+.support-1 {
+  background-color: var(--tui-support-1, var(--tui-support-01));
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #56b4b0;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #eaf9f8;
+  border-radius: 10px;
+}
+
+.balloon-button {
+  background-color: #526ed3;
+  color: #fff;
+  padding: 0.5rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+}
+
+.form-box {
+  width: 50%;
+}
+
+u {
+  cursor: pointer;
+}
+
+.tui-row {
+  line-height: 2;
+}
+
+ul {
+  list-style: disc;
+  padding-left: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .tui-container {
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  .tui-row {
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+
+  .logo-right-box {
+    display: none;
+  }
+
+  .tui-col_6 {
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .mobile-flex-container {
+    width: 100%;
+  }
+
+  .mobile-hide {
+    display: none;
+  }
+
+  .mobile-vis {
+    display: initial;
+  }
+
+  .header {
+    position: initial;
+  }
+
+  .main_container {
+    margin-top: 1px;
+    padding: 0px;
+  }
+}

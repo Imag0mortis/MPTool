@@ -1,0 +1,102 @@
+.wrapper {
+  margin: 0 2rem;
+  background-color: #fff;
+  border-radius: 16px;
+  width: auto;
+  border-radius: 15px;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 28px;
+  color: #2c7a77;
+  padding-bottom: 2rem;
+}
+
+.container {
+  padding: 2rem 2rem 2rem 2rem;
+}
+
+p {
+  font-size: 17px;
+  margin-top: 0.5rem;
+}
+
+li {
+  font-size: 17px;
+  margin-top: 0.5rem;
+}
+
+.modal_header {
+  text-align: center;
+  width: 500px;
+  height: 19px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  text-transform: uppercase;
+  color: #000000;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.modal_middle {
+  margin-top: 1rem;
+  width: 500px;
+  text-align: center;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+  padding-bottom: 0.5rem;
+}
+
+.cancel {
+  width: 147px;
+  height: 42px;
+  padding-right: 1rem;
+}
+
+.pay {
+  width: 147px;
+}
+
+.button_container {
+  margin-top: 2rem;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .wrapper {
+    width: auto;
+    margin: 0 0;
+  }
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 17px;
+  }
+
+  p {
+    font-size: 17px;
+    margin-top: 0.5rem;
+  }
+
+  li {
+    font-size: 17px;
+    margin-top: 0.5rem;
+  }
+
+  .container {
+    padding: 1rem 1rem 1rem 1rem;
+  }
+}

@@ -1,0 +1,58 @@
+<div class="table_container shadow(1)">
+  <div class="table_header">
+    <h3>История запросов</h3>
+  </div>
+  <div class="table_wrapper">
+    <tui-loader
+      class="inline-flex tui-space_right-2"
+      [showLoader]="!(positions.tableData$ | async)"
+      [inheritColor]="true"
+      [overlay]="true"
+    >
+      <table
+        *ngIf="positions.tableData$ | async as data"
+        tuiTable
+        class="table"
+        [columns]="columns"
+      >
+        <thead>
+          <tr tuiThGroup>
+            <th tuiTh [resizable]="true">Артикул</th>
+            <th tuiTh>Дата</th>
+            <th tuiTh>Позиция</th>
+            <th tuiTh>Запрос</th>
+          </tr>
+        </thead>
+        <tbody tuiTbody [data]="data">
+          <tr *tuiRow="let item of data; index as i" tuiTr>
+            <td *tuiCell="'article'" tuiTd>
+              {{ item.sku }}
+            </td>
+            <td *tuiCell="'date'" tuiTd>
+              {{ item.time }}
+            </td>
+            <td *tuiCell="'position'" tuiTd>
+              {{ item.pos }}
+            </td>
+            <td *tuiCell="'request'" tuiTd>
+              {{ item.query }}
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td [colSpan]="columns.length">
+              <tui-table-pagination
+                class="tui-space_top-2"
+                [total]="(positions.total$ | async) || 0"
+                [page]="(positions.page$ | async) - 1"
+                (pageChange)="onPage($event)"
+                (sizeChange)="onSize($event)"
+              ></tui-table-pagination>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </tui-loader>
+  </div>
+</div>

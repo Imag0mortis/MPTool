@@ -1,0 +1,141 @@
+<div class="published">
+  <div class="searchbar" style="display: flex; align-items: center">
+    <tui-input
+      tuiTextfieldSize="s"
+      class="search-input"
+      [(ngModel)]="searchTaskId"
+    >
+      Введите номер группы выкупа.
+      <input tuiTextfield type="text" />
+    </tui-input>
+    <tui-input
+      tuiTextfieldSize="s"
+      class="search-input"
+      [(ngModel)]="searchSku"
+    >
+      Введите артикул.
+      <input tuiTextfield type="text" />
+    </tui-input>
+
+    <tui-input
+      tuiTextfieldSize="s"
+      class="search-input"
+      [(ngModel)]="searchSkuName"
+    >
+      Введите название товара.
+      <input tuiTextfield type="text" />
+    </tui-input>
+
+    <tui-input-date-range
+      tuiTextfieldSize="s"
+      style="width: 200px"
+      class="b-form"
+      [(ngModel)]="dateCreatedRange"
+    >
+      Выберите диапазон дат публикации
+    </tui-input-date-range>
+
+    <button
+      style="margin-top: 0.8rem; margin-left: 1rem"
+      tuiButton
+      type="button"
+      appearance="primary"
+      class="tui-space_right-3 tui-space_bottom-3 search-button"
+      (click)="
+        searchReviews(
+          1,
+          searchSku,
+          searchSkuName,
+          searchTaskId,
+          dateCreatedRange
+        )
+      "
+    >
+      Найти
+    </button>
+
+    <button
+      style="margin-top: 0.8rem; margin-left: 1rem"
+      tuiButton
+      type="button"
+      appearance="primary"
+      class="tui-space_right-3 tui-space_bottom-3 search-button"
+      (click)="
+        searchReviews(1, 0, '', '');
+        searchSku = '';
+        searchSkuName = '';
+        searchTaskId = '';
+        dateCreatedRange = null
+      "
+    >
+      Очистить
+    </button>
+  </div>
+
+  <div class="" *ngIf="cards.length; else noContent">
+    <table class="tui-table">
+      <tbody>
+        <tr class="tui-table__tr tui-table__tr_border_none">
+          <th class="tui-table__th tui-table__th_first"></th>
+          <th class="tui-table__th">Товар</th>
+          <th class="tui-table__th">Отзыв</th>
+          <th class="tui-table__th">Дата публикации</th>
+          <th class="tui-table__th tui-table__th_last">Статус</th>
+        </tr>
+
+        <tr
+          class="tui-table__tr tui-table__tr_border_none"
+          *ngFor="let item of cards"
+        >
+          <td class="tui-table__td tui-table__td_first">
+            <div
+              class="image_placeholder"
+              [style.background-image]="'url(' + item.image + ')'"
+            ></div>
+          </td>
+          <td class="tui-table__td">
+            <a href="/selfransom/{{ item.taskID }}">
+              Группа выкупов №{{ item.taskID }}
+            </a>
+            <p class="rev_sku">Арт: {{ item.sku }}</p>
+            <p class="rev_sku">Товар: {{ item.skuName }}</p>
+          </td>
+          <td class="tui-table__td">
+            <span class="username">{{ item.customerName }}</span>
+            &nbsp;
+            <span class="ransom_number">
+              Выкуп №{{ item.buyID }}
+              <br />
+              <tui-rating
+                [disabled]="true"
+                [(ngModel)]="item.rating"
+                class="rating"
+              ></tui-rating>
+              <p class="rev_description">{{ item.text }}</p>
+            </span>
+          </td>
+          <td class="tui-table__td">
+            <p class="published_date">
+              {{ item.timeCreated * 1000 | date : 'medium' }}
+            </p>
+          </td>
+          <td class="tui-table__td tui-table__td_last">
+            <p class="published_status">Отменён</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <footer>
+    <tui-pagination
+      *ngIf="cards.length"
+      [length]="length"
+      [index]="index"
+      (indexChange)="goToPage($event)"
+    ></tui-pagination>
+  </footer>
+</div>
+
+<ng-template #noContent>
+  <p>У вас нет отменённых отзывов...</p>
+</ng-template>

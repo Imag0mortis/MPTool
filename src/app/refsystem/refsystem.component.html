@@ -1,0 +1,188 @@
+<div class="wrapper">
+  <div class="refsystem">
+    <div class="header_top">
+      <h1 class="ref">Реферальная система</h1>
+    </div>
+    <div class="head_container">
+      <div class="header_left">
+        <div class="user">
+          <tui-avatar
+            [rounded]="true"
+            size="l"
+            text="yuliya tsareva"
+            class="tui-space_top-1"
+          ></tui-avatar>
+          <span class="username">
+            <br />
+            Пользователь
+          </span>
+        </div>
+        <div class="balance">
+          <div>
+            <img
+              src="../../assets/icons/free-icon-money-971075 1.svg"
+              class="money_img"
+              alt="balance"
+            />
+            <br />
+            <span class="count">{{ total_sum }}руб.</span>
+          </div>
+          <p class="ref_balance">
+            <br />
+            Реф.баланс
+          </p>
+        </div>
+        <div class="referals">
+          <div>
+            <img
+              src="../../assets/icons/PersonAddFilled.svg"
+              class="ref_img"
+              alt="balance"
+            />
+            <br />
+            <span class="count">{{ total_registrations }} человек</span>
+          </div>
+          <p class="ref_refrrals">Рефералы</p>
+        </div>
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="main_container">
+      <h2 class="ofer">
+        Наш сервис предлагает вам зарабатывать вместе с нами!
+        <br />
+        Основные правила реферальной программы просты:
+      </h2>
+      <div class="rules">
+        <div class="icons">
+          <p>
+            <img
+              src="../../assets/icons/CheckFilled.svg"
+              class="rule_img"
+              alt="right"
+            />
+            <span class="rule_description">
+              Вы будете получать 20% от суммы трат пользователей,
+              зарегистрировавшихся
+              <br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;по
+              вашим реферальным ссылкам, на продление доступа и другие функции.
+            </span>
+          </p>
+          <p>
+            <img
+              src="../../assets/icons/CheckFilled.svg"
+              class="rule_img"
+              alt="right"
+            />
+            <span class="rule_description">
+              При условии хорошего количества оплат от вас мы можем увеличить
+              ваш процент. Все условия индивидуальны и обсуждаются через
+              поддержку.
+            </span>
+          </p>
+          <p>
+            <img
+              src="../../assets/icons/CheckFilled.svg"
+              class="rule_img"
+              alt="right"
+            />
+            <span class="rule_description">
+              Реферальный баланс полученный за привлечение пользователей в наш
+              сервис, вы можете потратить на продление тарифного плана или
+              вывести средства на свой счет
+            </span>
+          </p>
+          <p>
+            <img
+              src="../../assets/icons/CloseFilled.svg"
+              class="rule_img"
+              alt="wrong"
+            />
+            <span class="rule_description">
+              Запрещена регистрация и оплата по своим же ссылкам. За это - бан
+              всех аккаунтов без выплат.
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="footer_container">
+      <div class="table_content">
+        <table
+          *ngIf="links.length > 0"
+          tuiTable
+          class="table_content"
+          style="width: 100%"
+        >
+          <thead>
+            <th>Ссылка:</th>
+            <th>Кликов:</th>
+            <th>Регистраций:</th>
+            <th>Оплат:</th>
+            <th>Комиссия:</th>
+            <th>Удаление:</th>
+          </thead>
+          <tbody tuiTbody>
+            <tr *ngFor="let item of links">
+              <td>
+                <a href="{{ item.link }}" target="blank">{{ item.link }}</a>
+              </td>
+              <td>{{ item.hits }}</td>
+              <td>{{ item.registers }}</td>
+              <td>{{ item.sum_total }}</td>
+              <td>{{ item.referral_comission }}</td>
+              <td>
+                <button
+                  tuiButton
+                  type="button"
+                  (click)="deleteLink(item)"
+                  size="s"
+                  appearance="secondary-destructive"
+                  class="tui-space_right-3 tui-space_bottom-3"
+                  style="width: max-content"
+                >
+                  Удалить
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pagination-container" *ngIf="links.length > 0">
+          <tui-pagination
+            [length]="length"
+            [index]="index"
+            (indexChange)="goToPage($event)"
+          ></tui-pagination>
+        </div>
+      </div>
+    </div>
+    <div class="button_container">
+      <button
+        tuiButton
+        type="button"
+        (click)="onCreateLinkClick()"
+        appearance="primary"
+        class="tui-space_right-3 tui-space_bottom-3"
+      >
+        Создать ссылку
+      </button>
+      <button
+        tuiButton
+        type="button"
+        (click)="onBalanceWithdrawal()"
+        appearance="primary"
+        class="tui-space_right-3 tui-space_bottom-3"
+      >
+        Перевести реферальные выплаты на баланс
+      </button>
+      <!-- <button> 
+                tuiButton
+                [disabled]="true"
+                type="button"
+                appearance="primary" class="tui-space_right-3 tui-space_bottom-3">
+                Вывести средства
+            </button> -->
+    </div>
+  </div>
+</div>

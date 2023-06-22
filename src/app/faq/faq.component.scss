@@ -1,0 +1,84 @@
+.faq {
+  width: 90%;
+  height: max-content;
+  font-style: normal;
+}
+.content_container {
+  width: 90%;
+  height: max-content;
+  background: #ffffff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 15px;
+  margin: auto;
+  padding: 1rem 2rem 2rem 2rem;
+}
+.content_container {
+  width: 90%;
+}
+.head {
+  width: 467px;
+  height: 33px;
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 33px;
+  color: #2c7a77;
+}
+.subhead {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #a8a8a8;
+}
+.main_termins {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+}
+.place {
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 23px;
+}
+.description {
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 23px;
+}
+p {
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 23px;
+}
+h4 {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+}
+.font {
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 23px;
+}
+ul {
+  margin-top: 1rem;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 23px;
+}
+li {
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 23px;
+  margin-top: 0.5rem;
+}
+.app-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+.buttons_container {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 2rem;
+  margin-top: 1rem;
+}

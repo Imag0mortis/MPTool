@@ -1,0 +1,80 @@
+.restore-box {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.login_form {
+  background-color: #fff;
+  padding: 2rem 1rem 3rem 4rem;
+  width: calc(460px + 2rem);
+  border-radius: 16px;
+  margin-bottom: 5rem;
+  padding: 40px;
+}
+
+.login_form p {
+  margin-top: 1rem;
+}
+
+.login_form p u {
+  cursor: pointer;
+}
+
+tui-input {
+  padding-bottom: 1rem;
+}
+.politics {
+  margin-top: 0.5rem;
+}
+.terms_of_use {
+  padding-bottom: 0.5rem;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.checkbox1 {
+  display: flex;
+  padding-bottom: 0.5rem;
+}
+
+.agree {
+  margin-top: 0.5rem;
+}
+
+.checkbox2 {
+  display: flex;
+  padding-bottom: 0.5rem;
+}
+
+.login_container.sign-up-box {
+  height: auto;
+}
+
+@media screen and (max-width: 767px) {
+  .login_form {
+  }
+
+  .checkbox1 {
+  }
+
+  .login_form {
+  }
+
+  .tui-col_12 {
+    width: 100%;
+  }
+
+  .restore-box {
+    width: 100%;
+    padding: 0px;
+    margin: 1px;
+  }
+
+  .width-90-percent {
+    width: 90%;
+  }
+}

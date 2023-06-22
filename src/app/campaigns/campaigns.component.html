@@ -1,0 +1,15 @@
+<div class="campaigns_container">
+  <app-table-filters
+    *ngIf="ready"
+    (filtersChange)="filtersChange($event)"
+    [statuses]="statuses"
+    [types]="types"
+    [accounts]="accounts"
+  ></app-table-filters>
+  <app-table
+    [data]="data$ | async"
+    (onPageChanges)="onPageChanges($event)"
+    [total]="total$ | async"
+    [page]="page$ | async"
+  ></app-table>
+</div>

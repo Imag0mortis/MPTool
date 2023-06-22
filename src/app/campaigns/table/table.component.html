@@ -1,0 +1,145 @@
+<div class="table_container shadow(1)">
+  <p tuiTextfieldSize="m" class="filters">
+    <span>Кампании ({{ total }})</span>
+    <!-- <tui-input class="input" [tuiTextfieldCleaner]="true" [(ngModel)]="search"
+            tuiTextfieldIconLeft="tuiIconSearchLarge">
+            Поиск
+        </tui-input> -->
+    &nbsp;
+    <button
+      (click)="syncAdd()"
+      tuiButton
+      type="button"
+      size="m"
+      iconRight="tuiIconRefresh"
+      appearance="outline"
+      class="tui-space_right-3 tui-space_bottom-3 shadow(1)"
+    >
+      Загрузить из WB
+    </button>
+  </p>
+  <tui-loader [overlay]="true" [showLoader]="!data || data.length === 0">
+    <div class="table_wrapper">
+      <table *ngIf="data" tuiTable class="table" [columns]="columns">
+        <thead>
+          <tr tuiThGroup>
+            <th *tuiHead="'banner'" tuiTh [sorter]="null">Баннер</th>
+            <th *tuiHead="'name'" tuiTh [sorter]="null">Кампания</th>
+            <th *tuiHead="'type'" tuiTh [sorter]="null"></th>
+            <th *tuiHead="'target'" tuiTh tuiTh [sorter]="null">Цель</th>
+            <th *tuiHead="'bid'" tuiTh tuiTh [sorter]="null">Ставка</th>
+            <th *tuiHead="'budget'" tuiTh [sorter]="null">Бюджет</th>
+            <th *tuiHead="'status'" tuiTh [sorter]="null">Статус</th>
+            <th *tuiHead="'action'" tuiTh [sorter]="null"></th>
+            <th *tuiHead="'onOffToogle'" tuiTh [sorter]="null">Вкл / выкл</th>
+            <!-- 
+                    <th *tuiHead="'menu'" tuiTh [sorter]="null">
+                        <button tuiIconButton appearance="flat" icon="tuiIconMoreVer" type="button"
+                            [pseudoHover]="null"></button>
+                    </th> -->
+          </tr>
+        </thead>
+        <tbody tuiTbody [data]="data">
+          <tr *tuiRow="let item of data; index as i" tuiTr>
+            <td *tuiCell="'banner'" tuiTd>
+              <div
+                class="table_banner"
+                style="width: 27px; height: 36px; background-image: url({{
+                  item.imgSKU
+                }}); background-size: cover;"
+              ></div>
+            </td>
+            <td
+              *tuiCell="'name'"
+              tuiTd
+              style="cursor: pointer"
+              (click)="appService.goCampaign(item.campaignID)"
+            >
+              <u>{{ item.campaignName }}</u>
+            </td>
+            <td *tuiCell="'type'" tuiTd>
+              <i style="color: #929697">{{ item.type }}</i>
+            </td>
+            <td *tuiCell="'target'" tuiTd>
+              <i>{{ item.targetPlace }}/{{ item.targetBid }}</i>
+            </td>
+            <td *tuiCell="'bid'" tuiTd>
+              <i>{{ item.currentPlace }}/{{ item.currentBid }}</i>
+            </td>
+            <td *tuiCell="'budget'" tuiTd>{{ item.budget }} ₽</td>
+            <td *tuiCell="'status'" tuiTd>
+              <tui-tag
+                status="custom"
+                class="tag support-3"
+                [hoverable]="true"
+                [value]="item.currentState"
+              ></tui-tag>
+            </td>
+            <td *tuiCell="'action'" tuiTd>
+              <div style="height: 100%; display: flex; align-items: center">
+                <svg
+                  style="cursor: pointer"
+                  (click)="
+                    item.targetBid > 0 && item.targetPlace > 0
+                      ? (item.isEnabled = !item.isEnabled)
+                      : null;
+                    toggleCampaign(
+                      item.campaignID,
+                      item.isEnabled,
+                      item.targetBid,
+                      item.targetPlace
+                    )
+                  "
+                  width="30"
+                  height="16"
+                  viewBox="0 0 30 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M21.8182 0H8.18182C3.66818 0 0 3.58667 0 8C0 12.4133 3.66818 16 8.18182 16H21.8182C26.3318 16 30 12.4133 30 8C30 3.58667 26.3318 0 21.8182 0ZM21.8182 13.3333H8.18182C5.16818 13.3333 2.72727 10.9467 2.72727 8C2.72727 5.05333 5.16818 2.66667 8.18182 2.66667H21.8182C24.8318 2.66667 27.2727 5.05333 27.2727 8C27.2727 10.9467 24.8318 13.3333 21.8182 13.3333Z"
+                    fill="#2C7A77"
+                  />
+                  <circle
+                    *ngIf="!item.isEnabled"
+                    cx="8"
+                    cy="8"
+                    r="4"
+                    fill="#2C7A77"
+                  />
+                  <circle
+                    *ngIf="item.isEnabled"
+                    cx="21"
+                    cy="8"
+                    r="4"
+                    fill="#2C7A77"
+                  />
+                </svg>
+              </div>
+            </td>
+            <td *tuiCell="'onOffToogle'" tuiTd>
+              <tui-tag
+                [ngClass]="item.isEnabled ? 'support-3' : 'support-5'"
+                status="custom"
+                class="tag"
+                [hoverable]="true"
+                [value]="item.isEnabled ? 'Включен' : 'Выключен'"
+              ></tui-tag>
+            </td>
+            <!-- <td *tuiCell="'menu'" tuiTd>
+                        <button tuiIconButton size="m" appearance="flat" icon="tuiIconMoreVer" type="button"
+                            [pseudoHover]="null"></button>
+                    </td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table_pagination">
+      <tui-pagination
+        [length]="getPagesLength"
+        [index]="page - 1"
+        (indexChange)="goToPage($event)"
+      ></tui-pagination>
+    </div>
+  </tui-loader>
+</div>

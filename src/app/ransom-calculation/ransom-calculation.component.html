@@ -1,0 +1,11 @@
+<div class="main_container">
+  <div class="ransom-calculation_container">
+    <h2>Расчет выкупов</h2>
+    <app-ransom-calculation-filters
+      (load)="eventFromFilter($event)"
+    ></app-ransom-calculation-filters>
+    <app-ransom-calculation-table
+      [loading]="loading"
+    ></app-ransom-calculation-table>
+  </div>
+</div>

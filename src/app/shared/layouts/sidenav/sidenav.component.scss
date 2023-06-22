@@ -1,0 +1,174 @@
+.sidenav {
+  background: #434242;
+  padding: 10px;
+}
+
+.sidenav_container {
+  padding: 1rem 0 0 0rem;
+  margin-left: 16px;
+  height: max-content;
+  font-weight: 600;
+  color: #fff;
+}
+.sidenav_container ul li svg path {
+  fill: #fff;
+}
+.activeIcon {
+  fill: #fff !important;
+}
+
+.activeTxt {
+  text-decoration: none;
+  color: #fff;
+}
+.ad_control {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+.active_link {
+  background: #56b4b0;
+  color: white;
+  border-radius: 10px;
+  padding: 0.5rem;
+  width: 10rem;
+}
+.sidenav-link-item {
+  display: flex;
+  align-items: center;
+  min-width: 200px;
+  transition: 0.3s;
+  max-width: 240px;
+  margin: 0.5rem 0;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.sidenav-link-item img {
+  width: 16px;
+  height: 16px;
+  margin-right: 1rem;
+}
+
+.sidenav-link-item-title {
+  max-width: 140px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+svg {
+  cursor: pointer;
+}
+
+.control {
+  margin-left: 0.5rem;
+  width: 8.5rem;
+  max-width: 8.5rem;
+  padding: 0.4rem;
+  word-wrap: break-word;
+  line-height: 1.25;
+}
+.control:hover {
+  background-color: #9fb1b0;
+  transition: 0.3s;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.campagins_control {
+  margin: 0.35rem 0 0.35rem 1rem;
+  cursor: pointer;
+}
+
+.refsystem {
+  margin-top: 0.5rem;
+  margin-left: 0px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #1b514e;
+}
+
+.people {
+  width: 20px;
+  height: 20px;
+}
+
+.refsystem span {
+  width: 189px;
+  height: 21px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  color: #fff;
+  margin-left: 12px;
+}
+
+a.child-link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.finance {
+  margin-top: 1rem;
+  margin-left: 0px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #1b514e;
+}
+
+.finance span {
+  width: 189px;
+  height: 21px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  color: #fff;
+  margin-left: 13px;
+}
+
+.sidenav-link-item svg,
+.refsystem svg,
+.finance svg {
+  fill: #fff;
+}
+
+.sidenav-link-item-title img {
+  fill: #fff;
+  filter: invert(255);
+}
+
+@media screen and (max-width: 768px) {
+  .sidenav-link-item svg {
+    fill: #333;
+  }
+
+  .sidenav-link-item-title img {
+    fill: #fff;
+    filter: invert(0);
+  }
+
+  .refsystem svg,
+  .finance svg {
+    fill: #333;
+  }
+
+  .sidenav_container {
+    color: #333;
+  }
+
+  .refsystem span {
+    color: #333;
+  }
+
+  .finance span {
+    color: #333;
+  }
+
+  a.child-link {
+    color: #333;
+  }
+}

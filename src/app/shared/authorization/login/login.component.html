@@ -1,0 +1,66 @@
+<div class="tui-container">
+  <div class="tui-row login_container mobile-flex-container">
+    <div class="tui-col_6">
+      <div class="mobile-vis">
+        <img src="../../../../assets/img/LogoCab.svg" />
+      </div>
+
+      <form [formGroup]="loginForm">
+        <h3 class="tui-form__header tui-form__header_margin-top_none">
+          Авторизация
+        </h3>
+        <div class="tui-form__row">
+          <tui-input
+            tuiTextfieldExampleText="Field placeholder"
+            formControlName="emailValue"
+          >
+            E-mail
+            <span class="tui-required"></span>
+          </tui-input>
+          <tui-error
+            formControlName="emailValue"
+            [error]="[] | tuiFieldError | async"
+          ></tui-error>
+        </div>
+        <div class="tui-form__row">
+          <tui-input-password formControlName="passwordValue">
+            Password
+          </tui-input-password>
+          <tui-error
+            formControlName="passwordValue"
+            [error]="[] | tuiFieldError | async"
+          ></tui-error>
+        </div>
+        <div class="tui-form__buttons">
+          <button
+            (click)="login()"
+            tuiButton
+            size="l"
+            type="submit"
+            class="tui-form__button"
+          >
+            Войти
+          </button>
+        </div>
+      </form>
+      <br />
+      <p>
+        Нет учётной записи? Тогда
+        <u (click)="appService.goSignup()">зарегистрируйтесь</u>
+      </p>
+      <p>
+        Забыли пароль?
+        <u (click)="appService.goRestore()">Восстановить пароль</u>
+      </p>
+    </div>
+
+    <div class="tui-col_6 mobile-hide">
+      <div>
+        <img src="../../../../assets/img/LogoCab.svg" />
+      </div>
+      <div>
+        <h2 style="margin-top: 20px">Сервис продвижения на маркетплейсах</h2>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+<div class="">
+  <h1 class="basket_header">MpLiker - Избранное</h1>
+  <h2 class="description">
+    С помощью этой функции вы можете с разных аккуантов добавлять ваш бренд в
+    избранное, что положительно сказывается на его ранжировании в поиске
+  </h2>
+  <div class="content_block">
+    <div class="section_1">
+      <h3>
+        Ссылка:
+        <tui-tooltip
+          direction="right"
+          content="Вставьте ссылку на бренд/магазин, который хотите добавить в избранное"
+        ></tui-tooltip>
+      </h3>
+      <tui-input class="search-input" [(ngModel)]="link">
+        Ссылка
+        <input tuiTextfield type="text" />
+      </tui-input>
+    </div>
+    <div class="section_1">
+      <h3>
+        Количество:
+        <tui-tooltip
+          direction="right"
+          content="Укажите количество необходимых добавлений бренда в избранное."
+        ></tui-tooltip>
+      </h3>
+      <tui-input class="amount-input" [(ngModel)]="quantity">
+        Количество
+        <input tuiTextfield type="text" />
+      </tui-input>
+    </div>
+    <div class="period">
+      <h3>
+        Период выполнения:
+        <tui-tooltip
+          direction="right"
+          content="Укажите количество дней, за которые ваше задание будет выполняться."
+        ></tui-tooltip>
+      </h3>
+      <tui-select
+        class="period-select"
+        tuiTextfieldSize="l"
+        [tuiTextfieldLabelOutside]="true"
+        [valueContent]="period"
+        [(ngModel)]="period"
+      >
+        <ng-template tuiDataList>
+          <tui-data-list>
+            <button
+              *ngFor="let item of periodDict"
+              tuiOption
+              [value]="item.days"
+            >
+              {{ item.name }}
+            </button>
+          </tui-data-list>
+        </ng-template>
+      </tui-select>
+    </div>
+    <div class="section_1">
+      <p class="costdesk">
+        Стоимость:
+        <span class="money">{{ quantity | tariffsInfo : 3 }}</span>
+      </p>
+    </div>
+  </div>
+  <button class="task_button" (click)="create()" tuiButton>
+    СОЗДАТЬ ЗАДАНИЕ
+  </button>
+
+  <div class="table_content">
+    <table *ngIf="tasks.length > 0" tuiTable class="table" style="width: 100%">
+      <thead>
+        <th>Номер</th>
+        <th>Ссылка</th>
+        <th>Время создания</th>
+        <th>Статус</th>
+        <th>Время выполнени</th>
+        <th>Осталось</th>
+        <th>Отмена</th>
+      </thead>
+      <tbody tuiTbody>
+        <tr *ngFor="let task of tasks">
+          <td>{{ task.taskID }}</td>
+          <td>{{ task.link }}</td>
+          <td>{{ task.timeCreated * 1000 | date : 'fullDate' }}</td>
+          <td>{{ task.taskState }}</td>
+          <td>{{ task.executionHours }}</td>
+          <td>{{ task.favouritesRemaining }}</td>
+
+          <td>
+            <div
+              *ngIf="
+                !(task.taskState == 'Отменено' || task.taskState == 'Выполнено')
+              "
+            >
+              <button
+                tuiButton
+                size="s"
+                type="button"
+                (click)="cancelTask(task.taskID)"
+              >
+                Отменить
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="pagination-container" *ngIf="tasks.length > 0">
+      <tui-pagination
+        [length]="length"
+        [index]="index"
+        (indexChange)="goToPage($event)"
+      ></tui-pagination>
+    </div>
+  </div>
+</div>
+<div></div>

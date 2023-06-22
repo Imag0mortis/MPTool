@@ -1,0 +1,44 @@
+<div class="main_container">
+  <div class="ransom_card_header">
+    <h1 *ngIf="data.length > 0" class="ransom_number_main">
+      Группа выкупов № {{ data[0].taskID }}
+    </h1>
+    <div class="header_buttons">
+      <!-- <button tuiButton size="m" type="button" class="sorting"> Сортировка </button> -->
+      <!-- <button tuiButton size="m" type="button" class="autopay"> Автооплата </button> -->
+      <button
+        tuiButton
+        type="button"
+        appearance="secondary"
+        size="m"
+        class="return"
+        [routerLink]="'/selfransom'"
+      >
+        Вернуться
+      </button>
+    </div>
+  </div>
+  <div class="all_ransoms">
+    <tui-tabs>
+      <button tuiTab (click)="onTabClick('все')">Все выкупы</button>
+      <button tuiTab (click)="onTabClick('оплачен')">Оплаченные</button>
+      <button tuiTab (click)="onTabClick('не оплачен')">Неоплаченные</button>
+      <button tuiTab (click)="onTabClick('заказ выдан')">Архивные</button>
+    </tui-tabs>
+  </div>
+  <ng-container *ngIf="data.length > 0" [ngSwitch]="filter">
+    <app-card-table *ngSwitchCase="'все'" [data]="data"></app-card-table>
+    <app-card-table
+      *ngSwitchCase="'оплачен'"
+      [data]="getFilteredData(['оплачен', 'доставляется', 'готов к выдаче'])"
+    ></app-card-table>
+    <app-card-table
+      *ngSwitchCase="'не оплачен'"
+      [data]="getFilteredData(['не оплачен'])"
+    ></app-card-table>
+    <app-card-table
+      *ngSwitchCase="'заказ выдан'"
+      [data]="getFilteredData(['заказ выдан'])"
+    ></app-card-table>
+  </ng-container>
+</div>

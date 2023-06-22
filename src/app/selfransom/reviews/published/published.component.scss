@@ -1,0 +1,113 @@
+.published {
+  margin: 0rem 0rem 1rem 0;
+}
+
+th {
+  width: 48px;
+  height: 18px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  color: #929697;
+  white-space: nowrap;
+}
+
+.image_placeholder {
+  background-size: cover;
+  height: 100px;
+  /* width: 100px; */
+  margin-right: 10px;
+}
+
+.rev_sku {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+}
+
+.username {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+}
+
+.ransom_number {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #929697;
+}
+
+tui-rating {
+  color: #ff9a0c;
+}
+
+.rev_description {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+}
+
+.published_date {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+}
+
+.published_status {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  color: #389893;
+}
+
+.search-input {
+  margin-right: 1rem;
+  width: 200px;
+}
+
+.search-button {
+  height: 33px;
+}
+
+.searchbar {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 1450px) {
+  .published {
+    margin: 3rem 2rem 4rem 0;
+    width: 100%;
+    overflow: scroll;
+  }
+}
+
+@media (max-width: 768px) {
+  .searchbar {
+    display: block;
+    width: 100%;
+  }
+
+  .published {
+    margin: 1rem 2rem 4rem 0;
+  }
+}

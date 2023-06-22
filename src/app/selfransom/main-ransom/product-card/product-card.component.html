@@ -1,0 +1,27 @@
+<div
+  class="product_card"
+  [ngStyle]="{ 'background-image': 'url(' + product.imgLink + ')' }"
+>
+  <div class="product_card-status-info">
+    <img
+      src="../../../../assets/icons/question-circle-svgrepo-com.svg"
+      style="width: 24px"
+      tuiHintDirection="bottom"
+      [tuiHint]="tooltip"
+    />
+  </div>
+  <div class="product_card-footer">
+    <h4>{{ skuName }}&nbsp;({{ counter }} шт.)</h4>
+  </div>
+</div>
+
+<ng-template #tooltip>
+  <tui-loader
+    size="s"
+    class="tooltip"
+    [inheritColor]="true"
+    [showLoader]="false"
+  >
+    <div [innerHTML]="statusInfo"></div>
+  </tui-loader>
+</ng-template>

@@ -1,0 +1,52 @@
+<div class="">
+  <div class="tui-row restore-box mobile-flex-container" *ngIf="loginForm">
+    <div class="width-90-percent">
+      <div class="logo-mini" style="margin-bottom: 10px">
+        <img class="logo-mini" src="../../../../assets/img/LogoCab.svg" />
+        <br />
+      </div>
+      <form [formGroup]="loginForm">
+        <div class="">
+          <h3 class="tui-form__header tui-form__header_margin-top_none">
+            Восстановление пароля
+          </h3>
+          <div class="tui-form__row">
+            <tui-input
+              tuiTextfieldExampleText="Field placeholder"
+              formControlName="emailValue"
+            >
+              E-mail
+              <span class="tui-required"></span>
+            </tui-input>
+            <tui-error
+              formControlName="emailValue"
+              [error]="[] | tuiFieldError | async"
+            ></tui-error>
+          </div>
+
+          <div class="tui-form__buttons">
+            <button
+              (click)="restore()"
+              [disabled]="!loginForm.valid"
+              tuiButton
+              size="l"
+              type="submit"
+              class="tui-form__button"
+            >
+              Отправить
+            </button>
+          </div>
+        </div>
+      </form>
+      <p>
+        Уже зарегистрированы? Тогда
+        <u (click)="appService.goLogin()">войдите</u>
+      </p>
+      <p><u (click)="appService.goSignup()">Регистрация</u></p>
+    </div>
+  </div>
+</div>
+
+<ng-template #success>
+  <tui-svg src="tuiIconCheckLarge" class="success tui-space_left-3"></tui-svg>
+</ng-template>

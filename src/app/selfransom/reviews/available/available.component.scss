@@ -1,0 +1,132 @@
+.available {
+  margin: 0rem 0rem 0rem 1rem;
+}
+
+.search-button {
+  height: 33px;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.review_card-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+}
+
+.review_card {
+  width: 13%;
+  height: 380px;
+  margin: 1%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.target-link {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.searchbar tui-select {
+  width: 15rem;
+}
+
+.searchbar tui-input {
+  width: 15rem;
+}
+
+@media (max-width: 1920px) {
+  .review_card {
+    width: 20%;
+  }
+}
+
+@media (max-width: 1280px) {
+  .review_card {
+    width: 31%;
+  }
+}
+
+.image_placeholder {
+  height: 200px;
+  background: #d9d9d9;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+}
+
+.review_card-content {
+  padding: 0.5rem;
+}
+
+h1 {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+  height: 45px;
+}
+
+h2 {
+  width: 116px;
+  height: 19px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #929697;
+  margin-left: 0.3rem;
+}
+
+.task_button {
+  width: 100%;
+}
+
+footer {
+  margin-top: 2rem;
+}
+
+.searchbar {
+  display: flex;
+  align-items: center;
+}
+
+.search-button {
+  height: 33px;
+}
+
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+  }
+  .review_card-container {
+    max-width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+  }
+
+  .review_card {
+    width: 100%;
+    margin: 2% 0;
+  }
+
+  .searchbar {
+    display: block;
+    width: 100%;
+  }
+}

@@ -1,0 +1,36 @@
+<div class="table_container shadow(1)">
+  <div class="table_header">
+    <h3>Исправление оценки карточки</h3>
+  </div>
+  <table
+    *ngIf="scoreCorrection.scoreCorrectionData$ | async as data; else noData"
+    tuiTable
+    class="table"
+    [columns]="columns"
+  >
+    <thead>
+      <tr tuiThGroup>
+        <th tuiTh [resizable]="true">Артикул</th>
+        <th tuiTh>Текущая оценка</th>
+        <th tuiTh>Количество выкупов до рейтинга 4.6 (5)</th>
+      </tr>
+    </thead>
+    <tbody tuiTbody [data]="data">
+      <tr tuiTr>
+        <td *tuiCell="'sku'" tuiTd>
+          {{ data.sku }}
+        </td>
+        <td *tuiCell="'mark'" tuiTd>
+          {{ data.currentRating }}
+        </td>
+        <td *tuiCell="'quantity'" tuiTd>
+          {{ data.need5Stars }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noData>
+  <p>Введите искомый запрос...</p>
+</ng-template>

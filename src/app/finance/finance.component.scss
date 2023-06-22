@@ -1,0 +1,39 @@
+.main_container {
+  background: #ffffff;
+  border-radius: 15px;
+  padding-top: 1rem;
+  margin: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  overflow-y: scroll;
+}
+
+.table_content {
+  padding: 1rem 0rem;
+  text-align: center;
+}
+
+th {
+  background: #d5ebea;
+  height: 3rem;
+  color: #2c7a77;
+}
+
+.pagination-container {
+  margin-top: 1rem;
+}
+td {
+  margin-top: 2rem;
+  height: 3rem;
+}
+
+@media (max-width: 768px) {
+  .main_container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  th {
+    padding: 0px 25px 0px 25px;
+  }
+}

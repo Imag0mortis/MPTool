@@ -1,0 +1,402 @@
+<div class="fullpage">
+  <div class="page1">
+    <div class="Head">
+      <div class="header-wrapper">
+        <div class="logo_section">
+          <img src="../../assets/img/logo.png" class="logo1" alt="logo" />
+        </div>
+        <div class="navigationbar">
+          <div class="navigation">
+            <span class="navbutton">Телеграм</span>
+            <span class="navbutton" (click)="scroll(advantages)">Текст</span>
+            <span class="navbutton" (click)="scroll(tariffs)">Тарифы</span>
+            <span class="navbutton" [routerLink]="['/login']">Вход</span>
+          </div>
+          <div class="registration_main">
+            <button
+              tuiButton
+              type="button"
+              appearance="primary"
+              class="tui-space_right-3 tui-space_bottom-3"
+              [routerLink]="['/signup']"
+            >
+              Регистрация
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section1-wrapper">
+      <div class="mainsection1">
+        <div class="sectionleft">
+          <br />
+          <br />
+          <h1>MpTool</h1>
+          <br />
+          <h2>
+            Автоматизируйте рекламу на Wildberries.
+            <br />
+            Пусть деньги зарабатывают себя сами.
+            <br />
+            MpTool — эффективное и эффектное решение для продавцов.
+          </h2>
+          <button
+            tuiButton
+            type="button"
+            appearance="primary"
+            class="tui-space_right-3 tui-space_bottom-3"
+          >
+            Узнать больше
+          </button>
+        </div>
+        <div class="sectionright">
+          <div class="videosection">
+            <div class="videoplaceholder">
+              <iframe
+                width="720"
+                height="480"
+                src="https://www.youtube.com/embed/QqSRKZRoDMQ"
+                title="MV feat. Kolya Krasiviy - Запиваю Водку Дождём"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="users; else signup" class="container_page3">
+    <div class="mainsection_page3">
+      <div class="page3_content">
+        <div class="welcome_form">
+          <div class="card_frame">
+            <h2 class="welcome">
+              <br />
+              Добро пожаловать
+            </h2>
+            <h2 class="accounts">Аккаунты:</h2>
+            <div class="acc_card">
+              <div
+                *ngFor="let user of users"
+                class="card_block"
+                (click)="login(user.log, user.pass)"
+              >
+                <h3>{{ user.log }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page4_frame" #advantages>
+    <div class="page4">
+      <div class="sectionleft">
+        <h2 class="text_placeholder1">На что способен MpTool?</h2>
+        <div class="content_placeholder">
+          <h4 class="descript_text_1">
+            <strong>
+              Показ реальных ставок по рекламе по каждому ключевому запросу
+            </strong>
+            .
+            <br />
+            <br />
+            Уже одно это экономит вам 30-60% рекламного бюджета
+          </h4>
+        </div>
+      </div>
+      <div class="sectionright">
+        <div class="description_of_features">
+          <h4 class="descript_text_2">
+            <strong>Автоматическое управление рекламой</strong>
+            . Укажите желаемое место с оглядкой на реальные ставки и смотрите,
+            как сервис повышает эффективность вашей рекламы и поднимает вас в
+            выдаче. Больше не надо менять ставку вручную, это сделает MpTool.
+          </h4>
+        </div>
+        <div class="description_of_features">
+          <h4 class="descript_text_3">
+            <strong>Бот, который делает всю работу за вас</strong>
+            .
+            <br />
+            Он умеет: рассчитывать необходимую сумму самовыкупов для попадания
+            на ту или иную позицию; отслеживать цены конкурентов и присылать
+            уведомление, когда они изменятся; автоматически рассчитывать
+            поставку исходя из текущего темпа продаж; отслеживать позиции в
+            ранжировании по различным запросам; считать, сколько оценок нужно
+            накрутить для того или иного рейтинга карточки. Вы вводите свои
+            запросы — бот ежедневно их мониторит и присылает вам отчеты.
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page6">
+    <div class="page6_content">
+      <h4 class="FAQ">Часто задаваемые вопросы:</h4>
+      <div class="FAQ_boxes">
+        <div class="faqboxes_left">
+          <tui-accordion class="container">
+            <tui-accordion-item>
+              Как MpTool может повысить эффективность моей рекламы?
+              <ng-template tuiAccordionItemContent>
+                Вот небольшой пример, Например, вы крутитесь со ставкой 501 на 4
+                месте, конкурент А — со ставкой 500 на 5 месте, конкурент Б — со
+                ставкой 450 на 6 месте.
+                <br />
+                Конкурент А израсходовал бюджет, выпал из аукциона, MpTool это
+                сразу видит и понижает ставку до 451. Вы остаетесь на 5 месте и
+                экономите 50 рублей за каждую тысячу показов.
+                <br />
+                Еще пример. Вы крутитесь по ставке 100, конкурент А — по ставке
+                99, конкурент Б — по ставке 98, конкурент В — по ставке 97. Они
+                все подняли ставки до 101, и вы выпали из топовых позиций.
+                MpTool отслеживает это и автоматически крутит вашу ставку до
+                102.
+                <br />
+                Функции сервиса постоянно обновляются и расширяются, что делает
+                MTool самым эффективным и надежным инструментов для любого
+                продавца Wildberries.
+                <br />
+              </ng-template>
+            </tui-accordion-item>
+            <tui-accordion-item>
+              Насколько выгодно использовать MpTool?
+              <ng-template tuiAccordionItemContent>
+                <div #content>
+                  По статистике, более 80% поставщиков Wildberries переплачивают
+                  за рекламу. Сервис позволяет уменьшить рекламный бюджет в
+                  несколько раз, а сами рекламные кампании сделать максимально
+                  эффективными. В среднем наши клиенты экономят до 60% на
+                  рекламе, а ее эффективность повышается на 37%, Кроме того,
+                  MpTool экономит почти 50% рабочего времени менеджера, а
+                  значит, его можно использовать для решения других задач.
+                </div>
+              </ng-template>
+            </tui-accordion-item>
+          </tui-accordion>
+        </div>
+        <div class="faqboxes_right">
+          <tui-accordion class="container">
+            <tui-accordion-item>
+              Можно ли подключить MpTool бесплатно?
+              <ng-template tuiAccordionItemContent>
+                Да, у сервиса есть бесплатный тариф со следующими функциями:
+                <ul class="capabilities">
+                  <li>
+                    - Можно узнать, по какому ключу находится любая карточка
+                  </li>
+                  <li>
+                    - Рассчитать график самовыкупов для попадания на нужную
+                    позицию
+                  </li>
+                  <li>
+                    - Рассчитать, когда понадобится поставка, исходят из
+                    текущего темпа продаж
+                  </li>
+                  <li>- Отследить продажи по выбранному артикулу</li>
+                </ul>
+              </ng-template>
+            </tui-accordion-item>
+            <tui-accordion-item>
+              Сколько стоит использование MpTool?
+              <ng-template tuiAccordionItemContent>
+                Цены варьируются от 0 ₽ до 4999 ₽. Для разных продавцов у
+                сервиса есть разные тарифы. Подробнее о том, что входит в каждый
+                из них, можно прочитать ниже.
+              </ng-template>
+            </tui-accordion-item>
+          </tui-accordion>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page8">
+    <div class="page8_head">
+      <h4 class="three_reasons">
+        3 причины использовать MPTool
+        <br />
+        прямо сейчас
+      </h4>
+    </div>
+    <div class="page8_content">
+      <div class="content_block_p8">
+        <img
+          src="../../assets/icons/icono-ahorro.png"
+          class="reason"
+          alt="economy"
+        />
+        <h4 class="animation_placeholder">
+          Экономия бюджета
+          <br />
+          (до 60%)
+          <br />
+          и времени (до 47%)
+        </h4>
+      </div>
+      <div class="content_block_p8">
+        <img
+          src="../../assets/icons/45870.png"
+          class="reason"
+          alt="efficiency"
+        />
+        <h4 class="animation_placeholder">
+          Повышение эффективности рекламный
+          <br />
+          кампаний и их ROI
+          <br />
+          в несколько раз
+        </h4>
+      </div>
+      <div class="content_block_p8">
+        <img
+          src="../../assets/icons/2103686.png"
+          class="reason"
+          alt="automatization"
+        />
+        <h4 class="animation_placeholder">
+          Автоматизация всей
+          <br />
+          работы с рекламой:
+          <br />
+          просто задайте
+          <br />
+          параметры боту MPTool
+          <br />
+          и смотрите, как
+          <br />
+          ваш бизнес приносит
+          <br />
+          все больше и больше
+          <br />
+          денег
+        </h4>
+      </div>
+    </div>
+  </div>
+  <section id="reviews">
+    <div class="reviews__container">
+      <div class="reviews__wrapper">
+        <div class="reviews-content">
+          <h2>Отзывы</h2>
+          <div tuiCarouselButtons class="wrapper">
+            <button
+              tuiIconButton
+              icon="tuiIconChevronLeftLarge"
+              title="Previous"
+              (click)="carousel.prev()"
+            ></button>
+            <tui-carousel
+              [itemsCount]="3"
+              [duration]="4000"
+              #carousel
+              class="carousel"
+            >
+              <ng-container *ngFor="let item of items">
+                <tui-island *tuiItem>
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      margin-bottom: 1rem;
+                    "
+                  >
+                    <tui-avatar
+                      class="tui-space_top-1"
+                      [avatarUrl]="item.avatar"
+                    ></tui-avatar>
+                    <h2 style="margin: 0 0 0 1rem" class="tui-island__title">
+                      {{ item.name }}
+                    </h2>
+                  </div>
+                  <p>
+                    {{ item.decription }}
+                  </p>
+                </tui-island>
+              </ng-container>
+
+              <!--  <tui-island *tuiItem>
+                            <h2 class="tui-island__title">Monty Python and the Holy Grail</h2>
+                            <p>
+                                King Arthur and his Knights of the Round Table embark on a surreal, low-budget search
+                                for
+                                the Holy
+                                Grail, encountering many, very silly obstacles.
+                            </p>
+                            <div>
+                                <button tuiButton appearance="primary">
+                                    Buy $
+                                </button>
+                                <button tuiButton class="tui-space_left-2">
+                                    Rent $
+                                </button>
+                            </div>
+                        </tui-island> -->
+            </tui-carousel>
+            <button
+              tuiIconButton
+              icon="tuiIconChevronRightLarge"
+              title="Next"
+              (click)="carousel.next()"
+            ></button>
+          </div>
+          <!-- <div class="reviews-pagination">
+                    <tui-pagination size="s" class="pagination" [length]="items.length" [(index)]="index">
+                    </tui-pagination>
+                </div> -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <section #tariffs>
+    <div class="tariffs-container">
+      <app-tariffs></app-tariffs>
+    </div>
+  </section>
+
+  <section #footer>
+    <div class="footer-container">
+      <div class="footer-wrapper">
+        <img src="../../assets/img/logo.png" />
+        <div class="footer-links">
+          <a>Политика конфиденциальности</a>
+          <a>Соглашение на обработку персональных данных</a>
+        </div>
+        <div class="footer-tg">
+          <h4>Подписывайтесь на нас в телеграм</h4>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 48 48"
+            width="48px"
+            height="48px"
+          >
+            <path
+              fill="#29b6f6"
+              d="M24 4A20 20 0 1 0 24 44A20 20 0 1 0 24 4Z"
+            />
+            <path
+              fill="#fff"
+              d="M33.95,15l-3.746,19.126c0,0-0.161,0.874-1.245,0.874c-0.576,0-0.873-0.274-0.873-0.274l-8.114-6.733 l-3.97-2.001l-5.095-1.355c0,0-0.907-0.262-0.907-1.012c0-0.625,0.933-0.923,0.933-0.923l21.316-8.468 c-0.001-0.001,0.651-0.235,1.126-0.234C33.667,14,34,14.125,34,14.5C34,14.75,33.95,15,33.95,15z"
+            />
+            <path
+              fill="#b0bec5"
+              d="M23,30.505l-3.426,3.374c0,0-0.149,0.115-0.348,0.12c-0.069,0.002-0.143-0.009-0.219-0.043 l0.964-5.965L23,30.505z"
+            />
+            <path
+              fill="#cfd8dc"
+              d="M29.897,18.196c-0.169-0.22-0.481-0.26-0.701-0.093L16,26c0,0,2.106,5.892,2.427,6.912 c0.322,1.021,0.58,1.045,0.58,1.045l0.964-5.965l9.832-9.096C30.023,18.729,30.064,18.416,29.897,18.196z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ng-template #signup>
+    <div class="page2">
+      <app-sign-up></app-sign-up>
+    </div>
+  </ng-template>
+</div>

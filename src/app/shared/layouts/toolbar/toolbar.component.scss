@@ -1,0 +1,107 @@
+.toolbar_container {
+  padding: 0.75rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.toolbar_left,
+.toolbar_right {
+  display: flex;
+  align-items: center;
+}
+
+.toolbar_logo {
+  height: 4rem;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.toolbar_priceplan {
+  color: #2c7a77;
+  margin-left: 1rem;
+  margin-right: 1em;
+}
+
+.phone_number {
+  color: #2c7a77;
+  font-size: 17px;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+
+.balance_cash {
+  font-weight: 400;
+  font-size: 15px;
+  color: #000000;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+
+.dropdown-el {
+  display: flex;
+  padding: 0.25rem 0.35rem;
+  cursor: pointer;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.dropdown-el:hover {
+  background-color: #e9f8f3;
+  transition: 0.3s;
+}
+
+.menu_buttons {
+  margin-top: 20%;
+}
+
+.payment_button {
+  margin-left: 0.5rem;
+  width: 93%;
+}
+
+.reg_button {
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+  width: 93%;
+}
+
+.quit_button {
+  margin-left: 0.5rem;
+  margin-top: 1rem;
+  width: 93%;
+}
+
+@media screen and (max-width: 768px) {
+  .toolbar_container {
+    display: block;
+  }
+
+  .mob-right {
+    position: absolute;
+    top: 10px;
+    right: 0px;
+  }
+
+  .ransoms {
+    width: fit-content;
+    padding: 7px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    /* float: left; */
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+
+  .reviews {
+    width: fit-content;
+    padding: 7px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    /* float: left; */
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+}

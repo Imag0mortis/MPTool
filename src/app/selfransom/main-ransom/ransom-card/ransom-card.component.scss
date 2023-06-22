@@ -1,0 +1,54 @@
+.ransom_1 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+  width: 345px;
+  background: #ffffff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 15px;
+}
+
+::ng-deep .t-item {
+  padding: 0 !important;
+}
+
+.card_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.content_left {
+  text-align: center;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+.image_placeholder {
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 183px;
+  border-radius: 10px;
+}
+.content_right {
+  text-align: center;
+  margin-top: 2rem;
+  width: 50%;
+}
+.right_description {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  margin-left: 25%;
+}
+.open_button {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .ransom_1 {
+    width: 100%;
+  }
+}

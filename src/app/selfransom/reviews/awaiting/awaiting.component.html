@@ -1,0 +1,206 @@
+<div class="published">
+  <div class="searchbar" style="">
+    <tui-input
+      tuiTextfieldSize="s"
+      class="search-input"
+      [(ngModel)]="searchTaskId"
+    >
+      Введите номер группы выкупа.
+      <input tuiTextfield type="text" />
+    </tui-input>
+    <tui-input
+      tuiTextfieldSize="s"
+      class="search-input"
+      [(ngModel)]="searchSku"
+    >
+      Введите артикул.
+      <input tuiTextfield type="text" />
+    </tui-input>
+
+    <tui-input
+      tuiTextfieldSize="s"
+      class="search-input"
+      [(ngModel)]="searchSkuName"
+    >
+      Введите название товара.
+      <input tuiTextfield type="text" />
+    </tui-input>
+
+    <tui-input-date-range
+      tuiTextfieldSize="s"
+      style="width: 200px"
+      class="b-form"
+      [(ngModel)]="dateCreatedRange"
+    >
+      Выберите диапазон дат публикации
+    </tui-input-date-range>
+
+    <div class="dateCreated" *ngIf="testValue.value == 'по дате создания'">
+      <div>
+        <span style="padding-right: 1rem">С</span>
+        <input type="datetime-local" class="dateCreatedMin" />
+      </div>
+      <div>
+        <span style="padding-right: 0.4rem">ПО</span>
+        <input type="datetime-local" class="dateCreatedMax" />
+      </div>
+    </div>
+    <!--<div class="dateCreated" *ngIf="testValue.value == 'по дате публикации'">
+                <div><span style="padding-right: 1rem;">С</span><input  type="datetime-local" class="dateCreatedMin"></div>
+                <div><span style="padding-right: 0.4rem;">ПО</span><input type="datetime-local" class="dateCreatedMax"></div>
+            </div>!-->
+
+    <!--
+            <input type="datetime-local" class="datePublished">
+            -->
+
+    <button
+      style="margin-top: 0.8rem; margin-left: 1rem"
+      tuiButton
+      type="button"
+      appearance="primary"
+      class="tui-space_right-3 tui-space_bottom-3 search-button"
+      (click)="
+        searchReviews(
+          1,
+          searchSku,
+          searchSkuName,
+          searchTaskId,
+          dateCreatedRange
+        )
+      "
+    >
+      Найти
+    </button>
+
+    <button
+      style="margin-top: 0.8rem; margin-left: 1rem"
+      tuiButton
+      type="button"
+      appearance="primary"
+      class="tui-space_right-3 tui-space_bottom-3 search-button"
+      (click)="
+        searchReviews(1, 0, '', '');
+        searchSku = '';
+        searchSkuName = '';
+        searchTaskId = '';
+        dateCreatedRange = null
+      "
+    >
+      Очистить
+    </button>
+  </div>
+
+  <div class="" *ngIf="cards.length; else noContent">
+    <table class="tui-table">
+      <tbody>
+        <tr class="tui-table__tr tui-table__tr_border_none">
+          <th class="tui-table__th tui-table__th_first"></th>
+          <th class="tui-table__th">Товар</th>
+          <th class="tui-table__th">Отзыв</th>
+          <th class="tui-table__th">Дата и время публикации</th>
+          <th class="tui-table__th">Статус</th>
+          <th class="tui-table__th tui-table__th_last">Отменить публикацию</th>
+        </tr>
+
+        <tr
+          class="tui-table__tr tui-table__tr_border_none"
+          *ngFor="let item of cards"
+        >
+          <td class="tui-table__td tui-table__td_first">
+            <div
+              class="image_placeholder"
+              [style.background-image]="'url(' + item.image + ')'"
+            ></div>
+          </td>
+          <td class="tui-table__td">
+            <a href="/selfransom/{{ item.taskID }}">
+              Группа выкупов №{{ item.taskID }}
+            </a>
+
+            <p class="rev_sku">Арт: {{ item.sku }}</p>
+            <p class="rev_sku">Товар: {{ item.skuName }}</p>
+          </td>
+          <td class="tui-table__td">
+            <span class="username">
+              {{ item.customerName }}
+            </span>
+            &nbsp;
+            <br />
+            <span class="ransom_number">
+              Выкуп №{{ item.buyID }}
+              <br />
+              <tui-rating
+                [disabled]="true"
+                [(ngModel)]="item.rating"
+                class="rating"
+              ></tui-rating>
+              <p class="rev_description">{{ item.text }}</p>
+            </span>
+          </td>
+
+          <td class="tui-table__td">
+            <p class="published_date">
+              {{ item.timeCreated * 1000 | date : 'medium' }}
+            </p>
+          </td>
+          <td class="tui-table__td">
+            <p class="published_status">Ожидает публикации</p>
+          </td>
+          <td class="tui-table__td tui-table__td_last">
+            <button
+              (click)="showDialog(template)"
+              tuiButton
+              size="m"
+              type="button"
+              appearance="secondary-destructive"
+              class="task_button"
+            >
+              Отменить публикацию
+            </button>
+
+            <ng-template #template let-observer>
+              <p i18n class="modal_header">ВЫ УВЕРЕНЫ?</p>
+              <p class="modal_middle">
+                Вы действительно хотите отменить данную задачу?
+              </p>
+              <div class="button_container">
+                <button
+                  class="cancel"
+                  tuiButton
+                  appearance="secondary"
+                  type="button"
+                  size="m"
+                  (click)="observer.complete()"
+                >
+                  Нет
+                </button>
+                <button
+                  tuiButton
+                  type="button"
+                  size="m"
+                  class="pay"
+                  (click)="cancelTask(item.buyID); observer.complete()"
+                >
+                  Да&nbsp;
+                </button>
+              </div>
+            </ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <footer>
+    <tui-pagination
+      *ngIf="cards.length"
+      [length]="length"
+      [index]="index"
+      (indexChange)="goToPage($event)"
+    ></tui-pagination>
+  </footer>
+</div>
+
+<ng-template #noContent>
+  <p>У вас нет опубликованных отзывов...</p>
+</ng-template>

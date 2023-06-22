@@ -1,0 +1,104 @@
+<div class="">
+  <h1 class="basket_header">MpLiker - Вопросы</h1>
+  <h2 class="description">
+    С помощью этой функции вы можете с разных аккуантов добавлять вопросы по
+    товару для любых торговых позиций на WB
+  </h2>
+  <div class="content_block">
+    <div class="article_block">
+      <h3>
+        Артикул:
+        <tui-tooltip
+          content="Укажите артикул товара"
+          direction="right"
+        ></tui-tooltip>
+      </h3>
+      <tui-input class="search-input" [(ngModel)]="sku">
+        Артикул
+        <input tuiTextfield type="text" />
+      </tui-input>
+    </div>
+    <div class="question_block">
+      <h3>
+        Вопрос:
+        <tui-tooltip direction="right" content="Задайте вопрос"></tui-tooltip>
+      </h3>
+      <tui-input class="search-input" [(ngModel)]="question" maxlength="1000">
+        Вопрос (до 1000 символов)
+        <input tuiTextfield type="text" />
+      </tui-input>
+    </div>
+    <div class="sex_block">
+      <h3>
+        Пол:
+        <tui-tooltip direction="right" content="Укажите пол"></tui-tooltip>
+      </h3>
+      <tui-select
+        class="search-input"
+        tuiTextfieldSize="l"
+        [tuiTextfieldLabelOutside]="true"
+        [valueContent]="sex"
+        [(ngModel)]="sex"
+      >
+        <ng-template tuiDataList>
+          <tui-data-list>
+            <button tuiOption [value]="'Мужской'">Мужской</button>
+            <button tuiOption [value]="'Женский'">Женский</button>
+          </tui-data-list>
+        </ng-template>
+      </tui-select>
+    </div>
+    <div class="section_1">
+      <!-- <p class="costdesk">Стоимость:
+                <span class="money">500 р {{quantity | tariffsInfo: 3}} 
+                </span>
+            </p>-->
+    </div>
+  </div>
+  <button class="task_button" (click)="create()" tuiButton>
+    СОЗДАТЬ ЗАДАНИЕ
+  </button>
+
+  <div class="table_content">
+    <table *ngIf="tasks.length > 0" tuiTable class="table" style="width: 100%">
+      <thead>
+        <th>ID</th>
+        <th>Время создания</th>
+        <th>Статус</th>
+        <th>Артикул</th>
+        <th>Вопрос</th>
+        <th>Пол</th>
+        <th>Отмена</th>
+      </thead>
+      <tbody tuiTbody>
+        <tr *ngFor="let task of tasks">
+          <td>{{ task.taskID }}</td>
+          <td>{{ task.timeCreated * 1000 | date : 'fullDate' }}</td>
+          <td>{{ task.taskState }}</td>
+          <td>{{ task.sku }}</td>
+          <td>{{ task.question }}</td>
+          <td>{{ task.sex }}</td>
+          <td>
+            <button
+              tuiButton
+              size="s"
+              type="button"
+              (click)="cancelTask(task.taskID)"
+            >
+              Отменить
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination-container" *ngIf="tasks.length > 0">
+      <tui-pagination
+        [length]="length"
+        [index]="index"
+        (indexChange)="goToPage($event)"
+      ></tui-pagination>
+    </div>
+  </div>
+</div>
+<div></div>
