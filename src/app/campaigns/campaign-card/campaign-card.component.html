@@ -130,7 +130,7 @@
                   [(ngModel)]="item.minCPM"
                   tuiHintContent="Минимальная ставка"
                 >
-                Минимальная ставка
+                  Минимальная ставка
                   <input tuiTextfield type="number" />
                 </tui-input>
               </div>
@@ -170,42 +170,45 @@
             <h4>Задать</h4>
             <div class="bid_card-content">
               <div class="bid_card-col1">
-              <div class="bid_card-inputs">
+                <div class="bid_card-inputs">
+                  <tui-input
+                    class="bid_card-input"
+                    tuiHintContent='"Целевое место" — рекламное место, на котором хотим находиться.'
+                    tuiHintAppearance="onDark"
+                    [(ngModel)]="listBids[0].targetPlace"
+                  >
+                    Целевое место
+                    <input
+                      value="listBids[0].targetPlace"
+                      tuiTextfield
+                      type="number"
+                    />
+                  </tui-input>
 
-                <tui-input class="bid_card-input"
-                tuiHintContent='"Целевое место" — рекламное место, на котором хотим находиться.'
-                tuiHintAppearance="onDark"
-                [(ngModel)]="listBids[0].targetPlace"
-                >
-                 Целевое место
-                 <input value="listBids[0].targetPlace" tuiTextfield type="number" />
-              </tui-input>
+                  <tui-input
+                    class="bid_card-input"
+                    tuiHintContent='"Целевая ставка" — целевая ставка, ставка за которую вы готовы заплатить за целевое рекламное место.'
+                    tuiHintAppearance="onDark"
+                    [(ngModel)]="listBids[0].targetBid"
+                  >
+                    Целевая ставка
+                    <input tuiTextfield type="number" />
+                  </tui-input>
 
-              <tui-input
-              class="bid_card-input"
-              tuiHintContent='"Целевая ставка" — целевая ставка, ставка за которую вы готовы заплатить за целевое рекламное место.'
-              tuiHintAppearance="onDark"
-              [(ngModel)]="listBids[0].targetBid"
-              >
-              Целевая ставка
-              <input tuiTextfield type="number" />
-              </tui-input>
-
-              <tui-input
-              class="bid_card-input"
-              tuiHintContent='"Минимальное целевое место" — минимальное рекламное место, при достижении или снижении которого кампания будет приостановлена.'
-              tuiHintAppearance="onDark"
-              [(ngModel)]="listBids[0].min_place"
-                >
-              Минимальное целевое место
-              <input tuiTextfield type="number" />
-              </tui-input>
+                  <tui-input
+                    class="bid_card-input"
+                    tuiHintContent='"Минимальное целевое место" — минимальное рекламное место, при достижении или снижении которого кампания будет приостановлена.'
+                    tuiHintAppearance="onDark"
+                    [(ngModel)]="listBids[0].min_place"
+                  >
+                    Минимальное целевое место
+                    <input tuiTextfield type="number" />
+                  </tui-input>
+                </div>
               </div>
-            </div>
             </div>
           </div>
         </div>
-
       </ng-container>
     </div>
     <div class="card-info">
