@@ -1,4 +1,4 @@
-import {Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { async, first } from 'rxjs';
 import { AppService } from 'src/app/shared/services/app.service';
 import { RequestService } from 'src/app/shared/services/request.service';
@@ -6,7 +6,10 @@ import { Inject, Injector } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import { TuiAlertService } from '@taiga-ui/core';
 import { TuiDialogService } from '@taiga-ui/core';
-import { PolymorpheusContent , PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import {
+  PolymorpheusContent,
+  PolymorpheusComponent
+} from '@tinkoff/ng-polymorpheus';
 import { TuiDialogContext } from '@taiga-ui/core';
 import { VideoModalComponent } from './video-modal/video-modal.component';
 import { BotModalComponent } from 'src/app/shared/modals/bot-modal/bot-modal.component';
@@ -218,7 +221,7 @@ export class MainRansomComponent implements OnInit {
     });
   }
 
-   blobToBase64(blob: Blob) {
+  blobToBase64(blob: Blob) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onloadend = () => resolve(reader.result);
@@ -228,9 +231,9 @@ export class MainRansomComponent implements OnInit {
   }
   downloadExcel() {
     const workbook = new ExcelJS.Workbook();
-  
+
     const worksheet = workbook.addWorksheet('Выкупы');
-  
+
     const headers = [
       'Выкуп',
       'Получатель',
@@ -246,13 +249,13 @@ export class MainRansomComponent implements OnInit {
       'Группа выкупов',
       'QR код доставки'
     ];
-  
+
     worksheet.addRow(headers);
-  
+
     this.requestService.getSelfransomsExcel().subscribe((response) => {
       const ransoms = (response as any).ransoms;
-  
-      ransoms.forEach( async (ransom: any) => {
+
+      ransoms.forEach(async (ransom: any) => {
         const row = [
           ransom.buyID,
           ransom.customerName,
@@ -265,9 +268,9 @@ export class MainRansomComponent implements OnInit {
           ransom.sku,
           ransom.skuName,
           ransom.state,
-          ransom.taskID,
+          ransom.taskID
         ];
-      
+
         const base64Data = await this.blobToBase64(ransom.qrCode); // Преобразование Blob в base64
         const lastRow = worksheet.addRow(row);
         const imageCell = lastRow.getCell(13);
@@ -276,27 +279,28 @@ export class MainRansomComponent implements OnInit {
           text: 'QR код доставки',
           tooltip: 'QR код доставки'
         };
-  imageCell.fill = {
-    type: 'pattern',
-    pattern: 'solid',
-    fgColor: { argb: 'FFFFFFFF' }
-  };
-  imageCell.border = {
-    top: { style: 'thin' },
-    left: { style: 'thin' },
-    bottom: { style: 'thin' },
-    right: { style: 'thin' }
-  };
-  imageCell.alignment = { vertical: 'middle', horizontal: 'center' };
-  (imageCell as any).width = 100;
-  (imageCell as any).height = 100;
-});
-  
+        imageCell.fill = {
+          type: 'pattern',
+          pattern: 'solid',
+          fgColor: { argb: 'FFFFFFFF' }
+        };
+        imageCell.border = {
+          top: { style: 'thin' },
+          left: { style: 'thin' },
+          bottom: { style: 'thin' },
+          right: { style: 'thin' }
+        };
+        imageCell.alignment = { vertical: 'middle', horizontal: 'center' };
+        (imageCell as any).width = 100;
+        (imageCell as any).height = 100;
+      });
+
       workbook.xlsx.writeBuffer().then((data) => {
-        const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        const blob = new Blob([data], {
+          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        });
         saveAs(blob, 'ransoms.xlsx');
       });
     });
   }
-  
 }

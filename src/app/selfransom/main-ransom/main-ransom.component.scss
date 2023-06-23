@@ -1,26 +1,26 @@
-.tui-space_right-3{
+.tui-space_right-3 {
   width: 10rem;
   height: 33px;
 }
-.section_left{
+.section_left {
   margin-bottom: 1rem;
 }
-.main_container{
+.main_container {
   width: 100%;
   overflow-y: scroll;
 }
-.selfransom_wildberries{
+.selfransom_wildberries {
   font-weight: 600;
   font-size: 20px;
   line-height: 33px;
-  color: #2C7A77;
+  color: #2c7a77;
 }
-.add_selfransom{
+.add_selfransom {
   width: 23rem;
   margin-top: 1rem;
   padding-right: 2rem;
 }
-tui-tabs-with-more{
+tui-tabs-with-more {
   display: flex;
   font-style: normal;
   font-weight: 400;
@@ -28,7 +28,7 @@ tui-tabs-with-more{
   line-height: 23px;
   color: #000000;
 }
-.card_container{
+.card_container {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -45,25 +45,25 @@ tui-tabs-with-more{
   padding-bottom: 1rem;
 }
 
-.completed{
+.completed {
   color: red;
 }
-.paid{
+.paid {
   margin-top: 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.Completed_buyouts{
+.Completed_buyouts {
   margin-top: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.line{
+.line {
   width: 100%;
-  border: 1px solid #E6E6E6;
+  border: 1px solid #e6e6e6;
   margin-top: 1rem;
 }
 
@@ -71,27 +71,27 @@ tui-tabs-with-more{
   margin: 1rem auto;
 }
 
-.tui-island__paragraph{
+.tui-island__paragraph {
   display: flex;
   align-items: center;
 }
 
-.header_buttons{
+.header_buttons {
   width: 60rem;
   display: flex;
   justify-content: space-between;
 }
 
-.header_button{
+.header_button {
   width: 180px;
   height: 35px;
-  border: 1px solid #2C7A77;
+  border: 1px solid #2c7a77;
   border-radius: 5px;
   text-align: center;
   cursor: pointer;
 }
 
-.rev span{
+.rev span {
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -99,19 +99,19 @@ tui-tabs-with-more{
   color: #000000;
 }
 
-.rev{
+.rev {
   height: 20px;
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
   line-height: 16px;
-  color: #2C7A77;
+  color: #2c7a77;
   margin-left: auto;
   margin-right: auto;
   margin-top: 0.5rem;
 }
 
-.modal_header{
+.modal_header {
   text-align: center;
   width: 500px;
   height: 19px;
@@ -125,7 +125,7 @@ tui-tabs-with-more{
   padding-bottom: 0.5rem;
 }
 
-.modal_middle{
+.modal_middle {
   width: 500px;
   text-align: center;
   font-style: normal;
@@ -136,65 +136,63 @@ tui-tabs-with-more{
   padding-bottom: 0.5rem;
 }
 
-.cancel{
+.cancel {
   width: 147px;
   height: 42px;
   padding-right: 1rem;
 }
 
-.pay{
-  width: 147px;;
+.pay {
+  width: 147px;
 }
 
-.button_container{
+.button_container {
   margin-top: 2rem;
   width: 500px;
   display: flex;
   justify-content: center;
 }
 
-.video_container{
+.video_container {
   width: 500px;
   display: flex;
   flex-direction: column;
 }
 
-.searchbar {    
+.searchbar {
   display: flex;
   align-items: center;
   width: 100%;
 }
 
 .search-button {
-  height: 43px; 
+  height: 43px;
 }
 
-.searchbar tui-input{
+.searchbar tui-input {
   width: 25rem;
 }
-.excel_button{
+.excel_button {
   margin-top: 1rem;
 }
 
 @media screen and (max-width: 768px) {
-  .main_container{
-      width: auto;
-      padding-top: 1rem;
-      padding-left: 0.5rem;
-      padding-right: 0;
-      overflow: hidden;
+  .main_container {
+    width: auto;
+    padding-top: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0;
+    overflow: hidden;
   }
-  .add_selfransom{
-      width: 105%;
+  .add_selfransom {
+    width: 105%;
   }
-
-
 
   .searchbar {
-      display: block;
-      align-items: center;
-      width: 100%;
-      margin-top: 10px;
-      margin-right: 10px;
+    display: block;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    margin-right: 10px;
   }
 }

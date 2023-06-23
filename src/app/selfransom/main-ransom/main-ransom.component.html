@@ -2,243 +2,329 @@
   <h2 class="selfransom_wildberries">Самовыкупы Wildberries</h2>
   <!-- <div (click)="test()">test</div> -->
   <div class="header_buttons" *ngIf="!appService.isMobile">
-      <div class="header_button" (click)="showDialog(template2)"><p class="rev">1 <span>выкуп</span> 50 ₽ / шт</p></div>
-      <div class="header_button" (click)="showDialog(template)"><p class="rev">300 <span>выкупов</span> 45 ₽ / шт</p></div>
-      <div class="header_button" (click)="showDialog(template3)"><p class="rev">400 <span>выкупов</span> 40 ₽ / шт</p></div>
-      <div class="header_button" (click)="showDialog(template4)"><p class="rev">500 <span>выкупов</span> 35 ₽ / шт</p></div>
-      <div class="header_button" (click)="showDialog(template5)"><p class="rev">1000 <span>выкупов</span> 25₽ / шт</p></div>
+    <div class="header_button" (click)="showDialog(template2)">
+      <p class="rev">
+        1
+        <span>выкуп</span>
+        50 ₽ / шт
+      </p>
+    </div>
+    <div class="header_button" (click)="showDialog(template)">
+      <p class="rev">
+        300
+        <span>выкупов</span>
+        45 ₽ / шт
+      </p>
+    </div>
+    <div class="header_button" (click)="showDialog(template3)">
+      <p class="rev">
+        400
+        <span>выкупов</span>
+        40 ₽ / шт
+      </p>
+    </div>
+    <div class="header_button" (click)="showDialog(template4)">
+      <p class="rev">
+        500
+        <span>выкупов</span>
+        35 ₽ / шт
+      </p>
+    </div>
+    <div class="header_button" (click)="showDialog(template5)">
+      <p class="rev">
+        1000
+        <span>выкупов</span>
+        25₽ / шт
+      </p>
+    </div>
   </div>
   <div class="action_buttons">
-      <button (click)="appService.goCreateRansom()" tuiButton type="button" size="m" appearance="primary"
-          class="add_selfransom">СОЗДАТЬ ВЫКУП</button>
-      <button (click)="showVideoDialog()" tuiButton type="button" size="m" appearance="secondary-destructive"
-          class="add_selfransom">ОБУЧАЮЩЕЕ ВИДЕО</button>
-          <button
-          tuiButton type="button" size="m" appearance="secondary" 
-          class="excel_button" 
-          (click)="downloadExcel()"
-          style="background: none;
-                border: none;
-                cursor: pointer;">
-                  ВЫГРУЗИТЬ В EXCEL&nbsp;    
-                  <svg width="30px" height="30px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>file_type_excel2</title><path d="M28.781,4.405H18.651V2.018L2,4.588V27.115l16.651,2.868V26.445H28.781A1.162,1.162,0,0,0,30,25.349V5.5A1.162,1.162,0,0,0,28.781,4.405Zm.16,21.126H18.617L18.6,23.642h2.487v-2.2H18.581l-.012-1.3h2.518v-2.2H18.55l-.012-1.3h2.549v-2.2H18.53v-1.3h2.557v-2.2H18.53v-1.3h2.557v-2.2H18.53v-2H28.941Z" style="fill:#20744a;fill-rule:evenodd"/><rect x="22.487" y="7.439" width="4.323" height="2.2" style="fill:#20744a"/><rect x="22.487" y="10.94" width="4.323" height="2.2" style="fill:#20744a"/><rect x="22.487" y="14.441" width="4.323" height="2.2" style="fill:#20744a"/><rect x="22.487" y="17.942" width="4.323" height="2.2" style="fill:#20744a"/><rect x="22.487" y="21.443" width="4.323" height="2.2" style="fill:#20744a"/><polygon points="6.347 10.673 8.493 10.55 9.842 14.259 11.436 10.397 13.582 10.274 10.976 15.54 13.582 20.819 11.313 20.666 9.781 16.642 8.248 20.513 6.163 20.329 8.585 15.666 6.347 10.673" style="fill:#ffffff;fill-rule:evenodd"/></svg>
-                </button>
+    <button
+      (click)="appService.goCreateRansom()"
+      tuiButton
+      type="button"
+      size="m"
+      appearance="primary"
+      class="add_selfransom"
+    >
+      СОЗДАТЬ ВЫКУП
+    </button>
+    <button
+      (click)="showVideoDialog()"
+      tuiButton
+      type="button"
+      size="m"
+      appearance="secondary-destructive"
+      class="add_selfransom"
+    >
+      ОБУЧАЮЩЕЕ ВИДЕО
+    </button>
+    <button
+      tuiButton
+      type="button"
+      size="m"
+      appearance="secondary"
+      class="excel_button"
+      (click)="downloadExcel()"
+      style="background: none; border: none; cursor: pointer"
+    >
+      ВЫГРУЗИТЬ В EXCEL&nbsp;
+      <svg
+        width="30px"
+        height="30px"
+        viewBox="0 0 32 32"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <title>file_type_excel2</title>
+        <path
+          d="M28.781,4.405H18.651V2.018L2,4.588V27.115l16.651,2.868V26.445H28.781A1.162,1.162,0,0,0,30,25.349V5.5A1.162,1.162,0,0,0,28.781,4.405Zm.16,21.126H18.617L18.6,23.642h2.487v-2.2H18.581l-.012-1.3h2.518v-2.2H18.55l-.012-1.3h2.549v-2.2H18.53v-1.3h2.557v-2.2H18.53v-1.3h2.557v-2.2H18.53v-2H28.941Z"
+          style="fill: #20744a; fill-rule: evenodd"
+        />
+        <rect
+          x="22.487"
+          y="7.439"
+          width="4.323"
+          height="2.2"
+          style="fill: #20744a"
+        />
+        <rect
+          x="22.487"
+          y="10.94"
+          width="4.323"
+          height="2.2"
+          style="fill: #20744a"
+        />
+        <rect
+          x="22.487"
+          y="14.441"
+          width="4.323"
+          height="2.2"
+          style="fill: #20744a"
+        />
+        <rect
+          x="22.487"
+          y="17.942"
+          width="4.323"
+          height="2.2"
+          style="fill: #20744a"
+        />
+        <rect
+          x="22.487"
+          y="21.443"
+          width="4.323"
+          height="2.2"
+          style="fill: #20744a"
+        />
+        <polygon
+          points="6.347 10.673 8.493 10.55 9.842 14.259 11.436 10.397 13.582 10.274 10.976 15.54 13.582 20.819 11.313 20.666 9.781 16.642 8.248 20.513 6.163 20.329 8.585 15.666 6.347 10.673"
+          style="fill: #ffffff; fill-rule: evenodd"
+        />
+      </svg>
+    </button>
   </div>
-  
+
   <tui-tabs [(activeItemIndex)]="activeItemIndex">
-      <button *ngFor="let item of dictionary" tuiTab (click)="onTabClick(item.id)">
-          {{item.state}}
-      </button>
+    <button
+      *ngFor="let item of dictionary"
+      tuiTab
+      (click)="onTabClick(item.id)"
+    >
+      {{ item.state }}
+    </button>
   </tui-tabs>
 
   <div class="searchbar">
-      <tui-input  tuiTextfieldSize="m">
-          Введите номера групп выкупов через запятую
-          <input
-              tuiTextfield
-              type="text"
-              [(ngModel)]="searchTaskIds"
-          />
-      </tui-input>
+    <tui-input tuiTextfieldSize="m">
+      Введите номера групп выкупов через запятую
+      <input tuiTextfield type="text" [(ngModel)]="searchTaskIds" />
+    </tui-input>
 
-      <button
-          style="margin-top: 0.8rem; margin-left: 1rem;"
-          tuiButton
-          type="button"
-          size="m"
-          appearance="primary"
-          class="tui-space_right-3 tui-space_bottom-3 search-button"
-          (click)="getTasksByIds(searchTaskIds)"
-      >
-          Найти
-      </button>
+    <button
+      style="margin-top: 0.8rem; margin-left: 1rem"
+      tuiButton
+      type="button"
+      size="m"
+      appearance="primary"
+      class="tui-space_right-3 tui-space_bottom-3 search-button"
+      (click)="getTasksByIds(searchTaskIds)"
+    >
+      Найти
+    </button>
 
-      <button
-          style="margin-top: 0.8rem; margin-left: 1rem;"
-          tuiButton
-          type="button"
-          appearance="primary"
-          size="m"
-          class="tui-space_right-3 tui-space_bottom-3 search-button"  
-          (click)="clearTask()"
-      >
-          Очистить
-      </button>
-
+    <button
+      style="margin-top: 0.8rem; margin-left: 1rem"
+      tuiButton
+      type="button"
+      appearance="primary"
+      size="m"
+      class="tui-space_right-3 tui-space_bottom-3 search-button"
+      (click)="clearTask()"
+    >
+      Очистить
+    </button>
   </div>
-      
-  <div class="card_container" *ngIf="cards.length; else noCards">    
-      <app-main-ransom-card *ngFor="let item of cards" [item]="item">
-      </app-main-ransom-card>
+
+  <div class="card_container" *ngIf="cards.length; else noCards">
+    <app-main-ransom-card
+      *ngFor="let item of cards"
+      [item]="item"
+    ></app-main-ransom-card>
   </div>
 
   <div class="pagination-container" *ngIf="cards.length > 0">
-      <tui-pagination [length]="length" [index]="index" (indexChange)="goToPage($event)"></tui-pagination>
+    <tui-pagination
+      [length]="length"
+      [index]="index"
+      (indexChange)="goToPage($event)"
+    ></tui-pagination>
   </div>
 </div>
 
 <ng-template #noCards>
-  <div class="noсards-placeholder">
-      Нет выкупов для отображения...
-  </div>
+  <div class="noсards-placeholder">Нет выкупов для отображения...</div>
 </ng-template>
 
-<ng-template
-  #template
-  let-observer
-  >
+<ng-template #template let-observer>
   <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>
   <p class="modal_middle">
-      Вы действительно хотите подключить пакет на 300 выкупов?
+    Вы действительно хотите подключить пакет на 300 выкупов?
   </p>
   <p class="modal_middle">С вашего счета спишется 13500 ₽</p>
   <div class="button_container">
-      <button
-          class="cancel"
-          tuiButton
-          appearance="secondary"
-          type="button"
-          size="m"
-          (click)="observer.complete()"
-      >
-          Отмена
-      </button>
-      <button
-          tuiButton
-          type="button"
-          size="m"
-          class="pay"
-          (click)="observer.complete(); buyPackages(300)"
-      >
-          Оплатить&nbsp;
-      </button>
+    <button
+      class="cancel"
+      tuiButton
+      appearance="secondary"
+      type="button"
+      size="m"
+      (click)="observer.complete()"
+    >
+      Отмена
+    </button>
+    <button
+      tuiButton
+      type="button"
+      size="m"
+      class="pay"
+      (click)="observer.complete(); buyPackages(300)"
+    >
+      Оплатить&nbsp;
+    </button>
   </div>
 </ng-template>
 
-<ng-template
-  #template2
-  let-observer
-  >
+<ng-template #template2 let-observer>
   <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>
   <p class="modal_middle">
-      Вы действительно хотите подключить пакет на 1 выкуп?
+    Вы действительно хотите подключить пакет на 1 выкуп?
   </p>
   <p class="modal_middle">С вашего счета спишется 50 ₽</p>
   <div class="button_container">
-      <button
-          class="cancel"
-          tuiButton
-          appearance="secondary"
-          type="button"
-          size="m"
-          (click)="observer.complete()"
-      >
-          Отмена
-      </button>
-      <button
-          tuiButton
-          type="button"
-          size="m"
-          class="pay"
-          (click)="observer.complete(); buyPackages(1)"
-      >
-          Оплатить&nbsp;
-      </button>
+    <button
+      class="cancel"
+      tuiButton
+      appearance="secondary"
+      type="button"
+      size="m"
+      (click)="observer.complete()"
+    >
+      Отмена
+    </button>
+    <button
+      tuiButton
+      type="button"
+      size="m"
+      class="pay"
+      (click)="observer.complete(); buyPackages(1)"
+    >
+      Оплатить&nbsp;
+    </button>
   </div>
 </ng-template>
 
-<ng-template
-  #template3
-  let-observer
-  >
+<ng-template #template3 let-observer>
   <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>
   <p class="modal_middle">
-      Вы действительно хотите подключить пакет на 400 выкупов?
+    Вы действительно хотите подключить пакет на 400 выкупов?
   </p>
   <p class="modal_middle">С вашего счета спишется 16000 ₽</p>
   <div class="button_container">
-      <button
-          class="cancel"
-          tuiButton
-          appearance="secondary"
-          type="button"
-          size="m"
-          (click)="observer.complete()"
-      >
-          Отмена
-      </button>
-      <button
-          tuiButton
-          type="button"
-          size="m"
-          class="pay"
-          (click)="observer.complete(); buyPackages(400)"
-      >
-          Оплатить&nbsp;
-      </button>
+    <button
+      class="cancel"
+      tuiButton
+      appearance="secondary"
+      type="button"
+      size="m"
+      (click)="observer.complete()"
+    >
+      Отмена
+    </button>
+    <button
+      tuiButton
+      type="button"
+      size="m"
+      class="pay"
+      (click)="observer.complete(); buyPackages(400)"
+    >
+      Оплатить&nbsp;
+    </button>
   </div>
 </ng-template>
 
-<ng-template
-  #template4
-  let-observer
-  >
+<ng-template #template4 let-observer>
   <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>
   <p class="modal_middle">
-      Вы действительно хотите подключить пакет на 500 выкупов?
+    Вы действительно хотите подключить пакет на 500 выкупов?
   </p>
   <p class="modal_middle">С вашего счета спишется 17500 ₽</p>
   <div class="button_container">
-      <button
-          class="cancel"
-          tuiButton
-          appearance="secondary"
-          type="button"
-          size="m"
-          (click)="observer.complete()"
-      >
-          Отмена
-      </button>
-      <button
-          tuiButton
-          type="button"
-          size="m"
-          class="pay"
-          (click)="observer.complete(); buyPackages(500)"
-      >
-          Оплатить&nbsp;
-      </button>
+    <button
+      class="cancel"
+      tuiButton
+      appearance="secondary"
+      type="button"
+      size="m"
+      (click)="observer.complete()"
+    >
+      Отмена
+    </button>
+    <button
+      tuiButton
+      type="button"
+      size="m"
+      class="pay"
+      (click)="observer.complete(); buyPackages(500)"
+    >
+      Оплатить&nbsp;
+    </button>
   </div>
 </ng-template>
 
-<ng-template
-  #template5
-  let-observer
-  >
+<ng-template #template5 let-observer>
   <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>
   <p class="modal_middle">
-      Вы действительно хотите подключить пакет на 1000 выкупов?
+    Вы действительно хотите подключить пакет на 1000 выкупов?
   </p>
   <p class="modal_middle">С вашего счета спишется 25000 ₽</p>
   <div class="button_container">
-      <button
-          class="cancel"
-          tuiButton
-          appearance="secondary"
-          type="button"
-          size="m"
-          (click)="observer.complete()"
-      >
-          Отмена
-      </button>
-      <button
-          tuiButton
-          type="button"
-          size="m"
-          class="pay"
-          (click)="observer.complete(); buyPackages(1000)"
-      >
-          Оплатить&nbsp;
-      </button>
+    <button
+      class="cancel"
+      tuiButton
+      appearance="secondary"
+      type="button"
+      size="m"
+      (click)="observer.complete()"
+    >
+      Отмена
+    </button>
+    <button
+      tuiButton
+      type="button"
+      size="m"
+      class="pay"
+      (click)="observer.complete(); buyPackages(1000)"
+    >
+      Оплатить&nbsp;
+    </button>
   </div>
 </ng-template>

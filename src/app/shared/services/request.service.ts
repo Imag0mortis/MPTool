@@ -291,12 +291,11 @@ export class RequestService {
   public getSelfransomsExcel() {
     const params = new HttpParams()
       .set('page', '1')
-      .set('pageSize', '1000000') 
-      .set('filter', '7'); 
-  
+      .set('pageSize', '1000000')
+      .set('filter', '7');
+
     return this.http.get(environment.api + 'userRansoms.php', { params });
   }
-  
 
   public createBasketTask(body: LikerBasketTask) {
     return this.http.post(environment.api + 'wb_liker_basket.php', body);
