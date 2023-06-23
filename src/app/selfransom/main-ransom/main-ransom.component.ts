@@ -1,16 +1,40 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { first } from 'rxjs';
+import {Component, OnInit } from '@angular/core';
+import { async, first } from 'rxjs';
 import { AppService } from 'src/app/shared/services/app.service';
 import { RequestService } from 'src/app/shared/services/request.service';
 import { Inject, Injector } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import { TuiAlertService } from '@taiga-ui/core';
 import { TuiDialogService } from '@taiga-ui/core';
-import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
+import { PolymorpheusContent , PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { TuiDialogContext } from '@taiga-ui/core';
-import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { VideoModalComponent } from './video-modal/video-modal.component';
 import { BotModalComponent } from 'src/app/shared/modals/bot-modal/bot-modal.component';
+import { saveAs } from 'file-saver';
+import * as ExcelJS from 'exceljs';
+
+interface mainransom {
+  imgLink: string;
+  price: number;
+  priceTotal: number;
+  quantityRemaining: number;
+  quantityTotal: number;
+  quantityReady: number;
+  sku: number | null;
+  skus: string[];
+  taskID: number;
+  taskState: string;
+  taskStateNew: { count: number; state: string }[];
+  dictionary: {
+    0: { id: number; state: string };
+    1: { id: number; state: string };
+    2: { id: number; state: string };
+    3: { id: number; state: string };
+    4: { id: number; state: string };
+    5: { id: number; state: string };
+    6: { id: number; state: string };
+  };
+}
 
 @Component({
   selector: 'app-main-ransom',
@@ -182,27 +206,97 @@ export class MainRansomComponent implements OnInit {
         }
       });
   }
-}
 
-interface mainransom {
-  imgLink: string;
-  price: number;
-  priceTotal: number;
-  quantityRemaining: number;
-  quantityTotal: number;
-  quantityReady: number;
-  sku: number | null;
-  skus: string[];
-  taskID: number;
-  taskState: string;
-  taskStateNew: { count: number; state: string }[];
-  dictionary: {
-    0: { id: number; state: string };
-    1: { id: number; state: string };
-    2: { id: number; state: string };
-    3: { id: number; state: string };
-    4: { id: number; state: string };
-    5: { id: number; state: string };
-    6: { id: number; state: string };
+  blobToDataURL(blob: Blob) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = function () {
+        resolve(reader.result);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  }
+
+   blobToBase64(blob: Blob) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  }
+  downloadExcel() {
+    const workbook = new ExcelJS.Workbook();
+  
+    const worksheet = workbook.addWorksheet('Выкупы');
+  
+    const headers = [
+      'Выкуп',
+      'Получатель',
+      'Телефон',
+      'Код получения',
+      'Номер заказа',
+      'Адрес ПВЗ',
+      'Время хранения',
+      'Размер',
+      'Артикул',
+      'Название',
+      'Статус товара',
+      'Группа выкупов',
+      'QR код доставки'
+    ];
+  
+    worksheet.addRow(headers);
+  
+    this.requestService.getSelfransomsExcel().subscribe((response) => {
+      const ransoms = (response as any).ransoms;
+  
+      ransoms.forEach( async (ransom: any) => {
+        const row = [
+          ransom.buyID,
+          ransom.customerName,
+          ransom.customerPhone,
+          ransom.customerPickupCode,
+          ransom.orderID,
+          ransom.pickupAddress,
+          ransom.pickupExpireDate,
+          ransom.size,
+          ransom.sku,
+          ransom.skuName,
+          ransom.state,
+          ransom.taskID,
+        ];
+      
+        const base64Data = await this.blobToBase64(ransom.qrCode); // Преобразование Blob в base64
+        const lastRow = worksheet.addRow(row);
+        const imageCell = lastRow.getCell(13);
+        (imageCell as any).value = {
+          hyperlink: base64Data,
+          text: 'QR код доставки',
+          tooltip: 'QR код доставки'
+        };
+  imageCell.fill = {
+    type: 'pattern',
+    pattern: 'solid',
+    fgColor: { argb: 'FFFFFFFF' }
   };
+  imageCell.border = {
+    top: { style: 'thin' },
+    left: { style: 'thin' },
+    bottom: { style: 'thin' },
+    right: { style: 'thin' }
+  };
+  imageCell.alignment = { vertical: 'middle', horizontal: 'center' };
+  (imageCell as any).width = 100;
+  (imageCell as any).height = 100;
+});
+  
+      workbook.xlsx.writeBuffer().then((data) => {
+        const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        saveAs(blob, 'ransoms.xlsx');
+      });
+    });
+  }
+  
 }
