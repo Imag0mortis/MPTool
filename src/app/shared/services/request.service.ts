@@ -292,7 +292,7 @@ export class RequestService {
     const params = new HttpParams()
       .set('page', '1')
       .set('pageSize', '1000000')
-      .set('filter', '7');
+      .set('filter', '-1');
 
     return this.http.get(environment.api + 'userRansoms.php', { params });
   }

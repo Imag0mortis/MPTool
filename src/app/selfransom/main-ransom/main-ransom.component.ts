@@ -37,6 +37,7 @@ interface mainransom {
     5: { id: number; state: string };
     6: { id: number; state: string };
   };
+  deliveryQR: string | null; // Добавлено поле для QR-кода доставки
 }
 
 @Component({
@@ -174,10 +175,38 @@ export class MainRansomComponent implements OnInit {
     this.getDataRansoms(event + 1);
   }
 
-  getDataRansoms(page: number = this.page, filter = 0, searchTaskIds = '') {
+  base64ToData(base64String: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const image = new Image();
+      image.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = image.width;
+        canvas.height = image.height;
+
+        const context = canvas.getContext('2d');
+        context!.drawImage(image, 0, 0);
+
+        const dataUrl = canvas.toDataURL();
+        resolve(dataUrl);
+      };
+
+      image.onerror = (error) => {
+        reject(error);
+      };
+
+      image.src = base64String;
+    });
+  }
+
+  async getDataRansoms(
+    page: number = this.page,
+    filter = 0,
+    searchTaskIds = ''
+  ) {
     this.requestService
       .getAllSelfransomItem(page, this.pageSize, filter, searchTaskIds)
-      .subscribe((r: any) => {
+      // eslint-disable-next-line rxjs/no-async-subscribe
+      .subscribe(async (r: any) => {
         this.cards = r.taskList;
         this.length = r.tableData.pagesTotal;
         this.taskStates = r.taskStates;
@@ -210,30 +239,9 @@ export class MainRansomComponent implements OnInit {
       });
   }
 
-  blobToDataURL(blob: Blob) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = function () {
-        resolve(reader.result);
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
-  }
-
-  blobToBase64(blob: Blob) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result);
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
-  }
-  downloadExcel() {
+  async downloadExcel() {
     const workbook = new ExcelJS.Workbook();
-
     const worksheet = workbook.addWorksheet('Выкупы');
-
     const headers = [
       'Выкуп',
       'Получатель',
@@ -249,13 +257,13 @@ export class MainRansomComponent implements OnInit {
       'Группа выкупов',
       'QR код доставки'
     ];
-
     worksheet.addRow(headers);
 
     this.requestService.getSelfransomsExcel().subscribe((response) => {
       const ransoms = (response as any).ransoms;
 
-      ransoms.forEach(async (ransom: any) => {
+      for (const ransom of ransoms) {
+        console.log(ransom);
         const row = [
           ransom.buyID,
           ransom.customerName,
@@ -268,32 +276,42 @@ export class MainRansomComponent implements OnInit {
           ransom.sku,
           ransom.skuName,
           ransom.state,
-          ransom.taskID
+          ransom.taskID,
+          ransom.deliveryQR
         ];
 
-        const base64Data = await this.blobToBase64(ransom.qrCode); // Преобразование Blob в base64
         const lastRow = worksheet.addRow(row);
-        const imageCell = lastRow.getCell(13);
-        (imageCell as any).value = {
-          hyperlink: base64Data,
-          text: 'QR код доставки',
-          tooltip: 'QR код доставки'
-        };
-        imageCell.fill = {
-          type: 'pattern',
-          pattern: 'solid',
-          fgColor: { argb: 'FFFFFFFF' }
-        };
-        imageCell.border = {
-          top: { style: 'thin' },
-          left: { style: 'thin' },
-          bottom: { style: 'thin' },
-          right: { style: 'thin' }
-        };
-        imageCell.alignment = { vertical: 'middle', horizontal: 'center' };
-        (imageCell as any).width = 100;
-        (imageCell as any).height = 100;
-      });
+
+        // if (ransom.deliveryQR !== '') {
+        //   // Если есть непустой QR-код доставки, отобразить его
+        //   const imageId = workbook.addImage({
+        //     base64:
+        //       'https://t7.baidu.com/it/u=2272690563,768132477&fm=193&f=GIF',
+        //     extension: 'gif'
+        //   });
+        //   const imageCellAddress = `M${lastRow.number}`;
+        //   console.log(imageCellAddress);
+        //   const imageCell: any = worksheet.getCell(imageCellAddress);
+        //   imageCell.value = ransom.deliveryQR; // Устанавливаем значение ячейки как путь к изображению
+        //   imageCell.alignment = { vertical: 'middle', horizontal: 'center' };
+        //   imageCell.width = 100;
+        //   imageCell.height = 100;
+        //   imageCell.border = {
+        //     top: { style: 'thin' },
+        //     left: { style: 'thin' },
+        //     bottom: { style: 'thin' },
+        //     right: { style: 'thin' }
+        //   };
+        //   imageCell.fill = {
+        //     type: 'pattern',
+        //     pattern: 'solid',
+        //     fgColor: { argb: 'FFFFFFFF' }
+        //   };
+        //   imageCell.numFmt = ';;;'; // Скрыть текст в ячейке
+
+        //   worksheet.addImage(imageId, imageCellAddress);
+        // }
+      }
 
       workbook.xlsx.writeBuffer().then((data) => {
         const blob = new Blob([data], {
