@@ -33,6 +33,7 @@
         </div>
         <div class="tui-form__buttons">
           <button
+            [disabled]="loginForm.invalid"
             (click)="login()"
             tuiButton
             size="l"
