@@ -38,15 +38,15 @@ export class LoginComponent {
       .subscribe(
         (response: any) => {
           if (response.auth) {
+            console.log(response.auth);
+            this.alertService.open('Вы успешно вошли').subscribe();
             this.auth.successLogin(response);
           } else {
-            this.alertService.open(response.error.error);
-            alert(response.error.error.error);
+            this.alertService.open(response.error.error).subscribe();
           }
         },
         (error) => {
-          this.alertService.open(error.error.error);
-          alert(error.error.error);
+          this.alertService.open(error.error.error).subscribe();
         }
       );
   }
