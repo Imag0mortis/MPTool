@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve --host 0.0.0.0 --disable-host-check",
+    "build": "ng build --aot",
     "watch": "ng build --watch --configuration development",
     "lint": "eslint \"src/**/*.{js,ts}\" --quiet --fix --ignore-pattern \"!src\"",
     "format": "prettier --write \"src/**/*.{html,js,ts,css,scss}\" --ignore-path .prettierignore",

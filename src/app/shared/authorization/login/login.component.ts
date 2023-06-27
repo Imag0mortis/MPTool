@@ -19,25 +19,34 @@ export class LoginComponent {
   ) {}
 
   loginForm = new FormGroup({
-    emailValue: new FormControl('', Validators.required),
+    emailValue: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+    ]),
     passwordValue: new FormControl('', [
       Validators.required,
       Validators.minLength(8)
     ])
   });
 
-  login() {
+  async login() {
     this.request
       .loginRequest(
         String(this.loginForm.get('emailValue')!.value),
         String(this.loginForm.get('passwordValue')!.value)
       )
       .subscribe(
-        (r) => this.auth.successLogin(r),
-        (e: unknown) => {
-          //alert('Ошибка входа')
-          const options: any = { label: 'Ошибка входа!', status: 'error' };
-          this.alertService.open('Ошибка входа!', options);
+        (response: any) => {
+          if (response.auth) {
+            console.log(response.auth);
+            this.alertService.open('Вы успешно вошли').subscribe();
+            this.auth.successLogin(response);
+          } else {
+            this.alertService.open(response.error.error).subscribe();
+          }
+        },
+        (error) => {
+          this.alertService.open(error.error.error).subscribe();
         }
       );
   }
