@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { async, first } from 'rxjs';
+import { first } from 'rxjs';
 import { AppService } from 'src/app/shared/services/app.service';
 import { RequestService } from 'src/app/shared/services/request.service';
 import { Inject, Injector } from '@angular/core';
@@ -257,13 +257,17 @@ export class MainRansomComponent implements OnInit {
       'Группа выкупов',
       'QR код доставки'
     ];
-    worksheet.addRow(headers);
+
+    headers.forEach((header, index) => {
+      const column = worksheet.getColumn(index + 1);
+      column.header = header;
+      column.width = header.length + 5;
+    });
 
     this.requestService.getSelfransomsExcel().subscribe((response) => {
       const ransoms = (response as any).ransoms;
 
       for (const ransom of ransoms) {
-        console.log(ransom);
         const row = [
           ransom.buyID,
           ransom.customerName,
@@ -280,37 +284,32 @@ export class MainRansomComponent implements OnInit {
           ransom.deliveryQR
         ];
 
-        const lastRow = worksheet.addRow(row);
+        const lastRowNumber = worksheet.rowCount + 1;
+        const lastRow = worksheet.getRow(lastRowNumber);
+        lastRow.values = row;
 
-        // if (ransom.deliveryQR !== '') {
-        //   // Если есть непустой QR-код доставки, отобразить его
-        //   const imageId = workbook.addImage({
-        //     base64:
-        //       'https://t7.baidu.com/it/u=2272690563,768132477&fm=193&f=GIF',
-        //     extension: 'gif'
-        //   });
-        //   const imageCellAddress = `M${lastRow.number}`;
-        //   console.log(imageCellAddress);
-        //   const imageCell: any = worksheet.getCell(imageCellAddress);
-        //   imageCell.value = ransom.deliveryQR; // Устанавливаем значение ячейки как путь к изображению
-        //   imageCell.alignment = { vertical: 'middle', horizontal: 'center' };
-        //   imageCell.width = 100;
-        //   imageCell.height = 100;
-        //   imageCell.border = {
-        //     top: { style: 'thin' },
-        //     left: { style: 'thin' },
-        //     bottom: { style: 'thin' },
-        //     right: { style: 'thin' }
-        //   };
-        //   imageCell.fill = {
-        //     type: 'pattern',
-        //     pattern: 'solid',
-        //     fgColor: { argb: 'FFFFFFFF' }
-        //   };
-        //   imageCell.numFmt = ';;;'; // Скрыть текст в ячейке
+        lastRow.eachCell({ includeEmpty: true }, (cell: any) => {
+          cell.alignment = { wrapText: true };
+          cell.wordWrap = true;
 
-        //   worksheet.addImage(imageId, imageCellAddress);
-        // }
+          worksheet.getRow(cell.row).height = 45;
+          cell.alignment.horizontal = 'left';
+          cell.alignment.vertical = 'top';
+        });
+
+        if (ransom.deliveryQR !== '') {
+          const qrCellAddress = `M${lastRowNumber}`;
+          const qrCell: any = worksheet.getCell(qrCellAddress);
+          qrCell.value = {
+            hyperlink: ransom.deliveryQR,
+            text: 'Перейти'
+          };
+          qrCell.font = {
+            color: { argb: 'FF0000FF' },
+            underline: true
+          };
+          qrCell.alignment = { vertical: 'middle', horizontal: 'left' };
+        }
       }
 
       workbook.xlsx.writeBuffer().then((data) => {
