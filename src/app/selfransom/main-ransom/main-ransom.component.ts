@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs';
 import { AppService } from 'src/app/shared/services/app.service';
 import { RequestService } from 'src/app/shared/services/request.service';
@@ -6,11 +6,39 @@ import { Inject, Injector } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import { TuiAlertService } from '@taiga-ui/core';
 import { TuiDialogService } from '@taiga-ui/core';
-import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
+import {
+  PolymorpheusContent,
+  PolymorpheusComponent
+} from '@tinkoff/ng-polymorpheus';
 import { TuiDialogContext } from '@taiga-ui/core';
-import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { VideoModalComponent } from './video-modal/video-modal.component';
 import { BotModalComponent } from 'src/app/shared/modals/bot-modal/bot-modal.component';
+import { saveAs } from 'file-saver';
+import * as ExcelJS from 'exceljs';
+
+interface mainransom {
+  imgLink: string;
+  price: number;
+  priceTotal: number;
+  quantityRemaining: number;
+  quantityTotal: number;
+  quantityReady: number;
+  sku: number | null;
+  skus: string[];
+  taskID: number;
+  taskState: string;
+  taskStateNew: { count: number; state: string }[];
+  dictionary: {
+    0: { id: number; state: string };
+    1: { id: number; state: string };
+    2: { id: number; state: string };
+    3: { id: number; state: string };
+    4: { id: number; state: string };
+    5: { id: number; state: string };
+    6: { id: number; state: string };
+  };
+  deliveryQR: string | null; // Добавлено поле для QR-кода доставки
+}
 
 @Component({
   selector: 'app-main-ransom',
@@ -147,10 +175,38 @@ export class MainRansomComponent implements OnInit {
     this.getDataRansoms(event + 1);
   }
 
-  getDataRansoms(page: number = this.page, filter = 0, searchTaskIds = '') {
+  base64ToData(base64String: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const image = new Image();
+      image.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = image.width;
+        canvas.height = image.height;
+
+        const context = canvas.getContext('2d');
+        context!.drawImage(image, 0, 0);
+
+        const dataUrl = canvas.toDataURL();
+        resolve(dataUrl);
+      };
+
+      image.onerror = (error) => {
+        reject(error);
+      };
+
+      image.src = base64String;
+    });
+  }
+
+  async getDataRansoms(
+    page: number = this.page,
+    filter = 0,
+    searchTaskIds = ''
+  ) {
     this.requestService
       .getAllSelfransomItem(page, this.pageSize, filter, searchTaskIds)
-      .subscribe((r: any) => {
+      // eslint-disable-next-line rxjs/no-async-subscribe
+      .subscribe(async (r: any) => {
         this.cards = r.taskList;
         this.length = r.tableData.pagesTotal;
         this.taskStates = r.taskStates;
@@ -182,27 +238,86 @@ export class MainRansomComponent implements OnInit {
         }
       });
   }
-}
 
-interface mainransom {
-  imgLink: string;
-  price: number;
-  priceTotal: number;
-  quantityRemaining: number;
-  quantityTotal: number;
-  quantityReady: number;
-  sku: number | null;
-  skus: string[];
-  taskID: number;
-  taskState: string;
-  taskStateNew: { count: number; state: string }[];
-  dictionary: {
-    0: { id: number; state: string };
-    1: { id: number; state: string };
-    2: { id: number; state: string };
-    3: { id: number; state: string };
-    4: { id: number; state: string };
-    5: { id: number; state: string };
-    6: { id: number; state: string };
-  };
+  async downloadExcel() {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Выкупы');
+    const headers = [
+      'Выкуп',
+      'Получатель',
+      'Телефон',
+      'Код получения',
+      'Номер заказа',
+      'Адрес ПВЗ',
+      'Время хранения',
+      'Размер',
+      'Артикул',
+      'Название',
+      'Статус товара',
+      'Группа выкупов',
+      'QR код доставки'
+    ];
+
+    headers.forEach((header, index) => {
+      const column = worksheet.getColumn(index + 1);
+      column.header = header;
+      column.width = header.length + 5;
+    });
+
+    this.requestService.getSelfransomsExcel().subscribe((response) => {
+      const ransoms = (response as any).ransoms;
+
+      for (const ransom of ransoms) {
+        const row = [
+          ransom.buyID,
+          ransom.customerName,
+          ransom.customerPhone,
+          ransom.customerPickupCode,
+          ransom.orderID,
+          ransom.pickupAddress,
+          ransom.pickupExpireDate,
+          ransom.size,
+          ransom.sku,
+          ransom.skuName,
+          ransom.state,
+          ransom.taskID,
+          ransom.deliveryQR
+        ];
+
+        const lastRowNumber = worksheet.rowCount + 1;
+        const lastRow = worksheet.getRow(lastRowNumber);
+        lastRow.values = row;
+
+        lastRow.eachCell({ includeEmpty: true }, (cell: any) => {
+          cell.alignment = { wrapText: true };
+          cell.wordWrap = true;
+
+          worksheet.getRow(cell.row).height = 45;
+          cell.alignment.horizontal = 'left';
+          cell.alignment.vertical = 'top';
+        });
+
+        if (ransom.deliveryQR !== '') {
+          const qrCellAddress = `M${lastRowNumber}`;
+          const qrCell: any = worksheet.getCell(qrCellAddress);
+          qrCell.value = {
+            hyperlink: ransom.deliveryQR,
+            text: 'Перейти'
+          };
+          qrCell.font = {
+            color: { argb: 'FF0000FF' },
+            underline: true
+          };
+          qrCell.alignment = { vertical: 'middle', horizontal: 'left' };
+        }
+      }
+
+      workbook.xlsx.writeBuffer().then((data) => {
+        const blob = new Blob([data], {
+          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        });
+        saveAs(blob, 'ransoms.xlsx');
+      });
+    });
+  }
 }

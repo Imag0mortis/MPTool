@@ -288,6 +288,15 @@ export class RequestService {
     return this.http.get(environment.api + 'wb_liker_selfbuy_get_task.php');
   }
 
+  public getSelfransomsExcel() {
+    const params = new HttpParams()
+      .set('page', '1')
+      .set('pageSize', '1000000')
+      .set('filter', '-1');
+
+    return this.http.get(environment.api + 'userRansoms.php', { params });
+  }
+
   public createBasketTask(body: LikerBasketTask) {
     return this.http.post(environment.api + 'wb_liker_basket.php', body);
   }
