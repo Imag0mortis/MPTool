@@ -27,8 +27,10 @@ export class PaymentModalComponent {
       })
       .subscribe(
         (r: any) => {
-          this.context.completeWith(false);
-          window.open(r.url, '_blank');
+          setTimeout(() => {
+            this.context.completeWith(false);
+            window.open(r.url, '_blank');
+          }, 0);
         },
         (e: unknown) => alert('Ошибка оплаты')
       );
