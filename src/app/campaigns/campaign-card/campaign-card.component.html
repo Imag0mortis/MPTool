@@ -118,10 +118,10 @@
                   [(ngModel)]="data.targetBid"
                   [tuiValidator]="validator(item.minCPM)"
                   [readOnly]="true"
-                  tuiHintContent='"Заданное целевая ставка" — целевая ставка, за которую вы платите за целевое рекламное место.'
+                  tuiHintContent='"Заданная максимальная ставка" - это указанная вами максимальная ставка, бот не будет поднимать ставку выше этой цифры.'
                   tuiHintAppearance="onDark"
                 >
-                  Заданное целевая ставка
+                  Заданная максимальная ставка
                   <input tuiTextfield type="number" />
                 </tui-input>
                 <tui-input
@@ -187,11 +187,11 @@
 
                   <tui-input
                     class="bid_card-input"
-                    tuiHintContent='"Целевая ставка" — целевая ставка, ставка за которую вы готовы заплатить за целевое рекламное место.'
+                    tuiHintContent='"Максимальная ставка" - это максимальная ставка, которую вы готовы платить за удержание нужной позиции. Если аукцион перегрет - бот не будет повышать ставку выше этого уровня и подождет, пока можно будет выкупить показы дешевле.'
                     tuiHintAppearance="onDark"
                     [(ngModel)]="listBids[0].targetBid"
                   >
-                    Целевая ставка
+                    Максимальная ставка
                     <input tuiTextfield type="number" />
                   </tui-input>
 
