@@ -12,6 +12,7 @@ import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { of, switchMap } from 'rxjs';
 import { SelfransomService } from 'src/app/shared/services/selfransom.service';
 import { Address } from '../create-ransom/create-ransom.component';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface Placemark {
   geometry: number[];
@@ -113,6 +114,7 @@ export class MapModalComponent implements OnInit {
   openBalloon($event: any, arg: number) {
     if (this.showDetails === showDetailsType.ok) {
       this.loadingGuard = true;
+      const uniqueClass = `balloon-button-${uuidv4()}`;
       this.removeEventListener = this.renderer.listen(
         document.getElementById(String(arg)),
         'click',
@@ -122,6 +124,16 @@ export class MapModalComponent implements OnInit {
           this.removeEventListener();
         }
       );
+  
+      const placemark = this.placemarks.find((el) => el.id === arg);
+      if (placemark) {
+        const button = `<button id="${placemark.id}" class="balloon-button ${uniqueClass}">Выбрать</button>`;
+        const modifiedProperties = {
+          hintContent: `Адрес: ${placemark.address}`,
+          balloonContent: `Адрес: ${placemark.address},<br>время работы: ${placemark.schedule}<br><br>${button}`
+        };
+        placemark.properties = modifiedProperties;
+      }
     } else {
       this.zoom = 16;
       this.selfRansom.centerPoint$.next([
@@ -130,6 +142,8 @@ export class MapModalComponent implements OnInit {
       ]);
     }
   }
+  
+  
 
   closeBalloon() {
     this.loadingGuard = false;
@@ -143,7 +157,19 @@ export class MapModalComponent implements OnInit {
     });
     this.selfRansom.centerPoint$.next(address.geometry);
     this.showDetails = showDetailsType.loading;
+  
+    this.placemarks.forEach((placemark) => {
+      if (placemark.id !== id) {
+        placemark.schedule = '';
+        placemark.address = '';
+        placemark.properties = {
+          hintContent: `Содержание всплывающей подсказки, id: ${placemark.id}`,
+          balloonContent: `Пункт выдачи с id: ${placemark.id}`
+        };
+      }
+    });
   };
+  
 
   onMapChanged(event: any) {
     if (event.target._zoom <= 10) {
