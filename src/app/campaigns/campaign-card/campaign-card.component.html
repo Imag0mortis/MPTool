@@ -97,10 +97,10 @@
                   tuiHintContent='"Текущая ставка" — текущая ставка, за которую вы платите за текущее место.'
                   tuiHintAppearance="onDark"
                 >
-                  <ng-container tuiTextfieldWrapper>
+                  <!-- <ng-container tuiTextfieldWrapper> -->
                     <input tuiTextfield type="number" />
                     Текущая ставка
-                  </ng-container>
+                  <!-- </ng-container> -->
                 </tui-input>
 
                 <tui-input
@@ -301,6 +301,6 @@
       </button>
     </div>
 
-    <app-log-table *ngIf="false" [data]="bidLog"></app-log-table>
+    <app-log-table *ngIf="bidLog.length > 0" [data]="bidLog"></app-log-table>
   </div>
 </tui-loader>
