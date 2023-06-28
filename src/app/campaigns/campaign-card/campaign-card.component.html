@@ -249,12 +249,13 @@
           *ngIf="data.type === 'Поиск'"
           style="display: flex; justify-content: space-between"
         >
-          <tui-text-area style="flex: 1">
+          <tui-text-area
+          [(ngModel)]="keywordValue"
+          style="flex: 1">
             Введите ключевое слово
             <textarea
               [disabled]="isTextareaDisabled"
               tuiTextfield
-              [(ngModel)]="keywordValue"
               maxlength="1000"
             ></textarea>
           </tui-text-area>
@@ -300,6 +301,6 @@
       </button>
     </div>
 
-    <app-log-table *ngIf="bidLog.length > 0" [data]="bidLog"></app-log-table>
+    <app-log-table *ngIf="false" [data]="bidLog"></app-log-table>
   </div>
 </tui-loader>
