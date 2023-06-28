@@ -97,10 +97,10 @@
                   tuiHintContent='"Текущая ставка" — текущая ставка, за которую вы платите за текущее место.'
                   tuiHintAppearance="onDark"
                 >
-                  <ng-container tuiTextfieldWrapper>
+                  <!-- <ng-container tuiTextfieldWrapper> -->
                     <input tuiTextfield type="number" />
                     Текущая ставка
-                  </ng-container>
+                  <!-- </ng-container> -->
                 </tui-input>
 
                 <tui-input
@@ -118,13 +118,13 @@
                   [(ngModel)]="data.targetBid"
                   [tuiValidator]="validator(item.minCPM)"
                   [readOnly]="true"
-                  tuiHintContent='"Заданное целевая ставка" — целевая ставка, за которую вы платите за целевое рекламное место.'
+                  tuiHintContent='"Заданная максимальная ставка" - это указанная вами максимальная ставка, бот не будет поднимать ставку выше этой цифры.'
                   tuiHintAppearance="onDark"
                 >
-                  Заданное целевая ставка
+                  Заданная максимальная ставка
                   <input tuiTextfield type="number" />
                 </tui-input>
-                <tui-input
+                <!-- <tui-input
                   class="bid_card-input"
                   [readOnly]="true"
                   [(ngModel)]="item.minCPM"
@@ -132,7 +132,7 @@
                 >
                   Минимальная ставка
                   <input tuiTextfield type="number" />
-                </tui-input>
+                </tui-input> -->
               </div>
             </div>
             <!-- <div *ngIf="false" class="bid_card-col2">
@@ -187,11 +187,11 @@
 
                   <tui-input
                     class="bid_card-input"
-                    tuiHintContent='"Целевая ставка" — целевая ставка, ставка за которую вы готовы заплатить за целевое рекламное место.'
+                    tuiHintContent='"Максимальная ставка" - это максимальная ставка, которую вы готовы платить за удержание нужной позиции. Если аукцион перегрет - бот не будет повышать ставку выше этого уровня и подождет, пока можно будет выкупить показы дешевле.'
                     tuiHintAppearance="onDark"
                     [(ngModel)]="listBids[0].targetBid"
                   >
-                    Целевая ставка
+                    Максимальная ставка
                     <input tuiTextfield type="number" />
                   </tui-input>
 
@@ -249,12 +249,13 @@
           *ngIf="data.type === 'Поиск'"
           style="display: flex; justify-content: space-between"
         >
-          <tui-text-area style="flex: 1">
+          <tui-text-area
+          [(ngModel)]="keywordValue"
+          style="flex: 1">
             Введите ключевое слово
             <textarea
               [disabled]="isTextareaDisabled"
               tuiTextfield
-              [(ngModel)]="keywordValue"
               maxlength="1000"
             ></textarea>
           </tui-text-area>

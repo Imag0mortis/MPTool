@@ -1,6 +1,10 @@
 <div class="table_container">
   <h3>История действий бота</h3>
-  <div class="table_container-table">
+  <div
+    class="table_container-table"
+    style="height: 300px; overflow: auto"
+    (scroll)="onScroll()"
+  >
     <table tuiTable class="table" [columns]="columns">
       <thead>
         <tr tuiThGroup>
@@ -10,8 +14,8 @@
           <th tuiTh>Id/Группа ставки</th>
         </tr>
       </thead>
-      <tbody tuiTbody [data]="data">
-        <tr *tuiRow="let row of data; index as i" tuiTr>
+      <tbody tuiTbody [data]="visibleData">
+        <tr *tuiRow="let row of visibleData; index as i" tuiTr>
           <td *tuiCell="'time'" tuiTd>
             {{ row.time * 1000 | date : 'dd/MM/YYYY HH:mm:ss' }}
           </td>

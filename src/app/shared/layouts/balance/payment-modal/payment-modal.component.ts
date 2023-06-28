@@ -19,6 +19,9 @@ export class PaymentModalComponent {
   email: string = this.context.data;
 
   pay() {
+    // Open the window before starting the async call
+    const paymentWindow = window.open();
+
     this.request
       .payment({
         pay: {
@@ -27,8 +30,10 @@ export class PaymentModalComponent {
       })
       .subscribe(
         (r: any) => {
+          // Set the location of the window to the URL you wish to redirect
+          paymentWindow!.location.href = r.url;
+
           this.context.completeWith(false);
-          window.open(r.url, '_blank');
         },
         (e: unknown) => alert('Ошибка оплаты')
       );

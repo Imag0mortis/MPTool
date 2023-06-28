@@ -92,6 +92,7 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
           }
           this.data = result;
           this.listBids = result.listBids;
+          this.keywordValue = result.isUseOptimizer ? result.bidKeyWord : '';
           this.toggleDynamicKeywordFT
             ? null
             : (this.dynamicKeyword = result.isUseDynamicKeyword);

@@ -65,7 +65,7 @@ export class RestoreComponent {
             autoClose: false
           };
 
-          this.alertService.open('Проверьте почту!', options);
+          this.alertService.open('Проверьте почту!', options).subscribe();
           /*this.alertService.open(`Вы сейчас будете перенаправлены на страницу логина`, options).subscribe();
         setTimeout(() => {
           this.appService.goLogin();
@@ -73,10 +73,12 @@ export class RestoreComponent {
         },
         (e: unknown) => {
           const options: any = { label: 'Ошибка!', status: 'error' };
-          this.alertService.open(
-            'Произошла ошибка при отправке запроса на восстановление пароля!',
-            options
-          );
+          this.alertService
+            .open(
+              'Произошла ошибка при отправке запроса на восстановление пароля!',
+              options
+            )
+            .subscribe();
         }
       );
   }
