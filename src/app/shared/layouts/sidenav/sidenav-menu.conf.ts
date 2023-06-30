@@ -60,21 +60,21 @@ export const MenuConfiguration: MenuConf[] = [
       }
     ]
   },
-  {
-    name: 'Аналитика',
-    icon: 'edit.svg',
-    expanded: false,
-    childs: [
-      {
-        name: 'Позиция по запросу',
-        link: '/position'
-      },
-      {
-        name: 'Исправление оценки карточки',
-        link: '/score_correction'
-      }
-    ]
-  },
+  // {
+  //   name: 'Аналитика',
+  //   icon: 'edit.svg',
+  //   expanded: false,
+  //   childs: [
+  //     {
+  //       name: 'Позиция по запросу',
+  //       link: '/position'
+  //     },
+  //     {
+  //       name: 'Исправление оценки карточки',
+  //       link: '/score_correction'
+  //     }
+  //   ]
+  // },
   {
     name: 'Вопросы',
     icon: 'questions.svg',
