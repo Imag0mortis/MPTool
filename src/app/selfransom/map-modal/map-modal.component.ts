@@ -124,7 +124,7 @@ export class MapModalComponent implements OnInit {
           this.removeEventListener();
         }
       );
-  
+
       const placemark = this.placemarks.find((el) => el.id === arg);
       if (placemark) {
         const button = `<button id="${placemark.id}" class="balloon-button ${uniqueClass}">Выбрать</button>`;
@@ -142,8 +142,6 @@ export class MapModalComponent implements OnInit {
       ]);
     }
   }
-  
-  
 
   closeBalloon() {
     this.loadingGuard = false;
@@ -157,7 +155,7 @@ export class MapModalComponent implements OnInit {
     });
     this.selfRansom.centerPoint$.next(address.geometry);
     this.showDetails = showDetailsType.loading;
-  
+
     this.placemarks.forEach((placemark) => {
       if (placemark.id !== id) {
         placemark.schedule = '';
@@ -169,7 +167,6 @@ export class MapModalComponent implements OnInit {
       }
     });
   };
-  
 
   onMapChanged(event: any) {
     if (event.target._zoom <= 10) {
