@@ -4,8 +4,8 @@ import { BehaviorSubject, first, of, Subscription, switchMap } from 'rxjs';
 import { RequestService } from '../shared/services/request.service';
 import { UserService } from '../shared/services/user.service';
 import { VideoModalComponent } from '../selfransom/main-ransom/video-modal/video-modal.component';
-import {PolymorpheusComponent} from '@tinkoff/ng-polymorpheus';
-import {TuiDialogService} from '@taiga-ui/core';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import { TuiDialogService } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-campaigns',
@@ -33,7 +33,7 @@ export class CampaignsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
-    @Inject(Injector) private readonly injector: Injector,
+    @Inject(Injector) private readonly injector: Injector
   ) {}
 
   ngOnInit(): void {
