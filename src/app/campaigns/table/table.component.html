@@ -28,7 +28,9 @@
             <th *tuiHead="'type'" tuiTh [sorter]="null"></th>
             <th *tuiHead="'target'" tuiTh tuiTh [sorter]="null">Цель</th>
             <th *tuiHead="'bid'" tuiTh tuiTh [sorter]="null">Ставка</th>
-            <th *tuiHead="'budget'" tuiTh [sorter]="null">Бюджет</th>
+            <th *tuiHead="'budget'" tuiTh [sorter]="null">
+              <!-- Бюджет -->
+            </th>
             <th *tuiHead="'status'" tuiTh [sorter]="null">Статус</th>
             <th *tuiHead="'action'" tuiTh [sorter]="null"></th>
             <th *tuiHead="'onOffToogle'" tuiTh [sorter]="null">Вкл/выкл - автоматическое управление</th>
@@ -66,7 +68,9 @@
             <td *tuiCell="'bid'" tuiTd>
               <i>{{ item.currentPlace }}/{{ item.currentBid }}</i>
             </td>
-            <td *tuiCell="'budget'" tuiTd>{{ item.budget }} ₽</td>
+            <td *tuiCell="'budget'" tuiTd>
+              <!-- {{ item.budget }} ₽ -->
+            </td>
             <td *tuiCell="'status'" tuiTd>
               <tui-tag
                 status="custom"
