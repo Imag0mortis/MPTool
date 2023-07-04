@@ -37,29 +37,29 @@ export const MenuConfiguration: MenuConf[] = [
       }
     ]
   },
-  {
-    name: 'Накрутка лайков, добавлений',
-    icon: 'like.svg',
-    expanded: false,
-    childs: [
-      {
-        name: 'MPLiker',
-        link: './liker'
-      },
-      {
-        name: 'MpLiker - Избранное',
-        link: '/liker/choosen'
-      },
-      {
-        name: 'Корзина',
-        link: '/liker/basket'
-      },
-      {
-        name: 'Вопросы',
-        link: '/liker/questions'
-      }
-    ]
-  },
+  // {
+  //   name: 'Накрутка лайков, добавлений',
+  //   icon: 'like.svg',
+  //   expanded: false,
+  //   childs: [
+  //     {
+  //       name: 'MPLiker',
+  //       link: './liker'
+  //     },
+  //     {
+  //       name: 'MpLiker - Избранное',
+  //       link: '/liker/choosen'
+  //     },
+  //     {
+  //       name: 'Корзина',
+  //       link: '/liker/basket'
+  //     },
+  //     {
+  //       name: 'Вопросы',
+  //       link: '/liker/questions'
+  //     }
+  //   ]
+  // },
   // {
   //   name: 'Аналитика',
   //   icon: 'edit.svg',
