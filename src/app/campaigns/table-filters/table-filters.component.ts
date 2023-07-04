@@ -6,7 +6,9 @@ import {
   OnInit,
   Output,
   Inject,
-  Injector
+  Injector,
+  AfterContentChecked,
+  OnChanges
 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import {
@@ -36,7 +38,7 @@ interface Python {
 export class TableFiltersComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
-  subscriptionModal: Subscription;
+  // modalSubscription: Subscription = new Subscription();
 
   @Output() filtersChange = new EventEmitter<{
     account: string;
@@ -70,14 +72,13 @@ export class TableFiltersComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
     @Inject(Injector) private readonly injector: Injector,
-    private readonly dialogs: TuiDialogService,
     private modalService: GuideModalService
   ) {}
 
   ngOnInit(): void {
     this.filtersBind = this.fb.group({
       account: new FormControl(
-        this.accounts.length > 0 ? this.accounts[0].lk_id : null
+        this.accounts.length > 0 ? this.accounts[0]?.lk_id : null
       ),
       type: new FormControl(this.types.length > 0 ? this.types[0] : null),
       status: new FormControl(
@@ -85,9 +86,6 @@ export class TableFiltersComponent implements OnInit, OnDestroy {
       )
     });
 
-    if (this.accounts.length === 0) {
-      this.showDialog();
-    }
     this.subscription = this.filtersBind.valueChanges.subscribe((changes) => {
       this.filtersChange.emit({
         account: this.filtersBind.get('account')?.value,
@@ -97,20 +95,33 @@ export class TableFiltersComponent implements OnInit, OnDestroy {
     });
   }
 
-  showDialog(): void {
-    this.subscriptionModal = this.dialogService
-      .open(new PolymorpheusComponent(GuidemodalComponent, this.injector), {
-        size: 'l',
-        closeable: false,
-        dismissible: false
-      })
-      .subscribe();
-  }
+  // Для вызова модального окна из шаблона ng-template
+  //   showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
+  //     this.dialogs
+  //     .open(content,{
+  //       size: 'l',
+  //       closeable: false,
+  //       dismissible: false
+  //     })
+  //     .subscribe();
+  // }
+
+  // Для вызова модального окна из компонента
+
+  // showDialog(): void {
+  //   this.modalSubscription = this.dialogService
+  //     .open(new PolymorpheusComponent(GuidemodalComponent, this.injector), {
+  //       size: 'l',
+  //       closeable: false,
+  //       dismissible: false
+  //     })
+  //     .subscribe();
+  // }
 
   ngOnDestroy(): void {
+    // if (this.modalService.modalClosed) {
+    //   this.modalSubscription.unsubscribe();
+    // }
     this.subscription.unsubscribe();
-    if (this.modalService.modalClosed) {
-      this.subscriptionModal.unsubscribe();
-    }
   }
 }
