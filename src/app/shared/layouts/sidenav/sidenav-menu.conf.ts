@@ -42,10 +42,10 @@ export const MenuConfiguration: MenuConf[] = [
     icon: 'like.svg',
     expanded: false,
     childs: [
-      {
-        name: 'MPLiker',
-        link: './liker'
-      },
+      // {
+      //   name: 'MPLiker',
+      //   link: './liker'
+      // },
       {
         name: 'MpLiker - Избранное',
         link: '/liker/choosen'
