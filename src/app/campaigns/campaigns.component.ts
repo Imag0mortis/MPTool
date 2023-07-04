@@ -1,8 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, Injector } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BehaviorSubject, first, of, Subscription, switchMap } from 'rxjs';
 import { RequestService } from '../shared/services/request.service';
 import { UserService } from '../shared/services/user.service';
+import { VideoModalComponent } from '../selfransom/main-ransom/video-modal/video-modal.component';
+import {PolymorpheusComponent} from '@tinkoff/ng-polymorpheus';
+import {TuiDialogService} from '@taiga-ui/core';
 
 @Component({
   selector: 'app-campaigns',
@@ -28,7 +31,9 @@ export class CampaignsComponent implements OnInit, OnDestroy {
     private user: UserService,
     private request: RequestService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
+    @Inject(Injector) private readonly injector: Injector,
   ) {}
 
   ngOnInit(): void {
@@ -72,6 +77,16 @@ export class CampaignsComponent implements OnInit, OnDestroy {
       params['page'] ? this.page$.next(Number(params['page'])) : null;
       this.getData(params);
     });
+  }
+
+  showVideoDialog(): void {
+    this.dialogService
+      .open(new PolymorpheusComponent(VideoModalComponent, this.injector), {
+        size: 'page',
+        closeable: true,
+        dismissible: true
+      })
+      .subscribe();
   }
 
   ngOnDestroy(): void {

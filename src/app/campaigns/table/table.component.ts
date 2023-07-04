@@ -4,14 +4,18 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  Output
+  Output,
+  Inject,
+  Injector
 } from '@angular/core';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CampaingsTableObjSave } from 'src/app/shared/interfaces';
 import { AppService } from 'src/app/shared/services/app.service';
 import { RequestService } from 'src/app/shared/services/request.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { VideomodalComponent } from '../videomodal/videomodal.component';
+import {PolymorpheusComponent} from '@tinkoff/ng-polymorpheus';
+import {TuiDialogService} from '@taiga-ui/core';
 
 @Component({
   selector: 'app-table',
@@ -28,7 +32,9 @@ export class TableComponent implements OnDestroy {
   constructor(
     public appService: AppService,
     private user: UserService,
-    private request: RequestService
+    private request: RequestService,
+    @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
+    @Inject(Injector) private readonly injector: Injector,
   ) {}
 
   subscription: Subscription = new Subscription();
@@ -75,9 +81,20 @@ export class TableComponent implements OnDestroy {
     }
   }
 
+  showVideoDialog(): void {
+    this.dialogService
+      .open(new PolymorpheusComponent(VideomodalComponent, this.injector), {
+        size: 'page',
+        closeable: true,
+        dismissible: true
+      })
+      .subscribe();
+  }
+
   public syncAdd() {
     this.subscription = this.request
       .syncAds(this.user.userSubj$.value.user_wb_companies[0].lk_id)
       .subscribe((r) => alert('Кампании обновятся в течении минимум 5 минут'));
   }
+
 }

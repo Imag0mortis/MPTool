@@ -1,6 +1,6 @@
 .table-filters_container {
   margin: 0 2rem;
-  padding: 0.5rem 2rem;
+  padding: 0 2rem;
   background-color: #fff;
   border-radius: 16px;
   width: auto;
@@ -10,6 +10,7 @@
 
 .table-filters-right {
   display: flex;
+  padding-right: 8rem;
 }
 
 .b-form {

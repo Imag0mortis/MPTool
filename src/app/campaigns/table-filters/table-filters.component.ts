@@ -4,15 +4,21 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  Output
+  Output,
+  Inject,
+  Injector
 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import {
   TuiContextWithImplicit,
   tuiPure,
-  TuiStringHandler
+  TuiStringHandler,
 } from '@taiga-ui/cdk';
 import { Subscription } from 'rxjs';
+import { PolymorpheusContent,PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
+import { GuidemodalComponent } from '../guidemodal/guidemodal.component';
+
 
 interface Python {
   readonly lk_id: string;
@@ -22,7 +28,7 @@ interface Python {
 @Component({
   selector: 'app-table-filters',
   templateUrl: './table-filters.component.html',
-  styleUrls: ['./table-filters.component.scss']
+  styleUrls: ['./table-filters.component.scss'],
 })
 export class TableFiltersComponent implements OnInit, OnDestroy {
   subscription: Subscription;
@@ -37,39 +43,69 @@ export class TableFiltersComponent implements OnInit, OnDestroy {
   @Input() statuses: string[] = [];
   @Input() accounts: any[] = [];
 
+  template: PolymorpheusContent<TuiDialogContext<void, undefined>>;
+
   @tuiPure
-  stringify(
-    items: readonly Python[]
-  ): TuiStringHandler<TuiContextWithImplicit<string>> {
+  stringify(items: readonly Python[]): TuiStringHandler<TuiContextWithImplicit<string>> {
     const map = new Map(
-      items.map(
-        ({ lk_id, company_name }) => [lk_id, company_name] as [string, string]
-      )
+      items.map(({ lk_id, company_name }) => [lk_id, company_name] as [string, string])
     );
-    return ({ $implicit }: TuiContextWithImplicit<string>) =>
-      map.get($implicit) || '';
+    return ({ $implicit }: TuiContextWithImplicit<string>) => map.get($implicit) || '';
+    
   }
 
   filtersBind: FormGroup;
   loading = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
+    @Inject(Injector) private readonly injector: Injector,
+    private readonly dialogs: TuiDialogService
+  ) {}
 
   ngOnInit(): void {
     this.filtersBind = this.fb.group({
-      account: new FormControl(this.accounts[0].lk_id),
-      type: new FormControl(this.types[0]),
-      status: new FormControl(this.statuses[0])
+      account: new FormControl(this.accounts.length > 0 ? this.accounts[0]?.lk_id : null),
+      type: new FormControl(this.types.length > 0 ? this.types[0] : null),
+      status: new FormControl(this.statuses.length > 0 ? this.statuses[0] : null),
     });
-
+  
+    //  if (this.accounts.length === 0) {
+    //    this.showDialog();
+    //  }
+  
     this.subscription = this.filtersBind.valueChanges.subscribe((changes) => {
       this.filtersChange.emit({
         account: this.filtersBind.get('account')?.value,
         status: this.filtersBind.get('status')?.value,
-        type: this.filtersBind.get('type')?.value
+        type: this.filtersBind.get('type')?.value,
       });
     });
   }
+    
+// Для вызова модального окна из шаблона ng-template
+//   showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
+//     this.dialogs
+//     .open(content,{
+//       size: 'l',
+//       closeable: false,
+//       dismissible: false
+//     })
+//     .subscribe();
+// }
+
+// Для вызова модального окна из компонента
+
+showDialog(): void {
+  this.dialogService
+    .open(new PolymorpheusComponent(GuidemodalComponent, this.injector), {
+      size: 'l',
+      closeable: false,
+      dismissible: false
+    })
+    .subscribe();
+}
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

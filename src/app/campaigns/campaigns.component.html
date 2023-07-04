@@ -1,6 +1,5 @@
 <div class="campaigns_container">
   <app-table-filters
-    *ngIf="ready"
     (filtersChange)="filtersChange($event)"
     [statuses]="statuses"
     [types]="types"

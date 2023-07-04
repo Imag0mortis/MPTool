@@ -17,6 +17,16 @@
     >
       Загрузить из WB
     </button>
+    <button
+      (click)="showVideoDialog()"
+      tuiButton
+      type="button"
+      size="m"
+      appearance="secondary-destructive"
+      class="add_selfransom"
+    >
+      ОБУЧАЮЩЕЕ ВИДЕО
+    </button>
   </p>
   <tui-loader [overlay]="true" [showLoader]="!data || data.length === 0">
     <div class="table_wrapper">
