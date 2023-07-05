@@ -89,6 +89,7 @@ export class MapModalComponent implements OnInit {
         })
       )
       .subscribe((result: any) => {
+        console.log(result);
         if (result?.value) {
           this.showDetails = showDetailsType.ok;
           for (let i = 0; i < idArray.length; i++) {
@@ -100,6 +101,7 @@ export class MapModalComponent implements OnInit {
               const button = `<button id="${placemark.id}" class="balloon-button">Выбрать</button>`;
               placemark.schedule = detail.workTime;
               placemark.address = detail.address;
+              console.log(detail);
               placemark.properties = {
                 hintContent: `Адрес: ${detail.address}`,
                 balloonContent: `Адрес: ${detail.address},<br>время работы: ${detail.workTime}<br><br>${button}`

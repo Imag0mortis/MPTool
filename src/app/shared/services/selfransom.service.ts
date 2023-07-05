@@ -6,6 +6,33 @@ import { RequestService } from './request.service';
   providedIn: 'root'
 })
 export class SelfransomService {
+  allPoints: any;
+  nearPoints$: BehaviorSubject<any> = new BehaviorSubject(null);
+  currentPosition: any;
+  allPointsReady$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  centerPoint$: BehaviorSubject<any> = new BehaviorSubject([
+    55.759211, 37.609627
+  ]);
+
+  constructor(private request: RequestService) {}
+
+  //  ВЫЗЫВАЕТ
+  getAllMapsPoints() {
+    this.request
+      .getAllGeoPoints()
+      .pipe()
+      .subscribe((r: any) => {
+        console.log('Ау', r);
+        this.allPoints = r.value.model;
+        this.allPointsReady$.next(true);
+        const center = this.centerPoint$.value;
+        this.findNearPoints(
+          [center[0] - 0.015, center[1] - 0.035],
+          [center[0] + 0.015, center[1] + 0.035]
+        );
+      });
+  }
+
   public findNearPoints(minPoint: number[], maxPoint: number[]) {
     const filteredPoints = this.allPoints.filter((el: any) => {
       if (
@@ -20,35 +47,8 @@ export class SelfransomService {
 
     this.nearPoints$.next(filteredPoints);
   }
-  
-  allPoints: any;
-  nearPoints$: BehaviorSubject<any> = new BehaviorSubject(null);
-  currentPosition: any;
-  allPointsReady$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  centerPoint$: BehaviorSubject<any> = new BehaviorSubject([
-    55.759211, 37.609627
-  ]);
 
-  constructor(private request: RequestService) {}
-
-//  ВЫЗЫВАЕТ
-getAllMapsPoints() {
-  this.request
-    .getAllGeoPoints()
-    .pipe()
-    .subscribe((r: any) => {
-      console.log("Ау",r);
-      this.allPoints = r.value.model;
-      this.allPointsReady$.next(true);
-      const center = this.centerPoint$.value;
-      this.findNearPoints(
-        [center[0] - 0.015, center[1] - 0.035],
-        [center[0] + 0.015, center[1] + 0.035]
-      );
-    });
-}
   // findNearPoints(minPoint: number[], maxPoint: number[]) {
-    
 
   findCurrentPoint(arg: number) {
     return this.allPoints.find((el: any) => el.id === arg);
@@ -82,6 +82,4 @@ getAllMapsPoints() {
   getDetailsData(arg: number[]) {
     return this.request.getCurrentAdress(arg);
   }
-
-  
 }

@@ -139,6 +139,12 @@ export class RequestService {
     return this.http.get(environment.api + 'get_user_info.php');
   }
 
+  public test() {
+    return this.http.get(
+      environment.api + 'wb_retrieve_data.php?data=get_all_pickups'
+    );
+  }
+
   public getAds(
     userId: number,
     page: number,

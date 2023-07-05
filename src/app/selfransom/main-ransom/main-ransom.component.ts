@@ -133,6 +133,11 @@ export class MainRansomComponent implements OnInit {
     } else {
       //
     }
+    this.request.test().subscribe({
+      next: (res) => {
+        console.log(res);
+      }
+    });
   }
 
   checkBot() {
