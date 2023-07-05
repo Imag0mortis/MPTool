@@ -22,7 +22,6 @@ export class SelfransomService {
       .getAllGeoPoints()
       .pipe()
       .subscribe((r: any) => {
-        console.log('Ау', r);
         this.allPoints = r.value.model;
         this.allPointsReady$.next(true);
         const center = this.centerPoint$.value;
