@@ -6,6 +6,21 @@ import { RequestService } from './request.service';
   providedIn: 'root'
 })
 export class SelfransomService {
+  public findNearPoints(minPoint: number[], maxPoint: number[]) {
+    const filteredPoints = this.allPoints.filter((el: any) => {
+      if (
+        el.coordinates[1] > minPoint[1] &&
+        el.coordinates[1] < maxPoint[1] &&
+        el.coordinates[0] > minPoint[0] &&
+        el.coordinates[0] < maxPoint[0]
+      ) {
+        return el;
+      }
+    });
+
+    this.nearPoints$.next(filteredPoints);
+  }
+  
   allPoints: any;
   nearPoints$: BehaviorSubject<any> = new BehaviorSubject(null);
   currentPosition: any;
@@ -16,20 +31,24 @@ export class SelfransomService {
 
   constructor(private request: RequestService) {}
 
-  getAllMapsPoints() {
-    this.request
-      .getAllGeoPoints()
-      .pipe()
-      .subscribe((r: any) => {
-        this.allPoints = r.value.pickups;
-        this.allPointsReady$.next(true);
-        const center = this.centerPoint$.value;
-        this.findNearPoints(
-          [center[0] - 0.015, center[1] - 0.035],
-          [center[0] + 0.015, center[1] + 0.035]
-        );
-      });
-  }
+//  ВЫЗЫВАЕТ
+getAllMapsPoints() {
+  this.request
+    .getAllGeoPoints()
+    .pipe()
+    .subscribe((r: any) => {
+      console.log("Ау",r);
+      this.allPoints = r.value.model;
+      this.allPointsReady$.next(true);
+      const center = this.centerPoint$.value;
+      this.findNearPoints(
+        [center[0] - 0.015, center[1] - 0.035],
+        [center[0] + 0.015, center[1] + 0.035]
+      );
+    });
+}
+  // findNearPoints(minPoint: number[], maxPoint: number[]) {
+    
 
   findCurrentPoint(arg: number) {
     return this.allPoints.find((el: any) => el.id === arg);
@@ -64,18 +83,5 @@ export class SelfransomService {
     return this.request.getCurrentAdress(arg);
   }
 
-  findNearPoints(minPoint: number[], maxPoint: number[]) {
-    const filteredPoints = this.allPoints.filter((el: any) => {
-      if (
-        el.coordinates[1] > minPoint[1] &&
-        el.coordinates[1] < maxPoint[1] &&
-        el.coordinates[0] > minPoint[0] &&
-        el.coordinates[0] < maxPoint[0]
-      ) {
-        return el;
-      }
-    });
-
-    this.nearPoints$.next(filteredPoints);
-  }
+  
 }
