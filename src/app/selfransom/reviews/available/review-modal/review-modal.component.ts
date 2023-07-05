@@ -207,22 +207,26 @@ export class ReviewModalComponent implements OnInit {
               },
               (e: any) => {
                 //Макароны для проверки ответа на размер
-                console.log(e.error);
+                if (e.error.errorID === 19) {
+                  const options: any = { status: 'error' };
+                  this.alertService
+                    .open(
+                      'Некорректное фото отзыва (оно должно быть не менее 337*450)',
+                      options
+                    )
+                    .subscribe();
+                }
 
                 if (
                   e.error.errorDesc === 'feedback_photo_size_limit_exceeded'
                 ) {
                   const options: any = { status: 'error' };
-                  this.alertService.open(
-                    'Вы превысили ограничение по загружаемым фото 10Мб. Загрузите более легкие изображения!',
-                    options
-                  );
-                } else {
-                  const options: any = { status: 'error' };
-                  this.alertService.open(
-                    'Произошла ошибка при отправке запроса! Повторите попытку позднее',
-                    options
-                  );
+                  this.alertService
+                    .open(
+                      'Вы превысили ограничение по загружаемым фото 10Мб. Загрузите более легкие изображения!',
+                      options
+                    )
+                    .subscribe();
                 }
               }
             );
@@ -354,10 +358,12 @@ export class ReviewModalComponent implements OnInit {
       },
       (error: unknown) => {
         const options: any = { status: 'error' };
-        this.alertService.open(
-          'Произошла ошибка при отправке запроса! Повторите попытку позднее',
-          options
-        );
+        this.alertService
+          .open(
+            'Произошла ошибка при отправке запроса! Повторите попытку позднее',
+            options
+          )
+          .subscribe();
       }
     );
   }
