@@ -104,7 +104,7 @@ export class CreateRansomComponent {
         }
       },
       complete: () => {
-        console.log('Закрыли диалог');
+        // console.log('Закрыли диалог');
       }
     });
   }

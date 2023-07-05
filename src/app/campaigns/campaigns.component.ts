@@ -1,8 +1,19 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, Injector } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { BehaviorSubject, first, of, Subscription, switchMap } from 'rxjs';
+import {
+  BehaviorSubject,
+  filter,
+  first,
+  of,
+  Subscription,
+  switchMap
+} from 'rxjs';
 import { RequestService } from '../shared/services/request.service';
 import { UserService } from '../shared/services/user.service';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import { TuiDialogService } from '@taiga-ui/core';
+import { GuideModalService } from './guidemodal/guidemodal.service';
+import { GuidemodalComponent } from './guidemodal/guidemodal.component';
 
 @Component({
   selector: 'app-campaigns',
@@ -11,6 +22,8 @@ import { UserService } from '../shared/services/user.service';
 })
 export class CampaignsComponent implements OnInit, OnDestroy {
   subs: Subscription = new Subscription();
+
+  modalSubscription: Subscription = new Subscription();
 
   routeSub: Subscription = new Subscription();
 
@@ -28,7 +41,10 @@ export class CampaignsComponent implements OnInit, OnDestroy {
     private user: UserService,
     private request: RequestService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private modalService: GuideModalService,
+    @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
+    @Inject(Injector) private readonly injector: Injector
   ) {}
 
   ngOnInit(): void {
@@ -38,7 +54,11 @@ export class CampaignsComponent implements OnInit, OnDestroy {
 
     this.user.userSubj$
       .pipe(
+        filter((res) => !!res),
         switchMap((res) => {
+          if (res.user_wb_companies.length == 0) {
+            this.showDialog();
+          }
           if (res) {
             this.accounts = res.user_wb_companies;
             this.choosenAccount = res.user_wb_companies[0]['lk_id'];
@@ -74,12 +94,25 @@ export class CampaignsComponent implements OnInit, OnDestroy {
     });
   }
 
+  showDialog(): void {
+    this.modalSubscription = this.modalSubscription = this.dialogService
+      .open(new PolymorpheusComponent(GuidemodalComponent, this.injector), {
+        size: 'l',
+        closeable: false,
+        dismissible: false
+      })
+      .subscribe();
+  }
+
   ngOnDestroy(): void {
     this.page$.complete();
     this.data$.complete();
     this.total$.complete();
     this.subs.unsubscribe();
     this.routeSub.unsubscribe();
+    if (this.modalService.modalClosed) {
+      this.modalSubscription.unsubscribe();
+    }
   }
 
   filtersChange(arg: any) {

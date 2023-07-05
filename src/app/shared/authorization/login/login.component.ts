@@ -38,7 +38,7 @@ export class LoginComponent {
       .subscribe(
         (response: any) => {
           if (response.auth) {
-            console.log(response.auth);
+            // console.log(response.auth);
             this.alertService.open('Вы успешно вошли').subscribe();
             this.auth.successLogin(response);
           } else {

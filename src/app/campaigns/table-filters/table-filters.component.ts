@@ -13,7 +13,6 @@ import {
   TuiStringHandler
 } from '@taiga-ui/cdk';
 import { Subscription } from 'rxjs';
-
 interface Python {
   readonly lk_id: string;
   readonly company_name: string;
@@ -57,9 +56,13 @@ export class TableFiltersComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.filtersBind = this.fb.group({
-      account: new FormControl(this.accounts[0].lk_id),
-      type: new FormControl(this.types[0]),
-      status: new FormControl(this.statuses[0])
+      account: new FormControl(
+        this.accounts.length > 0 ? this.accounts[0]?.lk_id : null
+      ),
+      type: new FormControl(this.types.length > 0 ? this.types[0] : null),
+      status: new FormControl(
+        this.statuses.length > 0 ? this.statuses[0] : null
+      )
     });
 
     this.subscription = this.filtersBind.valueChanges.subscribe((changes) => {

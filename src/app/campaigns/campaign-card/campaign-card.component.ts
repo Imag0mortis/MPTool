@@ -207,7 +207,6 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
               keyword: this.keywordValue ? this.keywordValue : '',
               target_bid: this.listBids.map((el: any, i) => {
                 const newEl: any = {};
-                console.log(this.listBids);
                 newEl['targetBid'] = Number(el.targetBid)
                   ? Number(el.targetBid)
                   : el.currentBid;
@@ -218,7 +217,6 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
                   ? Number(el.min_place)
                   : 0;
                 newEl['targetID'] = Number(el.targetID);
-                console.log(el);
                 return newEl;
               })
             })
@@ -240,7 +238,6 @@ export class CampaignCardComponent implements OnInit, OnDestroy {
                 use_optimizer: this.useOptimazer ? this.useOptimazer : false,
                 keyword: this.keywordValue ? this.keywordValue : '',
                 target_bid: this.listBids.map((el: any) => {
-                  console.log(el);
                   const newEl: any = {};
                   newEl['targetBid'] = Number(el.targetBid)
                     ? Number(el.targetBid)

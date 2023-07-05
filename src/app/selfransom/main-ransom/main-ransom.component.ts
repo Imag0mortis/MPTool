@@ -131,7 +131,7 @@ export class MainRansomComponent implements OnInit {
     if (this.popupActive === false) {
       this.showBotDialog();
     } else {
-      console.log('Модальное окно неактивно.');
+      //
     }
   }
 
@@ -139,19 +139,19 @@ export class MainRansomComponent implements OnInit {
     if (!this.popupActive) {
       this.showBotDialog();
     } else {
-      console.log('Popup is not active.');
+      // console.log('Popup is not active.');
     }
   }
 
   //Модальное окно
   getData() {
     this.request.getUserInfo().subscribe((r: any) => {
-      console.log('проверка', r);
+      // console.log('проверка', r);
       this.popupActive = r.is_push_tg_enabled;
       if (this.popupActive === false) {
         this.showBotDialog();
       } else {
-        console.log('Модальное окно неактивно.');
+        // console.log('Модальное окно неактивно.');
       }
     });
   }
@@ -161,7 +161,7 @@ export class MainRansomComponent implements OnInit {
 
     this.getDataRansoms(this.page, this.filter, searchTaskIds);
 
-    console.log(this.filter);
+    // console.log(this.filter);
   }
 
   clearTask() {

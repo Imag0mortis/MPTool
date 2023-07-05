@@ -40,6 +40,8 @@ import { TableFiltersComponent } from './table-filters/table-filters.component';
 import { CampaignCardComponent } from './campaign-card/campaign-card.component';
 import { LogTableComponent } from './campaign-card/log-table/log-table.component';
 import { TuiPaginationModule } from '@taiga-ui/kit';
+import { VideomodalComponent } from './videomodal/videomodal.component';
+import { GuidemodalComponent } from './guidemodal/guidemodal.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { TuiPaginationModule } from '@taiga-ui/kit';
     CampaignsComponent,
     TableFiltersComponent,
     CampaignCardComponent,
-    LogTableComponent
+    LogTableComponent,
+    VideomodalComponent,
+    GuidemodalComponent
   ],
   imports: [
     FormsModule,
