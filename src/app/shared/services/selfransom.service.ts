@@ -16,12 +16,13 @@ export class SelfransomService {
 
   constructor(private request: RequestService) {}
 
+  //  ВЫЗЫВАЕТ
   getAllMapsPoints() {
     this.request
       .getAllGeoPoints()
       .pipe()
       .subscribe((r: any) => {
-        this.allPoints = r.value.pickups;
+        this.allPoints = r.value.model;
         this.allPointsReady$.next(true);
         const center = this.centerPoint$.value;
         this.findNearPoints(
@@ -30,6 +31,23 @@ export class SelfransomService {
         );
       });
   }
+
+  public findNearPoints(minPoint: number[], maxPoint: number[]) {
+    const filteredPoints = this.allPoints.filter((el: any) => {
+      if (
+        el.coordinates[1] > minPoint[1] &&
+        el.coordinates[1] < maxPoint[1] &&
+        el.coordinates[0] > minPoint[0] &&
+        el.coordinates[0] < maxPoint[0]
+      ) {
+        return el;
+      }
+    });
+
+    this.nearPoints$.next(filteredPoints);
+  }
+
+  // findNearPoints(minPoint: number[], maxPoint: number[]) {
 
   findCurrentPoint(arg: number) {
     return this.allPoints.find((el: any) => el.id === arg);
@@ -62,20 +80,5 @@ export class SelfransomService {
 
   getDetailsData(arg: number[]) {
     return this.request.getCurrentAdress(arg);
-  }
-
-  findNearPoints(minPoint: number[], maxPoint: number[]) {
-    const filteredPoints = this.allPoints.filter((el: any) => {
-      if (
-        el.coordinates[1] > minPoint[1] &&
-        el.coordinates[1] < maxPoint[1] &&
-        el.coordinates[0] > minPoint[0] &&
-        el.coordinates[0] < maxPoint[0]
-      ) {
-        return el;
-      }
-    });
-
-    this.nearPoints$.next(filteredPoints);
   }
 }

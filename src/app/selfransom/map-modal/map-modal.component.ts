@@ -115,15 +115,6 @@ export class MapModalComponent implements OnInit {
     if (this.showDetails === showDetailsType.ok) {
       this.loadingGuard = true;
       const uniqueClass = `balloon-button-${uuidv4()}`;
-      this.removeEventListener = this.renderer.listen(
-        document.getElementById(String(arg)),
-        'click',
-        (event) => {
-          event.preventDefault();
-          this.choosePVZ(arg);
-          this.removeEventListener();
-        }
-      );
 
       const placemark = this.placemarks.find((el) => el.id === arg);
       if (placemark) {
@@ -134,6 +125,16 @@ export class MapModalComponent implements OnInit {
         };
         placemark.properties = modifiedProperties;
       }
+
+      setTimeout(() => {
+        const balloonButton = document.getElementById(`${arg}`);
+        if (balloonButton) {
+          balloonButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            this.choosePVZ(arg);
+          });
+        }
+      }, 0);
     } else {
       this.zoom = 16;
       this.selfRansom.centerPoint$.next([
