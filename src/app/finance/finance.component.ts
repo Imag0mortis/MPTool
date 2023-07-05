@@ -78,7 +78,6 @@ export class FinanceComponent implements OnInit {
     this.request.getTransactions(page, this.pageSize).subscribe((r: any) => {
       this.transactions = r.operationLog;
       this.length = r.tableData.pagesTotal;
-      console.log(this.transactions);
     });
   }
 

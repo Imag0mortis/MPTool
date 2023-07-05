@@ -137,7 +137,7 @@ export class CardTableComponent implements OnInit, OnDestroy {
     }
     if (paymentQR != null) {
       this.data[index].paymentQR = JSON.parse(paymentQR);
-      console.log('кнопка', this.subscription);
+      // console.log('кнопка', this.subscription);
       return;
     }
 
@@ -269,7 +269,7 @@ export class CardTableComponent implements OnInit, OnDestroy {
                 // eslint-disable-next-line rxjs/no-nested-subscribe
                 .subscribe({
                   complete: () => {
-                    console.log('Закрыли диалог');
+                    // console.log('Закрыли диалог');
                   }
                 });
             },

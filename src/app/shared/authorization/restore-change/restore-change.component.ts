@@ -119,10 +119,9 @@ export class RestoreChangeComponent {
             label: 'Успешно изменили пароль!',
             status: 'success'
           };
-          this.alertService.open(
-            'Вы сейчас будете перенаправлены на страницу логина',
-            options
-          );
+          this.alertService
+            .open('Вы сейчас будете перенаправлены на страницу логина', options)
+            .subscribe();
           setTimeout(() => {
             this.appService.goLogin();
           }, 2000);
@@ -151,7 +150,9 @@ export class RestoreChangeComponent {
         },
         (e: unknown) => {
           const options: any = { label: 'Ошибка!', status: 'error' };
-          this.alertService.open('Пока не реализован backend!', options);
+          this.alertService
+            .open('Пока не реализован backend!', options)
+            .subscribe();
         }
       );
   }

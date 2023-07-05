@@ -56,7 +56,6 @@ export class CampaignsComponent implements OnInit, OnDestroy {
       .pipe(
         filter((res) => !!res),
         switchMap((res) => {
-          console.log(res);
           if (res.user_wb_companies.length == 0) {
             this.showDialog();
           }
