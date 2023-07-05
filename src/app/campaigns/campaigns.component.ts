@@ -2,19 +2,14 @@ import { Component, Inject, OnDestroy, OnInit, Injector } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import {
   BehaviorSubject,
-  concatMap,
   filter,
   first,
-  last,
   of,
   Subscription,
-  switchMap,
-  take,
-  takeLast
+  switchMap
 } from 'rxjs';
 import { RequestService } from '../shared/services/request.service';
 import { UserService } from '../shared/services/user.service';
-import { VideoModalComponent } from '../selfransom/main-ransom/video-modal/video-modal.component';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { TuiDialogService } from '@taiga-ui/core';
 import { GuideModalService } from './guidemodal/guidemodal.service';
@@ -65,7 +60,6 @@ export class CampaignsComponent implements OnInit, OnDestroy {
           if (res.user_wb_companies.length == 0) {
             this.showDialog();
           }
-          console.log('аа сюда дойдет?');
           if (res) {
             this.accounts = res.user_wb_companies;
             this.choosenAccount = res.user_wb_companies[0]['lk_id'];
@@ -82,7 +76,6 @@ export class CampaignsComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe((result: any) => {
-        console.log(result);
         if (result) {
           this.data$.next(result.adsData);
           this.total$.next(result.tableData.campaignsTotal);
@@ -103,7 +96,6 @@ export class CampaignsComponent implements OnInit, OnDestroy {
   }
 
   showDialog(): void {
-    console.log('а тут че');
     this.modalSubscription = this.modalSubscription = this.dialogService
       .open(new PolymorpheusComponent(GuidemodalComponent, this.injector), {
         size: 'l',
