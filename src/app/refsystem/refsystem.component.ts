@@ -49,13 +49,8 @@ export class RefsystemComponent implements OnInit {
     const quantity = 1;
     const type = 'someType';
     this.request.createLink(quantity, type).subscribe((response: any) => {
-      console.log(response.link);
       location.reload();
     });
-  }
-
-  test() {
-    console.log('ссылка', this.link);
   }
 
   onBalanceWithdrawal() {

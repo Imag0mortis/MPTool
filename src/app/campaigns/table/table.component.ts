@@ -14,8 +14,8 @@ import { AppService } from 'src/app/shared/services/app.service';
 import { RequestService } from 'src/app/shared/services/request.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { VideomodalComponent } from '../videomodal/videomodal.component';
-import {PolymorpheusComponent} from '@tinkoff/ng-polymorpheus';
-import {TuiDialogService} from '@taiga-ui/core';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import { TuiDialogService } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-table',
@@ -34,7 +34,7 @@ export class TableComponent implements OnDestroy {
     private user: UserService,
     private request: RequestService,
     @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
-    @Inject(Injector) private readonly injector: Injector,
+    @Inject(Injector) private readonly injector: Injector
   ) {}
 
   subscription: Subscription = new Subscription();
@@ -96,5 +96,4 @@ export class TableComponent implements OnDestroy {
       .syncAds(this.user.userSubj$.value.user_wb_companies[0].lk_id)
       .subscribe((r) => alert('Кампании обновятся в течении минимум 5 минут'));
   }
-
 }
