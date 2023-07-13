@@ -379,7 +379,7 @@ export class MainRansomComponent implements OnInit {
       const workbook: XLSX.WorkBook = XLSX.read(data, { type: 'binary' });
       const worksheet: XLSX.WorkSheet = workbook.Sheets[workbook.SheetNames[0]];
       const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, { header: 1, range: 1 });
-
+    
       const requestBody = {
         task: jsonData.map(item => ({
           sku: item[0],
@@ -398,10 +398,18 @@ export class MainRansomComponent implements OnInit {
           location.reload();
         },
         (error) => {
-          console.error(error);
+          console.error("Ау", error);
+          const options: any = { label: 'Ошибка!', status: 'error' };
+          this.alertService.open(
+            'Произошла ошибка при импорте самовыкупов',
+            options
+          ).subscribe(() => {});
         }
       );
     };
+    
+    fileReader.readAsBinaryString(file);
+    
   
     fileReader.readAsBinaryString(file);
   }
