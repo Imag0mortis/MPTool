@@ -84,6 +84,10 @@
   padding: 0.25rem;
 }
 
+.searchCompetitorsBids {
+  margin-left: 10px;
+}
+
 .line {
   padding: 0 0.6875rem;
   white-space: nowrap;
@@ -153,4 +157,40 @@
 .dynamics_bids-toggle {
   display: flex;
   align-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .bid_card-content {
+    display: block;
+  }
+  .bid_card-inputs {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    tui-input {
+      margin-right: 0rem;
+      width: 100%;
+    }
+  }
+
+  .dynamics_bids-container {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .dynamics_bids-col1 {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: auto;
+    .searchCompetitorsBids {
+      margin-left: 0;
+    }
+  }
+  .dynamics_bids-col2 {
+    width: auto;
+    margin-left: 0;
+    padding-left: 0;
+    border-left: none;
+  }
 }
