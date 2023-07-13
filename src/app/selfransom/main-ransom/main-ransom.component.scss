@@ -151,6 +151,8 @@ tui-tabs-with-more {
   width: 500px;
   display: flex;
   justify-content: center;
+  gap: 1rem;
+  margin-left: 1rem;
 }
 
 .video_container {
@@ -176,6 +178,19 @@ tui-tabs-with-more {
   margin-top: 1rem;
 }
 
+.excel_uploading {
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+.button_container button{
+  width: 16.4rem;
+}
+
+tui-input-files{
+  margin-top: 2rem;
+}
+
 @media screen and (max-width: 768px) {
   .main_container {
     width: auto;
@@ -194,5 +209,15 @@ tui-tabs-with-more {
     width: 100%;
     margin-top: 10px;
     margin-right: 10px;
+  }
+  .excel_button {
+    width: 96.7%;
+  }
+  .searchbar tui-input {
+    width: 98%;
+  }
+  .excel_uploading {
+    margin-left: 0;
+    width: 96.7%;
   }
 }
