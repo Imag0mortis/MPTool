@@ -13,6 +13,8 @@ import {
   TuiDialogModule,
   TuiErrorModule,
   TuiExpandModule,
+  TuiLabelModule,
+  TuiLinkModule,
   TuiLoaderModule,
   TuiPrimitiveTextfieldModule,
   TuiScrollbarModule,
@@ -146,7 +148,9 @@ const mapConfig: YaConfig = {
     TuiSvgModule,
     TuiInputTimeModule,
     TuiAccordionModule,
-    TuiInputDateRangeModule
+    TuiInputDateRangeModule,
+    TuiLinkModule,
+    TuiLabelModule
   ]
 })
 export class SelfransomModule {}
