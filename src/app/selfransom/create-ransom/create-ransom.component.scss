@@ -189,6 +189,62 @@ h2 {
   white-space: nowrap;
 }
 
+.excel_button {
+  margin-top: 1rem;
+}
+
+.excel_uploading {
+  margin-left: 1rem;
+}
+
+.button_container button{
+  width: 16.4rem;
+}
+
+.modal_header {
+  text-align: center;
+  width: 500px;
+  height: 19px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  text-transform: uppercase;
+  color: #000000;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.modal_middle {
+  width: 500px;
+  text-align: center;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+  padding-bottom: 0.5rem;
+}
+
+.cancel {
+  width: 147px;
+  height: 42px;
+  padding-right: 1rem;
+}
+
+.pay {
+  width: 147px;
+}
+
+.button_container {
+  margin-top: 2rem;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-left: 1rem;
+}
+
 @media screen and (max-width: 768px) {
   .create_ransom {
     overflow-x: hidden;
@@ -306,6 +362,14 @@ h2 {
   }
   .footer_left {
     white-space: nowrap;
+  }
+  .excel_button {
+    width: 96.7%;
+  }
+  .excel_uploading {
+      margin-left: 5%;
+      margin-top: 1rem;
+      width: 118.7%;
   }
 }
 

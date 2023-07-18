@@ -6,6 +6,7 @@ import { WrapperComponent } from './wrapper/wrapper.component';
 import { RouterModule } from '@angular/router';
 import {
   TuiAccordionModule,
+  TuiAvatarModule,
   TuiInputModule,
   TuiMarkerIconModule,
   TuiTagModule,
@@ -44,7 +45,8 @@ import { TuiActiveZoneModule } from '@taiga-ui/cdk';
     TuiExpandModule,
     TuiSidebarModule,
     TuiActiveZoneModule,
-    TuiAccordionModule
+    TuiAccordionModule,
+    TuiAvatarModule
   ],
   exports: [SidenavComponent, ToolbarComponent, WrapperComponent]
 })

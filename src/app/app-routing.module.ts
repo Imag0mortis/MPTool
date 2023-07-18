@@ -152,6 +152,13 @@ const routes: Routes = [
           import('./finance/finance.module').then((m) => m.FinanceModule),
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard]
+      },
+      {
+        path: 'lessons',
+        loadChildren: () =>
+          import('./lessons/lessons.module').then((m) => m.LessonsModule),
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard]
       }
     ]
   }

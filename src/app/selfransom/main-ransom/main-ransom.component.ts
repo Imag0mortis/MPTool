@@ -5,6 +5,7 @@ import { RequestService } from 'src/app/shared/services/request.service';
 import { Inject, Injector } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import { TuiAlertService } from '@taiga-ui/core';
+import { HttpClient } from '@angular/common/http';
 import { TuiDialogService } from '@taiga-ui/core';
 import {
   PolymorpheusContent,
@@ -130,6 +131,7 @@ export class MainRansomComponent implements OnInit {
   constructor(
     @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
     private request: RequestService,
+    private http: HttpClient,
     private user: UserService,
     private readonly alertService: TuiAlertService,
     @Inject(Injector) private readonly injector: Injector,
@@ -396,6 +398,9 @@ export class MainRansomComponent implements OnInit {
         (response) => {
           console.log(response);
           location.reload();
+          this.alertService
+            .open('', {label: 'Выкупы успешно импортированы!'})
+            .subscribe();
         },
         (error) => {
           console.error("Ау", error);
@@ -414,11 +419,15 @@ export class MainRansomComponent implements OnInit {
     fileReader.readAsBinaryString(file);
   }
   
-   downloadTemplate() {
-    const link = document.createElement('a');
-    link.href = 'template.xlsx';
-    link.download = 'template.xlsx';
-    link.click();
+  downloadFile() {
+    const fileUrl = '../../../../template.xlsx';
+    const fileName = 'template.xlsx';
+
+    fetch(fileUrl)
+      .then(response => response.blob())
+      .then(blob => saveAs(blob, fileName))
+      .catch(error => console.error('Ошибка загрузки файла:', error));
   }
+
 
 }
