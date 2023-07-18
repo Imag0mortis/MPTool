@@ -121,7 +121,7 @@
         />
       </svg>
     </button>
-    <label for="excelFile">
+    <!-- <label for="excelFile">
       <button (click)="showDialog(templateExcel)" tuiButton type="button" size="m" appearance="secondary" class="excel_uploading" style="background: none; border: none; cursor: pointer">
         ЗАГРУЗИТЬ В MPTOOL&nbsp;
       <svg
@@ -176,7 +176,7 @@
         />
       </svg>
     </button>
-    </label>
+    </label> -->
   </div>
 
   <tui-tabs [(activeItemIndex)]="activeItemIndex">
@@ -406,7 +406,7 @@
       type="button"
       size="m"
       class="pay"
-      onclick="downloadTemplate()"
+      (click)="downloadFile()"
     >
       Скачать шаблон&nbsp;
     </button>

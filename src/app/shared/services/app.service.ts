@@ -140,4 +140,7 @@ export class AppService {
     this.router.navigate(['/finance']);
   }
   
+  goLessons() {
+    this.router.navigate(['/lessons']);
+  }
 }

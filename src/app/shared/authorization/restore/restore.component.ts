@@ -65,7 +65,7 @@ export class RestoreComponent {
             autoClose: false
           };
 
-          this.alertService.open('Проверьте почту!', options).subscribe();
+          this.alertService.open('Проверьте почту! Если письмо не пришло, проверьте папку спам!', options).subscribe();
           /*this.alertService.open(`Вы сейчас будете перенаправлены на страницу логина`, options).subscribe();
         setTimeout(() => {
           this.appService.goLogin();
