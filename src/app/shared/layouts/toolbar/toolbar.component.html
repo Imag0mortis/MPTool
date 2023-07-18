@@ -59,7 +59,7 @@
     </tui-marker-icon>
   </div>
 
-  <div *ngIf="appService.isMobile">
+  <div *ngIf="appService.isMobile" class="mobile_menu">
     <div style="position: relative" (click)="toggleMobile(true)">
       <img
         class="toolbar_logo"
@@ -74,7 +74,7 @@
         src="tuiIconAlignJustifyLarge"
         class="toolbar_button tui-space_right-2 mob-right"
       ></tui-marker-icon>
-      <div *tuiSidebar="open; direction: 'left'">
+      <div *tuiSidebar="open; direction: 'left'" style="overflow: scroll;">
         <div *ngIf="user.userSubj$ | async as userInfo">
           <h1 class="phone_number">
             {{

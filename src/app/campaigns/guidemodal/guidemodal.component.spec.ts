@@ -8,9 +8,8 @@ describe('GuidemodalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GuidemodalComponent ]
-    })
-    .compileComponents();
+      declarations: [GuidemodalComponent]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(GuidemodalComponent);
     component = fixture.componentInstance;

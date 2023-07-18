@@ -98,8 +98,8 @@
                   tuiHintAppearance="onDark"
                 >
                   <!-- <ng-container tuiTextfieldWrapper> -->
-                    <input tuiTextfield type="number" />
-                    Текущая ставка
+                  <input tuiTextfield type="number" />
+                  Текущая ставка
                   <!-- </ng-container> -->
                 </tui-input>
 
@@ -249,9 +249,7 @@
           *ngIf="data.type === 'Поиск'"
           style="display: flex; justify-content: space-between"
         >
-          <tui-text-area
-          [(ngModel)]="keywordValue"
-          style="flex: 1">
+          <tui-text-area [(ngModel)]="keywordValue" style="flex: 1">
             Введите ключевое слово
             <textarea
               [disabled]="isTextareaDisabled"
@@ -262,8 +260,8 @@
           <button
             tuiButton
             type="button"
+            class="searchCompetitorsBids"
             appearance="primary"
-            style="margin-left: 10px"
             (click)="searchCompetitorsBids()"
           >
             Поиск

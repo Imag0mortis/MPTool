@@ -160,6 +160,8 @@ export class CreateRansomComponent {
             name: 'Мужской'
           };
 
+          // console.log(r);
+
           for (let i = 0; i < r.sizes.length; i++) {
             extendedResult.sizes[i].Value = r.sizes[i].Value;
           }
@@ -175,7 +177,7 @@ export class CreateRansomComponent {
         },
         (e: unknown) => {
           const options: any = { status: 'error' };
-          this.alertService.open('Товары не найдены!', options);
+          this.alertService.open('Товары не найдены!', options).subscribe();
         }
       );
     } else {

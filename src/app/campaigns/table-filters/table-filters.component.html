@@ -63,28 +63,13 @@
   </button> -->
 </div>
 
-<ng-template
-    #template
-    let-observer
->
-    <p>You can show a dialog with template</p>
-    <p>
-        Your balance:
-    </p>
-    <button
-        tuiButton
-        type="button"
-        size="m"
-        class="tui-space_right-3"
-    >
-        Withdraw&nbsp;
-    </button>
-    <button
-        tuiButton
-        type="button"
-        size="m"
-        (click)="observer.complete()"
-    >
-        Cancel
-    </button>
+<ng-template #template let-observer>
+  <p>You can show a dialog with template</p>
+  <p>Your balance:</p>
+  <button tuiButton type="button" size="m" class="tui-space_right-3">
+    Withdraw&nbsp;
+  </button>
+  <button tuiButton type="button" size="m" (click)="observer.complete()">
+    Cancel
+  </button>
 </ng-template>
