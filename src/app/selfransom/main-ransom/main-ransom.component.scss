@@ -191,6 +191,38 @@ tui-input-files{
   margin-top: 2rem;
 }
 
+.guide{
+  margin: 1rem 0 0 1rem;
+  padding: 0;
+}
+.hello{
+  text-align: center;
+}
+.hello_description{
+  text-align: center;
+  font-size: 17px;
+  padding-bottom: 1rem;
+}
+.hello_img{
+  height: 25rem;
+  margin-left: 15%;
+}
+.guide_button{
+  width: 100%;
+  margin-top: 1rem;
+}
+.decline{
+  text-align: center;
+  color: red;
+  text-decoration: underline;
+  margin-top: 2rem;
+  cursor: pointer;
+}
+.red-popover-bg {
+  background-color: red;
+  color: white; /* Чтобы текст был хорошо виден на красном фоне */
+}
+
 @media screen and (max-width: 768px) {
   .main_container {
     width: auto;

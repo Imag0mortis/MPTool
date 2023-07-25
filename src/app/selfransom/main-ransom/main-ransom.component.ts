@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
 import { Observable, Subject, finalize, first, map, of, switchMap, timer } from 'rxjs';
 import { AppService } from 'src/app/shared/services/app.service';
 import { RequestService } from 'src/app/shared/services/request.service';
@@ -19,6 +19,7 @@ import * as ExcelJS from 'exceljs';
 import * as XLSX from 'xlsx';
 import { TuiFileLike } from '@taiga-ui/kit';
 import { FormControl } from '@angular/forms';
+import { IStepOption, TourService } from 'ngx-ui-tour-tui-dropdown';
 
 interface mainransom {
   imgLink: string;
@@ -49,7 +50,25 @@ interface mainransom {
   templateUrl: './main-ransom.component.html',
   styleUrls: ['./main-ransom.component.scss']
 })
-export class MainRansomComponent implements OnInit {
+export class MainRansomComponent implements OnInit, AfterViewInit  {
+  @ViewChild('hello_modal', { read: TemplateRef }) hello_modal!: TemplateRef<any>;
+  private readonly tourService = inject(TourService);
+  private readonly steps: IStepOption[] = [
+    {
+      anchorId: 'start-button',
+      title: 'Итак начнём!',
+      content: 'Для начала нажмите на кнопку создания самовыкупа',
+      prevBtnTitle: 'Назад',
+      nextBtnTitle: 'Далее',
+    },
+    {
+      anchorId: 'selfRansoms',
+      title: 'Итак начнём!',
+      content: 'Для начала нажмите на кнопку создания самовыкупа',
+      prevBtnTitle: 'Назад',
+      nextBtnTitle: 'Далее',
+    },
+  ];
   taskStates = [];
   cards: mainransom[] = [];
   activeItemIndex = 0;
@@ -138,6 +157,9 @@ export class MainRansomComponent implements OnInit {
     public appService: AppService,
     private requestService: RequestService
   ) {}
+  ngAfterViewInit(): void {
+    this.showWelcomeModal();
+  }
 
   showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
     this.dialogService.open(content).subscribe();
@@ -171,13 +193,28 @@ export class MainRansomComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
+    this.startTour();
     this.getDataRansoms(this.page);
+    this.tourService.initialize(this.steps, {
+      enableBackdrop: true,
+      backdropConfig: {
+        offset: 10,
+      },
+    });
 
     if (this.popupActive === false) {
       this.showBotDialog();
     } else {
       //
     }
+  }
+
+  showWelcomeModal(): void {
+    this.showDialog(this.hello_modal);
+  }
+  
+  startTour() {
+    this.tourService.start();
   }
 
   checkBot() {
