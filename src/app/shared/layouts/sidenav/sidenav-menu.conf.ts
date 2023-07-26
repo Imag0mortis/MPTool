@@ -76,6 +76,17 @@ export const MenuConfiguration: MenuConf[] = [
   //   ]
   // },
   {
+    name: 'Отзывы',
+    icon: 'question-answer.svg',
+    expanded: false,
+    childs: [
+      {
+        name: 'Авто ответы на отзывы',
+        link: '/feedback-token'
+      }
+    ]
+  },
+  {
     name: 'Вопросы',
     icon: 'questions.svg',
     expanded: false,

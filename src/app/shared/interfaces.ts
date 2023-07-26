@@ -107,3 +107,9 @@ export interface CampaingsTableObjSave {
   campaign_id: number;
   enable: boolean;
 }
+
+export interface FeedbackWbApiKey {
+  companyName: string;
+  apiKey: string;
+  lkID: number;
+}
