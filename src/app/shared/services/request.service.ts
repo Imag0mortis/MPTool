@@ -197,7 +197,9 @@ export class RequestService {
   }
 
   public getFeedbacksWbApiKeys() {
-    return this.http.get(environment.api + 'wb/feedbacks/wbAPIKey.php');
+    return this.http.get<FeedbackWbApiKey[]>(
+      environment.api + 'wb/feedbacks/wbAPIKey.php'
+    );
   }
 
   public setFeedbacksWbApiKey(body: Omit<FeedbackWbApiKey, 'lkID'>) {

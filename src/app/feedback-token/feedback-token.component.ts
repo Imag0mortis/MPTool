@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { WbApi } from '../shared/interfaces';
+import { FeedbackWbApiKey, WbApi } from '../shared/interfaces';
 import { AppService } from '../shared/services/app.service';
 import { RequestService } from '../shared/services/request.service';
 import { TuiDialogService } from '@taiga-ui/core';
@@ -11,16 +11,9 @@ import { TuiDialogService } from '@taiga-ui/core';
   styleUrls: ['./feedback-token.component.scss']
 })
 export class FeedbackTokenComponent implements OnInit {
-  tokenForm: FormGroup;
-  token: FormGroup;
   apiForm: FormGroup;
-  apiRecord: FormGroup;
   apiKeys: WbApi[];
-  apiKey: string;
-  companyName: string;
   lkID: number;
-  redactButton: boolean;
-  // apiInfo: any = new FormControl(null)
 
   constructor(
     @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
@@ -32,10 +25,6 @@ export class FeedbackTokenComponent implements OnInit {
       companyName: new FormControl(''),
       apiKey: new FormControl('')
     });
-    this.apiRecord = fb.group({
-      companyName: new FormControl(''),
-      apiKey: new FormControl('')
-    });
   }
 
   ngOnInit(): void {
@@ -43,25 +32,23 @@ export class FeedbackTokenComponent implements OnInit {
   }
 
   getData() {
-    this.requestService.getWbApiKey().subscribe(
-      (data: WbApi[]) => {
-        if (data && data.length > 0) {
+    this.requestService.getFeedbacksWbApiKeys().subscribe({
+      next: (data: FeedbackWbApiKey[]) => {
+        if (data.length > 0) {
           this.apiKeys = data;
-          this.apiKey = data[0].apiKey;
-          this.companyName = data[0].companyName;
           this.lkID = data[0].lkID;
         }
       },
-      (error: string) => {
+      error: (error: string) => {
         console.log('Ошибка при получении данных:', error);
       }
-    );
+    });
   }
 
   redactWbApi() {
     const body: WbApi = {
-      companyName: this.apiRecord.get('companyName')?.value,
-      apiKey: this.apiRecord.get('apiKey')?.value,
+      companyName: this.apiForm.get('companyName')?.value,
+      apiKey: this.apiForm.get('apiKey')?.value,
       lkID: this.lkID
     };
 
