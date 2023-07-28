@@ -137,6 +137,13 @@ const routes: Routes = [
         canActivateChild: [AuthGuard]
       },
       {
+        path: 'feedback',
+        loadChildren: () =>
+          import('./feedback/feedback.module').then((m) => m.FeedbackModule),
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard]
+      },
+      {
         path: 'feedback-token',
         loadChildren: () =>
           import('./feedback-token/feedback-token.module').then(

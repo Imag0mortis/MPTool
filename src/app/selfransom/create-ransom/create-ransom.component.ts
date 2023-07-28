@@ -1,9 +1,16 @@
 import { Component, Inject, Injector } from '@angular/core';
 import { Router } from '@angular/router';
-import { TuiAlertService, TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
+import {
+  TuiAlertService,
+  TuiDialogContext,
+  TuiDialogService
+} from '@taiga-ui/core';
 import { PositionsService } from 'src/app/shared/services/positions.service';
 import { MapModalComponent } from '../map-modal/map-modal.component';
-import { PolymorpheusComponent, PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
+import {
+  PolymorpheusComponent,
+  PolymorpheusContent
+} from '@tinkoff/ng-polymorpheus';
 import { WbPosition } from 'src/app/shared/interfaces';
 import { RequestService } from 'src/app/shared/services/request.service';
 import { AppService } from 'src/app/shared/services/app.service';
@@ -268,7 +275,7 @@ export class CreateRansomComponent {
       }
     }
   }
-  
+
   copySelfRansom(item: WbPosition): void {
     if (this.data.length < this.maxCountPositions) {
       const newItem = Object.assign({}, item);
@@ -312,7 +319,9 @@ export class CreateRansomComponent {
   }
 
   openFileInput(): void {
-    const fileInput: HTMLInputElement = document.getElementById('excelFile') as HTMLInputElement;
+    const fileInput: HTMLInputElement = document.getElementById(
+      'excelFile'
+    ) as HTMLInputElement;
     fileInput.click();
   }
 
@@ -324,10 +333,17 @@ export class CreateRansomComponent {
       const data: string = e.target.result;
       const workbook: XLSX.WorkBook = XLSX.read(data, { type: 'binary' });
       const worksheet: XLSX.WorkSheet = workbook.Sheets[workbook.SheetNames[0]];
-      const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, { header: 1, range: 1 });
+      const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, {
+        header: 1,
+        range: 1
+      });
 
       // Filter out empty arrays
-      const nonEmptyArrays = jsonData.filter(item => item.some((value: string | undefined) => value !== undefined && value !== ''));
+      const nonEmptyArrays = jsonData.filter((item) =>
+        item.some(
+          (value: string | undefined) => value !== undefined && value !== ''
+        )
+      );
 
       if (nonEmptyArrays.length === 0) {
         console.log('No data found in the file.');
@@ -335,7 +351,7 @@ export class CreateRansomComponent {
       }
 
       const requestBody = {
-        task: nonEmptyArrays.map(item => ({
+        task: nonEmptyArrays.map((item) => ({
           sku: item[0],
           name: item[1],
           price: item[2],
@@ -343,7 +359,7 @@ export class CreateRansomComponent {
           size: item[4],
           query: item[5],
           sex: item[6],
-          address: item[7],
+          address: item[7]
         }))
       };
 
@@ -356,26 +372,26 @@ export class CreateRansomComponent {
             .subscribe();
         },
         (error) => {
-          console.error("Ау", error);
+          console.error('Ау', error);
           const options: any = { label: 'Ошибка!', status: 'error' };
           this.alertService
             .open('Произошла ошибка при импорте самовыкупов', options)
-            .subscribe(() => { });
+            .subscribe(() => {});
         }
       );
     };
 
     fileReader.readAsBinaryString(file);
   }
-  
+
   downloadFile() {
     const fileUrl = '../../../assets/template.xlsx';
     const fileName = 'template.xlsx';
 
     fetch(fileUrl)
-      .then(response => response.blob())
-      .then(blob => saveAs(blob, fileName))
-      .catch(error => console.error('Ошибка загрузки файла:', error));
+      .then((response) => response.blob())
+      .then((blob) => saveAs(blob, fileName))
+      .catch((error) => console.error('Ошибка загрузки файла:', error));
   }
 }
 
