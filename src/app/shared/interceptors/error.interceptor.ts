@@ -30,6 +30,18 @@ export class ErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
+        if (error.status === 429) {
+          this.alertService
+            .open(
+              'С вашего устройства поступает слишком много запросов, попробуйте через 10 секунд',
+              {
+                label: 'Ошибка!',
+                status: 'error' as TuiNotification
+              }
+            )
+            .subscribe();
+        }
+
         // в скором времени буду обновлять ошибки
         // eslint-disable-next-line sonarjs/no-small-switch
         switch (error.error.errorID) {
