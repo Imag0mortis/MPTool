@@ -117,6 +117,12 @@ a {
   border-radius: 15px;
 }
 
+.button_container {
+  margin-top: 1rem;
+  display: flex;
+  column-gap: 0.5rem;
+}
+
 @media (max-width: 768px) {
   .token_header {
     flex-direction: column;
