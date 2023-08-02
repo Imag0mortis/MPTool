@@ -66,7 +66,6 @@ export class FeedbackTokenComponent implements OnInit {
   }
 
   onEditApiKey(observer: Observer<void>) {
-    console.log(this.selectedApiKey);
     if (this.selectedApiKey) {
       this.requestService
         .updateFeedbacksWbApiKey(this.selectedApiKey)
