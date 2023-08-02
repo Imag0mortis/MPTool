@@ -210,10 +210,9 @@ export class RequestService {
     return this.http.put(environment.api + 'wb/feedbacks/wbAPIKey.php', body);
   }
 
-  public deleteFeedbacksWbApiKey(lkID: Pick<FeedbackWbApiKey, 'lkID'>) {
-    return this.http.delete(environment.api + 'wb/feedbacks/wbAPIKey.php', {
-      body: lkID.lkID
-    });
+  public deleteFeedbacksWbApiKey(lkID: number) {
+    const url = `${environment.api}wb/feedbacks/wbAPIKey.php?lkId=${lkID}`;
+    return this.http.delete(url);
   }
 
   public getPositions(sku: any, query: any, page: any) {

@@ -1,6 +1,6 @@
 <div class="token">
   <div class="wrapper">
-    <h1>Добавление API ключа, для управления авто ответами на отзывы</h1>
+    <h1>Добавление API ключа, для управления автоответами на отзывы</h1>
     <div class="greyline"></div>
     <div class="token_header">
       <div class="header_inputs">
@@ -32,35 +32,7 @@
             Добавить
           </button>
         </div>
-        <!-- <div class="header_instructions">
-          <ol>
-            <li>
-              1. Перейти
-              <a
-                href="https://seller.wildberries.ru/supplier-settings/access-to-api"
-              >
-                https://seller.wildberries.ru/supplier-settings/access-to-api/
-              </a>
-            </li>
-            <li>2. 2.Создать или скопировать по ссылке API ключ</li>
-            <li>
-              3. Вставить ключ в поле ввода и написать наименование организации
-            </li>
-          </ol>
-        </div> -->
       </div>
-      <!-- <div class="video_container">
-        <h2>Посмотриие наше обучающее видео</h2>
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/WGtFxnLJsJI"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-        ></iframe>
-      </div> -->
     </div>
     <div class="api_table" style="margin-top: 2rem">
       <table class="tui-table">
@@ -68,6 +40,7 @@
           <tr class="tui-table__tr tui-table__tr_border_none">
             <th class="tui-table__th tui-table__th_first">API ключ</th>
             <th class="tui-table__th">Название организации</th>
+            <th class="tui-table__th">Редактировать</th>
             <th class="tui-table__th tui-table__th_last">Удалить</th>
           </tr>
           <tr
@@ -78,13 +51,24 @@
               {{ item.apiKey }}
             </td>
             <td class="tui-table__td">{{ item.companyName }}</td>
+            <td class="tui-table__td">
+              <button
+                tuiButton
+                type="button"
+                size="m"
+                appearance="accent"
+                (click)="redactWbApi(item)"
+              >
+                Редактировать
+              </button>
+            </td>
+
             <td class="tui-table__td tui-table__td_last">
               <button
                 tuiButton
                 type="button"
                 size="m"
                 appearance="accent"
-                class="tui-space_right-3 tui-space_bottom-3"
                 (click)="deleteApi(item.lkID)"
               >
                 Удалить
@@ -96,3 +80,48 @@
     </div>
   </div>
 </div>
+
+<ng-template #editApiKeys let-observer>
+  <p i18n class="modal_header">Редактирование API ключа</p>
+  <div class="modal_middle">
+    <h2>API ключ</h2>
+    <ng-container>
+      <tui-input
+        tuiTextfieldSize="m"
+        [tuiTextfieldLabelOutside]="true"
+        [ngModel]="selectedApiKey?.apiKey"
+        (ngModelChange)="selectedApiKey!.apiKey = $event"
+      ></tui-input>
+    </ng-container>
+    <h2>Название организации</h2>
+    <ng-container>
+      <tui-input
+        tuiTextfieldSize="m"
+        [tuiTextfieldLabelOutside]="true"
+        [ngModel]="selectedApiKey?.companyName"
+        (ngModelChange)="selectedApiKey!.companyName = $event"
+      ></tui-input>
+    </ng-container>
+  </div>
+  <div class="button_container">
+    <button
+      class="cancel"
+      tuiButton
+      appearance="secondary"
+      type="button"
+      size="m"
+      (click)="observer.complete()"
+    >
+      Отмена
+    </button>
+    <button
+      tuiButton
+      type="button"
+      size="m"
+      class="pay"
+      (click)="onEditApiKey(observer)"
+    >
+      Отредактировать
+    </button>
+  </div>
+</ng-template>

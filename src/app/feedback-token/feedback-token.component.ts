@@ -1,9 +1,17 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Inject,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { FeedbackWbApiKey, WbApi } from '../shared/interfaces';
 import { AppService } from '../shared/services/app.service';
 import { RequestService } from '../shared/services/request.service';
-import { TuiDialogService } from '@taiga-ui/core';
+import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
+import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
+import { Observer } from 'rxjs';
 
 @Component({
   selector: 'app-feedback-token',
@@ -11,14 +19,16 @@ import { TuiDialogService } from '@taiga-ui/core';
   styleUrls: ['./feedback-token.component.scss']
 })
 export class FeedbackTokenComponent implements OnInit {
+  @ViewChild('editApiKeys') modal: ElementRef;
+
   apiForm: FormGroup;
   apiKeys: WbApi[];
-  lkID: number;
+  selectedApiKey: WbApi | null = null;
 
   constructor(
     @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
     public appService: AppService,
-    private fb: FormBuilder,
+    fb: FormBuilder,
     private requestService: RequestService
   ) {
     this.apiForm = fb.group({
@@ -36,7 +46,6 @@ export class FeedbackTokenComponent implements OnInit {
       next: (data: FeedbackWbApiKey[]) => {
         if (data.length > 0) {
           this.apiKeys = data;
-          this.lkID = data[0].lkID;
         }
       },
       error: (error: string) => {
@@ -45,41 +54,51 @@ export class FeedbackTokenComponent implements OnInit {
     });
   }
 
-  redactWbApi() {
-    const body: WbApi = {
-      companyName: this.apiForm.get('companyName')?.value,
-      apiKey: this.apiForm.get('apiKey')?.value,
-      lkID: this.lkID
-    };
+  redactWbApi(item: any) {
+    item['lkId'] = item['lkID'];
+    delete item['lkID'];
+    this.selectedApiKey = item;
+    this.showDialog(this.modal);
+  }
 
-    this.requestService.redactWbApi(body).subscribe(() => {
-      alert('API ключ успешно изменён');
-      location.reload();
-    });
+  showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
+    this.dialogService.open(content).subscribe();
+  }
+
+  onEditApiKey(observer: Observer<void>) {
+    console.log(this.selectedApiKey);
+    if (this.selectedApiKey) {
+      this.requestService
+        .updateFeedbacksWbApiKey(this.selectedApiKey)
+        .subscribe(() => {
+          observer.complete();
+          alert('API ключ успешно отредактирован');
+          location.reload();
+        });
+    }
   }
 
   setWbApi() {
-    const body: WbApi = {
+    const body: Omit<FeedbackWbApiKey, 'lkID'> = {
       companyName: this.apiForm.get('companyName')?.value,
-      apiKey: this.apiForm.get('apiKey')?.value,
-      lkID: this.lkID
+      apiKey: this.apiForm.get('apiKey')?.value
     };
 
-    this.requestService.setWbApiKey(body).subscribe(() => {
+    this.requestService.setFeedbacksWbApiKey(body).subscribe(() => {
       alert('API ключ успешно установлен');
       location.reload();
     });
   }
 
   deleteApi(lkId: number) {
-    this.requestService.deleteApi(lkId).subscribe(
-      () => {
+    this.requestService.deleteFeedbacksWbApiKey(lkId).subscribe({
+      next: () => {
         location.reload();
         console.log('API успешно удалено');
       },
-      (error: string) => {
+      error: (error: string) => {
         console.error('Ошибка при удалении API:', error);
       }
-    );
+    });
   }
 }
