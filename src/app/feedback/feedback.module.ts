@@ -35,9 +35,12 @@ import {
   TuiValidatorModule
 } from '@taiga-ui/cdk';
 import { TuiPaginationModule } from '@taiga-ui/kit';
+import { FeedbackComponent } from './feedback.component';
+import { TableComponent } from './table/table.component';
+import { TableFiltersComponent } from './table-filters/table-filters.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [FeedbackComponent, TableComponent, TableFiltersComponent],
   imports: [
     FormsModule,
     CommonModule,

@@ -1,3 +1,9 @@
 .feedback-container {
   padding: 4rem 2rem 0 2rem;
 }
+
+@media only screen and (max-width: 768px) {
+  .feedback-container {
+    padding: 1rem 0.7rem 1rem 0.7rem;
+  }
+}

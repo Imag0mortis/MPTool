@@ -1,0 +1,75 @@
+<div class="table_container shadow(1)">
+  <tui-loader [overlay]="true" [showLoader]="!data || data.length === 0">
+    <div class="table_wrapper">
+      <table *ngIf="data" tuiTable class="table" [columns]="columns">
+        <thead>
+          <tr tuiThGroup>
+            <th *tuiHead="'product'" tuiTh [sorter]="null">Товар</th>
+            <th *tuiHead="'review'" tuiTh [sorter]="null">Отзыв</th>
+            <th *tuiHead="'autoAnswer'" tuiTh [sorter]="null">Автоответ</th>
+            <th *tuiHead="'status'" tuiTh [sorter]="null">Статус</th>
+          </tr>
+        </thead>
+        <tbody tuiTbody [data]="data">
+          <tr *tuiRow="let item of data; index as i" tuiTr>
+            <td *tuiCell="'product'" class="column" tuiTd>
+              <div class="product-wrapper">
+                <div
+                  class="table_banner"
+                  style="width: 34px; height: 46px; background-image: url('{{
+                    item.photoLinks ? item.photoLinks[0].miniSize : null
+                  }}'); background-size: cover"
+                ></div>
+                <div class="sku">
+                  Арт.
+                  <br />
+                  {{ item.productDetails.nmId }}
+                </div>
+              </div>
+            </td>
+            <td *tuiCell="'review'" class="column" tuiTd>
+              <div class="review-wrapper">
+                <div class="review-nickname">
+                  {{ item.userName ? item.userName : 'Аноним' }}
+                </div>
+                <div class="review-stars">
+                  <ng-container
+                    *ngFor="let _ of getStarArray(item.productValuation)"
+                  >
+                    <img src="../../../assets/icons/star.svg" alt="" />
+                  </ng-container>
+                </div>
+                <div class="review-descr">
+                  {{ item.text }}
+                </div>
+              </div>
+            </td>
+            <td *tuiCell="'autoAnswer'" class="column" tuiTd>
+              <div class="autoAnswer-wrapper">
+                <button tuiButton size="s" type="button" appearance="primary">
+                  Получить ответ
+                </button>
+
+                <textarea class="custom-textarea" [placeholder]="text"></textarea>
+
+                <button tuiButton size="s" type="button" appearance="primary">
+                  Отправить
+                </button>
+              </div>
+            </td>
+            <td *tuiCell="'status'" class="column" tuiTd>
+              Ожидает ответа
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table_pagination">
+      <tui-pagination
+        [length]="getPagesLength"
+        [index]="page - 1"
+        (indexChange)="goToPage($event)"
+      ></tui-pagination>
+    </div>
+  </tui-loader>
+</div>

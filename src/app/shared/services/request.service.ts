@@ -215,6 +215,17 @@ export class RequestService {
     return this.http.delete(url);
   }
 
+  public getFeedbacks(lkId: number, page: number, pageSize: number) {
+    return this.http.get(
+      environment.api +
+        `wb/feedbacks/feedbacks.php?lkId=${lkId}&page=${page}&pageSize=${pageSize}`
+    );
+  }
+
+  public getAnswerFromAI(body: { feedback: string; feedbackId: string }) {
+    return this.http.post(environment.api + `wb/feedbacks/ask.php`, body);
+  }
+
   public getPositions(sku: any, query: any, page: any) {
     return this.http.get(
       environment.api +

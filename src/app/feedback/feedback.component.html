@@ -1,3 +1,9 @@
 <div class="feedback-container">
   <h2>Автоответы на отзывы</h2>
+  <app-table-filters
+    *ngIf="tableFilterReady"
+    [statuses]="statuses"
+    [accounts]="accounts"
+  ></app-table-filters>
+  <app-table [data]="data$ | async"></app-table>
 </div>
