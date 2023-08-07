@@ -2,8 +2,8 @@
   <h2>Автоответы на отзывы</h2>
   <app-table-filters
     *ngIf="tableFilterReady"
-    [statuses]="statuses"
     [accounts]="accounts"
+    (filtersChange)="filtersChange($event)"
   ></app-table-filters>
   <app-table [data]="data$ | async"></app-table>
 </div>

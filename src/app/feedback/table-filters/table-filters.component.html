@@ -1,5 +1,5 @@
 <div class="table-filters_container">
-  <div class="table-filters-left">
+  <div class="table-filters">
     <form class="b-form" [formGroup]="filtersBind">
       <tui-select
         tuiTextfieldSize="m"
@@ -19,24 +19,6 @@
           <tui-loader class="tui-space_vertical-3 loader"></tui-loader>
         </ng-template>
       </tui-select>
-    </form>
-  </div>
-  <div class="table-filters-right">
-    <form [formGroup]="filtersBind" class="b-form">
-      <tui-select
-        tuiTextfieldSize="m"
-        class="tui-space_vertical-4"
-        formControlName="status"
-        [tuiTextfieldLabelOutside]="true"
-      >
-        Статусы
-        <input tuiTextfield placeholder="Выберите статус" />
-        <tui-data-list-wrapper
-          *tuiDataList
-          [items]="statuses"
-        ></tui-data-list-wrapper>
-      </tui-select>
-      &nbsp;
     </form>
   </div>
 </div>

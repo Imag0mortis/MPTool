@@ -226,6 +226,14 @@ export class RequestService {
     return this.http.post(environment.api + `wb/feedbacks/ask.php`, body);
   }
 
+  public publishFeedback(body: {
+    lkId: number;
+    feedback: string;
+    feedbackId: string;
+  }) {
+    return this.http.post(environment.api + `wb/feedbacks/publish.php`, body);
+  }
+
   public getPositions(sku: any, query: any, page: any) {
     return this.http.get(
       environment.api +

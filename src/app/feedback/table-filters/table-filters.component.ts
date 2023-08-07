@@ -13,6 +13,7 @@ import {
   TuiStringHandler
 } from '@taiga-ui/cdk';
 import { Subscription } from 'rxjs';
+import { WbFeedbackService } from 'src/app/shared/services/wb-feedback.service';
 interface Python {
   readonly lk_id: string;
   readonly company_name: string;
@@ -28,10 +29,8 @@ export class TableFiltersComponent implements OnInit, OnDestroy {
 
   @Output() filtersChange = new EventEmitter<{
     account: string;
-    status: string;
   }>();
 
-  @Input() statuses: string[] = [];
   @Input() accounts: any[] = [];
 
   @tuiPure
@@ -50,22 +49,23 @@ export class TableFiltersComponent implements OnInit, OnDestroy {
   filtersBind: FormGroup;
   loading = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private feedbackService: WbFeedbackService
+  ) {}
 
   ngOnInit(): void {
+    this.feedbackService.currentCompanyID.next(this.accounts[0].lk_id);
+
     this.filtersBind = this.fb.group({
       account: new FormControl(
         this.accounts.length > 0 ? this.accounts[0]?.lk_id : null
-      ),
-      status: new FormControl(
-        this.statuses.length > 0 ? this.statuses[0] : null
       )
     });
 
     this.subscription = this.filtersBind.valueChanges.subscribe((changes) => {
       this.filtersChange.emit({
-        account: this.filtersBind.get('account')?.value,
-        status: this.filtersBind.get('status')?.value
+        account: this.filtersBind.get('account')?.value
       });
     });
   }
