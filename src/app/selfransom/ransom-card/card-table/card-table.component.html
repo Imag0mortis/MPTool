@@ -169,6 +169,7 @@
         Арт. {{ item.sku }}
       </div>
       <div class="ransom_description">{{ item.name }}</div>
+      <div class="ransom_query">{{ item.query }}</div>
       <div class="cost">{{ item.price }} ₽</div>
     </div>
     <div class="expanded">
@@ -224,6 +225,7 @@
             Арт. {{ item.sku }}
           </div>
           <div class="ransom_description">{{ item.name }}</div>
+          <div class="ransom_query">{{ item.query }}</div>
           <div class="cost">Стоимость: {{ item.price }} ₽</div>
           <p class="mobile_data">
             Получатель:
@@ -241,7 +243,7 @@
             Код получения:
             <span>{{ item.customerCode }}</span>
           </p>
-          <!-- <div class="recipient"> 
+          <!-- <div class="recipient">
                             <h5>Получатель:</h5>
                             <h6>{{item.customerName}}</h6>
                         </div>
