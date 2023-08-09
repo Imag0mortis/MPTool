@@ -77,5 +77,12 @@
         </tbody>
       </table>
     </div>
+    <div class="table_pagination">
+      <tui-pagination
+        [length]="getPagesLength"
+        [index]="page - 1"
+        (indexChange)="goToPage($event)"
+      ></tui-pagination>
+    </div>
   </tui-loader>
 </div>

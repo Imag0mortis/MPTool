@@ -19,6 +19,8 @@ export class FeedbackComponent implements OnInit {
   accounts: WbApiKey[] = [];
 
   data$: BehaviorSubject<any> = new BehaviorSubject(null);
+  page$: BehaviorSubject<any> = new BehaviorSubject(1);
+  total$: BehaviorSubject<any> = new BehaviorSubject(null);
 
   constructor(
     private request: RequestService,
@@ -28,6 +30,13 @@ export class FeedbackComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadInitialData();
+  }
+
+  onPageChanges(page: number) {
+    console.log(page + 1);
+    this.page$.next(page + 1);
+    const selectedAccount = this.feedbackService.currentCompanyID.value;
+    this.refreshData(selectedAccount as any, page + 1);
   }
 
   private loadInitialData() {
@@ -42,12 +51,13 @@ export class FeedbackComponent implements OnInit {
           this.tableFilterReady = true;
         }),
         switchMap(() =>
-          this.request.getFeedbacks(this.accounts[0].lk_id, 1, -1)
+          this.request.getFeedbacks(this.accounts[0].lk_id, 1, 50)
         ),
         map((response: any) => this.filterFeedbacks(response))
       )
       .subscribe((v: any) => {
         this.data$.next(v.data.feedbacks);
+        this.total$.next(v.data.countUnanswered / 4);
       });
   }
 
@@ -63,12 +73,12 @@ export class FeedbackComponent implements OnInit {
 
   filtersChange(currentCompanyID: any) {
     this.feedbackService.currentCompanyID.next(currentCompanyID.account);
-    this.refreshData(currentCompanyID.account);
+    this.refreshData(currentCompanyID.account, this.page$.value);
   }
 
-  private refreshData(selectedAccount: number) {
+  private refreshData(selectedAccount: number, page: number) {
     this.request
-      .getFeedbacks(selectedAccount, 1, -1)
+      .getFeedbacks(selectedAccount, page, 50)
       .pipe(map((response: any) => this.filterFeedbacks(response)))
       .subscribe({
         next: (v) => {

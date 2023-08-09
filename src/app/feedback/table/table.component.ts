@@ -4,7 +4,9 @@ import {
   OnDestroy,
   OnInit,
   Inject,
-  Injector
+  Injector,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/shared/services/app.service';
@@ -20,6 +22,10 @@ import { WbFeedbackService } from 'src/app/shared/services/wb-feedback.service';
 })
 export class TableComponent implements OnInit, OnDestroy {
   @Input() data: any[] = [];
+  @Input() total = 0;
+  @Input() page = 0;
+
+  @Output() onPageChanges = new EventEmitter();
 
   text = '';
 
@@ -96,6 +102,14 @@ export class TableComponent implements OnInit, OnDestroy {
           this.disabledFeedbacksFromAI.add(feedback.id);
         }
       });
+  }
+
+  get getPagesLength() {
+    return Math.ceil(this.total / 10);
+  }
+
+  goToPage(page: number): void {
+    this.onPageChanges.emit(page);
   }
 
   isButtonPostAnswerDisabled(feedbackId: string): boolean {

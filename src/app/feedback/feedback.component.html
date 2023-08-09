@@ -5,5 +5,9 @@
     [accounts]="accounts"
     (filtersChange)="filtersChange($event)"
   ></app-table-filters>
-  <app-table [data]="data$ | async"></app-table>
+  <app-table
+  [data]="data$ | async"
+  [page]="page$ | async"
+  [total]="total$ | async"
+  (onPageChanges)="onPageChanges($event)"></app-table>
 </div>
