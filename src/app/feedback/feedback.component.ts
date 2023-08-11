@@ -33,7 +33,6 @@ export class FeedbackComponent implements OnInit {
   }
 
   onPageChanges(page: number) {
-    console.log(page + 1);
     this.page$.next(page + 1);
     const selectedAccount = this.feedbackService.currentCompanyID.value;
     this.refreshData(selectedAccount as any, page + 1);
@@ -57,7 +56,7 @@ export class FeedbackComponent implements OnInit {
       )
       .subscribe((v: any) => {
         this.data$.next(v.data.feedbacks);
-        this.total$.next(v.data.countUnanswered / 4);
+        this.total$.next(v.data.countUnanswered / 5);
       });
   }
 
