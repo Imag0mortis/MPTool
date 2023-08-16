@@ -6,12 +6,8 @@ import { TuiTabBarModule } from '@taiga-ui/addon-mobile';
 import { TuiIslandModule, TuiTabsModule } from '@taiga-ui/kit';
 import { TuiButtonModule, TuiScrollbarModule } from '@taiga-ui/core';
 
-
-
 @NgModule({
-  declarations: [
-    LessonsComponent
-  ],
+  declarations: [LessonsComponent],
   imports: [
     CommonModule,
     lessonsRoutes,
@@ -22,4 +18,4 @@ import { TuiButtonModule, TuiScrollbarModule } from '@taiga-ui/core';
     TuiButtonModule
   ]
 })
-export class LessonsModule { }
+export class LessonsModule {}

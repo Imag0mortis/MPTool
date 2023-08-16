@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subject, finalize, first, map, of, switchMap, timer } from 'rxjs';
+import {
+  Observable,
+  Subject,
+  finalize,
+  first,
+  map,
+  of,
+  switchMap,
+  timer
+} from 'rxjs';
 import { AppService } from 'src/app/shared/services/app.service';
 import { RequestService } from 'src/app/shared/services/request.service';
 import { Inject, Injector } from '@angular/core';
@@ -77,44 +86,42 @@ export class MainRansomComponent implements OnInit {
   pageSize = 20;
 
   readonly control = new FormControl();
- 
-    readonly rejectedFiles$ = new Subject<TuiFileLike | null>();
-    readonly loadingFiles$ = new Subject<TuiFileLike | null>();
-    readonly loadedFiles$ = this.control.valueChanges.pipe(
-        switchMap(file => (file ? this.makeRequest(file) : of(null))),
-    );
- 
-    onReject(file: TuiFileLike | readonly TuiFileLike[]): void {
-        this.rejectedFiles$.next(file as TuiFileLike);
-    }
- 
-    removeFile(): void {
-        this.control.setValue(null);
-    }
- 
-    clearRejected(): void {
-        this.removeFile();
-        this.rejectedFiles$.next(null);
-    }
- 
-    makeRequest(file: TuiFileLike): Observable<TuiFileLike | null> {
-        this.loadingFiles$.next(file);
- 
-        return timer(1000).pipe(
-            map(() => {
-                if (Math.random() > 0.5) {
-                    return file;
-                }
- 
-                this.rejectedFiles$.next(file);
- 
-                return null;
-            }),
-            finalize(() => this.loadingFiles$.next(null)),
-        );
-    }
 
-    
+  readonly rejectedFiles$ = new Subject<TuiFileLike | null>();
+  readonly loadingFiles$ = new Subject<TuiFileLike | null>();
+  readonly loadedFiles$ = this.control.valueChanges.pipe(
+    switchMap((file) => (file ? this.makeRequest(file) : of(null)))
+  );
+
+  onReject(file: TuiFileLike | readonly TuiFileLike[]): void {
+    this.rejectedFiles$.next(file as TuiFileLike);
+  }
+
+  removeFile(): void {
+    this.control.setValue(null);
+  }
+
+  clearRejected(): void {
+    this.removeFile();
+    this.rejectedFiles$.next(null);
+  }
+
+  makeRequest(file: TuiFileLike): Observable<TuiFileLike | null> {
+    this.loadingFiles$.next(file);
+
+    return timer(1000).pipe(
+      map(() => {
+        if (Math.random() > 0.5) {
+          return file;
+        }
+
+        this.rejectedFiles$.next(file);
+
+        return null;
+      }),
+      finalize(() => this.loadingFiles$.next(null))
+    );
+  }
 
   private readonly dialog = this.dialogService.open<number>(
     new PolymorpheusComponent(BotModalComponent, this.injector),
@@ -283,7 +290,6 @@ export class MainRansomComponent implements OnInit {
         }
       });
   }
-  
 
   async downloadExcel() {
     const workbook = new ExcelJS.Workbook();
@@ -368,22 +374,27 @@ export class MainRansomComponent implements OnInit {
   }
 
   openFileInput(): void {
-    const fileInput: HTMLInputElement = document.getElementById('excelFile') as HTMLInputElement;
+    const fileInput: HTMLInputElement = document.getElementById(
+      'excelFile'
+    ) as HTMLInputElement;
     fileInput.click();
   }
-  
+
   importFile(event: any): void {
     const file: File = event.target.files[0];
     const fileReader: FileReader = new FileReader();
- 
+
     fileReader.onload = (e: any) => {
       const data: string = e.target.result;
       const workbook: XLSX.WorkBook = XLSX.read(data, { type: 'binary' });
       const worksheet: XLSX.WorkSheet = workbook.Sheets[workbook.SheetNames[0]];
-      const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, { header: 1, range: 1 });
-    
+      const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, {
+        header: 1,
+        range: 1
+      });
+
       const requestBody = {
-        task: jsonData.map(item => ({
+        task: jsonData.map((item) => ({
           sku: item[0],
           name: item[1],
           price: item[2],
@@ -391,7 +402,7 @@ export class MainRansomComponent implements OnInit {
           size: item[4],
           query: item[5],
           sex: item[6],
-          address: item[7],
+          address: item[7]
         }))
       };
       this.requestService.createSelfransomTask(requestBody).subscribe(
@@ -399,35 +410,31 @@ export class MainRansomComponent implements OnInit {
           console.log(response);
           location.reload();
           this.alertService
-            .open('', {label: 'Выкупы успешно импортированы!'})
+            .open('', { label: 'Выкупы успешно импортированы!' })
             .subscribe();
         },
         (error) => {
-          console.error("Ау", error);
+          console.error('Ау', error);
           const options: any = { label: 'Ошибка!', status: 'error' };
-          this.alertService.open(
-            'Произошла ошибка при импорте самовыкупов',
-            options
-          ).subscribe(() => {});
+          this.alertService
+            .open('Произошла ошибка при импорте самовыкупов', options)
+            .subscribe(() => {});
         }
       );
     };
-    
+
     fileReader.readAsBinaryString(file);
-    
-  
+
     fileReader.readAsBinaryString(file);
   }
-  
+
   downloadFile() {
     const fileUrl = '../../../../template.xlsx';
     const fileName = 'template.xlsx';
 
     fetch(fileUrl)
-      .then(response => response.blob())
-      .then(blob => saveAs(blob, fileName))
-      .catch(error => console.error('Ошибка загрузки файла:', error));
+      .then((response) => response.blob())
+      .then((blob) => saveAs(blob, fileName))
+      .catch((error) => console.error('Ошибка загрузки файла:', error));
   }
-
-
 }
