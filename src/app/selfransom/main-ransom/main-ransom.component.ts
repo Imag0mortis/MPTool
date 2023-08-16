@@ -1,20 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  Observable,
-  Subject,
-  finalize,
-  first,
-  map,
-  of,
-  switchMap,
-  timer
-} from 'rxjs';
+import { Observable, Subject, finalize, first, map, of, switchMap, timer } from 'rxjs';
 import { AppService } from 'src/app/shared/services/app.service';
 import { RequestService } from 'src/app/shared/services/request.service';
 import { Inject, Injector } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import { TuiAlertService } from '@taiga-ui/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { TuiDialogService } from '@taiga-ui/core';
 import {
   PolymorpheusContent,
@@ -28,6 +19,7 @@ import * as ExcelJS from 'exceljs';
 import * as XLSX from 'xlsx';
 import { TuiFileLike } from '@taiga-ui/kit';
 import { FormControl } from '@angular/forms';
+import { TuiStringHandler } from '@taiga-ui/cdk';
 
 interface mainransom {
   imgLink: string;
@@ -41,15 +33,6 @@ interface mainransom {
   taskID: number;
   taskState: string;
   taskStateNew: { count: number; state: string }[];
-  dictionary: {
-    0: { id: number; state: string };
-    1: { id: number; state: string };
-    2: { id: number; state: string };
-    3: { id: number; state: string };
-    4: { id: number; state: string };
-    5: { id: number; state: string };
-    6: { id: number; state: string };
-  };
   deliveryQR: string | null; // Добавлено поле для QR-кода доставки
 }
 
@@ -68,7 +51,8 @@ export class MainRansomComponent implements OnInit {
   state = '';
   popupActive: boolean;
 
-  dictionary = [
+  dictionary: readonly FilterOption[] = [
+    { id: -1, state: 'Все' },
     { id: 0, state: 'Ожидает оплаты' },
     { id: 1, state: 'Товар доставляется' },
     { id: 7, state: 'Товар готов к выдаче' },
@@ -78,50 +62,54 @@ export class MainRansomComponent implements OnInit {
     { id: 8, state: 'Заказ отменен' },
     { id: 9, state: 'Не получен на ПВЗ' },
     { id: 5, state: 'Архив' },
-    { id: -1, state: 'Все' }
   ];
+
+  filterControl = new FormControl();
+  stringify: TuiStringHandler<FilterOption> = option => option.state;
 
   searchTaskIds: string;
   page = 1;
   pageSize = 20;
 
   readonly control = new FormControl();
-
-  readonly rejectedFiles$ = new Subject<TuiFileLike | null>();
-  readonly loadingFiles$ = new Subject<TuiFileLike | null>();
-  readonly loadedFiles$ = this.control.valueChanges.pipe(
-    switchMap((file) => (file ? this.makeRequest(file) : of(null)))
-  );
-
-  onReject(file: TuiFileLike | readonly TuiFileLike[]): void {
-    this.rejectedFiles$.next(file as TuiFileLike);
-  }
-
-  removeFile(): void {
-    this.control.setValue(null);
-  }
-
-  clearRejected(): void {
-    this.removeFile();
-    this.rejectedFiles$.next(null);
-  }
-
-  makeRequest(file: TuiFileLike): Observable<TuiFileLike | null> {
-    this.loadingFiles$.next(file);
-
-    return timer(1000).pipe(
-      map(() => {
-        if (Math.random() > 0.5) {
-          return file;
-        }
-
-        this.rejectedFiles$.next(file);
-
-        return null;
-      }),
-      finalize(() => this.loadingFiles$.next(null))
+ 
+    readonly rejectedFiles$ = new Subject<TuiFileLike | null>();
+    readonly loadingFiles$ = new Subject<TuiFileLike | null>();
+    readonly loadedFiles$ = this.control.valueChanges.pipe(
+        switchMap(file => (file ? this.makeRequest(file) : of(null))),
     );
-  }
+ 
+    onReject(file: TuiFileLike | readonly TuiFileLike[]): void {
+        this.rejectedFiles$.next(file as TuiFileLike);
+    }
+ 
+    removeFile(): void {
+        this.control.setValue(null);
+    }
+ 
+    clearRejected(): void {
+        this.removeFile();
+        this.rejectedFiles$.next(null);
+    }
+ 
+    makeRequest(file: TuiFileLike): Observable<TuiFileLike | null> {
+        this.loadingFiles$.next(file);
+ 
+        return timer(1000).pipe(
+            map(() => {
+                if (Math.random() > 0.5) {
+                    return file;
+                }
+ 
+                this.rejectedFiles$.next(file);
+ 
+                return null;
+            }),
+            finalize(() => this.loadingFiles$.next(null)),
+        );
+    }
+
+    
 
   private readonly dialog = this.dialogService.open<number>(
     new PolymorpheusComponent(BotModalComponent, this.injector),
@@ -290,10 +278,16 @@ export class MainRansomComponent implements OnInit {
         }
       });
   }
+  
 
-  async downloadExcel() {
-    const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('Выкупы');
+  async downloadExcel(selectedFilterId: number) {
+    const params = new HttpParams()
+    .set('page', '1')
+    .set('pageSize', '1000000')
+    .set('filter', selectedFilterId.toString());
+
+  const workbook = new ExcelJS.Workbook();
+  const worksheet = workbook.addWorksheet('Выкупы');
     const headers = [
       'Выкуп',
       'Получатель',
@@ -309,16 +303,16 @@ export class MainRansomComponent implements OnInit {
       'Группа выкупов',
       'QR код доставки'
     ];
-
+  
     headers.forEach((header, index) => {
       const column = worksheet.getColumn(index + 1);
       column.header = header;
       column.width = header.length + 5;
     });
-
-    this.requestService.getSelfransomsExcel().subscribe((response) => {
+  
+    this.requestService.getSelfransomsExcel(params).subscribe((response) => {
       const ransoms = (response as any).ransoms;
-
+  
       for (const ransom of ransoms) {
         const row = [
           ransom.buyID,
@@ -335,20 +329,20 @@ export class MainRansomComponent implements OnInit {
           ransom.taskID,
           ransom.deliveryQR
         ];
-
+  
         const lastRowNumber = worksheet.rowCount + 1;
         const lastRow = worksheet.getRow(lastRowNumber);
         lastRow.values = row;
-
+  
         lastRow.eachCell({ includeEmpty: true }, (cell: any) => {
           cell.alignment = { wrapText: true };
           cell.wordWrap = true;
-
+  
           worksheet.getRow(cell.row).height = 45;
           cell.alignment.horizontal = 'left';
           cell.alignment.vertical = 'top';
         });
-
+  
         if (ransom.deliveryQR !== '') {
           const qrCellAddress = `M${lastRowNumber}`;
           const qrCell: any = worksheet.getCell(qrCellAddress);
@@ -363,7 +357,7 @@ export class MainRansomComponent implements OnInit {
           qrCell.alignment = { vertical: 'middle', horizontal: 'left' };
         }
       }
-
+  
       workbook.xlsx.writeBuffer().then((data) => {
         const blob = new Blob([data], {
           type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
@@ -372,29 +366,25 @@ export class MainRansomComponent implements OnInit {
       });
     });
   }
+  
 
   openFileInput(): void {
-    const fileInput: HTMLInputElement = document.getElementById(
-      'excelFile'
-    ) as HTMLInputElement;
+    const fileInput: HTMLInputElement = document.getElementById('excelFile') as HTMLInputElement;
     fileInput.click();
   }
-
+  
   importFile(event: any): void {
     const file: File = event.target.files[0];
     const fileReader: FileReader = new FileReader();
-
+ 
     fileReader.onload = (e: any) => {
       const data: string = e.target.result;
       const workbook: XLSX.WorkBook = XLSX.read(data, { type: 'binary' });
       const worksheet: XLSX.WorkSheet = workbook.Sheets[workbook.SheetNames[0]];
-      const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, {
-        header: 1,
-        range: 1
-      });
-
+      const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, { header: 1, range: 1 });
+    
       const requestBody = {
-        task: jsonData.map((item) => ({
+        task: jsonData.map(item => ({
           sku: item[0],
           name: item[1],
           price: item[2],
@@ -402,7 +392,7 @@ export class MainRansomComponent implements OnInit {
           size: item[4],
           query: item[5],
           sex: item[6],
-          address: item[7]
+          address: item[7],
         }))
       };
       this.requestService.createSelfransomTask(requestBody).subscribe(
@@ -410,31 +400,40 @@ export class MainRansomComponent implements OnInit {
           console.log(response);
           location.reload();
           this.alertService
-            .open('', { label: 'Выкупы успешно импортированы!' })
+            .open('', {label: 'Выкупы успешно импортированы!'})
             .subscribe();
         },
         (error) => {
-          console.error('Ау', error);
+          console.error("Ау", error);
           const options: any = { label: 'Ошибка!', status: 'error' };
-          this.alertService
-            .open('Произошла ошибка при импорте самовыкупов', options)
-            .subscribe(() => {});
+          this.alertService.open(
+            'Произошла ошибка при импорте самовыкупов',
+            options
+          ).subscribe(() => {});
         }
       );
     };
-
+    
     fileReader.readAsBinaryString(file);
-
+    
+  
     fileReader.readAsBinaryString(file);
   }
-
+  
   downloadFile() {
     const fileUrl = '../../../../template.xlsx';
     const fileName = 'template.xlsx';
 
     fetch(fileUrl)
-      .then((response) => response.blob())
-      .then((blob) => saveAs(blob, fileName))
-      .catch((error) => console.error('Ошибка загрузки файла:', error));
+      .then(response => response.blob())
+      .then(blob => saveAs(blob, fileName))
+      .catch(error => console.error('Ошибка загрузки файла:', error));
   }
+
+
+}
+
+interface FilterOption {
+  id: number;
+  state: string;
 }

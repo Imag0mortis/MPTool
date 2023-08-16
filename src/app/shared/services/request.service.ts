@@ -288,12 +288,7 @@ export class RequestService {
     return this.http.get(environment.api + 'wb_liker_selfbuy_get_task.php');
   }
 
-  public getSelfransomsExcel() {
-    const params = new HttpParams()
-      .set('page', '1')
-      .set('pageSize', '1000000')
-      .set('filter', '-1');
-
+  public getSelfransomsExcel(params: HttpParams) {
     return this.http.get(environment.api + 'userRansoms.php', { params });
   }
 
