@@ -218,7 +218,9 @@ export class CardTableComponent implements OnInit, OnDestroy {
 
   cancelTask(id: number) {
     this.request.cancelRansomTask(id).subscribe(
-      (r) => window.location.reload(),
+      (r) => {
+        window.location.reload();
+      },
       (e: unknown) => {
         const options: any = {
           label: 'Произошла ошибка отмены! Повторите попытку позднее!',
