@@ -45,6 +45,8 @@ interface mainransom {
   deliveryQR: string | null; // Добавлено поле для QR-кода доставки
 }
 
+declare var Intercom: any;
+
 @Component({
   selector: 'app-main-ransom',
   templateUrl: './main-ransom.component.html',
@@ -158,7 +160,7 @@ export class MainRansomComponent implements OnInit, AfterViewInit  {
     private requestService: RequestService
   ) {}
   ngAfterViewInit(): void {
-    this.showWelcomeModal();
+    // this.showWelcomeModal();
   }
 
   showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
@@ -206,6 +208,13 @@ export class MainRansomComponent implements OnInit, AfterViewInit  {
       this.showBotDialog();
     } else {
       //
+    }
+  }
+
+  startIntercomTour() {
+    // Здесь запускается тур Intercom
+    if (Intercom) {
+      Intercom('startTour', 'tour_id');
     }
   }
 

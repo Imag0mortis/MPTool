@@ -149,6 +149,11 @@ export class CreateRansomComponent implements OnInit, AfterViewInit{
         offset: 10,
       },
     });
+    this.item.sex = null;
+  }
+
+  onSexChange(newValue: number) {
+    this.item.sex = newValue;
   }
 
 
@@ -252,10 +257,7 @@ export class CreateRansomComponent implements OnInit, AfterViewInit{
           const extendedResult = { ...r };
           extendedResult.quantity = 1;
           extendedResult.request = '';
-          extendedResult.sex = {
-            value: 0,
-            name: 'Мужской'
-          };
+          extendedResult.sex = undefined;
 
           // console.log(r);
 
@@ -287,33 +289,39 @@ export class CreateRansomComponent implements OnInit, AfterViewInit{
 
   // eslint-disable-next-line sonarjs/cognitive-complexity
   createTask() {
-    const body: any[] = [];
-    let validateOk = true;
+     const body: any[] = [];
+  let validateOk = true;
 
-    this.data.forEach((el, i: number) => {
-      if (!el.address || !el.quantity || !el.request || el.quantity <= 0) {
-        const options: any = { status: 'error' };
-        this.alertService
-          .open(
-            'Заполнены не все поля,проверьте поисковой запрос, адрес и количество!',
-            options
-          )
-          .subscribe();
-        validateOk = false;
-      } else {
-        const item = {
-          sku: el.sku,
-          name: el.name,
-          price: el.price,
-          quantity: Number(el.quantity),
-          query: el.request,
-          sex: el.sex?.name,
-          address: el.address?.addressName,
-          size: el.sizes[0].Key.length === 0 ? '' : el.size.name
-        };
-        body.push(item);
-      }
-    });
+  this.data.forEach((el, i: number) => {
+    if (
+      !el.address ||
+      !el.quantity ||
+      !el.request ||
+      el.quantity <= 0 ||
+      !el.sex
+    ) {
+      const options: any = { status: 'error' };
+      this.alertService
+        .open(
+          'Заполнены не все поля, проверьте поисковой запрос, адрес, количество и пол!',
+          options
+        )
+        .subscribe();
+      validateOk = false;
+    } else {
+      const item = {
+        sku: el.sku,
+        name: el.name,
+        price: el.price,
+        quantity: Number(el.quantity),
+        query: el.request,
+        sex: el.sex?.name,
+        address: el.address?.addressName,
+        size: el.sizes[0].Key.length === 0 ? '' : el.size.name
+      };
+      body.push(item);
+    }
+  });
 
     //Полный массив айдишников адресов
 
@@ -416,15 +424,23 @@ export class CreateRansomComponent implements OnInit, AfterViewInit{
   importFile(event: any): void {
     const file: File = event.target.files[0];
     const fileReader: FileReader = new FileReader();
-  
+
     fileReader.onload = (e: any) => {
       const data: string = e.target.result;
       const workbook: XLSX.WorkBook = XLSX.read(data, { type: 'binary' });
       const worksheet: XLSX.WorkSheet = workbook.Sheets[workbook.SheetNames[0]];
       const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, { header: 1, range: 1 });
-  
+
+      // Filter out empty arrays
+      const nonEmptyArrays = jsonData.filter(item => item.some((value: string | undefined) => value !== undefined && value !== ''));
+
+      if (nonEmptyArrays.length === 0) {
+        console.log('No data found in the file.');
+        return;
+      }
+
       const requestBody = {
-        task: jsonData.map(item => ({
+        task: nonEmptyArrays.map(item => ({
           sku: item[0],
           name: item[1],
           price: item[2],
@@ -435,7 +451,7 @@ export class CreateRansomComponent implements OnInit, AfterViewInit{
           address: item[7],
         }))
       };
-  
+
       this.request.createSelfransomTask(requestBody).subscribe(
         (response) => {
           console.log(response);
@@ -449,11 +465,11 @@ export class CreateRansomComponent implements OnInit, AfterViewInit{
           const options: any = { label: 'Ошибка!', status: 'error' };
           this.alertService
             .open('Произошла ошибка при импорте самовыкупов', options)
-            .subscribe(() => {});
+            .subscribe(() => { });
         }
       );
     };
-  
+
     fileReader.readAsBinaryString(file);
   }
   

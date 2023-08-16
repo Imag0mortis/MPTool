@@ -189,19 +189,19 @@
                 </ng-template>
               </td>
 
-              <td style="max-width: 120px; width: 120px" tuiTd *tuiCell="'sex'" tourAnchor="sex">
+              <td style="max-width: 120px; width: 120px" tuiTd *tuiCell="'sex'" tourAnchor="sex" [ngStyle]="{'border': item.sex === undefined ? '3px solid red' : null}">
                 <tui-select
                   tuiTextfieldSize="m"
                   [tuiTextfieldLabelOutside]="true"
-                  [valueContent]="item.sex!.name"
                   [(ngModel)]="item.sex"
+                  (ngModelChange)="onSexChange($event)"
                 >
                   <ng-template tuiDataList>
                     <tui-data-list>
                       <button
                         *ngFor="let item of sexDict"
                         tuiOption
-                        [value]="{ name: item.name, value: item.value }"
+                        [value]="item.name"
                       >
                         {{ item.name }}
                       </button>
@@ -209,6 +209,7 @@
                   </ng-template>
                 </tui-select>
               </td>
+              
               <td
                 tuiTd
                 *tuiCell="'request'"

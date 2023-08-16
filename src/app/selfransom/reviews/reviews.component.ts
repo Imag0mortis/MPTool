@@ -14,6 +14,8 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { AppService } from 'src/app/shared/services/app.service';
 import { FormControl } from '@angular/forms';
 
+declare var Intercom: any;
+
 @Component({
   selector: 'app-reviews',
   templateUrl: './reviews.component.html',
@@ -62,6 +64,13 @@ export class ReviewsComponent {
 
   showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
     this.dialogService.open(content).subscribe();
+  }
+
+  startIntercomTour() {
+    // Здесь запускается тур Intercom
+    if (Intercom) {
+      Intercom('startTour', '464113');
+    }
   }
 
   buyFeedbackPackages(quantity: number) {
