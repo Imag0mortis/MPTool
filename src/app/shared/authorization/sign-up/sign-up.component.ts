@@ -95,18 +95,20 @@ export class SignUpComponent {
           this.alertService.open(
             'Вы сейчас будете перенаправлены на страницу логина',
             options
-          );
+          )
+          .subscribe();
+
           setTimeout(() => {
             this.appService.goLogin();
           }, 2000);
         },
-        (e: unknown) => {
-          console.log(e);
+        (error) => {
+          console.log(error);
           const options: any = { label: 'Ошибка!', status: 'error' };
-          this.alertService.open(
-            'Произошла ошибка при отправке запроса! Повторите попытку позднее',
+          this.alertService.open(error.error.error,
             options
-          );
+          )
+          .subscribe();
         }
       );
   }

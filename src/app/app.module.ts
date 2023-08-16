@@ -35,6 +35,7 @@ import { TuiMoneyModule } from '@taiga-ui/addon-commerce';
 import { TuiAutoFocusModule } from '@taiga-ui/cdk';
 import { TuiInputCopyModule } from '@taiga-ui/kit';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 
 registerLocaleData(localeRu);
 
@@ -78,6 +79,7 @@ registerLocaleData(localeRu);
       useClass: AuthInterceptor,
       multi: true
     },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     {
       provide: LOCALE_ID,
       useValue: 'ru'

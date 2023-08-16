@@ -319,15 +319,23 @@ export class CreateRansomComponent {
   importFile(event: any): void {
     const file: File = event.target.files[0];
     const fileReader: FileReader = new FileReader();
-  
+
     fileReader.onload = (e: any) => {
       const data: string = e.target.result;
       const workbook: XLSX.WorkBook = XLSX.read(data, { type: 'binary' });
       const worksheet: XLSX.WorkSheet = workbook.Sheets[workbook.SheetNames[0]];
       const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, { header: 1, range: 1 });
-  
+
+      // Filter out empty arrays
+      const nonEmptyArrays = jsonData.filter(item => item.some((value: string | undefined) => value !== undefined && value !== ''));
+
+      if (nonEmptyArrays.length === 0) {
+        console.log('No data found in the file.');
+        return;
+      }
+
       const requestBody = {
-        task: jsonData.map(item => ({
+        task: nonEmptyArrays.map(item => ({
           sku: item[0],
           name: item[1],
           price: item[2],
@@ -338,7 +346,7 @@ export class CreateRansomComponent {
           address: item[7],
         }))
       };
-  
+
       this.request.createSelfransomTask(requestBody).subscribe(
         (response) => {
           console.log(response);
@@ -352,11 +360,11 @@ export class CreateRansomComponent {
           const options: any = { label: 'Ошибка!', status: 'error' };
           this.alertService
             .open('Произошла ошибка при импорте самовыкупов', options)
-            .subscribe(() => {});
+            .subscribe(() => { });
         }
       );
     };
-  
+
     fileReader.readAsBinaryString(file);
   }
   
