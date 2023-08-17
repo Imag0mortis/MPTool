@@ -45,8 +45,6 @@ export class ChoosenComponent implements OnInit {
   }
 
   create() {
-    //Колхоз
-
     const body: LikerFavoritesTask = {
       link: this.link,
       hours: this.period * 24,

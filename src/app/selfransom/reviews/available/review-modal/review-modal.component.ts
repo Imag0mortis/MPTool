@@ -343,6 +343,8 @@ export class ReviewModalComponent implements OnInit {
               '№' +
               el.buy_id +
               ' ' +
+              el.accountName +
+              ' ' +
               el.pickupAddress +
               ' ' +
               el.sex +
@@ -490,6 +492,7 @@ interface ransom {
 }
 
 interface BuyRansom {
+  accountName: string;
   buy_id: number;
   pickupAddress: string;
   query: string;
