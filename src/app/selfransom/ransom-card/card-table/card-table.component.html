@@ -27,9 +27,7 @@
 
       <div
         *ngIf="
-          item.deliveryState === 'не оплачен' &&
-            item.taskState != 'Ошибка' &&
-            item.taskState != 'Отменено';
+          item.deliveryState === 'не оплачен' && item.taskState != 'Отменено';
           else deliveryBlock
         "
         class="table_buttons"
@@ -73,58 +71,61 @@
             </button>
           </div>
         </ng-template>
-        <button
-          tuiButton
-          [disabled]="!!item.checkState"
-          (click)="checkPayment(i, item.buyID)"
-          type="button"
-          class="tui-space_right-3 tui-space_bottom-3"
-          size="s"
-        >
-          Я оплатил
-        </button>
 
-        <button
-          *ngIf="item.taskState === 'Товар доставляется'"
-          tuiButton
-          (click)="showDialog(template_tracking)"
-          type="button"
-          class="tui-space_right-3 tui-space_bottom-3"
-          size="s"
-        >
-          Отследить свою доставку
-        </button>
+        <ng-container *ngIf="item.taskState !== 'Ошибка'">
+          <button
+            tuiButton
+            [disabled]="!!item.checkState"
+            (click)="checkPayment(i, item.buyID)"
+            type="button"
+            class="tui-space_right-3 tui-space_bottom-3"
+            size="s"
+          >
+            Я оплатил
+          </button>
 
-        <button
-          *ngIf="item.paymentState === 'initial'; else paymentQR"
-          tuiButton
-          (click)="requestQR(i, item.buyID)"
-          type="button"
-          class="tui-space_right-3 tui-space_bottom-3"
-          size="s"
-        >
-          Получить код для оплаты
-        </button>
+          <button
+            *ngIf="item.taskState === 'Товар доставляется'"
+            tuiButton
+            (click)="showDialog(template_tracking)"
+            type="button"
+            class="tui-space_right-3 tui-space_bottom-3"
+            size="s"
+          >
+            Отследить свою доставку
+          </button>
 
-        <div class="qr_search">
-          <ng-template #paymentQR>
-            <span *ngIf="item.paymentState === 'wait'" class="bot_search">
-              {{ item.searchState }}
-            </span>
-            <button
-              [showLoader]="item.paymentState === 'wait'"
-              tuiButton
-              (click)="showQR(qrModal, item.paymentQR!)"
-              type="button"
-              [disabled]="item.paymentState === 'wait'"
-              class="tui-space_right-3 tui-space_bottom-3"
-              [icon]=""
-              size="s"
-            >
-              <img src="../../../assets/icons/qr_template.svg" />
-            </button>
-          </ng-template>
-        </div>
+          <button
+            *ngIf="item.paymentState === 'initial'; else paymentQR"
+            tuiButton
+            (click)="requestQR(i, item.buyID)"
+            type="button"
+            class="tui-space_right-3 tui-space_bottom-3"
+            size="s"
+          >
+            Получить код для оплаты
+          </button>
+
+          <div class="qr_search">
+            <ng-template #paymentQR>
+              <span *ngIf="item.paymentState === 'wait'" class="bot_search">
+                {{ item.searchState }}
+              </span>
+              <button
+                [showLoader]="item.paymentState === 'wait'"
+                tuiButton
+                (click)="showQR(qrModal, item.paymentQR!)"
+                type="button"
+                [disabled]="item.paymentState === 'wait'"
+                class="tui-space_right-3 tui-space_bottom-3"
+                [icon]=""
+                size="s"
+              >
+                <img src="../../../assets/icons/qr_template.svg" />
+              </button>
+            </ng-template>
+          </div>
+        </ng-container>
 
         <!--    <button tuiButton type="button" class="tui-space_right-3 tui-space_bottom-3" [icon]="
                     " size="s"> Вопросы по оплате
@@ -169,6 +170,7 @@
         Арт. {{ item.sku }}
       </div>
       <div class="ransom_description">{{ item.name }}</div>
+      <div class="ransom_query">{{ item.query }}</div>
       <div class="cost">{{ item.price }} ₽</div>
     </div>
     <div class="expanded">
@@ -224,6 +226,7 @@
             Арт. {{ item.sku }}
           </div>
           <div class="ransom_description">{{ item.name }}</div>
+          <div class="ransom_query">{{ item.query }}</div>
           <div class="cost">Стоимость: {{ item.price }} ₽</div>
           <p class="mobile_data">
             Получатель:
@@ -241,7 +244,7 @@
             Код получения:
             <span>{{ item.customerCode }}</span>
           </p>
-          <!-- <div class="recipient"> 
+          <!-- <div class="recipient">
                             <h5>Получатель:</h5>
                             <h6>{{item.customerName}}</h6>
                         </div>
@@ -260,13 +263,11 @@
         </div>
       </div>
     </div>
-
+    <!-- это для мобилок -->
     <div class="buttons_container">
       <div
         *ngIf="
-          item.deliveryState === 'не оплачен' &&
-          item.taskState != 'Ошибка' &&
-          item.taskState != 'Отменено'
+          item.deliveryState === 'не оплачен' && item.taskState != 'Отменено'
         "
         class="table_buttons"
       >
@@ -280,7 +281,6 @@
         >
           Отменить
         </button>
-
         <ng-template #template let-observer>
           <p i18n class="modal_header">ВЫ УВЕРЕНЫ?</p>
           <p class="modal_middle">
@@ -308,42 +308,44 @@
             </button>
           </div>
         </ng-template>
-        <button
-          tuiButton
-          [disabled]="!!item.checkState"
-          (click)="checkPayment(i, item.buyID)"
-          type="button"
-          class="mobile_check_payment"
-          size="m"
-        >
-          Я оплатил
-        </button>
-        <button
-          *ngIf="item.paymentState === 'initial'; else paymentQR"
-          tuiButton
-          (click)="requestQR(i, item.buyID)"
-          type="button"
-          class="mobile_get_qr"
-          size="m"
-        >
-          Получить код для оплаты
-        </button>
-        <div class="qr_search">
-          <ng-template #paymentQR>
-            <button
-              [showLoader]="item.paymentState === 'wait'"
-              tuiButton
-              (click)="showQR(qrModal, item.paymentQR!)"
-              type="button"
-              [disabled]="item.paymentState === 'wait'"
-              class="mobile_qr_button"
-              [icon]=""
-              size="m"
-            >
-              <img src="../../../assets/icons/qr_template.svg" />
-            </button>
-          </ng-template>
-        </div>
+        <ng-container *ngIf="item.taskState !== 'Ошибка'">
+          <button
+            tuiButton
+            [disabled]="!!item.checkState"
+            (click)="checkPayment(i, item.buyID)"
+            type="button"
+            class="mobile_check_payment"
+            size="m"
+          >
+            Я оплатил
+          </button>
+          <button
+            *ngIf="item.paymentState === 'initial'; else paymentQR"
+            tuiButton
+            (click)="requestQR(i, item.buyID)"
+            type="button"
+            class="mobile_get_qr"
+            size="m"
+          >
+            Получить код для оплаты
+          </button>
+          <div class="qr_search">
+            <ng-template #paymentQR>
+              <button
+                [showLoader]="item.paymentState === 'wait'"
+                tuiButton
+                (click)="showQR(qrModal, item.paymentQR!)"
+                type="button"
+                [disabled]="item.paymentState === 'wait'"
+                class="mobile_qr_button"
+                [icon]=""
+                size="m"
+              >
+                <img src="../../../assets/icons/qr_template.svg" />
+              </button>
+            </ng-template>
+          </div>
+        </ng-container>
         <!--    <button tuiButton type="button" class="tui-space_right-3 tui-space_bottom-3" [icon]="
                     " size="s"> Вопросы по оплате
                 </button> -->

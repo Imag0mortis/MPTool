@@ -89,10 +89,40 @@ export const MenuConfiguration: MenuConf[] = [
         link: '/telegrambot'
       }
     ]
-  }
+  },
 ];
 
+export const SupportConfiguration: SupportConf[] = [
+    {
+      name: 'Техподдержка',
+      icon: 'technical-support-svgrepo-com.svg',
+      expanded: false,
+      childs: [
+        {
+          name: 'Напишите нам в Telegram',
+          link: 'https://t.me/annamptool_support'
+        },
+        {
+          name: 'Напишите нам в WhatsApp',
+          link: 'https://wa.me/79856270105'
+        },
+        {
+          name: 'Написать нам на почту',
+          link: 'mailto:support@mptool.pro'
+        }
+      ]
+  },
+]
+
 interface MenuConf {
+  name: string;
+  icon: string;
+  expanded: boolean;
+  childs?: MenuChildConf[];
+  link?: string;
+}
+
+interface SupportConf {
   name: string;
   icon: string;
   expanded: boolean;

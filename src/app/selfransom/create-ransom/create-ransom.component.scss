@@ -201,7 +201,7 @@ h2 {
   margin-left: 1rem;
 }
 
-.button_container button{
+.button_container button {
   width: 16.4rem;
 }
 
@@ -247,6 +247,10 @@ h2 {
   justify-content: center;
   gap: 1rem;
   margin-left: 1rem;
+}
+.download{
+  width: 100%;
+  margin-top: 1rem;
 }
 
 .guide{
@@ -377,9 +381,13 @@ h2 {
     width: 96.7%;
   }
   .excel_uploading {
-      margin-left: 5%;
-      margin-top: 1rem;
-      width: 118.7%;
+    margin-left: 5%;
+    margin-top: 1rem;
+    width: 118.7%;
+  }
+  .download{
+    width: 100%;
+    margin-top: 1rem;
   }
 }
 
@@ -411,5 +419,7 @@ h2 {
     display: flex;
     justify-content: space-between; /* Распределение кнопок по ширине */
     margin-top: 1rem;
+    width: inherit;
+    margin-left: 0;
   }
 }

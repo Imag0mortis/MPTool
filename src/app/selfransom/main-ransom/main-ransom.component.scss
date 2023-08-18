@@ -165,6 +165,7 @@ tui-tabs-with-more {
   display: flex;
   align-items: center;
   width: 100%;
+  margin-top: 1rem;
 }
 
 .search-button {
@@ -183,12 +184,25 @@ tui-tabs-with-more {
   margin-left: 1rem;
 }
 
-.button_container button{
+.button_container button {
   width: 16.4rem;
 }
 
-tui-input-files{
+tui-input-files {
   margin-top: 2rem;
+}
+tui-select{
+  margin-top: 1rem;  
+}
+
+.save_as{
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.excel_cancel{
+  width: 100%;
+  margin-top: 1rem;
 }
 
 .guide{
@@ -222,6 +236,17 @@ tui-input-files{
   background-color: red;
   color: white; /* Чтобы текст был хорошо виден на красном фоне */
 }
+.search_buttons{
+  margin-left: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+.search{
+  width: 10rem;
+}
+.clear{
+  width: 10rem;
+}
 
 @media screen and (max-width: 768px) {
   .main_container {
@@ -251,5 +276,17 @@ tui-input-files{
   .excel_uploading {
     margin-left: 0;
     width: 96.7%;
+  }
+  .search_buttons{
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    margin-left: 0rem;
+  }
+  .search{
+    width: 47%;
+  }
+  .clear{
+    width: 47%;
   }
 }

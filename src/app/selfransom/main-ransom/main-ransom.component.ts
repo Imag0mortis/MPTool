@@ -5,7 +5,7 @@ import { RequestService } from 'src/app/shared/services/request.service';
 import { Inject, Injector } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import { TuiAlertService } from '@taiga-ui/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { TuiDialogService } from '@taiga-ui/core';
 import {
   PolymorpheusContent,
@@ -19,7 +19,7 @@ import * as ExcelJS from 'exceljs';
 import * as XLSX from 'xlsx';
 import { TuiFileLike } from '@taiga-ui/kit';
 import { FormControl } from '@angular/forms';
-import { IStepOption, TourService } from 'ngx-ui-tour-tui-dropdown';
+import { TuiStringHandler } from '@taiga-ui/cdk';
 
 interface mainransom {
   imgLink: string;
@@ -33,15 +33,6 @@ interface mainransom {
   taskID: number;
   taskState: string;
   taskStateNew: { count: number; state: string }[];
-  dictionary: {
-    0: { id: number; state: string };
-    1: { id: number; state: string };
-    2: { id: number; state: string };
-    3: { id: number; state: string };
-    4: { id: number; state: string };
-    5: { id: number; state: string };
-    6: { id: number; state: string };
-  };
   deliveryQR: string | null; // Добавлено поле для QR-кода доставки
 }
 
@@ -52,25 +43,7 @@ declare var Intercom: any;
   templateUrl: './main-ransom.component.html',
   styleUrls: ['./main-ransom.component.scss']
 })
-export class MainRansomComponent implements OnInit, AfterViewInit  {
-  @ViewChild('hello_modal', { read: TemplateRef }) hello_modal!: TemplateRef<any>;
-  private readonly tourService = inject(TourService);
-  private readonly steps: IStepOption[] = [
-    {
-      anchorId: 'start-button',
-      title: 'Итак начнём!',
-      content: 'Для начала нажмите на кнопку создания самовыкупа',
-      prevBtnTitle: 'Назад',
-      nextBtnTitle: 'Далее',
-    },
-    {
-      anchorId: 'selfRansoms',
-      title: 'Итак начнём!',
-      content: 'Для начала нажмите на кнопку создания самовыкупа',
-      prevBtnTitle: 'Назад',
-      nextBtnTitle: 'Далее',
-    },
-  ];
+export class MainRansomComponent implements OnInit {
   taskStates = [];
   cards: mainransom[] = [];
   activeItemIndex = 0;
@@ -80,7 +53,8 @@ export class MainRansomComponent implements OnInit, AfterViewInit  {
   state = '';
   popupActive: boolean;
 
-  dictionary = [
+  dictionary: readonly FilterOption[] = [
+    { id: -1, state: 'Все' },
     { id: 0, state: 'Ожидает оплаты' },
     { id: 1, state: 'Товар доставляется' },
     { id: 7, state: 'Товар готов к выдаче' },
@@ -90,8 +64,10 @@ export class MainRansomComponent implements OnInit, AfterViewInit  {
     { id: 8, state: 'Заказ отменен' },
     { id: 9, state: 'Не получен на ПВЗ' },
     { id: 5, state: 'Архив' },
-    { id: -1, state: 'Все' }
   ];
+
+  filterControl = new FormControl();
+  stringify: TuiStringHandler<FilterOption> = option => option.state;
 
   searchTaskIds: string;
   page = 1;
@@ -195,35 +171,13 @@ export class MainRansomComponent implements OnInit, AfterViewInit  {
 
   ngOnInit(): void {
     this.getData();
-    this.startTour();
     this.getDataRansoms(this.page);
-    this.tourService.initialize(this.steps, {
-      enableBackdrop: true,
-      backdropConfig: {
-        offset: 10,
-      },
-    });
 
     if (this.popupActive === false) {
       this.showBotDialog();
     } else {
       //
     }
-  }
-
-  startIntercomTour() {
-    // Здесь запускается тур Intercom
-    if (Intercom) {
-      Intercom('startTour', 'tour_id');
-    }
-  }
-
-  showWelcomeModal(): void {
-    this.showDialog(this.hello_modal);
-  }
-  
-  startTour() {
-    this.tourService.start();
   }
 
   checkBot() {
@@ -331,9 +285,14 @@ export class MainRansomComponent implements OnInit, AfterViewInit  {
   }
   
 
-  async downloadExcel() {
-    const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('Выкупы');
+  async downloadExcel(selectedFilterId: number) {
+    const params = new HttpParams()
+    .set('page', '1')
+    .set('pageSize', '1000000')
+    .set('filter', selectedFilterId.toString());
+
+  const workbook = new ExcelJS.Workbook();
+  const worksheet = workbook.addWorksheet('Выкупы');
     const headers = [
       'Выкуп',
       'Получатель',
@@ -349,16 +308,16 @@ export class MainRansomComponent implements OnInit, AfterViewInit  {
       'Группа выкупов',
       'QR код доставки'
     ];
-
+  
     headers.forEach((header, index) => {
       const column = worksheet.getColumn(index + 1);
       column.header = header;
       column.width = header.length + 5;
     });
-
-    this.requestService.getSelfransomsExcel().subscribe((response) => {
+  
+    this.requestService.getSelfransomsExcel(params).subscribe((response) => {
       const ransoms = (response as any).ransoms;
-
+  
       for (const ransom of ransoms) {
         const row = [
           ransom.buyID,
@@ -375,20 +334,20 @@ export class MainRansomComponent implements OnInit, AfterViewInit  {
           ransom.taskID,
           ransom.deliveryQR
         ];
-
+  
         const lastRowNumber = worksheet.rowCount + 1;
         const lastRow = worksheet.getRow(lastRowNumber);
         lastRow.values = row;
-
+  
         lastRow.eachCell({ includeEmpty: true }, (cell: any) => {
           cell.alignment = { wrapText: true };
           cell.wordWrap = true;
-
+  
           worksheet.getRow(cell.row).height = 45;
           cell.alignment.horizontal = 'left';
           cell.alignment.vertical = 'top';
         });
-
+  
         if (ransom.deliveryQR !== '') {
           const qrCellAddress = `M${lastRowNumber}`;
           const qrCell: any = worksheet.getCell(qrCellAddress);
@@ -403,7 +362,7 @@ export class MainRansomComponent implements OnInit, AfterViewInit  {
           qrCell.alignment = { vertical: 'middle', horizontal: 'left' };
         }
       }
-
+  
       workbook.xlsx.writeBuffer().then((data) => {
         const blob = new Blob([data], {
           type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
@@ -412,6 +371,7 @@ export class MainRansomComponent implements OnInit, AfterViewInit  {
       });
     });
   }
+  
 
   openFileInput(): void {
     const fileInput: HTMLInputElement = document.getElementById('excelFile') as HTMLInputElement;
@@ -476,4 +436,9 @@ export class MainRansomComponent implements OnInit, AfterViewInit  {
   }
 
 
+}
+
+interface FilterOption {
+  id: number;
+  state: string;
 }

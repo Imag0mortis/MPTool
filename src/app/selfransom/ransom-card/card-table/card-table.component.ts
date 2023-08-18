@@ -44,7 +44,7 @@ export class CardTableComponent implements OnInit, OnDestroy {
   public deliveryQRsvg = '';
   address = '';
   dialog: any;
-  timerCheckQr: NodeJS.Timer;
+  timerCheckQr: any;
 
   public trackingStatusV2: any;
 
@@ -218,7 +218,9 @@ export class CardTableComponent implements OnInit, OnDestroy {
 
   cancelTask(id: number) {
     this.request.cancelRansomTask(id).subscribe(
-      (r) => window.location.reload(),
+      (r) => {
+        window.location.reload();
+      },
       (e: unknown) => {
         const options: any = {
           label: 'Произошла ошибка отмены! Повторите попытку позднее!',
