@@ -299,6 +299,7 @@ h2 {
   .mobile_ransom {
     display: flex;
     flex-direction: column;
+    row-gap: 1rem;
   }
   .account-input {
     width: 100%;
@@ -401,5 +402,7 @@ h2 {
     display: flex;
     justify-content: space-between; /* Распределение кнопок по ширине */
     margin-top: 1rem;
+    width: inherit;
+    margin-left: 0;
   }
 }

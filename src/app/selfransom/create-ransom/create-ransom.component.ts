@@ -1,4 +1,4 @@
-import { Component, Inject, Injector } from '@angular/core';
+import { Component, Inject, Injector, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   TuiAlertService,
@@ -24,7 +24,7 @@ import * as XLSX from 'xlsx';
   templateUrl: './create-ransom.component.html',
   styleUrls: ['./create-ransom.component.scss']
 })
-export class CreateRansomComponent {
+export class CreateRansomComponent implements OnInit {
   sku: number | undefined;
   data: WbPosition[] = [];
   numChars = 0;
@@ -69,6 +69,10 @@ export class CreateRansomComponent {
     @Inject(TuiAlertService)
     private readonly alertService: TuiAlertService
   ) {}
+
+  ngOnInit(): void {
+    this.item.sex = null;
+  }
 
   private readonly dialog = this.dialogService.open<Address>(
     new PolymorpheusComponent(MapModalComponent, this.injector),
@@ -162,10 +166,6 @@ export class CreateRansomComponent {
           const extendedResult = { ...r };
           extendedResult.quantity = 1;
           extendedResult.request = '';
-          extendedResult.sex = {
-            value: 0,
-            name: 'Мужской'
-          };
 
           // console.log(r);
 
@@ -201,7 +201,13 @@ export class CreateRansomComponent {
     let validateOk = true;
 
     this.data.forEach((el, i: number) => {
-      if (!el.address || !el.quantity || !el.request || el.quantity <= 0) {
+      if (
+        !el.address ||
+        !el.quantity ||
+        !el.request ||
+        el.quantity <= 0 ||
+        !el.sex
+      ) {
         const options: any = { status: 'error' };
         this.alertService
           .open(
