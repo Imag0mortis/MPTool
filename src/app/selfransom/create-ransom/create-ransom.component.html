@@ -205,8 +205,8 @@
                 <tui-select
                   tuiTextfieldSize="m"
                   [tuiTextfieldLabelOutside]="true"
+                  [valueContent]="item.sex?.name"
                   [(ngModel)]="item.sex"
-                  (ngModelChange)="onSexChange($event)"
                 >
                   <ng-template tuiDataList>
                     <tui-data-list>
@@ -363,7 +363,7 @@
                       <tui-select
                         tuiTextfieldSize="s"
                         [tuiTextfieldLabelOutside]="true"
-                        [valueContent]="item.sex!.name"
+                        [valueContent]="item.sex?.name"
                         [(ngModel)]="item.sex"
                       >
                         <ng-template tuiDataList>
