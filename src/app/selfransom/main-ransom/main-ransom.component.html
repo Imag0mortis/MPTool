@@ -65,7 +65,7 @@
       size="m"
       appearance="secondary"
       class="excel_button"
-      (click)="downloadExcel()"
+      (click)="showDialog(templateExcelByFilter)"
       style="background: none; border: none; cursor: pointer"
     >
       ВЫГРУЗИТЬ В EXCEL&nbsp;
@@ -436,4 +436,38 @@
       Импортировать в MPtool&nbsp;
     </button>
   </div>
+</ng-template>
+
+
+<ng-template #templateExcelByFilter let-observer>
+  <p i18n class="modal_header">ВЫГРУЗКА EXCEL</p>
+<tui-select
+  class="tui-space_top-4"
+  [formControl]="filterControl"
+  [stringify]="stringify"
+>
+  Выберите фильтр
+  <select tuiSelect [items]="dictionary"></select>
+</tui-select>
+<div class="excel_buttons">
+  <button
+  tuiButton
+  type="button"
+  size="l"
+  appearance="primary"
+  class="save_as"
+  (click)="downloadExcel(filterControl.value.id)"
+>
+  Сохранить
+</button>
+  <button
+    tuiButton
+    size="l"
+    type="button"
+    appearance="secondary-destructive"
+    class="excel_cancel"
+  >
+    Отменить
+  </button>
+</div>
 </ng-template>
