@@ -116,7 +116,7 @@ export class CreateRansomComponent implements OnInit {
         }
       },
       complete: () => {
-        // console.log('Закрыли диалог');
+        //
       }
     });
   }
@@ -211,7 +211,7 @@ export class CreateRansomComponent implements OnInit {
         const options: any = { status: 'error' };
         this.alertService
           .open(
-            'Заполнены не все поля,проверьте поисковой запрос, адрес и количество!',
+            'Заполнены не все поля, проверьте поисковой запрос, адрес, количество и пол!',
             options
           )
           .subscribe();
@@ -382,7 +382,7 @@ export class CreateRansomComponent implements OnInit {
           const options: any = { label: 'Ошибка!', status: 'error' };
           this.alertService
             .open('Произошла ошибка при импорте самовыкупов', options)
-            .subscribe(() => {});
+            .subscribe();
         }
       );
     };

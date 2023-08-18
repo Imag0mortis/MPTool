@@ -440,3 +440,8 @@ export class MainRansomComponent implements OnInit {
       .catch((error) => console.error('Ошибка загрузки файла:', error));
   }
 }
+
+interface FilterOption {
+  id: number;
+  state: string;
+}
