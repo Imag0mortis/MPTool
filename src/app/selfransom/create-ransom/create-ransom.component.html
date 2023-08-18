@@ -183,8 +183,13 @@
                 </ng-template>
               </td>
 
-              <td style="max-width: 120px; width: 120px" tuiTd *tuiCell="'sex'"
-              [ngStyle]="{'border': item.sex === undefined ? '3px solid red' : null}"
+              <td
+                style="max-width: 120px; width: 120px"
+                tuiTd
+                *tuiCell="'sex'"
+                [ngStyle]="{
+                  border: item.sex === undefined ? '3px solid red' : null
+                }"
               >
                 <tui-select
                   tuiTextfieldSize="m"
