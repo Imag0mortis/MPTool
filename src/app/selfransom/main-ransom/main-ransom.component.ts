@@ -45,6 +45,11 @@ interface mainransom {
   deliveryQR: string | null; // Добавлено поле для QR-кода доставки
 }
 
+interface FilterOption {
+  id: number;
+  state: string;
+}
+
 @Component({
   selector: 'app-main-ransom',
   templateUrl: './main-ransom.component.html',
@@ -65,9 +70,6 @@ export class MainRansomComponent implements OnInit {
     { id: 0, state: 'Ожидает оплаты' },
     { id: 1, state: 'Товар доставляется' },
     { id: 7, state: 'Товар готов к выдаче' },
-    { id: 2, state: 'Завершенный' },
-    { id: 3, state: 'Ошибка' },
-    { id: 4, state: 'Отменено' },
     { id: 8, state: 'Заказ отменен' },
     { id: 9, state: 'Не получен на ПВЗ' },
     { id: 5, state: 'Архив' }
@@ -418,7 +420,7 @@ export class MainRansomComponent implements OnInit {
           const options: any = { label: 'Ошибка!', status: 'error' };
           this.alertService
             .open('Произошла ошибка при импорте самовыкупов', options)
-            .subscribe(() => {});
+            .subscribe();
         }
       );
     };

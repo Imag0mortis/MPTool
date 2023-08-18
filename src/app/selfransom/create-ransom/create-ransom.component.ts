@@ -1,11 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  Inject,
-  Injector,
-  OnInit,
-  inject
-} from '@angular/core';
+import { Component, Inject, Injector, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   TuiAlertService,
@@ -32,79 +25,6 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./create-ransom.component.scss']
 })
 export class CreateRansomComponent implements OnInit {
-  //   {
-  //     anchorId: 'sku-input',
-  //     prevBtnTitle: 'Назад',
-  //     nextBtnTitle: 'Далее',
-  //     title: 'Введите артикул',
-  //     content: 'Введите артикул товара, который вы хотите добавить в список самовыкупов. Скопируйте его со страницы товара на маркетплейсе.',
-  //   },
-  //   {
-  //     anchorId: 'head_button',
-  //     prevBtnTitle: 'Назад',
-  //     nextBtnTitle: 'Далее',
-  //     title: 'Добавьте товар',
-  //     content: 'Нажмите на кнопку добавить выкуп',
-  //   },
-  //   {
-  //     anchorId: 'quantity',
-  //     title: 'Введите количество',
-  //     prevBtnTitle: 'Назад',
-  //     nextBtnTitle: 'Далее',
-  //     content: 'Введите количество товара, который вы хотите добавить в самовыкуп.',
-  //   },
-  //   {
-  //     anchorId: 'sizes',
-  //     prevBtnTitle: 'Назад',
-  //     nextBtnTitle: 'Далее',
-  //     title: 'Выберите размер',
-  //     content: 'Выберите размер товара, если он предусмотрен. Если размер товара не предусмотрен, просто пропустите данный пункт.',
-  //   },
-  //   {
-  //     anchorId: 'sex',
-  //     prevBtnTitle: 'Назад',
-  //     nextBtnTitle: 'Далее',
-  //     title: 'Выберите пол',
-  //     content: 'Выбор пола предусматривает какого пола будет лицо, создавшее заказ',
-  //   },
-  //   {
-  //     anchorId: 'request',
-  //     prevBtnTitle: 'Назад',
-  //     nextBtnTitle: 'Далее',
-  //     title: 'Укажите запрос.',
-  //     content: 'Поисковый запрос имитирует поведение реального покупателя, а так же влияет на скорость получения QR-кода на оплату ботом.',
-  //   },
-  //   {
-  //     anchorId: 'address',
-  //     prevBtnTitle: 'Назад',
-  //     nextBtnTitle: 'Далее',
-  //     title: 'Укажите адрес ПВЗ',
-  //     content: 'Укажите адрес пункта выдачи заказов, на который будет осуществлена доставка. Нажмите далее.',
-  //   },
-
-  //   {
-  //     anchorId: 'copy',
-  //     prevBtnTitle: 'Назад',
-  //     nextBtnTitle: 'Далее',
-  //     title: 'Копирование',
-  //     content: 'Если в этом нет необходимости просто нажмите кнопку "далее".',
-  //   },
-  //   {
-  //     anchorId: 'cancel',
-  //     prevBtnTitle: 'Назад',
-  //     nextBtnTitle: 'Далее',
-  //     title: 'Вы можете удалить',
-  //     content: 'Строку с задачей при необходимости. Нажмите кнопку "далее".',
-  //   },
-  //   {
-  //     anchorId: 'create_task',
-  //     prevBtnTitle: 'Назад',
-  //     nextBtnTitle: 'Далее',
-  //     endBtnTitle: 'Закрыть',
-  //     title: 'Теперь вы можете',
-  //     content: 'Создать данную задачу с выкупами. Вы сможете увидеть её на главном экране раздела самовыкупов.',
-  //   },
-  // ];
   sku: number | undefined;
   data: WbPosition[] = [];
   numChars = 0;
@@ -154,10 +74,6 @@ export class CreateRansomComponent implements OnInit {
     this.item.sex = null;
   }
 
-  onSexChange(newValue: number) {
-    this.item.sex = newValue;
-  }
-
   private readonly dialog = this.dialogService.open<Address>(
     new PolymorpheusComponent(MapModalComponent, this.injector),
     {
@@ -199,7 +115,9 @@ export class CreateRansomComponent implements OnInit {
           });
         }
       },
-      complete: () => {}
+      complete: () => {
+        //
+      }
     });
   }
 
@@ -248,7 +166,6 @@ export class CreateRansomComponent implements OnInit {
           const extendedResult = { ...r };
           extendedResult.quantity = 1;
           extendedResult.request = '';
-          extendedResult.sex = undefined;
 
           // console.log(r);
 
@@ -465,7 +382,7 @@ export class CreateRansomComponent implements OnInit {
           const options: any = { label: 'Ошибка!', status: 'error' };
           this.alertService
             .open('Произошла ошибка при импорте самовыкупов', options)
-            .subscribe(() => {});
+            .subscribe();
         }
       );
     };
