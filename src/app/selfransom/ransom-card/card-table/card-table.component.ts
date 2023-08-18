@@ -44,7 +44,7 @@ export class CardTableComponent implements OnInit, OnDestroy {
   public deliveryQRsvg = '';
   address = '';
   dialog: any;
-  timerCheckQr: NodeJS.Timer;
+  timerCheckQr: any;
 
   public trackingStatusV2: any;
 
