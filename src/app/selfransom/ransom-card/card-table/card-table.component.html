@@ -12,16 +12,29 @@
         </div>
       </div>
 
-      <div class="table-header-col1">
+      <div class="table-header-col1" style="column-gap: 1rem">
         <button
-          *ngIf="item.taskState === 'Товар доставляется'"
+          *ngIf="shouldShowTrackingButton(item)"
           tuiButton
           (click)="showDialogTracking(template_tracking, item.trackingStatusV2)"
           type="button"
-          class="tracking_button"
+          style="margin-left: 50%"
           size="s"
         >
           Отследить свою доставку
+        </button>
+        <button
+          *ngIf="
+            shouldShowTrackingButton(item) ||
+            item.taskState === 'Товар готов к выдаче'
+          "
+          tuiButton
+          (click)="reloadRansomStatus(item.buyID)"
+          type="button"
+          [style.margin-left]="shouldShowTrackingButton(item) ? '' : '50%'"
+          size="s"
+        >
+          Обновить статус
         </button>
       </div>
 
@@ -93,6 +106,20 @@
             size="s"
           >
             Отследить свою доставку
+          </button>
+
+          <button
+            *ngIf="
+              shouldShowTrackingButton(item) ||
+              item.taskState === 'Товар готов к выдаче'
+            "
+            tuiButton
+            (click)="reloadRansomStatus(item.buyID)"
+            type="button"
+            class="tui-space_right-3 tui-space_bottom-3"
+            size="s"
+          >
+            Обновить статус
           </button>
 
           <button
@@ -214,6 +241,20 @@
             size="s"
           >
             Отследить свою доставку
+          </button>
+
+          <button
+            *ngIf="
+              item.taskState === 'Товар готов к выдаче' ||
+              item.taskState === 'Товар доставляется'
+            "
+            tuiButton
+            (click)="reloadRansomStatus(item.buyID)"
+            type="button"
+            class="tracking_button"
+            size="s"
+          >
+            Обновить статус
           </button>
 
           <p class="date_create">
