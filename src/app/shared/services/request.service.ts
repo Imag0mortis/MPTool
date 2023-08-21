@@ -292,6 +292,10 @@ export class RequestService {
     return this.http.get(environment.api + 'userRansoms.php', { params });
   }
 
+  public reloadRansomStatus(body: any) {
+    return this.http.post(environment.api + 'wb/ransoms/state.php', body);
+  }
+
   public createBasketTask(body: LikerBasketTask) {
     return this.http.post(environment.api + 'wb_liker_basket.php', body);
   }

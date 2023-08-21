@@ -296,6 +296,18 @@ export class CardTableComponent implements OnInit, OnDestroy {
     this.dialogService.open(content).subscribe();
   }
 
+  shouldShowTrackingButton(item: any): boolean {
+    return item.taskState === 'Товар доставляется';
+  }
+
+  reloadRansomStatus(id: any) {
+    this.request.reloadRansomStatus({ ransomId: id }).subscribe({
+      next: (r) => {
+        window.location.reload();
+      }
+    });
+  }
+
   ngOnDestroy(): void {
     this.subscription.forEach((el) => el.unsubscribe());
     if (this.timerCheckQr) {
