@@ -1,9 +1,16 @@
-import { AfterViewInit, Component, Inject, Injector, OnInit, inject } from '@angular/core';
+import { Component, Inject, Injector, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TuiAlertService, TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
+import {
+  TuiAlertService,
+  TuiDialogContext,
+  TuiDialogService
+} from '@taiga-ui/core';
 import { PositionsService } from 'src/app/shared/services/positions.service';
 import { MapModalComponent } from '../map-modal/map-modal.component';
-import { PolymorpheusComponent, PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
+import {
+  PolymorpheusComponent,
+  PolymorpheusContent
+} from '@tinkoff/ng-polymorpheus';
 import { WbPosition } from 'src/app/shared/interfaces';
 import { RequestService } from 'src/app/shared/services/request.service';
 import { AppService } from 'src/app/shared/services/app.service';
@@ -17,7 +24,7 @@ import * as XLSX from 'xlsx';
   templateUrl: './create-ransom.component.html',
   styleUrls: ['./create-ransom.component.scss']
 })
-export class CreateRansomComponent implements OnInit{
+export class CreateRansomComponent implements OnInit {
   sku: number | undefined;
   data: WbPosition[] = [];
   numChars = 0;
@@ -67,11 +74,6 @@ export class CreateRansomComponent implements OnInit{
     this.item.sex = null;
   }
 
-  onSexChange(newValue: number) {
-    this.item.sex = newValue;
-  }
-
-
   private readonly dialog = this.dialogService.open<Address>(
     new PolymorpheusComponent(MapModalComponent, this.injector),
     {
@@ -114,6 +116,7 @@ export class CreateRansomComponent implements OnInit{
         }
       },
       complete: () => {
+        //
       }
     });
   }
@@ -163,7 +166,6 @@ export class CreateRansomComponent implements OnInit{
           const extendedResult = { ...r };
           extendedResult.quantity = 1;
           extendedResult.request = '';
-          extendedResult.sex = undefined;
 
           // console.log(r);
 
@@ -195,39 +197,39 @@ export class CreateRansomComponent implements OnInit{
 
   // eslint-disable-next-line sonarjs/cognitive-complexity
   createTask() {
-     const body: any[] = [];
-  let validateOk = true;
+    const body: any[] = [];
+    let validateOk = true;
 
-  this.data.forEach((el, i: number) => {
-    if (
-      !el.address ||
-      !el.quantity ||
-      !el.request ||
-      el.quantity <= 0 ||
-      !el.sex
-    ) {
-      const options: any = { status: 'error' };
-      this.alertService
-        .open(
-          'Заполнены не все поля, проверьте поисковой запрос, адрес, количество и пол!',
-          options
-        )
-        .subscribe();
-      validateOk = false;
-    } else {
-      const item = {
-        sku: el.sku,
-        name: el.name,
-        price: el.price,
-        quantity: Number(el.quantity),
-        query: el.request,
-        sex: el.sex?.name,
-        address: el.address?.addressName,
-        size: el.sizes[0].Key.length === 0 ? '' : el.size.name
-      };
-      body.push(item);
-    }
-  });
+    this.data.forEach((el, i: number) => {
+      if (
+        !el.address ||
+        !el.quantity ||
+        !el.request ||
+        el.quantity <= 0 ||
+        !el.sex
+      ) {
+        const options: any = { status: 'error' };
+        this.alertService
+          .open(
+            'Заполнены не все поля, проверьте поисковой запрос, адрес, количество и пол!',
+            options
+          )
+          .subscribe();
+        validateOk = false;
+      } else {
+        const item = {
+          sku: el.sku,
+          name: el.name,
+          price: el.price,
+          quantity: Number(el.quantity),
+          query: el.request,
+          sex: el.sex?.name,
+          address: el.address?.addressName,
+          size: el.sizes[0].Key.length === 0 ? '' : el.size.name
+        };
+        body.push(item);
+      }
+    });
 
     //Полный массив айдишников адресов
 
@@ -279,7 +281,7 @@ export class CreateRansomComponent implements OnInit{
       }
     }
   }
-  
+
   copySelfRansom(item: WbPosition): void {
     if (this.data.length < this.maxCountPositions) {
       const newItem = Object.assign({}, item);
@@ -323,7 +325,9 @@ export class CreateRansomComponent implements OnInit{
   }
 
   openFileInput(): void {
-    const fileInput: HTMLInputElement = document.getElementById('excelFile') as HTMLInputElement;
+    const fileInput: HTMLInputElement = document.getElementById(
+      'excelFile'
+    ) as HTMLInputElement;
     fileInput.click();
   }
 
@@ -335,10 +339,17 @@ export class CreateRansomComponent implements OnInit{
       const data: string = e.target.result;
       const workbook: XLSX.WorkBook = XLSX.read(data, { type: 'binary' });
       const worksheet: XLSX.WorkSheet = workbook.Sheets[workbook.SheetNames[0]];
-      const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, { header: 1, range: 1 });
+      const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, {
+        header: 1,
+        range: 1
+      });
 
       // Filter out empty arrays
-      const nonEmptyArrays = jsonData.filter(item => item.some((value: string | undefined) => value !== undefined && value !== ''));
+      const nonEmptyArrays = jsonData.filter((item) =>
+        item.some(
+          (value: string | undefined) => value !== undefined && value !== ''
+        )
+      );
 
       if (nonEmptyArrays.length === 0) {
         console.log('No data found in the file.');
@@ -346,7 +357,7 @@ export class CreateRansomComponent implements OnInit{
       }
 
       const requestBody = {
-        task: nonEmptyArrays.map(item => ({
+        task: nonEmptyArrays.map((item) => ({
           sku: item[0],
           name: item[1],
           price: item[2],
@@ -354,7 +365,7 @@ export class CreateRansomComponent implements OnInit{
           size: item[4],
           query: item[5],
           sex: item[6],
-          address: item[7],
+          address: item[7]
         }))
       };
 
@@ -367,26 +378,26 @@ export class CreateRansomComponent implements OnInit{
             .subscribe();
         },
         (error) => {
-          console.error("Ау", error);
+          console.error('Ау', error);
           const options: any = { label: 'Ошибка!', status: 'error' };
           this.alertService
             .open('Произошла ошибка при импорте самовыкупов', options)
-            .subscribe(() => { });
+            .subscribe();
         }
       );
     };
 
     fileReader.readAsBinaryString(file);
   }
-  
+
   downloadFile() {
     const fileUrl = '../../../assets/template.xlsx';
     const fileName = 'template.xlsx';
 
     fetch(fileUrl)
-      .then(response => response.blob())
-      .then(blob => saveAs(blob, fileName))
-      .catch(error => console.error('Ошибка загрузки файла:', error));
+      .then((response) => response.blob())
+      .then((blob) => saveAs(blob, fileName))
+      .catch((error) => console.error('Ошибка загрузки файла:', error));
   }
 }
 

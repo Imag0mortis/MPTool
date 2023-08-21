@@ -64,8 +64,8 @@
       size="m"
       appearance="secondary"
       class="excel_button"
-      style="background: none; border: none; cursor: pointer"
       (click)="showDialog(templateExcelByFilter)"
+      style="background: none; border: none; cursor: pointer"
     >
       ВЫГРУЗИТЬ В EXCEL&nbsp;
       <svg
@@ -393,36 +393,36 @@
 
 <ng-template #templateExcelByFilter let-observer>
   <p i18n class="modal_header">ВЫГРУЗКА EXCEL</p>
-<tui-select
-  class="tui-space_top-4"
-  [formControl]="filterControl"
-  [stringify]="stringify"
->
-  Выберите фильтр
-  <select tuiSelect [items]="dictionary"></select>
-</tui-select>
-<div class="excel_buttons">
-  <button
-  tuiButton
-  type="button"
-  size="l"
-  appearance="primary"
-  class="save_as"
-  (click)="downloadExcel(filterControl.value.id)"
->
-  Сохранить
-</button>
-  <button
-    tuiButton
-    size="l"
-    type="button"
-    appearance="secondary-destructive"
-    class="excel_cancel"
-    (click)="observer.complete()"
+  <tui-select
+    class="tui-space_top-4"
+    [formControl]="filterControl"
+    [stringify]="stringify"
   >
-    Отменить
-  </button>
-</div>
+    Выберите фильтр
+    <select tuiSelect [items]="dictionary"></select>
+  </tui-select>
+  <div class="excel_buttons">
+    <button
+      tuiButton
+      type="button"
+      size="l"
+      appearance="primary"
+      class="save_as"
+      (click)="downloadExcel(filterControl.value.id)"
+    >
+      Сохранить
+    </button>
+    <button
+      tuiButton
+      size="l"
+      type="button"
+      appearance="secondary-destructive"
+      class="excel_cancel"
+      (click)="observer.complete()"
+    >
+      Отменить
+    </button>
+  </div>
 </ng-template>
 
 <ng-template #templateExcelByFilter let-observer>

@@ -177,12 +177,12 @@
                 </ng-template>
               </td>
 
-              <td style="max-width: 120px; width: 120px" tuiTd *tuiCell="'sex'" tourAnchor="sex" [ngStyle]="{'border': item.sex === undefined ? '3px solid red' : null}" [ngStyle]="{'border': item.sex === undefined ? '3px solid red' : null}">
+              <td style="max-width: 120px; width: 120px" tuiTd *tuiCell="'sex'" tourAnchor="sex" [ngStyle]="{'border': item.sex === undefined ? '3px solid red' : null}">
                 <tui-select
                   tuiTextfieldSize="m"
                   [tuiTextfieldLabelOutside]="true"
+                  [valueContent]="item.sex?.name"
                   [(ngModel)]="item.sex"
-                  (ngModelChange)="onSexChange($event)"
                 >
                   <ng-template tuiDataList>
                     <tui-data-list>
@@ -197,7 +197,7 @@
                   </ng-template>
                 </tui-select>
               </td>
-              
+
               <td
                 tuiTd
                 *tuiCell="'request'"
@@ -339,7 +339,7 @@
                       <tui-select
                         tuiTextfieldSize="s"
                         [tuiTextfieldLabelOutside]="true"
-                        [valueContent]="item.sex!.name"
+                        [valueContent]="item.sex?.name"
                         [(ngModel)]="item.sex"
                       >
                         <ng-template tuiDataList>
@@ -459,18 +459,22 @@
 
 <ng-template #templateExcel let-observer>
   <p i18n class="modal_header">ИМПОРТ ИЗ EXCEL</p>
-  <ol style="margin-top: 2rem;">
-    <li> 1. Скачайте шаблон </li>
-    <li> 2. Заполните таблицу в соответствии с шаблоном <br>
-      ВАЖНО!!! Не забудьте удалить примеры самовыкупов из шаблона</li>
-    <li> 3. Загрузите заполненный документ в MPTool</li>
+  <ol style="margin-top: 2rem">
+    <li>1. Скачайте шаблон</li>
+    <li>
+      2. Заполните таблицу в соответствии с шаблоном
+      <br />
+      ВАЖНО!!! Не забудьте удалить примеры самовыкупов из шаблона
+    </li>
+    <li>3. Загрузите заполненный документ в MPTool</li>
   </ol>
   <label for="excelFile">
-    <input id="excelFile" type="file" (change)="importFile($event)" hidden="hidden">
-    <button tuiButton type="button" size="m" class="pay" (click)="openFileInput()" appearance='secondary-destructive' style="width: 100%; margin-top: 1rem;">
-      Загрузить файл&nbsp;
-    </button>    
-  </label>
+    <input
+      id="excelFile"
+      type="file"
+      (change)="importFile($event)"
+      hidden="hidden"
+    />
     <button
       tuiButton
       type="button"
@@ -480,4 +484,15 @@
     >
       Импортировать в MPtool&nbsp;
     </button>
+  </label>
+  <button
+    appearance="secondary"
+    tuiButton
+    type="button"
+    size="m"
+    class="download"
+    (click)="downloadFile()"
+  >
+    Скачать шаблон&nbsp;
+  </button>
 </ng-template>
