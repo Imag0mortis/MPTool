@@ -66,6 +66,7 @@ import { TuiInputCopyModule } from '@taiga-ui/kit';
 import { AwaitingComponent } from './reviews/awaiting/awaiting.component';
 import { CanceledComponent } from './reviews/canceled/canceled.component';
 import { ErrorComponent } from './reviews/error/error.component';
+import { TourTuiDropdownModule } from 'ngx-ui-tour-tui-dropdown';
 
 const mapConfig: YaConfig = {
   apikey: '136eb4f5-f723-42ba-bf7a-16d856667d78',
@@ -90,7 +91,7 @@ const mapConfig: YaConfig = {
     VideoModalComponent,
     AwaitingComponent,
     CanceledComponent,
-    ErrorComponent
+    ErrorComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
@@ -150,7 +151,8 @@ const mapConfig: YaConfig = {
     TuiAccordionModule,
     TuiInputDateRangeModule,
     TuiLinkModule,
-    TuiLabelModule
+    TuiLabelModule,
+    TourTuiDropdownModule,
   ]
 })
 export class SelfransomModule {}

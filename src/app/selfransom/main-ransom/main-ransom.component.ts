@@ -45,6 +45,7 @@ interface mainransom {
   deliveryQR: string | null; // Добавлено поле для QR-кода доставки
 }
 
+declare var Intercom: any;
 interface FilterOption {
   id: number;
   state: string;
@@ -145,6 +146,9 @@ export class MainRansomComponent implements OnInit {
     public appService: AppService,
     private requestService: RequestService
   ) {}
+  ngAfterViewInit(): void {
+    // this.showWelcomeModal();
+  }
 
   showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
     this.dialogService.open(content).subscribe();

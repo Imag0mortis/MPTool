@@ -189,6 +189,10 @@ h2 {
   white-space: nowrap;
 }
 
+.invalid-input {
+  border: 1px solid red;
+}
+
 .excel_button {
   margin-top: 1rem;
 }
@@ -248,6 +252,12 @@ h2 {
   width: 100%;
   margin-top: 1rem;
 }
+
+.guide{
+  margin-left: 1rem;
+}
+
+
 
 @media screen and (max-width: 768px) {
   .create_ransom {
