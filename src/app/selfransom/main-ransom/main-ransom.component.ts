@@ -70,6 +70,9 @@ export class MainRansomComponent implements OnInit {
     { id: 0, state: 'Ожидает оплаты' },
     { id: 1, state: 'Товар доставляется' },
     { id: 7, state: 'Товар готов к выдаче' },
+    { id: 2, state: 'Завершенный' },
+    { id: 3, state: 'Ошибка' },
+    { id: 4, state: 'Отменено' },
     { id: 8, state: 'Заказ отменен' },
     { id: 9, state: 'Не получен на ПВЗ' },
     { id: 5, state: 'Архив' }
