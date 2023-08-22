@@ -7,9 +7,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiAlertModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { TuiButtonModule } from '@taiga-ui/core';
 import { TuiTableModule } from '@taiga-ui/addon-table';
+import { GuidemodalComponent } from '../feedback/guidemodal/guidemodal.component';
 
 @NgModule({
-  declarations: [FeedbackTokenComponent],
+  declarations: [FeedbackTokenComponent, GuidemodalComponent],
   imports: [
     FormsModule,
     CommonModule,
