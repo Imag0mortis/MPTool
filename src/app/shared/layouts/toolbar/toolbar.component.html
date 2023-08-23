@@ -75,7 +75,7 @@
         class="toolbar_button tui-space_right-2 mob-right"
       ></tui-marker-icon>
       <div *tuiSidebar="open; direction: 'left'" style="overflow: scroll; overflow-x: hidden;">
-        <div *ngIf="user.userSubj$ | async as userInfo">
+        <div *ngIf="user.userSubj$ | async as userInfo" class="mobile_info">
           <h1 class="phone_number">
             {{
               userInfo.self_info.phone
