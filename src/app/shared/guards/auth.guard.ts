@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AppService } from '../services/app.service';
 
 @Injectable()
-export class AuthGuard  {
+export class AuthGuard {
   constructor(@Inject(AppService) private appService: AppService) {}
 
   canActivate(

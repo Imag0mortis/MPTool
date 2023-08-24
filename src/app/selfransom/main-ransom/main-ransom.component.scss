@@ -219,27 +219,27 @@ tui-select {
   margin-top: 1rem;
 }
 
-.guide{
+.guide {
   margin: 1rem 0 0 1rem;
   padding: 0;
 }
-.hello{
+.hello {
   text-align: center;
 }
-.hello_description{
+.hello_description {
   text-align: center;
   font-size: 17px;
   padding-bottom: 1rem;
 }
-.hello_img{
+.hello_img {
   height: 25rem;
   margin-left: 15%;
 }
-.guide_button{
+.guide_button {
   width: 100%;
   margin-top: 1rem;
 }
-.decline{
+.decline {
   text-align: center;
   color: red;
   text-decoration: underline;
@@ -250,15 +250,15 @@ tui-select {
   background-color: red;
   color: white; /* Чтобы текст был хорошо виден на красном фоне */
 }
-.search_buttons{
+.search_buttons {
   margin-left: 1rem;
   display: flex;
   gap: 1rem;
 }
-.search{
+.search {
   width: 10rem;
 }
-.clear{
+.clear {
   width: 10rem;
 }
 
@@ -291,16 +291,16 @@ tui-select {
     margin-left: 0;
     width: 96.7%;
   }
-  .search_buttons{
+  .search_buttons {
     margin-top: 1rem;
     display: flex;
     gap: 1rem;
     margin-left: 0rem;
   }
-  .search{
+  .search {
     width: 47%;
   }
-  .clear{
+  .clear {
     width: 47%;
   }
 }

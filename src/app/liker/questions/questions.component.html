@@ -16,7 +16,11 @@
       </h3>
       <tui-input class="search-input" [(ngModel)]="sku">
         Артикул
-        <input tuiTextfield (keyup)="validateOnlyNumbers($event)" type="number" />
+        <input
+          tuiTextfield
+          (keyup)="validateOnlyNumbers($event)"
+          type="number"
+        />
       </tui-input>
     </div>
     <div class="sex_block">
@@ -51,13 +55,15 @@
       Вопрос:
       <tui-tooltip direction="right" content="Задайте вопрос"></tui-tooltip>
     </h3>
-    <tui-textarea [(ngModel)]="question" maxlength="1000"
+    <tui-textarea
+      [(ngModel)]="question"
+      maxlength="1000"
       class="field-medium"
       [expandable]="true"
       [maxLength]="1000"
-  >
-  Вопрос (до 1000 символов)
-  </tui-textarea>
+    >
+      Вопрос (до 1000 символов)
+    </tui-textarea>
   </div>
   <button class="task_button" (click)="create()" tuiButton>
     СОЗДАТЬ ЗАДАНИЕ

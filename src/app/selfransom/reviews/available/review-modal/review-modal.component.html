@@ -10,7 +10,6 @@
         <input tuiTextfield />
       </tui-input>
 
-      
       <div class="ransom">
         <h2>Укажите выкуп</h2>
         <tui-select
@@ -36,11 +35,11 @@
       </div>
       <div class="date">
         <h2>Запланировать отзыв</h2>
-  
+
         <tui-input-date class="b-form" formControlName="date">
           Выберите дату публикации отзыва
         </tui-input-date>
-  
+
         <br />
       </div>
       <div class="time">
@@ -103,9 +102,9 @@
       </div>
       <div class="photo">
         <h2>Добавьте фото товара</h2>
-  
+
         <p>Общий размер загружаемых фото - 10Мб</p>
-  
+
         <div class="photo_placeholder">
           <tui-input-files
             accept="image/*"
@@ -114,7 +113,7 @@
             (reject)="onReject($event)"
             (ngModelChange)="checkFiles($event)"
           ></tui-input-files>
-  
+
           <tui-files class="tui-space_top-1">
             <tui-file
               *ngFor="let file of control.valueChanges | async; index as idx"
@@ -122,7 +121,7 @@
               [showDelete]="control.enabled"
               (removed)="removeFile(file, idx)"
             ></tui-file>
-  
+
             <tui-file
               *ngFor="let file of rejectedFiles"
               state="error"

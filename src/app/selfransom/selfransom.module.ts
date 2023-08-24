@@ -91,7 +91,7 @@ const mapConfig: YaConfig = {
     VideoModalComponent,
     AwaitingComponent,
     CanceledComponent,
-    ErrorComponent,
+    ErrorComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
@@ -152,7 +152,7 @@ const mapConfig: YaConfig = {
     TuiInputDateRangeModule,
     TuiLinkModule,
     TuiLabelModule,
-    TourTuiDropdownModule,
+    TourTuiDropdownModule
   ]
 })
 export class SelfransomModule {}

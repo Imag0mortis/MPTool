@@ -4,16 +4,8 @@ import { TestComponent } from './test.component';
 import { TestRoutes } from './test.routing';
 import { TourTuiDropdownModule } from 'ngx-ui-tour-tui-dropdown';
 
-
-
 @NgModule({
-  declarations: [
-    TestComponent
-  ],
-  imports: [
-    CommonModule,
-    TourTuiDropdownModule,
-    TestRoutes
-  ]
+  declarations: [TestComponent],
+  imports: [CommonModule, TourTuiDropdownModule, TestRoutes]
 })
-export class TestModule { }
+export class TestModule {}

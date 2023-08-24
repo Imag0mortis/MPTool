@@ -142,7 +142,7 @@
       {{ item.state }}
     </button>
   </tui-tabs>
-  
+
   <div class="searchbar">
     <tui-input tuiTextfieldSize="m">
       Введите номера групп выкупов через запятую
@@ -160,7 +160,7 @@
       >
         Найти
       </button>
-  
+
       <button
         tuiButton
         type="button"
@@ -189,290 +189,304 @@
     ></tui-pagination>
   </div>
 
-<ng-template #noCards>
-  <div class="noсards-placeholder">Нет выкупов для отображения...</div>
-</ng-template>
+  <ng-template #noCards>
+    <div class="noсards-placeholder">Нет выкупов для отображения...</div>
+  </ng-template>
 
-<ng-template #template let-observer>
-  <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>
-  <p class="modal_middle">
-    Вы действительно хотите подключить пакет на 300 выкупов?
-  </p>
-  <p class="modal_middle">С вашего счета спишется 13500 ₽</p>
-  <div class="button_container">
-    <button
-      class="cancel"
-      tuiButton
-      appearance="secondary"
-      type="button"
-      size="m"
-      (click)="observer.complete()"
-    >
-      Отмена
-    </button>
-    <button
-      tuiButton
-      type="button"
-      size="m"
-      class="pay"
-      (click)="observer.complete(); buyPackages(300)"
-    >
-      Оплатить&nbsp;
-    </button>
-  </div>
-</ng-template>
+  <ng-template #template let-observer>
+    <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>
+    <p class="modal_middle">
+      Вы действительно хотите подключить пакет на 300 выкупов?
+    </p>
+    <p class="modal_middle">С вашего счета спишется 13500 ₽</p>
+    <div class="button_container">
+      <button
+        class="cancel"
+        tuiButton
+        appearance="secondary"
+        type="button"
+        size="m"
+        (click)="observer.complete()"
+      >
+        Отмена
+      </button>
+      <button
+        tuiButton
+        type="button"
+        size="m"
+        class="pay"
+        (click)="observer.complete(); buyPackages(300)"
+      >
+        Оплатить&nbsp;
+      </button>
+    </div>
+  </ng-template>
 
-<ng-template #template2 let-observer>
-  <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>
-  <p class="modal_middle">
-    Вы действительно хотите подключить пакет на 1 выкуп?
-  </p>
-  <p class="modal_middle">С вашего счета спишется 50 ₽</p>
-  <div class="button_container">
-    <button
-      class="cancel"
-      tuiButton
-      appearance="secondary"
-      type="button"
-      size="m"
-      (click)="observer.complete()"
-    >
-      Отмена
-    </button>
-    <button
-      tuiButton
-      type="button"
-      size="m"
-      class="pay"
-      (click)="observer.complete(); buyPackages(1)"
-    >
-      Оплатить&nbsp;
-    </button>
-  </div>
-</ng-template>
+  <ng-template #template2 let-observer>
+    <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>
+    <p class="modal_middle">
+      Вы действительно хотите подключить пакет на 1 выкуп?
+    </p>
+    <p class="modal_middle">С вашего счета спишется 50 ₽</p>
+    <div class="button_container">
+      <button
+        class="cancel"
+        tuiButton
+        appearance="secondary"
+        type="button"
+        size="m"
+        (click)="observer.complete()"
+      >
+        Отмена
+      </button>
+      <button
+        tuiButton
+        type="button"
+        size="m"
+        class="pay"
+        (click)="observer.complete(); buyPackages(1)"
+      >
+        Оплатить&nbsp;
+      </button>
+    </div>
+  </ng-template>
 
-<ng-template #template3 let-observer>
-  <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>
-  <p class="modal_middle">
-    Вы действительно хотите подключить пакет на 400 выкупов?
-  </p>
-  <p class="modal_middle">С вашего счета спишется 16000 ₽</p>
-  <div class="button_container">
-    <button
-      class="cancel"
-      tuiButton
-      appearance="secondary"
-      type="button"
-      size="m"
-      (click)="observer.complete()"
-    >
-      Отмена
-    </button>
-    <button
-      tuiButton
-      type="button"
-      size="m"
-      class="pay"
-      (click)="observer.complete(); buyPackages(400)"
-    >
-      Оплатить&nbsp;
-    </button>
-  </div>
-</ng-template>
+  <ng-template #template3 let-observer>
+    <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>
+    <p class="modal_middle">
+      Вы действительно хотите подключить пакет на 400 выкупов?
+    </p>
+    <p class="modal_middle">С вашего счета спишется 16000 ₽</p>
+    <div class="button_container">
+      <button
+        class="cancel"
+        tuiButton
+        appearance="secondary"
+        type="button"
+        size="m"
+        (click)="observer.complete()"
+      >
+        Отмена
+      </button>
+      <button
+        tuiButton
+        type="button"
+        size="m"
+        class="pay"
+        (click)="observer.complete(); buyPackages(400)"
+      >
+        Оплатить&nbsp;
+      </button>
+    </div>
+  </ng-template>
 
-<ng-template #template4 let-observer>
-  <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>
-  <p class="modal_middle">
-    Вы действительно хотите подключить пакет на 500 выкупов?
-  </p>
-  <p class="modal_middle">С вашего счета спишется 17500 ₽</p>
-  <div class="button_container">
-    <button
-      class="cancel"
-      tuiButton
-      appearance="secondary"
-      type="button"
-      size="m"
-      (click)="observer.complete()"
-    >
-      Отмена
-    </button>
-    <button
-      tuiButton
-      type="button"
-      size="m"
-      class="pay"
-      (click)="observer.complete(); buyPackages(500)"
-    >
-      Оплатить&nbsp;
-    </button>
-  </div>
-</ng-template>
+  <ng-template #template4 let-observer>
+    <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>
+    <p class="modal_middle">
+      Вы действительно хотите подключить пакет на 500 выкупов?
+    </p>
+    <p class="modal_middle">С вашего счета спишется 17500 ₽</p>
+    <div class="button_container">
+      <button
+        class="cancel"
+        tuiButton
+        appearance="secondary"
+        type="button"
+        size="m"
+        (click)="observer.complete()"
+      >
+        Отмена
+      </button>
+      <button
+        tuiButton
+        type="button"
+        size="m"
+        class="pay"
+        (click)="observer.complete(); buyPackages(500)"
+      >
+        Оплатить&nbsp;
+      </button>
+    </div>
+  </ng-template>
 
-<ng-template #template5 let-observer>
-  <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>
-  <p class="modal_middle">
-    Вы действительно хотите подключить пакет на 1000 выкупов?
-  </p>
-  <p class="modal_middle">С вашего счета спишется 25000 ₽</p>
-  <div class="button_container">
-    <button
-      class="cancel"
-      tuiButton
-      appearance="secondary"
-      type="button"
-      size="m"
-      (click)="observer.complete()"
-    >
-      Отмена
-    </button>
-    <button
-      tuiButton
-      type="button"
-      size="m"
-      class="pay"
-      (click)="observer.complete(); buyPackages(1000)"
-    >
-      Оплатить&nbsp;
-    </button>
-  </div>
-</ng-template>
+  <ng-template #template5 let-observer>
+    <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>
+    <p class="modal_middle">
+      Вы действительно хотите подключить пакет на 1000 выкупов?
+    </p>
+    <p class="modal_middle">С вашего счета спишется 25000 ₽</p>
+    <div class="button_container">
+      <button
+        class="cancel"
+        tuiButton
+        appearance="secondary"
+        type="button"
+        size="m"
+        (click)="observer.complete()"
+      >
+        Отмена
+      </button>
+      <button
+        tuiButton
+        type="button"
+        size="m"
+        class="pay"
+        (click)="observer.complete(); buyPackages(1000)"
+      >
+        Оплатить&nbsp;
+      </button>
+    </div>
+  </ng-template>
 
-<ng-template #templateExcel let-observer>
-  <p i18n class="modal_header">ИМПОРТ ИЗ EXCEL</p>
-  <ol style="margin-top: 2rem">
-    <li>1. Скачайте шаблон</li>
-    <li>
-      2. Заполните таблицу в соответствии с шаблоном
-      <br />
-      ВАЖНО!!! Не забудьте удалить примеры самовыкупов из шаблона
-    </li>
-    <li>3. Загрузите заполненный документ в MPTool</li>
-  </ol>
-  <label for="excelFile">
-    <input
-      id="excelFile"
-      type="file"
-      (change)="importFile($event)"
-      hidden="hidden"
+  <ng-template #templateExcel let-observer>
+    <p i18n class="modal_header">ИМПОРТ ИЗ EXCEL</p>
+    <ol style="margin-top: 2rem">
+      <li>1. Скачайте шаблон</li>
+      <li>
+        2. Заполните таблицу в соответствии с шаблоном
+        <br />
+        ВАЖНО!!! Не забудьте удалить примеры самовыкупов из шаблона
+      </li>
+      <li>3. Загрузите заполненный документ в MPTool</li>
+    </ol>
+    <label for="excelFile">
+      <input
+        id="excelFile"
+        type="file"
+        (change)="importFile($event)"
+        hidden="hidden"
+      />
+      <button
+        tuiButton
+        type="button"
+        size="m"
+        class="pay"
+        (click)="openFileInput()"
+        appearance="secondary-destructive"
+        style="width: 100%; margin-top: 1rem"
+      >
+        Загрузить файл&nbsp;
+      </button>
+    </label>
+    <div class="button_container">
+      <button
+        appearance="secondary"
+        tuiButton
+        type="button"
+        size="m"
+        class="pay"
+        (click)="downloadFile()"
+      >
+        Скачать шаблон&nbsp;
+      </button>
+      <button
+        tuiButton
+        type="button"
+        size="m"
+        class="pay"
+        (click)="importFile($event)"
+      >
+        Импортировать в MPtool&nbsp;
+      </button>
+    </div>
+  </ng-template>
+
+  <ng-template #templateExcelByFilter let-observer>
+    <p i18n class="modal_header">ВЫГРУЗКА EXCEL</p>
+    <tui-select
+      class="tui-space_top-4"
+      [formControl]="filterControl"
+      [stringify]="stringify"
+    >
+      Выберите фильтр
+      <select tuiSelect [items]="dictionary"></select>
+    </tui-select>
+    <div class="excel_buttons">
+      <button
+        tuiButton
+        type="button"
+        size="l"
+        appearance="primary"
+        class="save_as"
+        (click)="downloadExcel(filterControl.value.id)"
+      >
+        Сохранить
+      </button>
+      <button
+        tuiButton
+        size="l"
+        type="button"
+        appearance="secondary-destructive"
+        class="excel_cancel"
+        (click)="observer.complete()"
+      >
+        Отменить
+      </button>
+    </div>
+  </ng-template>
+
+  <ng-template #templateExcelByFilter let-observer>
+    <p i18n class="modal_header">ВЫГРУЗКА EXCEL</p>
+    <tui-select
+      class="tui-space_top-4"
+      [formControl]="filterControl"
+      [stringify]="stringify"
+    >
+      Выберите фильтр
+      <select tuiSelect [items]="dictionary"></select>
+    </tui-select>
+    <div class="excel_buttons">
+      <button
+        tuiButton
+        type="button"
+        size="l"
+        appearance="primary"
+        class="save_as"
+        (click)="downloadExcel(filterControl.value.id)"
+      >
+        Сохранить
+      </button>
+      <button
+        tuiButton
+        size="l"
+        type="button"
+        appearance="secondary-destructive"
+        class="excel_cancel"
+        (click)="observer.complete()"
+      >
+        Отменить
+      </button>
+    </div>
+  </ng-template>
+
+  <ng-template #hello_modal let-observer>
+    <h2 class="hello">Вас приветствует команда MPTOOL</h2>
+    <p class="hello_description">
+      MPTOOL это самый комфортный и безопасный сервис для создания самовыкупов.
+      С нами вы без проблем сможете создавать выкупы безопасно.
+    </p>
+    <img
+      class="hello_img"
+      src="../../../assets/img/clipart4402439.png"
+      alt=""
     />
+    <p class="hello_description" style="font-weight: bold">
+      В данном разделе вы сможете создавать и управлять вашими самовыкупами.
+    </p>
+    <p class="hello_description" style="font-weight: bold">
+      Давайте же создадим ваш первый выкуп!
+    </p>
     <button
       tuiButton
       type="button"
-      size="m"
-      class="pay"
-      (click)="openFileInput()"
-      appearance="secondary-destructive"
-      style="width: 100%; margin-top: 1rem"
-    >
-      Загрузить файл&nbsp;
-    </button>
-  </label>
-  <div class="button_container">
-    <button
-      appearance="secondary"
-      tuiButton
-      type="button"
-      size="m"
-      class="pay"
-      (click)="downloadFile()"
-    >
-      Скачать шаблон&nbsp;
-    </button>
-    <button
-      tuiButton
-      type="button"
-      size="m"
-      class="pay"
-      (click)="importFile($event)"
-    >
-      Импортировать в MPtool&nbsp;
-    </button>
-  </div>
-</ng-template>
-
-<ng-template #templateExcelByFilter let-observer>
-  <p i18n class="modal_header">ВЫГРУЗКА EXCEL</p>
-  <tui-select
-    class="tui-space_top-4"
-    [formControl]="filterControl"
-    [stringify]="stringify"
-  >
-    Выберите фильтр
-    <select tuiSelect [items]="dictionary"></select>
-  </tui-select>
-  <div class="excel_buttons">
-    <button
-      tuiButton
-      type="button"
-      size="l"
       appearance="primary"
-      class="save_as"
-      (click)="downloadExcel(filterControl.value.id)"
-    >
-      Сохранить
-    </button>
-    <button
-      tuiButton
-      size="l"
-      type="button"
-      appearance="secondary-destructive"
-      class="excel_cancel"
+      class="guide_button"
       (click)="observer.complete()"
     >
-      Отменить
+      Покажите мне как создать выкуп
     </button>
-  </div>
-</ng-template>
-
-<ng-template #templateExcelByFilter let-observer>
-  <p i18n class="modal_header">ВЫГРУЗКА EXCEL</p>
-<tui-select
-  class="tui-space_top-4"
-  [formControl]="filterControl"
-  [stringify]="stringify"
->
-  Выберите фильтр
-  <select tuiSelect [items]="dictionary"></select>
-</tui-select>
-<div class="excel_buttons">
-  <button
-  tuiButton
-  type="button"
-  size="l"
-  appearance="primary"
-  class="save_as"
-  (click)="downloadExcel(filterControl.value.id)"
->
-  Сохранить
-</button>
-  <button
-    tuiButton
-    size="l"
-    type="button"
-    appearance="secondary-destructive"
-    class="excel_cancel"
-    (click)="observer.complete()"
-  >
-    Отменить
-  </button>
+    <p class="decline" (click)="observer.complete()">
+      Нет, спасибо, я разберусь сам(а)
+    </p>
+  </ng-template>
 </div>
-</ng-template>
-
-<ng-template #hello_modal let-observer>
-  <h2 class="hello">Вас приветствует команда MPTOOL</h2>
-  <p class="hello_description">MPTOOL это самый комфортный и безопасный сервис для создания самовыкупов. С нами вы без проблем сможете создавать выкупы безопасно.</p>
-  <img class="hello_img" src="../../../assets/img/clipart4402439.png" alt="">
-  <p class="hello_description" style="font-weight: bold;">В данном разделе вы сможете создавать и управлять вашими самовыкупами.</p>
-  <p class="hello_description" style="font-weight: bold;">Давайте же создадим ваш первый выкуп!</p>
-    <button
-    tuiButton
-    type="button"
-    appearance="primary"
-    class="guide_button"
-    (click)="observer.complete()"
->
-Покажите мне как создать выкуп
-</button>
-<p class="decline" (click)="observer.complete();">Нет, спасибо, я разберусь сам(а)</p>
-</ng-template>
