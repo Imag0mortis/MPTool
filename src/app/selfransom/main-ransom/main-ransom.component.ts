@@ -44,8 +44,6 @@ interface mainransom {
   taskStateNew: { count: number; state: string }[];
   deliveryQR: string | null; // Добавлено поле для QR-кода доставки
 }
-
-declare var Intercom: any;
 interface FilterOption {
   id: number;
   state: string;
