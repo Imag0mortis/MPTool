@@ -1,0 +1,157 @@
+.wrapper {
+  background-color: #fff;
+  border-radius: 16px;
+  height: 50rem;
+  overflow-y: scroll;
+  border-radius: 15px;
+  padding: 10rem 8rem 0 8rem;
+}
+
+iframe {
+  margin-top: 1rem;
+  margin-left: 2rem;
+}
+
+h2 {
+  margin-left: 2rem;
+}
+
+.greyline {
+  height: 1px;
+  background-color: #929697;
+  margin: auto;
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.token_header {
+  display: flex;
+}
+
+.header_inputs {
+  width: 60%;
+}
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #000000;
+}
+
+h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+}
+
+tui-input {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+ol {
+  margin-top: 3rem;
+}
+
+li {
+  padding-bottom: 0.2rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  color: #3d3d3d;
+}
+
+p {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  color: #3d3d3d;
+  margin-top: 1rem;
+}
+
+.token_footer {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.task_button {
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 200px;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.tui-space_right-3 .t-wrapper {
+  background-color: #2c7a77 !important;
+  color: #fff !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+.label {
+  width: 100%;
+  height: max-content;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+}
+
+.button_container {
+  margin-top: 1rem;
+  display: flex;
+  column-gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .token_header {
+    flex-direction: column;
+  }
+  .wrapper {
+    padding: 5rem 2rem 0 2rem;
+    height: auto;
+  }
+
+  .header_inputs {
+    width: 100%;
+  }
+
+  tui-input {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+    max-width: none;
+  }
+
+  iframe {
+    margin-top: 0;
+    margin-left: 0;
+    width: 105%;
+  }
+
+  h2 {
+    margin-left: 0;
+  }
+}

@@ -115,7 +115,7 @@ export class CardTableComponent implements OnInit, OnDestroy {
           label: 'Информация о платеже принята',
           status: 'info'
         };
-        this.alertService.open('', options);
+        this.alertService.open('', options).subscribe();
         this.data[index].checkState = true;
       },
       (e: unknown) => {
@@ -123,7 +123,7 @@ export class CardTableComponent implements OnInit, OnDestroy {
           label: 'Произошла ошибка! Проверьте позднее!',
           status: 'error'
         };
-        this.alertService.open('', options);
+        this.alertService.open('', options).subscribe();
       }
     );
   }

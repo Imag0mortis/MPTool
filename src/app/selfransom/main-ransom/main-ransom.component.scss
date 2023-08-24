@@ -165,6 +165,7 @@ tui-tabs-with-more {
   display: flex;
   align-items: center;
   width: 100%;
+  margin-top: 1rem;
 }
 
 .search-button {
@@ -218,6 +219,49 @@ tui-select {
   margin-top: 1rem;
 }
 
+.guide{
+  margin: 1rem 0 0 1rem;
+  padding: 0;
+}
+.hello{
+  text-align: center;
+}
+.hello_description{
+  text-align: center;
+  font-size: 17px;
+  padding-bottom: 1rem;
+}
+.hello_img{
+  height: 25rem;
+  margin-left: 15%;
+}
+.guide_button{
+  width: 100%;
+  margin-top: 1rem;
+}
+.decline{
+  text-align: center;
+  color: red;
+  text-decoration: underline;
+  margin-top: 2rem;
+  cursor: pointer;
+}
+.red-popover-bg {
+  background-color: red;
+  color: white; /* Чтобы текст был хорошо виден на красном фоне */
+}
+.search_buttons{
+  margin-left: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+.search{
+  width: 10rem;
+}
+.clear{
+  width: 10rem;
+}
+
 @media screen and (max-width: 768px) {
   .main_container {
     width: auto;
@@ -246,5 +290,17 @@ tui-select {
   .excel_uploading {
     margin-left: 0;
     width: 96.7%;
+  }
+  .search_buttons{
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    margin-left: 0rem;
+  }
+  .search{
+    width: 47%;
+  }
+  .clear{
+    width: 47%;
   }
 }

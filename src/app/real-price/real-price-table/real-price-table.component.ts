@@ -10,4 +10,11 @@ export class RealPriceTableComponent {
   constructor(public realBid: RealBidService) {}
 
   columns = ['position', 'idAdvertiser', 'idProduct', 'realBid'];
+
+  goToWBCard(arg: any) {
+    window.open(
+      `https://www.wildberries.ru/catalog/${arg}/detail.aspx`,
+      '_blank'
+    );
+  }
 }

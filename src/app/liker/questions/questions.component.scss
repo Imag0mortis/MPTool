@@ -23,16 +23,21 @@
   color: #000000;
   margin-left: 2rem;
 }
+.question_cost{
+  color: red;
+  margin-left: 2rem;
+  font-size: 16px;
+}
 .content_block {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   margin: 0 2rem;
   margin-top: 1rem;
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
   color: #2c7a77;
+  gap: 1rem;
 }
 .article-input {
   width: 15rem;
@@ -116,7 +121,11 @@ svg {
   width: 20rem;
 }
 .question_block {
-  width: 20rem;
+  margin: 2rem;
+  width: 40%;
+}
+.question_block h3{
+  color: #2c7a77;
 }
 .search-input {
   width: 20rem;
@@ -130,6 +139,15 @@ svg {
     padding-right: 1rem;
     width: auto;
   }
+  .question_block{
+    margin: 1rem 1rem 0 1rem;
+  }
+  .task_button{
+    width: 102%;
+  }
+  .field-medium{
+    width: 257%;
+  }
   .basket_header {
     font-size: 20px;
     padding-left: 1rem;
@@ -141,6 +159,12 @@ svg {
   .content_block {
     flex-direction: column;
     margin: 0 1rem;
+  }
+  .search-input{
+    width: 120%;
+  }
+  .sex-search-input{
+    width: 110%;
   }
   .article-input,
   .search-input,
@@ -170,12 +194,6 @@ svg {
   h3 {
     font-size: 15px;
     margin-left: 0.5rem;
-  }
-  .article_block {
-  }
-  .question_block,
-  .search-input,
-  .sex_block {
   }
   svg {
     width: 12px;

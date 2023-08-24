@@ -137,6 +137,22 @@ const routes: Routes = [
         canActivateChild: [AuthGuard]
       },
       {
+        path: 'feedback',
+        loadChildren: () =>
+          import('./feedback/feedback.module').then((m) => m.FeedbackModule),
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard]
+      },
+      {
+        path: 'feedback-token',
+        loadChildren: () =>
+          import('./feedback-token/feedback-token.module').then(
+            (m) => m.FeedbackTokenModule
+          ),
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard]
+      },
+      {
         path: 'telegrambot',
         loadChildren: () =>
           import('./telegram-bot/telegram-bot.module').then(

@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import {
   CampaignObj,
   CampaingsTableObjSave,
+  FeedbackWbApiKey,
   Liker,
   LikerBasketTask,
   LikerFavoritesTask,
@@ -193,6 +194,44 @@ export class RequestService {
       environment.api + 'wbcampaigns/saveCampaign.php',
       campaign
     );
+  }
+
+  public getFeedbacksWbApiKeys() {
+    return this.http.get<FeedbackWbApiKey[]>(
+      environment.api + 'wb/feedbacks/wbAPIKey.php'
+    );
+  }
+
+  public setFeedbacksWbApiKey(body: Omit<FeedbackWbApiKey, 'lkID'>) {
+    return this.http.post(environment.api + 'wb/feedbacks/wbAPIKey.php', body);
+  }
+
+  public updateFeedbacksWbApiKey(body: FeedbackWbApiKey) {
+    return this.http.put(environment.api + 'wb/feedbacks/wbAPIKey.php', body);
+  }
+
+  public deleteFeedbacksWbApiKey(lkID: number) {
+    const url = `${environment.api}wb/feedbacks/wbAPIKey.php?lkId=${lkID}`;
+    return this.http.delete(url);
+  }
+
+  public getFeedbacks(lkId: number, page: number, pageSize: number) {
+    return this.http.get(
+      environment.api +
+        `wb/feedbacks/feedbacks.php?lkId=${lkId}&page=${page}&pageSize=${pageSize}`
+    );
+  }
+
+  public getAnswerFromAI(body: { feedback: string; feedbackId: string }) {
+    return this.http.post(environment.api + `wb/feedbacks/ask.php`, body);
+  }
+
+  public publishFeedback(body: {
+    lkId: number;
+    feedback: string;
+    feedbackId: string;
+  }) {
+    return this.http.post(environment.api + `wb/feedbacks/publish.php`, body);
   }
 
   public getPositions(sku: any, query: any, page: any) {

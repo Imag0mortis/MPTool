@@ -1,0 +1,24 @@
+<div class="table-filters_container">
+  <div class="table-filters">
+    <form class="b-form" [formGroup]="filtersBind">
+      <tui-select
+        tuiTextfieldSize="m"
+        *tuiLet="accounts as items"
+        [tuiTextfieldLabelOutside]="true"
+        [valueContent]="items ? stringify(items) : loading"
+        formControlName="account"
+      >
+        <ng-template tuiDataList>
+          <tui-data-list *ngIf="items; else loading">
+            <button *ngFor="let item of items" tuiOption [value]="item.lk_id">
+              {{ item.company_name }}
+            </button>
+          </tui-data-list>
+        </ng-template>
+        <ng-template #loading>
+          <tui-loader class="tui-space_vertical-3 loader"></tui-loader>
+        </ng-template>
+      </tui-select>
+    </form>
+  </div>
+</div>

@@ -10,63 +10,70 @@
         <input tuiTextfield />
       </tui-input>
 
-      <h2>Укажите выкуп</h2>
-
-      <tui-select
-        tuiTextfieldSize="m"
-        [tuiTextfieldLabelOutside]="true"
-        [(ngModel)]="ransom"
-        formControlName="ransom"
-      >
-        Укажите выкуп
-        <input tuiTextfield placeholder="Укажите выкуп" />
-        <ng-template tuiDataList>
-          <tui-data-list>
-            <button
-              *ngFor="let ransom of ransomsDict"
-              tuiOption
-              [value]="ransom.id"
-            >
-              {{ ransom.name }}
-            </button>
-          </tui-data-list>
-        </ng-template>
-      </tui-select>
-
-      <h2>Запланировать отзыв</h2>
-
-      <tui-input-date class="b-form" formControlName="date">
-        Выберите дату публикации отзыва
-      </tui-input-date>
-
-      <br />
-
-      <tui-input-time
-        toNativeDate
-        class="b-form"
-        formControlName="time"
-        timeMode="HH:MM"
-      >
-        Выберите время публикации отзыва
-      </tui-input-time>
-
-      <h2>Отзыв о товаре</h2>
-      <tui-text-area formControlName="feedback">
-        Например, отличный чехол (от 10 до 1000 символов)
-        <textarea tuiTextfield minLength="10" maxlength="1000"></textarea>
-      </tui-text-area>
-      <h2>Пол в отзыве (Обязательно)</h2>
-      <tui-select
-        tuiTextfieldSize="m"
-        [tuiTextfieldLabelOutside]="true"
-        formControlName="sex"
-      >
-        <tui-data-list-wrapper
-          *tuiDataList
-          [items]="sexDict"
-        ></tui-data-list-wrapper>
-      </tui-select>
-      <div *ngIf="sized">
+      
+      <div class="ransom">
+        <h2>Укажите выкуп</h2>
+        <tui-select
+          tuiTextfieldSize="m"
+          [tuiTextfieldLabelOutside]="true"
+          [(ngModel)]="ransom"
+          formControlName="ransom"
+        >
+          Укажите выкуп
+          <input tuiTextfield placeholder="Укажите выкуп" />
+          <ng-template tuiDataList>
+            <tui-data-list>
+              <button
+                *ngFor="let ransom of ransomsDict"
+                tuiOption
+                [value]="ransom.id"
+              >
+                {{ ransom.name }}
+              </button>
+            </tui-data-list>
+          </ng-template>
+        </tui-select>
+      </div>
+      <div class="date">
+        <h2>Запланировать отзыв</h2>
+  
+        <tui-input-date class="b-form" formControlName="date">
+          Выберите дату публикации отзыва
+        </tui-input-date>
+  
+        <br />
+      </div>
+      <div class="time">
+        <tui-input-time
+          toNativeDate
+          class="b-form"
+          formControlName="time"
+          timeMode="HH:MM"
+        >
+          Выберите время публикации отзыва
+        </tui-input-time>
+      </div>
+      <div class="feedback">
+        <h2>Отзыв о товаре</h2>
+        <tui-text-area formControlName="feedback">
+          Например, отличный чехол (от 10 до 1000 символов)
+          <textarea tuiTextfield minLength="10" maxlength="1000"></textarea>
+        </tui-text-area>
+      </div>
+      <div class="sex">
+        <h2>Пол в отзыве (Обязательно)</h2>
+        <tui-select
+          tuiTextfieldSize="m"
+          [tuiTextfieldLabelOutside]="true"
+          formControlName="sex"
+        >
+          <tui-data-list-wrapper
+            *tuiDataList
+            [items]="sexDict"
+          ></tui-data-list-wrapper>
+        </tui-select>
+      </div>
+      <div *ngIf="sized" class="size">
         <h2>
           Размер (Если у товара отсутствует размер, либо он соответствует
           размеру, выставьте "Cоответствует размеру")
@@ -90,46 +97,50 @@
           </ng-template>
         </tui-select>
       </div>
-      <h2>Рейтинг</h2>
-      <tui-rating formControlName="rating" class="rating"></tui-rating>
-      <h2>Добавьте фото товара</h2>
-
-      <p>Общий размер загружаемых фото - 10Мб</p>
-
-      <div class="photo_placeholder">
-        <tui-input-files
-          accept="image/*"
-          [multiple]="true"
-          [formControl]="control"
-          (reject)="onReject($event)"
-          (ngModelChange)="checkFiles($event)"
-        ></tui-input-files>
-
-        <tui-files class="tui-space_top-1">
-          <tui-file
-            *ngFor="let file of control.valueChanges | async; index as idx"
-            [file]="file"
-            [showDelete]="control.enabled"
-            (removed)="removeFile(file, idx)"
-          ></tui-file>
-
-          <tui-file
-            *ngFor="let file of rejectedFiles"
-            state="error"
-            [file]="file"
-            [showDelete]="control.enabled"
-            (removed)="clearRejected(file)"
-          ></tui-file>
-        </tui-files>
-        <!-- <img class="image_preview"
-                    *ngFor="let item of photos"
-                    style="width: 70px; height: 70px"
-                    [src]="item"
-                />  -->
-        <tui-error
-          [formControl]="control"
-          [error]="['maxLength'] | tuiFieldError | async"
-        ></tui-error>
+      <div class="rating_info">
+        <h2>Рейтинг</h2>
+        <tui-rating formControlName="rating" class="rating"></tui-rating>
+      </div>
+      <div class="photo">
+        <h2>Добавьте фото товара</h2>
+  
+        <p>Общий размер загружаемых фото - 10Мб</p>
+  
+        <div class="photo_placeholder">
+          <tui-input-files
+            accept="image/*"
+            [multiple]="true"
+            [formControl]="control"
+            (reject)="onReject($event)"
+            (ngModelChange)="checkFiles($event)"
+          ></tui-input-files>
+  
+          <tui-files class="tui-space_top-1">
+            <tui-file
+              *ngFor="let file of control.valueChanges | async; index as idx"
+              [file]="file"
+              [showDelete]="control.enabled"
+              (removed)="removeFile(file, idx)"
+            ></tui-file>
+  
+            <tui-file
+              *ngFor="let file of rejectedFiles"
+              state="error"
+              [file]="file"
+              [showDelete]="control.enabled"
+              (removed)="clearRejected(file)"
+            ></tui-file>
+          </tui-files>
+          <!-- <img class="image_preview"
+                      *ngFor="let item of photos"
+                      style="width: 70px; height: 70px"
+                      [src]="item"
+                  />  -->
+          <tui-error
+            [formControl]="control"
+            [error]="['maxLength'] | tuiFieldError | async"
+          ></tui-error>
+        </div>
       </div>
     </form>
     <div class="buttons_container">

@@ -92,9 +92,11 @@ export class SignUpComponent {
             label: 'Успешно зарегистрированы!',
             status: 'success'
           };
-          this.alertService
-            .open('Вы сейчас будете перенаправлены на страницу логина', options)
-            .subscribe();
+          this.alertService.open(
+            'Вы сейчас будете перенаправлены на страницу логина',
+            options
+          )
+          .subscribe();
 
           setTimeout(() => {
             this.appService.goLogin();
@@ -103,7 +105,10 @@ export class SignUpComponent {
         (error) => {
           console.log(error);
           const options: any = { label: 'Ошибка!', status: 'error' };
-          this.alertService.open(error.error.error, options).subscribe();
+          this.alertService.open(error.error.error,
+            options
+          )
+          .subscribe();
         }
       );
   }

@@ -11,7 +11,7 @@
 
     <!--
         <img (click)="appService.goAccount()" src="../../../assets/icons/free-icon-settings-25319 4.svg" alt="настройки" class="options">
-    
+
      -->
   </div>
   <button
@@ -62,26 +62,19 @@
     </g>
   </svg>
 </ng-template>
-<p>
-  <a href="https://t.me/annamptool_support">
-    <button tuiButton type="button" class="support" [icon]="icon">
-      Связаться с поддержкой
-    </button>
-  </a>
-</p>
 
 <div class="ransoms_and_reviews" *ngIf="user.userSubj$ | async as userInfo">
   <div class="ransoms">
-    <span class="count">{{ userInfo.package_info.selfransoms_prepaid }}</span>
+    <span class="count">Выкупы:</span>
     &nbsp;
-    <span class="count">выкупов</span>
+    <span class="count">{{ userInfo.package_info.selfransoms_prepaid }}</span>
   </div>
   <div class="reviews">
-    <span class="count">{{ userInfo.package_info.feedbacks_prepaid }}</span>
+    <span class="count">Отзывы:</span>
     &nbsp;
-    <span class="count">отзывов</span>
+    <span class="count">{{ userInfo.package_info.feedbacks_prepaid }}</span>
   </div>
 </div>
-<!-- <div ngIf="isMobile"> 
+<!-- <div ngIf="isMobile">
     <button tuiButton size="m" type="button" appearance="primary" class="tui-space_right-3 tui-space_bottom-3" (click)="showDialog()">Пополнение</button>
 </div>-->

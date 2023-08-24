@@ -25,7 +25,7 @@
         <td *tuiCell="'idAdvertiser'" tuiTd>
           {{ item.subject }}
         </td>
-        <td *tuiCell="'idProduct'" tuiTd>
+        <td class="article" (click)="goToWBCard(item.sku)" *tuiCell="'idProduct'" tuiTd>
           {{ item.sku }}
         </td>
         <td *tuiCell="'realBid'" tuiTd>

@@ -47,10 +47,13 @@
   display: flex;
   justify-content: flex-end;
   margin-right: 0.5rem;
+  margin-left: 10rem;
 }
 .head_button {
   margin-top: 0rem;
   margin-left: 2rem;
+  width: 33%;
+
 }
 .head_button2 {
   margin-top: 1rem;
@@ -113,7 +116,7 @@
 }
 .mid_left {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 1rem;
 }
 .photo_placeholder {
@@ -189,6 +192,10 @@ h2 {
   white-space: nowrap;
 }
 
+.invalid-input {
+  border: 1px solid red;
+}
+
 .excel_button {
   margin-top: 1rem;
 }
@@ -227,8 +234,8 @@ h2 {
 }
 
 .cancel {
-  width: 147px;
-  height: 42px;
+  width: 25px;
+  height: 20px;
   padding-right: 1rem;
 }
 
@@ -248,6 +255,12 @@ h2 {
   width: 100%;
   margin-top: 1rem;
 }
+
+.guide{
+  margin-left: 1rem;
+}
+
+
 
 @media screen and (max-width: 768px) {
   .create_ransom {
@@ -283,7 +296,7 @@ h2 {
   .mid_left {
     flex-direction: column;
     width: 80%;
-    margin-left: 8%;
+    margin-right: 23%;
   }
   .head_button {
     margin-top: 1rem;
@@ -294,6 +307,7 @@ h2 {
     margin-top: 1rem;
     padding-left: 2%;
     padding-right: 0;
+    width: 100%;
   }
   .sku-input {
     margin-right: 0;
@@ -374,11 +388,14 @@ h2 {
   .excel_uploading {
     margin-left: 5%;
     margin-top: 1rem;
-    width: 118.7%;
+    width: 120%;
   }
   .download {
     width: 100%;
     margin-top: 1rem;
+  }
+  .mid_right {
+    margin-left: 0;
   }
 }
 

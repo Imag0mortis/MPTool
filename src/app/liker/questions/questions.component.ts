@@ -29,6 +29,16 @@ export class QuestionsComponent implements OnInit, OnDestroy {
 
   subscription: Subscription = new Subscription();
 
+  validateOnlyNumbers(event: any): void {
+    const inputValue: string = event.value;
+    const numbersOnly = inputValue.replace(/\D/g, '');
+    this.sku = +numbersOnly;
+
+    // if (inputValue !== numbersOnly) {
+    //     ошибка, введите только цифры
+    // }
+  }
+
   ngOnInit(): void {
     this.getData(1);
   }
