@@ -29,6 +29,7 @@ export class UserService {
   updateUserInfo() {
     this.request.getUserInfo().subscribe(
       (r: any) => {
+        localStorage.setItem('usetifulID', r.user_id);
         if (localStorage.getItem('token')) {
           this.setUserSubj = r;
         }
