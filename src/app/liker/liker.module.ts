@@ -17,7 +17,8 @@ import {
   TuiTagModule,
   TuiSelectModule,
   TuiPaginationModule,
-  TuiRadioLabeledModule
+  TuiRadioLabeledModule,
+  TuiTextareaModule
 } from '@taiga-ui/kit';
 import { TuiTableModule } from '@taiga-ui/addon-table';
 import { LikesComponent } from './likes/likes.component';
@@ -54,7 +55,8 @@ import { TuiTooltipModule } from '@taiga-ui/core';
     TuiRadioLabeledModule,
     TuiTooltipModule,
     TuiHintModule,
-    TuiLoaderModule
+    TuiLoaderModule,
+    TuiTextareaModule
   ]
 })
 export class LikerModule {}

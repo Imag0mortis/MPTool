@@ -28,7 +28,7 @@ export const MenuConfiguration: MenuConf[] = [
         link: '/selfransom'
       },
       {
-        name: 'Рассчет выкупов',
+        name: 'Расчет выкупов',
         link: '/ransom_calculation'
       },
       {
