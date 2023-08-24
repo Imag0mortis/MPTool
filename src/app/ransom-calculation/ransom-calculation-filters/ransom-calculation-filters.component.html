@@ -4,6 +4,7 @@
       class="input positions_search-input"
       [tuiTextfieldCleaner]="true"
       [(ngModel)]="searchRequest"
+      (keyup.enter)="search()"
     >
       Запрос
     </tui-input>
