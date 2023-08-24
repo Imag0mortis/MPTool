@@ -16,7 +16,7 @@
       </h3>
       <tui-input class="search-input" [(ngModel)]="sku">
         Артикул
-        <input tuiTextfield type="text" />
+        <input tuiTextfield (keyup)="validateOnlyNumbers($event)" type="number" />
       </tui-input>
     </div>
     <div class="sex_block">
@@ -41,7 +41,7 @@
     </div>
     <div class="section_1">
       <!-- <p class="costdesk">Стоимость:
-                <span class="money">500 р {{quantity | tariffsInfo: 3}} 
+                <span class="money">500 р {{quantity | tariffsInfo: 3}}
                 </span>
             </p>-->
     </div>
