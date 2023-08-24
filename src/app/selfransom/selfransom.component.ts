@@ -25,7 +25,7 @@ export class SelfransomComponent implements OnInit {
     this.userId = localStorage.getItem('usetifulID')!;
     this.selfransomService.getUserGeoLocation();
     this.appService.init();
-    // this.loadUsetifulScript(this.userId);
+    this.loadUsetifulScript(this.userId);
     console.log('Айдишник', this.userId);
   }
 

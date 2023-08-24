@@ -75,21 +75,21 @@ export const MenuConfiguration: MenuConf[] = [
   //     }
   //   ]
   // },
-  {
-    name: 'Автоответы',
-    icon: 'question-answer.svg',
-    expanded: false,
-    childs: [
-      {
-        name: 'Управление автоответами на отзывы',
-        link: '/feedback'
-      },
-      {
-        name: 'Ввод API ключа для автоответов',
-        link: '/feedback-token'
-      }
-    ]
-  },
+  // {
+  //   name: 'Автоответы',
+  //   icon: 'question-answer.svg',
+  //   expanded: false,
+  //   childs: [
+  //     {
+  //       name: 'Управление автоответами на отзывы',
+  //       link: '/feedback'
+  //     },
+  //     {
+  //       name: 'Ввод API ключа для автоответов',
+  //       link: '/feedback-token'
+  //     }
+  //   ]
+  // },
   {
     name: 'Вопросы',
     icon: 'questions.svg',
