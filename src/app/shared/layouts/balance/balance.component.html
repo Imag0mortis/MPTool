@@ -65,14 +65,14 @@
 
 <div class="ransoms_and_reviews" *ngIf="user.userSubj$ | async as userInfo">
   <div class="ransoms">
-    <span class="count">{{ userInfo.package_info.selfransoms_prepaid }}</span>
+    <span class="count">выкуп:</span>
     &nbsp;
-    <span class="count">выкупов</span>
+    <span class="count">{{ userInfo.package_info.selfransoms_prepaid }}</span>
   </div>
   <div class="reviews">
-    <span class="count">{{ userInfo.package_info.feedbacks_prepaid }}</span>
+    <span class="count">отзыв:</span>
     &nbsp;
-    <span class="count">отзывов</span>
+    <span class="count">{{ userInfo.package_info.feedbacks_prepaid }}</span>
   </div>
 </div>
 <!-- <div ngIf="isMobile"> 
