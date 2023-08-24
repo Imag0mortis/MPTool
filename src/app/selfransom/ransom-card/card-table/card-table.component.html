@@ -45,10 +45,10 @@
         "
         class="table_buttons"
       >
+      <!-- [disabled]="!!item.checkState" -->
         <button
           *ngIf="item.taskState != 'Не получен на ПВЗ'"
           tuiButton
-          [disabled]="!!item.checkState"
           (click)="showDialog(template)"
           type="button"
           class="tui-space_right-3 tui-space_bottom-3"
@@ -311,9 +311,9 @@
         "
         class="table_buttons"
       >
+      <!-- [disabled]="!!item.checkState" -->
         <button
           tuiButton
-          [disabled]="!!item.checkState"
           (click)="showDialog(template)"
           type="button"
           class="mobile_cancel"
