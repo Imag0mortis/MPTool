@@ -4,6 +4,7 @@
     С помощью этой функции вы можете с разных аккуантов добавлять вопросы по
     товару для любых торговых позиций на WB
   </h2>
+  <p class="question_cost">Стоимость одного вопроса 5 рублей.</p>
   <div class="content_block">
     <div class="article_block">
       <h3>
@@ -18,23 +19,13 @@
         <input tuiTextfield type="text" />
       </tui-input>
     </div>
-    <div class="question_block">
-      <h3>
-        Вопрос:
-        <tui-tooltip direction="right" content="Задайте вопрос"></tui-tooltip>
-      </h3>
-      <tui-input class="search-input" [(ngModel)]="question" maxlength="1000">
-        Вопрос (до 1000 символов)
-        <input tuiTextfield type="text" />
-      </tui-input>
-    </div>
     <div class="sex_block">
       <h3>
         Пол:
         <tui-tooltip direction="right" content="Укажите пол"></tui-tooltip>
       </h3>
       <tui-select
-        class="search-input"
+        class="sex-search-input"
         tuiTextfieldSize="l"
         [tuiTextfieldLabelOutside]="true"
         [valueContent]="sex"
@@ -54,6 +45,19 @@
                 </span>
             </p>-->
     </div>
+  </div>
+  <div class="question_block">
+    <h3>
+      Вопрос:
+      <tui-tooltip direction="right" content="Задайте вопрос"></tui-tooltip>
+    </h3>
+    <tui-textarea [(ngModel)]="question" maxlength="1000"
+      class="field-medium"
+      [expandable]="true"
+      [maxLength]="1000"
+  >
+  Вопрос (до 1000 символов)
+  </tui-textarea>
   </div>
   <button class="task_button" (click)="create()" tuiButton>
     СОЗДАТЬ ЗАДАНИЕ
