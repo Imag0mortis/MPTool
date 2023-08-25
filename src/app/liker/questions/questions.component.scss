@@ -1,11 +1,5 @@
-.basket {
-  margin: 1rem 2rem;
-  background-color: #fff;
-  border-radius: 16px;
-  width: auto;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  border-radius: 15px;
-  padding-right: 2rem;
+.wrapper{
+  overflow-x: hidden;
 }
 .basket_header {
   font-weight: 600;
@@ -70,9 +64,17 @@
   margin-right: 10%;
 }
 .table_content {
-  padding: 1rem;
   text-align: center;
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 1rem;
 }
+
+.table_content table {
+  width: 100%;
+  table-layout: fixed;
+}
+
 .body {
   padding: 0.5rem;
 }
@@ -80,6 +82,14 @@ th {
   background: #d5ebea;
   height: 3rem;
   color: #2c7a77;
+}
+
+.table_content th,
+.table_content td {
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .pagination-container {
@@ -122,7 +132,7 @@ svg {
 }
 .question_block {
   margin: 2rem;
-  width: 40%;
+  width: 42%;
 }
 .question_block h3 {
   color: #2c7a77;
@@ -141,6 +151,7 @@ svg {
   }
   .question_block {
     margin: 1rem 1rem 0 1rem;
+    width: 40%;
   }
   .task_button {
     width: 102%;
@@ -200,7 +211,16 @@ svg {
     height: 16px;
   }
   .table_content {
-    width: 100%;
-    overflow: scroll;
+    width: 110%;
+  }
+  .question_cost {
+    margin-left: 1rem;
+  }
+  .question_cost{
+    margin-left: 1rem;
+  }
+  .table_content table {
+    width: auto;
+    table-layout: auto;
   }
 }
