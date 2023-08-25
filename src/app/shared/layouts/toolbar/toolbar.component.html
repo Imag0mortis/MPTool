@@ -109,18 +109,18 @@
           *ngIf="user.userSubj$ | async as userInfo"
         >
           <div class="ransoms">
+            <span class="count">Выкупов:</span>
+            <!-- &nbsp; -->
             <span class="count">
               {{ userInfo.package_info.selfransoms_prepaid }}
             </span>
-            &nbsp;
-            <span class="count">выкупов</span>
           </div>
           <div class="reviews">
+            <span class="count">Отзывов:</span>
+            <!-- &nbsp; -->
             <span class="count">
               {{ userInfo.package_info.feedbacks_prepaid }}
             </span>
-            &nbsp;
-            <span class="count">отзывов</span>
           </div>
         </div>
 
