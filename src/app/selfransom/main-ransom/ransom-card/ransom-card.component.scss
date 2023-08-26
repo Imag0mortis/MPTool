@@ -47,8 +47,21 @@
   margin-top: 1rem;
 }
 
+@media screen and (max-width: 1140px) {
+  .ransom_1 {
+    width: 315px;
+  }
+}
+
+
 @media screen and (max-width: 768px) {
   .ransom_1 {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 365px) {
+  .ransom_1 {
+    width: 85%;
   }
 }

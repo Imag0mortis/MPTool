@@ -1,14 +1,10 @@
 .create_ransom {
-  margin: 1rem 2rem;
-  background-color: #fff;
-  border-radius: 16px;
-  width: auto;
-  border-radius: 15px;
-  margin-left: 3rem;
-  margin-bottom: 1rem;
+      background-color: #fff;
+      width: auto;
+      margin-top: 3rem;
+      padding-left: 20px;
 }
 .create_header {
-  padding: 1rem 1rem 0rem 3rem;
   display: flex;
   align-items: center;
 }
@@ -28,7 +24,6 @@
 .mid_container {
   display: flex;
   align-items: center;
-  padding: 0rem 1rem 0rem 3rem;
   font-weight: 700;
   font-size: 12px;
   line-height: 19px;
@@ -66,8 +61,6 @@
 }
 .ransom_table {
   margin-top: 1rem;
-  padding-left: 3rem;
-  padding-right: 1rem;
 }
 .table {
   width: 100%;
@@ -153,7 +146,6 @@
   padding-bottom: 2rem;
 }
 .footer_left {
-  margin-left: 3rem;
   margin-top: 1rem;
 }
 .right_description {

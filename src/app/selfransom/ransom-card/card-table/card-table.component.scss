@@ -293,7 +293,7 @@ h4 {
 }
 
 .expanded {
-  height: 85px;
+  min-height: 85px;
   background: rgba(86, 180, 176, 0.24);
   border-radius: 10px;
   margin-left: 1rem;
