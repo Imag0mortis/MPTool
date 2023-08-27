@@ -63,6 +63,12 @@ export class ErrorInterceptor implements HttpInterceptor {
               )
               .subscribe();
             break;
+          case 13:
+            const options: any = { status: 'error' };
+            this.alertService
+              .open('Вы выбрали более ' + 5 + ' товаров на один ПВЗ!', options)
+              .subscribe();
+            break;
           default:
             break;
         }
