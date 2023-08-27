@@ -361,7 +361,7 @@
                             <button
                               *ngFor="let item of sexDict"
                               tuiOption
-                              [value]="{ name: item.name, value: item.value }"
+                              [value]="item.name"
                             >
                               {{ item.name }}
                             </button>
