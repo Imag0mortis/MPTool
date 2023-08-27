@@ -223,7 +223,7 @@ export class CreateRansomComponent implements OnInit {
           price: el.price,
           quantity: Number(el.quantity),
           query: el.request,
-          sex: el.sex?.name,
+          sex: el.sex,
           address: el.address?.addressName,
           size: el.sizes[0].Key.length === 0 ? '' : el.size.name
         };
