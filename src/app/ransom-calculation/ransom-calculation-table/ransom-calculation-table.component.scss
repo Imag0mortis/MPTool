@@ -92,3 +92,9 @@ td:nth-child(even) {
 tr:first-child td {
   border-bottom: 1px solid #ebf3f3;
 }
+
+.loader-over-table{
+  width: 65vw;
+  overflow: scroll;
+}
+

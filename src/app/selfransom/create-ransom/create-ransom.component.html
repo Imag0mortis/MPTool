@@ -214,13 +214,14 @@
               <td
                 tuiTd
                 *tuiCell="'request'"
+                style="max-width: 120px;"
                 [ngStyle]="{
                   border: item.request.length < 1 ? '3px solid red' : null
                 }"
               >
                 <tui-input class="account-input" [(ngModel)]="item.request">
                   <input tuiTextfield type="text" />
-                </tui-input>
+                 </tui-input>
               </td>
               <td tuiTd *tuiCell="'address'">
                 <button
