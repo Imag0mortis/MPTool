@@ -5,6 +5,7 @@
   border-radius: 16px;
   width: auto;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
@@ -15,6 +16,7 @@
 
 .b-form {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .b-form > * {
@@ -31,30 +33,31 @@
     display: flex;
     flex-direction: column;
     width: auto;
-    margin: 0 0;
-    padding-left: 1rem;
-    padding-top: 1rem;
+    margin: 0;
+    padding: 1rem;
+    border-radius: 0;
   }
+  
   .table-filters-left,
   .table-filters-right {
     width: 100%;
+    padding: 0;
   }
+  
   form.b-form tui-select[tuiTextfieldSize='m'] {
     width: 100%;
+    min-width: unset;
   }
-  table {
-    width: 100%;
-    overflow: scroll;
-  }
+
   .b-form {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-left: 1rem;
+    margin: 0;
   }
 
   .table-filters-right {
     display: flex;
-    padding-right: 0rem;
+    padding-right: 0;
   }
 }

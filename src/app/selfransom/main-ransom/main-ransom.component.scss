@@ -261,6 +261,9 @@ tui-select {
 .clear {
   width: 10rem;
 }
+.action_buttons{
+  width: auto;
+}
 
 @media screen and (max-width: 768px) {
   .main_container {
@@ -281,15 +284,8 @@ tui-select {
     margin-top: 10px;
     margin-right: 10px;
   }
-  .excel_button {
-    width: 96.7%;
-  }
   .searchbar tui-input {
     width: 98%;
-  }
-  .excel_uploading {
-    margin-left: 0;
-    width: 96.7%;
   }
   .search_buttons {
     margin-top: 1rem;
