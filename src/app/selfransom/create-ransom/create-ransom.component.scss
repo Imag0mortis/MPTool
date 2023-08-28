@@ -1,8 +1,9 @@
 .create_ransom {
-      background-color: #fff;
-      width: auto;
-      margin-top: 3rem;
-      padding-left: 20px;
+  background-color: #fff;
+  width: auto;
+  margin-top: 3rem;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .create_header {
   display: flex;
@@ -22,12 +23,15 @@
   color: #1976d2;
 }
 .mid_container {
-  display: flex;
+  display: grid;
   align-items: center;
   font-weight: 700;
   font-size: 12px;
   line-height: 19px;
   color: #2c7a77;
+  grid-template-columns: auto 1fr;
+  margin-top: 1rem;
+  gap: 1rem;
 }
 .article {
   width: 465px;
@@ -38,21 +42,27 @@
   height: 21px;
 }
 .mid_right {
-  width: 100%;
+  // width: 100%;
   display: flex;
+  // justify-content: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
   justify-content: flex-end;
-  margin-right: 0.5rem;
-  margin-left: 10rem;
+  // margin-right: 0.5rem;
+  // margin-left: 10rem;
 }
 .head_button {
-  margin-top: 0rem;
-  margin-left: 2rem;
-  width: 33%;
+  // margin-top: 0rem;
+  // margin-left: 2rem;
+  // width: 33%;
 }
 .head_button2 {
-  margin-top: 1rem;
-  margin-left: 2rem;
-  width: 15rem;
+  // margin-top: 1rem;
+  // margin-left: 2rem;
+  // width: 15rem;
+  width: 100%;
+  max-width: 15rem;
+  min-width: 13rem;
 }
 .word {
   font-weight: 700;
@@ -103,13 +113,15 @@
   width: 100%;
 }
 .sku-input {
-  margin-right: 1rem;
+  // margin-right: 1rem;
   min-width: 200px;
 }
 .mid_left {
   display: flex;
   align-items: flex-start;
-  margin-top: 1rem;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 1rem;
 }
 .photo_placeholder {
   width: 40px;
@@ -157,7 +169,6 @@
 .footer_button {
   margin-top: 2rem;
   width: 25rem;
-  margin-right: 1.5rem;
 }
 .right_section {
   width: 79.5%;
@@ -180,7 +191,6 @@ h2 {
 .warning {
   color: red;
   font-size: 15px;
-  white-space: nowrap;
 }
 
 .invalid-input {
@@ -192,7 +202,8 @@ h2 {
 }
 
 .excel_uploading {
-  margin-left: 1rem;
+  // margin-left: 1rem;
+  width: 17rem;
 }
 
 .button_container button {
