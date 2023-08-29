@@ -3,14 +3,16 @@
     <div class="tarrifs_header">
       <h1>Расчитать оплату на:</h1>
       <div class="buttons_container">
-        <tui-island [hoverable]="true"
+        <tui-island
+          [hoverable]="true"
           class="tariffs-header-button"
           [ngClass]="duration === 1 ? 'active' : null"
           (click)="durationToggle(1)"
         >
           <strong>НА 1 МЕСЯЦ</strong>
         </tui-island>
-        <tui-island [hoverable]="true"
+        <tui-island
+          [hoverable]="true"
           class="tariffs-header-button"
           [ngClass]="duration === 3 ? 'active' : null"
           (click)="durationToggle(3)"
@@ -18,7 +20,8 @@
           <strong>НА 3 МЕСЯЦА</strong>
           <i>-10%</i>
         </tui-island>
-        <tui-island [hoverable]="true"
+        <tui-island
+          [hoverable]="true"
           class="tariffs-header-button"
           [ngClass]="duration === 4 ? 'active' : null"
           (click)="durationToggle(4)"
@@ -30,7 +33,12 @@
     </div>
     <div class="tariffs-cards">
       <div class="tariffs-content" *ngIf="user.userSubj$ | async">
-        <tui-island [hoverable]="true" *ngFor="let item of tariffs; index as index" class="tariffs-col" style="padding: 0!important;">
+        <tui-island
+          [hoverable]="true"
+          *ngFor="let item of tariffs; index as index"
+          class="tariffs-col"
+          style="padding: 0 !important"
+        >
           <div class="tarif_wrapper">
             <div class="tariffs_main">
               <div class="tariff_col-name">

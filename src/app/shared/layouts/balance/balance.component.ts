@@ -47,10 +47,18 @@ export class BalanceComponent implements OnInit {
     this.dialog.subscribe();
   }
 
-  getPluralForm(number: number, oneForm: string, fewForm: string, manyForm: string): string {
+  getPluralForm(
+    number: number,
+    oneForm: string,
+    fewForm: string,
+    manyForm: string
+  ): string {
     if (number % 10 === 1 && number % 100 !== 11) {
       return oneForm;
-    } else if ([2, 3, 4].includes(number % 10) && ![12, 13, 14].includes(number % 100)) {
+    } else if (
+      [2, 3, 4].includes(number % 10) &&
+      ![12, 13, 14].includes(number % 100)
+    ) {
       return fewForm;
     } else {
       return manyForm;

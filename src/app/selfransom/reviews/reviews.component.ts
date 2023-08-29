@@ -22,13 +22,6 @@ import { FormControl } from '@angular/forms';
 export class ReviewsComponent {
   filter_state = -1;
   testValue = new FormControl();
-  dictionary: [
-    { id: 1; state: 'Доступные товары для отзывов' },
-    { id: 2; state: 'Опубликованные' },
-    { id: 3; state: 'Ожидает публикации' },
-    { id: 4; state: 'Отменённые' },
-    { id: 5; state: 'Ошибка' }
-  ];
   filter = 1;
 
   activeItemIndex = 0;

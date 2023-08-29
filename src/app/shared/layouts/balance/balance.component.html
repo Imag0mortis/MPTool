@@ -67,12 +67,30 @@
   <div class="ransoms">
     <span class="count">{{ userInfo.package_info.selfransoms_prepaid }}</span>
     &nbsp;
-    <span class="count">{{ getPluralForm(userInfo.package_info.selfransoms_prepaid, 'выкуп', 'выкупа', 'выкупов') }}</span>
+    <span class="count">
+      {{
+        getPluralForm(
+          userInfo.package_info.selfransoms_prepaid,
+          'выкуп',
+          'выкупа',
+          'выкупов'
+        )
+      }}
+    </span>
   </div>
   <div class="reviews">
     <span class="count">{{ userInfo.package_info.feedbacks_prepaid }}</span>
     &nbsp;
-    <span class="count">{{ getPluralForm(userInfo.package_info.feedbacks_prepaid, 'отзыв', 'отзыва', 'отзывов') }}</span>
+    <span class="count">
+      {{
+        getPluralForm(
+          userInfo.package_info.feedbacks_prepaid,
+          'отзыв',
+          'отзыва',
+          'отзывов'
+        )
+      }}
+    </span>
   </div>
 </div>
 <!-- <div ngIf="isMobile"> 

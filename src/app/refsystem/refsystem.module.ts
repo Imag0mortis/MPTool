@@ -36,7 +36,7 @@ import {
     TuiTextfieldControllerModule,
     refsystemRoutes,
     TuiPaginationModule,
-    TuiIslandModule,
+    TuiIslandModule
   ]
 })
 export class RefsystemModule {}
