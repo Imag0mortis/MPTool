@@ -81,7 +81,6 @@ tui-tabs-with-more {
   gap: 1rem 1rem;
   display: flex;
   flex-wrap: wrap;
-  // justify-content: space-between;
 }
 
 .header_button {
@@ -255,7 +254,6 @@ tui-select {
   color: white; /* Чтобы текст был хорошо виден на красном фоне */
 }
 .search_buttons {
-  // margin-left: 1rem;
   display: flex;
   gap: 1rem;
 }
