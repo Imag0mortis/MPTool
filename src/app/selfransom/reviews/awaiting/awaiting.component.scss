@@ -140,6 +140,8 @@ tui-rating {
 .searchbar {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .search-input {
@@ -160,7 +162,6 @@ tui-rating {
 
 @media (max-width: 768px) {
   .searchbar {
-    display: block;
     width: 100%;
   }
 

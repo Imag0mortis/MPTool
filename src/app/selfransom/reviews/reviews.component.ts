@@ -22,20 +22,13 @@ import { FormControl } from '@angular/forms';
 export class ReviewsComponent {
   filter_state = -1;
   testValue = new FormControl();
-
-  onTabChange(tabIndex: number) {
-    this.filter_state = tabIndex;
-    this.onFilterChange();
-  }
-
-  onFilterChange() {
-    if (this.testValue.value) {
-      this.requestService
-        .getReviewsByFilter(1, 20, this.filter_state, this.testValue.value)
-        .subscribe();
-    }
-  }
-
+  dictionary: [
+    { id: 1; state: 'Доступные товары для отзывов' },
+    { id: 2; state: 'Опубликованные' },
+    { id: 3; state: 'Ожидает публикации' },
+    { id: 4; state: 'Отменённые' },
+    { id: 5; state: 'Ошибка' }
+  ];
   filter = 1;
 
   activeItemIndex = 0;
@@ -59,6 +52,18 @@ export class ReviewsComponent {
     private router: Router,
     private requestService: RequestService
   ) {}
+  onTabChange(tabIndex: number) {
+    this.filter_state = tabIndex;
+    this.onFilterChange();
+  }
+
+  onFilterChange() {
+    if (this.testValue.value) {
+      this.requestService
+        .getReviewsByFilter(1, 20, this.filter_state, this.testValue.value)
+        .subscribe();
+    }
+  }
 
   showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
     this.dialogService.open(content).subscribe();

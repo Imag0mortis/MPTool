@@ -1,10 +1,15 @@
 .reviews {
   background-color: #fff;
-    margin-top: 4.3rem;
-    padding: 0 20px;
+  margin-top: 4.3rem;
+  padding: 0 20px 20px 20px;
 }
 
-.reviews-about{
+main {
+  padding: 1rem 0 0 0;
+  width: 75vw;
+}
+
+.reviews-about {
   width: auto;
   font-family: Roboto;
   font-style: italic;
@@ -41,9 +46,9 @@ h2 {
 
 .header_buttons {
   width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .header_button {
@@ -57,22 +62,22 @@ h2 {
 
 .rev {
   height: 20px;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 16px;
-    color: #2c7a77;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0.5rem;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  color: #2c7a77;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.5rem;
 }
 
 .rev span {
   font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
-    color: #000;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #000;
 }
 
 .header_navigation {
@@ -82,7 +87,7 @@ h2 {
 }
 
 tui-tabs {
-  width: max-content;
+  // width: max-content;
 }
 
 .search {
@@ -165,6 +170,10 @@ tui-input {
     margin: 0;
   }
 
+  main {
+    width: auto;
+  }
+
   h1 {
     font-size: 18px;
   }
@@ -236,3 +245,8 @@ tui-input {
     justify-content: space-around;
   }
 }
+
+// .mobile_buttons{
+//   display: flex;
+//   flex-wrap: wrap;
+// }
