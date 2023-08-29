@@ -74,6 +74,7 @@
 }
 .table {
   width: 100%;
+  table-layout: fixed;
 }
 .filters {
   display: flex;
@@ -106,7 +107,8 @@
 .table_container {
   background-color: #fff;
   border-radius: 16px;
-  width: auto;
+  width: 100%;
+  overflow-x: auto;
 }
 
 .table_container table {
@@ -260,6 +262,18 @@ h2 {
 
 .guide {
   margin-left: 1rem;
+}
+
+@media screen and (max-width: 1274px) {
+  .mid_right{
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (max-width: 986px) {
+  .mid_right{
+    margin-top: 7rem;
+  }
 }
 
 @media screen and (max-width: 768px) {
