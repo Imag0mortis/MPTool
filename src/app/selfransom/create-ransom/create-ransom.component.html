@@ -2,14 +2,13 @@
   <div class="create_header">
     <div class="left_head">
       <h2>Создать выкуп</h2>
-      <span class="warning">
+      <p class="warning">
         Внимание! В целях безопасности нельзя отправлять сразу больше пяти
         товаров на один ПВЗ
         <br />
         до приёма предыдущих заказов!
-      </span>
+      </p>
     </div>
-    <div class="right_head"></div>
   </div>
   <div class="mid_container">
     <div class="mid_left">
@@ -215,6 +214,7 @@
               <td
                 tuiTd
                 *tuiCell="'request'"
+                style="max-width: 120px"
                 [ngStyle]="{
                   border: item.request.length < 1 ? '3px solid red' : null
                 }"

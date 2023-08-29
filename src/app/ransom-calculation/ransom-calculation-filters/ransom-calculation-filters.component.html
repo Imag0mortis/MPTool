@@ -1,5 +1,5 @@
 <div class="table-filters_container">
-  <div style="display: flex">
+  <div style="display: flex; gap: 0.5rem">
     <tui-input
       class="input positions_search-input"
       [tuiTextfieldCleaner]="true"
@@ -17,25 +17,17 @@
       Позиция
     </tui-input>
   </div>
-  <div style="display: flex">
+  <div style="display: flex; gap: 0.5rem">
     <button
       (click)="search()"
       tuiButton
       size="l"
       type="submit"
-      class="tui-form__button"
       iconRight="tuiIconSearch"
     >
       Поиск
     </button>
-    &nbsp;&nbsp;
-    <button
-      tuiButton
-      (click)="clear()"
-      type="button"
-      appearance="secondary"
-      class="tui-space_right-3 tui-space_bottom-3"
-    >
+    <button tuiButton (click)="clear()" type="button" appearance="secondary">
       Очистить
     </button>
   </div>

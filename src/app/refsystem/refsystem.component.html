@@ -108,30 +108,32 @@
       </div>
     </div>
     <div class="mobile_footer" *ngIf="appService.isMobile">
-    <div class="" *ngFor="let item of links">
-      <tui-island [hoverable]="true">
-        <h3 class="tui-island__title"><a href="{{ item.link }}" target="blank">{{ item.link }}</a></h3>
+      <div class="" *ngFor="let item of links">
+        <tui-island [hoverable]="true">
+          <h3 class="tui-island__title">
+            <a href="{{ item.link }}" target="blank">{{ item.link }}</a>
+          </h3>
           <div class="tui-island__paragraph">
             <ul>
-            <li>Кликов: {{ item.hits }}</li>
-            <li>Регистраций: {{ item.registers }}</li>
-            <li>Оплат: {{ item.sum_total }}</li>
-            <li>Комиссия: {{ item.referral_comission }}</li>
+              <li>Кликов: {{ item.hits }}</li>
+              <li>Регистраций: {{ item.registers }}</li>
+              <li>Оплат: {{ item.sum_total }}</li>
+              <li>Комиссия: {{ item.referral_comission }}</li>
             </ul>
           </div>
-        <button
+          <button
             tuiButton
             type="button"
             appearance="flat"
             size="m"
             class="tui-island__footer-button"
             (click)="deleteLink(item)"
-        >
+          >
             <span>Удалить</span>
-        </button>
-    </tui-island>
+          </button>
+        </tui-island>
+      </div>
     </div>
-  </div>
     <div class="footer_container">
       <div class="table_content" *ngIf="!appService.isMobile">
         <table

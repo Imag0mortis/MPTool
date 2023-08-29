@@ -1,9 +1,8 @@
 <div class="available">
-  <div class="searchbar" style="">
+  <div class="searchbar">
     <tui-input
       tuiTextfieldSize="s"
       class="search-input"
-      style="margin-right: 1rem"
       [(ngModel)]="searchSku"
     >
       Введите артикул.
@@ -12,7 +11,6 @@
     <tui-input
       tuiTextfieldSize="s"
       class="search-input"
-      style="margin-right: 1rem"
       [(ngModel)]="searchSkuName"
     >
       Введите название товара.
@@ -20,24 +18,22 @@
     </tui-input>
 
     <button
-      style="margin-top: 0.8rem; margin-left: 1rem"
       tuiButton
       type="button"
       appearance="primary"
       size="s"
-      class="tui-space_right-3 tui-space_bottom-3 search-button"
+      class="search-button"
       (click)="searchReviews(1, searchSku, searchSkuName)"
     >
       Найти
     </button>
 
     <button
-      style="margin-top: 0.8rem; margin-left: 1rem"
       tuiButton
       type="button"
       size="s"
       appearance="primary"
-      class="tui-space_right-3 tui-space_bottom-3 search-button"
+      class="search-button"
       (click)="searchReviews(1, 0, ''); searchSku = ''; searchSkuName = ''"
     >
       Очистить

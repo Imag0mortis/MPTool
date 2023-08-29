@@ -133,10 +133,14 @@
     </button> -->
   </div>
 
-  <tui-tabs [(activeItemIndex)]="activeItemIndex">
+  <tui-tabs
+    [underline]="false"
+    class="tabs"
+    [(activeItemIndex)]="activeItemIndex"
+  >
     <button
-      *ngFor="let item of dictionary"
       tuiTab
+      *ngFor="let item of dictionary"
       (click)="onTabClick(item.id)"
     >
       {{ item.state }}

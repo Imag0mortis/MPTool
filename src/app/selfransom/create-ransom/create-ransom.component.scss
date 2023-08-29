@@ -1,14 +1,11 @@
 .create_ransom {
-  margin: 1rem 2rem;
   background-color: #fff;
-  border-radius: 16px;
   width: auto;
-  border-radius: 15px;
-  margin-left: 3rem;
-  margin-bottom: 1rem;
+  margin-top: 3rem;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .create_header {
-  padding: 1rem 1rem 0rem 3rem;
   display: flex;
   align-items: center;
 }
@@ -26,13 +23,15 @@
   color: #1976d2;
 }
 .mid_container {
-  display: flex;
+  display: grid;
   align-items: center;
-  padding: 0rem 1rem 0rem 3rem;
   font-weight: 700;
   font-size: 12px;
   line-height: 19px;
   color: #2c7a77;
+  grid-template-columns: auto 1fr;
+  margin-top: 1rem;
+  gap: 1rem;
 }
 .article {
   width: 465px;
@@ -43,21 +42,27 @@
   height: 21px;
 }
 .mid_right {
-  width: 100%;
+  // width: 100%;
   display: flex;
+  // justify-content: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
   justify-content: flex-end;
-  margin-right: 0.5rem;
-  margin-left: 10rem;
+  // margin-right: 0.5rem;
+  // margin-left: 10rem;
 }
 .head_button {
-  margin-top: 0rem;
-  margin-left: 2rem;
-  width: 33%;
+  // margin-top: 0rem;
+  // margin-left: 2rem;
+  // width: 33%;
 }
 .head_button2 {
-  margin-top: 1rem;
-  margin-left: 2rem;
-  width: 15rem;
+  // margin-top: 1rem;
+  // margin-left: 2rem;
+  // width: 15rem;
+  width: 100%;
+  max-width: 15rem;
+  min-width: 13rem;
 }
 .word {
   font-weight: 700;
@@ -66,8 +71,6 @@
 }
 .ransom_table {
   margin-top: 1rem;
-  padding-left: 3rem;
-  padding-right: 1rem;
 }
 .table {
   width: 100%;
@@ -110,13 +113,15 @@
   width: 100%;
 }
 .sku-input {
-  margin-right: 1rem;
+  // margin-right: 1rem;
   min-width: 200px;
 }
 .mid_left {
   display: flex;
   align-items: flex-start;
-  margin-top: 1rem;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 1rem;
 }
 .photo_placeholder {
   width: 40px;
@@ -153,7 +158,6 @@
   padding-bottom: 2rem;
 }
 .footer_left {
-  margin-left: 3rem;
   margin-top: 1rem;
 }
 .right_description {
@@ -165,7 +169,6 @@
 .footer_button {
   margin-top: 2rem;
   width: 25rem;
-  margin-right: 1.5rem;
 }
 .right_section {
   width: 79.5%;
@@ -199,7 +202,8 @@ h2 {
 }
 
 .excel_uploading {
-  margin-left: 1rem;
+  // margin-left: 1rem;
+  width: 17rem;
 }
 
 .button_container button {

@@ -1,9 +1,23 @@
 .reviews {
   background-color: #fff;
-  margin: 0 1rem;
-  border-radius: 16px;
-  //max-width: 980px;
-  padding: 1rem;
+  margin-top: 4.3rem;
+  padding: 0 20px 20px 20px;
+}
+
+main {
+  padding: 1rem 0 0 0;
+  width: 75vw;
+}
+
+.reviews-about {
+  width: auto;
+  font-family: Roboto;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000;
+  margin-bottom: 1rem;
 }
 
 h1 {
@@ -31,9 +45,10 @@ h2 {
 }
 
 .header_buttons {
-  width: 60rem;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .header_button {
@@ -46,9 +61,7 @@ h2 {
 }
 
 .rev {
-  width: auto;
   height: 20px;
-  font-family: 'Roboto';
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
@@ -60,22 +73,17 @@ h2 {
 }
 
 .rev span {
-  font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  color: #000000;
+  color: #000;
 }
 
 .header_navigation {
   margin-top: 2rem;
   display: flex;
   justify-content: space-between;
-}
-
-tui-tabs {
-  width: max-content;
 }
 
 .search {
@@ -156,6 +164,10 @@ tui-input {
 @media only screen and (max-width: 768px) {
   .reviews {
     margin: 0;
+  }
+
+  main {
+    width: auto;
   }
 
   h1 {

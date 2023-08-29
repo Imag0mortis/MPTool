@@ -2,10 +2,10 @@
   <header>
     <h1>Отзывы</h1>
 
-    <h2>
+    <p class="reviews-about">
       Отзывы можно создать только для выкупленных вами товаров в(разделе
       самовыкупы), которые вы уже забрали из пункта выдачи.
-    </h2>
+    </p>
     <header>
       <div class="header_buttons" *ngIf="!appService.isMobile">
         <div class="header_button" (click)="showDialog(template2)">
@@ -48,82 +48,51 @@
 
     <nav>
       <div class="header_navigation">
-        <div>
-          <tui-tabs
-            *ngIf="!appService.isMobile"
-            [(activeItemIndex)]="activeItemIndex"
-            [underline]="false"
-          >
-            <button
-              tuiTab
-              class="nav_tab"
-              (click)="filter = 1"
-              style="width: max-content"
-            >
-              <div class="tabdesk">Доступные товары для отзывов</div>
-            </button>
-            <button tuiTab class="nav_tab" (click)="filter = 3">
-              <div class="tabdesk">Ожидает публикации</div>
-            </button>
-            <button tuiTab class="nav_tab" (click)="filter = 2">
-              <div class="tabdesk">Опубликованные</div>
-            </button>
-            <button tuiTab class="nav_tab" (click)="filter = 4">
-              <div class="tabdesk">Отменённые</div>
-            </button>
-            <button tuiTab class="nav_tab" (click)="filter = 5">
-              <div class="tabdesk">Ошибка</div>
-            </button>
-            <!--<button tuiTab class="nav_tab" (click)="filter = -1"><div class="tabdesk">Все</div></button> -->
-          </tui-tabs>
+        <tui-tabs
+          *ngIf="!appService.isMobile"
+          [(activeItemIndex)]="activeItemIndex"
+          [underline]="false"
+          style="height: 100%; flex-wrap: wrap; box-shadow: none"
+        >
+          <button tuiTab class="nav_tab" (click)="filter = 1">
+            <div class="tabdesk">Доступные товары для отзывов</div>
+          </button>
+          <button tuiTab class="nav_tab" (click)="filter = 3">
+            <div class="tabdesk">Ожидает публикации</div>
+          </button>
+          <button tuiTab class="nav_tab" (click)="filter = 2">
+            <div class="tabdesk">Опубликованные</div>
+          </button>
+          <button tuiTab class="nav_tab" (click)="filter = 4">
+            <div class="tabdesk">Отменённые</div>
+          </button>
+          <button tuiTab class="nav_tab" (click)="filter = 5">
+            <div class="tabdesk">Ошибка</div>
+          </button>
+        </tui-tabs>
 
-          <div class="mobile_buttons" *ngIf="appService.isMobile">
-            <button
-              tuiButton
-              (click)="filter = 1"
-              type="button"
-              appearance="secondary"
-              class="tui-space_right-3 tui-space_bottom-3"
-            >
-              Доступные
-            </button>
-
-            <button
-              tuiButton
-              (click)="filter = 3"
-              type="button"
-              appearance="secondary"
-              class="tui-space_right-3 tui-space_bottom-3"
-            >
-              Ожидает публикации
-            </button>
-            <button
-              tuiButton
-              (click)="filter = 2"
-              type="button"
-              appearance="secondary"
-              class="tui-space_right-3 tui-space_bottom-3"
-            >
-              Опубликованные
-            </button>
-          </div>
-        </div>
-        <div class="search">
-          <!-- <tui-input
-            formControlName="testValue1">
-            Артикул:
-            <input
-                tuiTextfield
-                inputmode="numeric"/>
-        </tui-input> -->
-          <!-- <button
-            tuiButton
-            type="button"
-            appearance="primary"
-            class="tui-space_right-3 tui-space_bottom-3">
-            Найти
-        </button> -->
-        </div>
+        <tui-tabs
+          *ngIf="appService.isMobile"
+          [underline]="false"
+          class="tabs"
+          [(activeItemIndex)]="activeItemIndex"
+        >
+          <button tuiTab class="nav_tab" (click)="filter = 1">
+            <div class="tabdesk">Доступные товары для отзывов</div>
+          </button>
+          <button tuiTab class="nav_tab" (click)="filter = 3">
+            <div class="tabdesk">Ожидает публикации</div>
+          </button>
+          <button tuiTab class="nav_tab" (click)="filter = 2">
+            <div class="tabdesk">Опубликованные</div>
+          </button>
+          <button tuiTab class="nav_tab" (click)="filter = 4">
+            <div class="tabdesk">Отменённые</div>
+          </button>
+          <button tuiTab class="nav_tab" (click)="filter = 5">
+            <div class="tabdesk">Ошибка</div>
+          </button>
+        </tui-tabs>
       </div>
     </nav>
   </header>

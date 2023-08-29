@@ -6,11 +6,7 @@ import { TuiIslandModule } from '@taiga-ui/kit';
 
 @NgModule({
   declarations: [TariffsComponent],
-  imports: [
-    CommonModule, 
-    TuiButtonModule,
-    TuiIslandModule
-  ],
-  exports: [TariffsComponent],
+  imports: [CommonModule, TuiButtonModule, TuiIslandModule],
+  exports: [TariffsComponent]
 })
 export class TariffsModule {}

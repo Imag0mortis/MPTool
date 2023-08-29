@@ -77,9 +77,10 @@ tui-tabs-with-more {
 }
 
 .header_buttons {
-  width: 60rem;
+  width: 100%;
+  gap: 1rem 1rem;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .header_button {
@@ -165,7 +166,9 @@ tui-tabs-with-more {
   display: flex;
   align-items: center;
   width: 100%;
+  gap: 1rem;
   margin-top: 1rem;
+  flex-wrap: wrap;
 }
 
 .search-button {
@@ -251,7 +254,6 @@ tui-select {
   color: white; /* Чтобы текст был хорошо виден на красном фоне */
 }
 .search_buttons {
-  margin-left: 1rem;
   display: flex;
   gap: 1rem;
 }
@@ -261,8 +263,17 @@ tui-select {
 .clear {
   width: 10rem;
 }
-.action_buttons{
+.action_buttons {
   width: auto;
+}
+
+@media screen and (min-width: 769px) {
+  .tabs {
+    height: 100%;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -275,6 +286,10 @@ tui-select {
   }
   .add_selfransom {
     width: 105%;
+  }
+
+  .card_container {
+    column-gap: 3rem;
   }
 
   .searchbar {

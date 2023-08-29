@@ -71,7 +71,7 @@ export class CreateRansomComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.item.sex = null;
+    // this.item.sex = null;
   }
 
   private readonly dialog = this.dialogService.open<Address>(
