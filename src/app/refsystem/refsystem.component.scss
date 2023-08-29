@@ -1,11 +1,6 @@
 .refsystem {
-  background-color: #fff;
-  border-radius: 16px;
   width: auto;
   height: max-content;
-  background: #ffffff;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  border-radius: 15px;
 }
 .header_top {
   display: flex;
@@ -221,31 +216,37 @@ tui-input {
   margin-right: 5.5%;
 }
 
-.table_content {
-  text-align: center;
-  width: 100%;
-}
-
 a {
   text-decoration: none;
   color: #1a938e;
 }
 
-th {
-  background: #d5ebea;
-  height: 3rem;
-  color: #2c7a77;
+.table_content {
+  text-align: center;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table_content table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.table_content th,
+.table_content td {
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .pagination-container {
   margin-top: 1rem;
 }
-td {
-  font-size: 13px;
-  margin-top: 2rem;
-  height: 3rem;
-  color: #000000;
+.delete{
+  width: auto;
 }
+
 
 @media screen and (max-width: 1400px) {
   .footer_container {
@@ -302,6 +303,9 @@ td {
   .refsystem {
     width: 100%;
   }
+  .head_container{
+    width: 40%;
+  }
   .header_left {
     display: flex;
     align-items: center;
@@ -316,9 +320,7 @@ td {
     width: 100%;
     overflow: scroll;
   }
-  .head_container {
-    width: 100%;
-  }
+
   .balance {
     margin-left: 33%;
     margin-top: 1rem;
@@ -327,13 +329,13 @@ td {
     margin-left: 1.5rem;
   }
   .referals {
-    margin-left: 26%;
+    margin-left: -4%;
   }
   .ref {
     margin-left: 0rem;
   }
   .main_container {
-    padding: 1rem 1rem 2rem 0;
+    padding: 1rem 2rem 2rem 0;
   }
   .table_container {
     width: 100%;
@@ -343,5 +345,30 @@ td {
   th {
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .delete {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  tui-island{
+    margin: 1rem 1rem 0 1rem;
+  }
+  .tui-island__footer-button span{
+    color: red;
+  }
+  .tui-island__title{
+    border-bottom: 1px;
+    border-bottom-color: gray ;
+  }
+  .ref_refrrals {
+    margin-left: 1.7rem;
+    padding-top: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+  .ref_balance{
+    margin-left: 10%;
+  }
+  .img_wrapper{
+    margin-left: 10%;
   }
 }

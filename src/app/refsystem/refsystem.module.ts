@@ -5,6 +5,7 @@ import { refsystemRoutes } from './refsystem.routing';
 import {
   TuiAvatarModule,
   TuiInputModule,
+  TuiIslandModule,
   TuiPaginationModule
 } from '@taiga-ui/kit';
 import {
@@ -34,7 +35,8 @@ import {
     TuiButtonModule,
     TuiTextfieldControllerModule,
     refsystemRoutes,
-    TuiPaginationModule
+    TuiPaginationModule,
+    TuiIslandModule,
   ]
 })
 export class RefsystemModule {}

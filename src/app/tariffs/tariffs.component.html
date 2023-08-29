@@ -3,63 +3,65 @@
     <div class="tarrifs_header">
       <h1>Расчитать оплату на:</h1>
       <div class="buttons_container">
-        <div
+        <tui-island [hoverable]="true"
           class="tariffs-header-button"
           [ngClass]="duration === 1 ? 'active' : null"
           (click)="durationToggle(1)"
         >
           <strong>НА 1 МЕСЯЦ</strong>
-        </div>
-        <div
+        </tui-island>
+        <tui-island [hoverable]="true"
           class="tariffs-header-button"
           [ngClass]="duration === 3 ? 'active' : null"
           (click)="durationToggle(3)"
         >
           <strong>НА 3 МЕСЯЦА</strong>
           <i>-10%</i>
-        </div>
-        <div
+        </tui-island>
+        <tui-island [hoverable]="true"
           class="tariffs-header-button"
           [ngClass]="duration === 4 ? 'active' : null"
           (click)="durationToggle(4)"
         >
           <strong>6 МЕСЯЦЕВ</strong>
           <i>-15%</i>
-        </div>
+        </tui-island>
       </div>
     </div>
     <div class="tariffs-cards">
       <div class="tariffs-content" *ngIf="user.userSubj$ | async">
-        <div *ngFor="let item of tariffs; index as index" class="tariffs-col">
-          <div class="tariffs_main">
-            <div class="tariff_col-name">
-              <h3 [style.color]="item.color">{{ item.name }}</h3>
+        <tui-island [hoverable]="true" *ngFor="let item of tariffs; index as index" class="tariffs-col" style="padding: 0!important;">
+          <div class="tarif_wrapper">
+            <div class="tariffs_main">
+              <div class="tariff_col-name">
+                <h3 [style.color]="item.color">{{ item.name }}</h3>
+              </div>
+              <div class="tariffs-col-description">
+                <h4 [style.color]="item.color">{{ item.title }}</h4>
+              </div>
+              <div [style.background]="item.color" class="line"></div>
+              <div [style.color]="item.color" class="tariffs-circle">
+                <h5>{{ getMatchAmmount(item.basePrice) }} ₽</h5>
+              </div>
+              <ul>
+                <li *ngFor="let el of item.descriptions; index as i">
+                  <span class="desc">{{ el }}</span>
+                </li>
+              </ul>
             </div>
-            <div class="tariffs-col-description">
-              <h4 [style.color]="item.color">{{ item.title }}</h4>
-            </div>
-            <div [style.background]="item.color" class="line"></div>
-            <div [style.color]="item.color" class="tariffs-circle">
-              <h5>{{ getMatchAmmount(item.basePrice) }} ₽</h5>
-            </div>
-            <ul>
-              <li *ngFor="let el of item.descriptions; index as i">
-                <span class="desc">{{ el }}</span>
-              </li>
-            </ul>
-          </div>
-          <div class="content_footer">
-            <div class="tariffs-el-button">
-              <div
-                [style.background]="item.color"
-                (click)="setTariff(item.id, index === 0 ? null : dialog)"
-                class="buy_tariff"
-              >
-                <p>Подключить</p>
+            <div class="content_footer">
+              <div class="tariffs-el-button">
+                <div
+                  [style.background]="item.color"
+                  (click)="setTariff(item.id, index === 0 ? null : dialog)"
+                  class="buy_tariff"
+                >
+                  <p>Подключить</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </tui-island>
       </div>
     </div>
   </div>
