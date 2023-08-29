@@ -42,11 +42,13 @@ export class LoginComponent {
             this.alertService.open('Вы успешно вошли').subscribe();
             this.auth.successLogin(response);
           } else {
-            this.alertService.open(response.error.error).subscribe();
+            const options: any = { label: 'Ошибка!', status: 'error' };
+            this.alertService.open(response.error.error, options).subscribe();
           }
         },
         (error) => {
-          this.alertService.open(error.error.error).subscribe();
+          const options: any = { label: 'Ошибка!', status: 'error' };
+          this.alertService.open(error.error.error, options).subscribe();
         }
       );
   }

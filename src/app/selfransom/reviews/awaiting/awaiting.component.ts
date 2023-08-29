@@ -166,7 +166,8 @@ export class AwaitingComponent implements OnInit {
       },
       (error: any) => {
         //alert(123);
-        console.log(error.error.errorDesc);
+        const options: any = { label: 'Ошибка!', status: 'error' };
+        console.log(error.error.errorDesc, options);
       }
     );
   };
