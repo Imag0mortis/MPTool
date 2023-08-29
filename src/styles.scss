@@ -33,6 +33,7 @@ $main_bg: '#fff';
   --tui-link: #2e8061;
 
   --tui-success-fill: #2e8061;
+  font-synthesis: none;
 }
 
 body {
@@ -40,6 +41,7 @@ body {
   margin: 0;
   height: max-content;
   color: #333333;
+  font-synthesis: none;
 }
 
 p {

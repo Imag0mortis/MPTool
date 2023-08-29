@@ -9,7 +9,7 @@
           <tui-avatar
             [rounded]="true"
             size="l"
-            text="yuliya tsareva"
+            text="user"
             class="tui-space_top-1"
           ></tui-avatar>
           <span class="username">
@@ -18,7 +18,7 @@
           </span>
         </div>
         <div class="balance">
-          <div>
+          <div class="img_wrapper">
             <img
               src="../../assets/icons/free-icon-money-971075 1.svg"
               class="money_img"
@@ -107,8 +107,33 @@
         </div>
       </div>
     </div>
+    <div class="mobile_footer" *ngIf="appService.isMobile">
+    <div class="" *ngFor="let item of links">
+      <tui-island [hoverable]="true">
+        <h3 class="tui-island__title"><a href="{{ item.link }}" target="blank">{{ item.link }}</a></h3>
+          <div class="tui-island__paragraph">
+            <ul>
+            <li>Кликов: {{ item.hits }}</li>
+            <li>Регистраций: {{ item.registers }}</li>
+            <li>Оплат: {{ item.sum_total }}</li>
+            <li>Комиссия: {{ item.referral_comission }}</li>
+            </ul>
+          </div>
+        <button
+            tuiButton
+            type="button"
+            appearance="flat"
+            size="m"
+            class="tui-island__footer-button"
+            (click)="deleteLink(item)"
+        >
+            <span>Удалить</span>
+        </button>
+    </tui-island>
+    </div>
+  </div>
     <div class="footer_container">
-      <div class="table_content">
+      <div class="table_content" *ngIf="!appService.isMobile">
         <table
           *ngIf="links.length > 0"
           tuiTable
@@ -139,10 +164,10 @@
                   (click)="deleteLink(item)"
                   size="s"
                   appearance="secondary-destructive"
-                  class="tui-space_right-3 tui-space_bottom-3"
+                  class="delete"
                   style="width: max-content"
                 >
-                  Удалить
+                  <span>Удалить</span>
                 </button>
               </td>
             </tr>
