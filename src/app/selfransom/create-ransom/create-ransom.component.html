@@ -15,7 +15,7 @@
       <tui-input
         class="sku-input"
         [(ngModel)]="sku"
-        (keyup.enter)="checkNewSKU()"
+        (keyup.enter)="validateOnlyNumbers($event)"
       >
         Артикул
         <input tuiTextfield type="number" />

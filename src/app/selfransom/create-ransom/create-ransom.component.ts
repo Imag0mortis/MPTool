@@ -158,6 +158,12 @@ export class CreateRansomComponent implements OnInit {
     return requestValue.length;
   }
 
+  validateOnlyNumbers(event: any): void {
+    const inputValue: string = event.value;
+    const numbersOnly = inputValue.replace(/\D/g, '');
+    this.sku = +numbersOnly;
+  }
+
   checkNewSKU() {
     //Если более this.maxCountPositions позиций - не добавляем и выводим алерт
     if (this.data.length < this.maxCountPositions) {

@@ -88,6 +88,7 @@
               tuiButton
               size="s"
               type="button"
+              [disabled]="!isCancelButtonEnabled(task.taskState)"
               (click)="cancelTask(task.taskID)"
             >
               Отменить

@@ -24,9 +24,9 @@
             content="Укажите артикул, который необходимо добавлять в корзину."
           ></tui-tooltip>
         </h4>
-        <tui-input class="article-input" [(ngModel)]="sku">
+        <tui-input class="article-input" [(ngModel)]="sku" (keyup)="validateOnlyNumbers($event)">
           Артикул
-          <input tuiTextfield type="text" />
+          <input tuiTextfield type="number" />
         </tui-input>
       </div>
       <div class="inputs"></div>
@@ -53,7 +53,7 @@
         </h4>
         <tui-input class="amount-input" [(ngModel)]="quantity">
           Количество
-          <input tuiTextfield type="text" />
+          <input tuiTextfield type="number" />
         </tui-input>
       </div>
       <div class="section_1">
@@ -120,6 +120,7 @@
                 tuiButton
                 size="s"
                 type="button"
+                [disabled]="!isCancelButtonEnabled(task.taskState)"
                 (click)="cancelTask(task.taskID)"
               >
                 Отменить

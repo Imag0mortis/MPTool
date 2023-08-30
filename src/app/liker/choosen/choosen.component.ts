@@ -4,6 +4,16 @@ import { LikerFavoritesTask } from 'src/app/shared/interfaces';
 import { RequestService } from 'src/app/shared/services/request.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
+interface TaskData {
+  executionHours: number;
+  taskID: number;
+  taskState: string;
+  timeCreated: number;
+  userID: number;
+  favouritesRemaining: number;
+  link: string;
+}
+
 @Component({
   selector: 'app-choosen',
   templateUrl: './choosen.component.html',
@@ -20,19 +30,11 @@ export class ChoosenComponent implements OnInit {
   tasks: TaskData[] = [];
 
   periodDict = [
-    {
-      days: 1,
-      name: 'В течении одного дня'
-    },
-    {
-      days: 2,
-      name: 'В течении двух дней'
-    },
-    {
-      days: 3,
-      name: 'В течении трёх дней'
-    }
+    { days: 1, name: 'В течение одного дня' },
+    { days: 2, name: 'В течение двух дней' },
+    { days: 3, name: 'В течение трех дней' }
   ];
+
   constructor(
     private requestService: RequestService,
     private userService: UserService,
@@ -44,7 +46,13 @@ export class ChoosenComponent implements OnInit {
     this.getData(1);
   }
 
-  create() {
+  create(): void {
+    if (!this.link || !this.quantity) {
+      const options: any = { label: 'Ошибка!', status: 'error' };
+      this.alertService.open('Заполните все поля', options).subscribe();
+      return;
+    }
+
     const body: LikerFavoritesTask = {
       link: this.link,
       hours: this.period * 24,
@@ -52,20 +60,22 @@ export class ChoosenComponent implements OnInit {
     };
 
     this.requestService.createFavoritesTask(body).subscribe(
-      (r) => this.getData(1),
-      (e: any) => {
-        if (e.error.errorDesc === 'insuffient_balance') {
+      () => this.getData(1),
+      (error: any) => {
+        if (error.error.errorDesc === 'insufficient_balance') {
+          console.log('Ошибка', error)
+        } else if (error.error.errorDesc === 'incorrect_query') {
           const options: any = { label: 'Ошибка!', status: 'error' };
-          this.alertService.open('На счету недостаточно средств', options);
+          this.alertService.open('Введите корректную ссылку', options).subscribe();
         }
       }
     );
   }
 
-  getData(page: number) {
-    this.requestService.getFavoritesTask(page, 5).subscribe((r: any) => {
-      this.tasks = r.taskList;
-      this.length = r.tableData.pagesTotal;
+  getData(page: number): void {
+    this.requestService.getFavoritesTask(page, 5).subscribe((response: any) => {
+      this.tasks = response.taskList;
+      this.length = response.tableData.pagesTotal;
       this.userService.updateUserInfo();
       this.link = '';
       this.quantity = undefined;
@@ -73,18 +83,25 @@ export class ChoosenComponent implements OnInit {
     });
   }
 
-  goToPage(event: any) {
+  goToPage(event: any): void {
     this.index = event;
     this.getData(event + 1);
   }
 
-  cancelTask = (arg: number) => {
+  isCancelButtonEnabled(taskState: string): boolean {
+    return (
+      taskState === 'Ошибка (Неверные данные)' ||
+      taskState === 'Ожидание выполнения'
+    );
+  }
+
+  cancelTask = (taskId: number): void => {
     const body = {
-      task_id: String(arg),
+      task_id: String(taskId),
       action: 'cancel'
     };
     this.requestService.changeFavoritesTask(body).subscribe(
-      (success) => {
+      () => {
         this.getData(1);
       },
       (error: unknown) => {
