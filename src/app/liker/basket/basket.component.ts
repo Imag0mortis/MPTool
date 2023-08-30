@@ -65,10 +65,7 @@ export class BasketComponent implements OnInit {
     this.requestService.createBasketTask(body).subscribe(
       () => this.getData(1),
       (error: any) => {
-        if (error.error.errorDesc === 'insufficient_balance') {
-          const options: any = { label: 'Ошибка!', status: 'error' };
-          this.alertService.open('На счету недостаточно средств', options).subscribe();
-        }
+        console.log('Ошибка', error)
       }
     );
   }

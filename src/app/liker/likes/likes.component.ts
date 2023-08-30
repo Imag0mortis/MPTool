@@ -103,11 +103,8 @@ export class LikesComponent implements OnInit {
         const newData = this.tableData$.value.concat(r['taskList']);
         this.tableData$.next(newData);
       },
-      (e: any) => {
-        if (e.error.errorDesc === 'insuffient_balance') {
-          const options: any = { label: 'Ошибка!', status: 'error' };
-          this.alertService.open('На счету недостаточно средств', options);
-        }
+      (error: any) => {
+        console.log('Ошибка', error)
       }
     );
   }
