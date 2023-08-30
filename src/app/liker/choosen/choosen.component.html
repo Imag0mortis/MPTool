@@ -92,14 +92,12 @@
 
           <td>
             <div
-              *ngIf="
-                !(task.taskState == 'Отменено' || task.taskState == 'Выполнено')
-              "
             >
               <button
                 tuiButton
                 size="s"
                 type="button"
+                [disabled]="!isCancelButtonEnabled(task.taskState)"
                 (click)="cancelTask(task.taskID)"
               >
                 Отменить

@@ -4,6 +4,17 @@ import { LikerBasketTask } from 'src/app/shared/interfaces';
 import { RequestService } from 'src/app/shared/services/request.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
+interface TaskData {
+  basketRemaining: number;
+  executionHours: number;
+  query: string;
+  sku: number;
+  taskID: number;
+  taskState: string;
+  timeCreated: number;
+  userID: number;
+}
+
 @Component({
   selector: 'app-basket',
   templateUrl: './basket.component.html',
@@ -21,19 +32,11 @@ export class BasketComponent implements OnInit {
   tasks: TaskData[] = [];
 
   periodDict = [
-    {
-      days: 1,
-      name: 'В течении одного дня'
-    },
-    {
-      days: 2,
-      name: 'В течении двух дней'
-    },
-    {
-      days: 3,
-      name: 'В течении трёх дней'
-    }
+    { days: 1, name: 'В течение одного дня' },
+    { days: 2, name: 'В течение двух дней' },
+    { days: 3, name: 'В течение трех дней' }
   ];
+
   constructor(
     private requestService: RequestService,
     private userService: UserService,
@@ -45,7 +48,13 @@ export class BasketComponent implements OnInit {
     this.getData(1);
   }
 
-  create() {
+  create(): void {
+    if (!this.sku || !this.request || !this.quantity) {
+      const options: any = { label: 'Ошибка!', status: 'error' };
+      this.alertService.open('Заполните все поля', options).subscribe();
+      return;
+    }
+
     const body: LikerBasketTask = {
       sku: Number(this.sku),
       query: this.request,
@@ -54,15 +63,16 @@ export class BasketComponent implements OnInit {
     };
 
     this.requestService.createBasketTask(body).subscribe(
-      (r) => this.getData(1),
-      (e: any) => {
-        if (e.error.errorDesc === 'insuffient_balance') {
+      () => this.getData(1),
+      (error: any) => {
+        if (error.error.errorDesc === 'insufficient_balance') {
           const options: any = { label: 'Ошибка!', status: 'error' };
-          this.alertService.open('На счету недостаточно средств', options);
+          this.alertService.open('На счету недостаточно средств', options).subscribe();
         }
       }
     );
   }
+
 
   getData(page: number) {
     this.requestService.getBasketTask(page, 5).subscribe((r: any) => {
@@ -81,6 +91,16 @@ export class BasketComponent implements OnInit {
     this.getData(event + 1);
   }
 
+  isCancelButtonEnabled(taskState: string): boolean {
+    return taskState === 'Ошибка(Неверные данные)' || taskState === 'Ожидание выполнения';
+  }
+  
+  validateOnlyNumbers(event: any): void {
+    const inputValue: string = event.value;
+    const numbersOnly = inputValue.replace(/\D/g, '');
+    this.sku = +numbersOnly;
+  }
+
   cancelTask = (arg: number) => {
     const body = {
       task_id: String(arg),
@@ -95,7 +115,7 @@ export class BasketComponent implements OnInit {
         this.alertService.open(
           'Что-то пошло не так! Повторите попытку позднее!',
           options
-        );
+        ).subscribe();
       }
     );
   };

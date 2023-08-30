@@ -33,10 +33,6 @@ export class QuestionsComponent implements OnInit, OnDestroy {
     const inputValue: string = event.value;
     const numbersOnly = inputValue.replace(/\D/g, '');
     this.sku = +numbersOnly;
-
-    // if (inputValue !== numbersOnly) {
-    //     ошибка, введите только цифры
-    // }
   }
 
   ngOnInit(): void {
@@ -52,6 +48,12 @@ export class QuestionsComponent implements OnInit, OnDestroy {
   }
 
   create() {
+    if (!this.sku || !this.question || !this.sex) {
+      const options: any = { label: 'Ошибка!', status: 'error' };
+      this.alertService.open('Заполните все поля', options).subscribe();
+      return;
+    }
+
     const body: LikerQuestionsTask = {
       sku: Number(this.sku),
       question: this.question,
@@ -59,13 +61,13 @@ export class QuestionsComponent implements OnInit, OnDestroy {
     };
     this.requestService
       .createQuestionsTask(body)
-      .subscribe((r) => this.getData(1));
+      .subscribe(() => this.getData(1));
   }
 
   getData(page: number) {
-    this.requestService.getQuestionsTask(page, 5).subscribe((r: any) => {
-      this.tasks = r.taskList;
-      this.length = r.tableData.pagesTotal;
+    this.requestService.getQuestionsTask(page, 5).subscribe((response: any) => {
+      this.tasks = response.taskList;
+      this.length = response.tableData.pagesTotal;
       this.sku = undefined;
       this.question = '';
       this.sex = '';
@@ -78,13 +80,17 @@ export class QuestionsComponent implements OnInit, OnDestroy {
     this.getData(event + 1);
   }
 
-  cancelTask = (arg: number) => {
+  isCancelButtonEnabled(taskState: string): boolean {
+    return taskState === 'Ошибка(Неверные данные)' || taskState === 'Ожидание выполнения';
+  }
+
+  cancelTask = (taskId: number) => {
     const body = {
-      task_id: String(arg),
+      task_id: String(taskId),
       action: 'cancel'
     };
     this.requestService.changeQuestionsTask(body).subscribe(
-      (success) => {
+      () => {
         this.getData(1);
       },
       (error: unknown) => {
@@ -92,7 +98,7 @@ export class QuestionsComponent implements OnInit, OnDestroy {
         this.alertService.open(
           'Что-то пошло не так! Повторите попытку позднее!',
           options
-        );
+        ).subscribe();
       }
     );
   };
