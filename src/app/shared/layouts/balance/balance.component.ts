@@ -1,10 +1,11 @@
 import { Component, Inject, Injector, OnInit } from '@angular/core';
-import { TuiDialogService } from '@taiga-ui/core';
+import { TuiDialogService, TuiDialogContext } from '@taiga-ui/core';
 import { AppService } from '../../services/app.service';
 import { UserService } from '../../services/user.service';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { PaymentModalComponent } from './payment-modal/payment-modal.component';
 import { RequestService } from '../../services/request.service';
+import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
 import { Info } from 'luxon';
 
 @Component({
@@ -24,7 +25,7 @@ export class BalanceComponent implements OnInit {
     private requestService: RequestService,
     private request: RequestService,
     @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
-    @Inject(Injector) private readonly injector: Injector
+    @Inject(Injector) private readonly injector: Injector,
   ) {}
 
   private dialog: any;
@@ -42,6 +43,10 @@ export class BalanceComponent implements OnInit {
       );
     });
   }
+
+  showPaymentDialog(content: PolymorpheusContent<TuiDialogContext>): void {
+    this.dialogService.open(content).subscribe();
+}
 
   showDialog(): void {
     this.dialog.subscribe();

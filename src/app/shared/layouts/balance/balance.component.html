@@ -21,7 +21,7 @@
     type="button"
     appearance="primary"
     class="tui-space_right-3 tui-space_bottom-3"
-    (click)="showDialog()"
+    (click)="showPaymentDialog(paymentSelect)"
   >
     Пополнение
   </button>
@@ -96,3 +96,38 @@
 <!-- <div ngIf="isMobile"> 
     <button tuiButton size="m" type="button" appearance="primary" class="tui-space_right-3 tui-space_bottom-3" (click)="showDialog()">Пополнение</button>
 </div>-->
+
+<ng-template #paymentSelect let-observer>
+  <p i18n class="modal_header">ВЫБЕРИТЕ МЕТОД ОПЛАТЫ</p>
+  <p>Внимание! Если вы хотите произвести оплату через расчётный счёт, вам необходимо связаться с нашей поддержкой, указав необходимый перечень услуг и реквизиты.</p>
+  <div class="button_container">
+    <!-- <button
+      appearance="primary"
+      tuiButton
+      type="button"
+      (click)="appService.goCompanyPayment(); observer.complete()"
+      class="tui-space_right-3 tui-space_bottom-3"
+    >
+      Оплатить как юридическое лицо
+    </button> -->
+    <a href="https://t.me/annamptool_support" target="_blank">
+    <button
+      appearance="primary"
+      tuiButton
+      type="button"
+      class="tui-space_right-3 tui-space_bottom-3"
+    >
+     Связаться с поддержкой 
+    </button>
+  </a>
+    <button
+      appearance="primary"
+      tuiButton
+      type="button"
+      (click)="showDialog(); observer.complete()"
+      class="tui-space_right-3 tui-space_bottom-3"
+    >
+      Оплатить как физическое лицо
+    </button>
+  </div>
+</ng-template>
