@@ -1,0 +1,60 @@
+.company_payment {
+    max-width: 800px;
+    background-color: #ffffff;
+    padding: 2rem;
+}
+
+h1{
+    color: #2c7a77;
+    line-height: 2rem;
+}
+
+p{
+    padding-bottom: 1rem;
+}
+
+.company_payment h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.amount-input {
+    display: flex;
+    align-items: center;
+}
+
+.amount-input input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.company_payment h2 {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.company_payment p tui-input {
+    display: block;
+    margin-top: 10px;
+}
+
+.company_payment p tui-input input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+@media (max-width: 600px) {
+    .company_payment {
+        padding: 10px;
+    }
+    .count_form{
+        width: 100%;
+    }
+}

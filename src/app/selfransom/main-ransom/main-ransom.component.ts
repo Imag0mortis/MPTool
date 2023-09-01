@@ -182,11 +182,11 @@ export class MainRansomComponent implements OnInit {
     this.getData();
     this.getDataRansoms(this.page);
 
-    if (this.popupActive === false) {
-      this.showBotDialog();
-    } else {
-      //
-    }
+    // if (this.popupActive === false) {
+    //   this.showBotDialog();
+    // } else {
+    //   //
+    // }
   }
 
   checkBot() {
@@ -202,11 +202,11 @@ export class MainRansomComponent implements OnInit {
     this.request.getUserInfo().subscribe((r: any) => {
       // console.log('проверка', r);
       this.popupActive = r.is_push_tg_enabled;
-      if (this.popupActive === false) {
-        this.showBotDialog();
-      } else {
-        // console.log('Модальное окно неактивно.');
-      }
+      // if (this.popupActive === false) {
+      //   this.showBotDialog();
+      // } else {
+      //   // console.log('Модальное окно неактивно.');
+      // }
     });
   }
 
@@ -305,6 +305,7 @@ export class MainRansomComponent implements OnInit {
       'Выкуп',
       'Получатель',
       'Телефон',
+      'Стоимость',
       'Код получения',
       'Номер заказа',
       'Адрес ПВЗ',
@@ -331,6 +332,7 @@ export class MainRansomComponent implements OnInit {
           ransom.buyID,
           ransom.customerName,
           ransom.customerPhone,
+          ransom.price,
           ransom.customerPickupCode,
           ransom.orderID,
           ransom.pickupAddress,

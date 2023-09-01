@@ -143,4 +143,10 @@ export class AppService {
   goLessons() {
     this.router.navigate(['/lessons']);
   }
+  goCompanyPayment() {
+    this.router.navigate(['/company-payment']);
+  }
+  goTelegramBot() {
+    this.router.navigate(['/telegrambot']);
+  }
 }

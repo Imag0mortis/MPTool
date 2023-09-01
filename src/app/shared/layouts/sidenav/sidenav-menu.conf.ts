@@ -75,36 +75,36 @@ export const MenuConfiguration: MenuConf[] = [
   //     }
   //   ]
   // },
-  // {
-  //   name: 'Автоответы',
-  //   icon: 'question-answer.svg',
-  //   expanded: false,
-  //   childs: [
-  //     {
-  //       name: 'Управление автоответами на отзывы',
-  //       link: '/feedback'
-  //     },
-  //     {
-  //       name: 'Ввод API ключа для автоответов',
-  //       link: '/feedback-token'
-  //     }
-  //   ]
-  // },
   {
-    name: 'Вопросы',
-    icon: 'questions.svg',
+    name: 'Автоответы',
+    icon: 'question-answer.svg',
     expanded: false,
     childs: [
-      /*{
-                name: "Настройка кабинета",
-                link: "/faq/answers"
-            },*/
       {
-        name: 'Привязка Telegram бота',
-        link: '/telegrambot'
+        name: 'Управление автоответами на отзывы',
+        link: '/feedback'
+      },
+      {
+        name: 'Ввод API ключа для автоответов',
+        link: '/feedback-token'
       }
     ]
-  }
+  },
+  // {
+  //   name: 'Вопросы',
+  //   icon: 'questions.svg',
+  //   expanded: false,
+  //   childs: [
+  //     /*{
+  //               name: "Настройка кабинета",
+  //               link: "/faq/answers"
+  //           },*/
+  //     {
+  //       name: 'Привязка Telegram бота',
+  //       link: '/telegrambot'
+  //     }
+  //   ]
+  // }
 ];
 
 export const SupportConfiguration: SupportConf[] = [

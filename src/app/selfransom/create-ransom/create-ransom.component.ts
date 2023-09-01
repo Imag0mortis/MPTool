@@ -281,7 +281,7 @@ export class CreateRansomComponent implements OnInit {
             },
             (e: unknown) => {
               const options: any = { status: 'error' };
-              this.alertService.open('Ошибка создания!', options);
+              this.alertService.open('Ошибка создания!', options).subscribe();
             }
           );
       }

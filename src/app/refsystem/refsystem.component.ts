@@ -5,7 +5,8 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { AppService } from 'src/app/shared/services/app.service';
 import { Referal } from 'src/app/shared/interfaces';
 import { HttpClient } from '@angular/common/http';
-import { TuiAlertService } from '@taiga-ui/core';
+import { TuiAlertService, TuiNotification } from '@taiga-ui/core';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-refsystem',
@@ -32,7 +33,8 @@ export class RefsystemComponent implements OnInit {
     private userService: UserService,
     public appService: AppService,
     private request: RequestService,
-    private user: UserService
+    private user: UserService,
+    private clipboard: Clipboard,
   ) {}
 
   ngOnInit(): void {
@@ -60,7 +62,10 @@ export class RefsystemComponent implements OnInit {
       })
       .subscribe(
         (r) => this.userService.updateUserInfo(),
-        (e: unknown) => alert('Ошибка. Отсутствуют средства на балансе.')
+        (e: unknown) => {
+          const options: any = { status: 'error' };
+          this.alertService.open('Ошибка! на счету недостаточно средств!', options).subscribe();
+        }
       );
   }
 
@@ -89,6 +94,18 @@ export class RefsystemComponent implements OnInit {
       }
     );
   }
+  copyTextToClipboard(text: string) {
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+  
+    this.alertService.open('Текст скопирован в буфер обмена', {
+      status: TuiNotification.Success,
+    }).subscribe();
+  }  
 }
 
 interface refinfo {

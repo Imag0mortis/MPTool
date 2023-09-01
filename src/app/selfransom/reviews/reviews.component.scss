@@ -240,4 +240,74 @@ tui-input {
     width: auto;
     justify-content: space-around;
   }
+  .header_button{
+    margin-top: 1rem;
+    width: 100%;
+  }
+  .modal_header {
+    text-align: center;
+    width: auto;
+    height: auto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .modal_middle {
+    width: auto;
+  }
+
+  .button_container {
+    margin-top: 1rem;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-left: 0;
+    flex-direction: column;
+  }
+
+  .button_container button {
+    width: 100%;
+    padding-right: 0;
+  }
+  .header_button{
+    margin-top: 1rem;
+    width: 100%;
+  }
+  .modal_header {
+    text-align: center;
+    width: auto;
+    height: auto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .modal_middle {
+    width: auto;
+  }
+
+  .button_container_buy {
+    margin-top: 0;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-left: 0;
+    flex-direction: column;
+  }
+
+  .button_container button {
+    width: 100%;
+    padding-right: 0;
+  }
 }
