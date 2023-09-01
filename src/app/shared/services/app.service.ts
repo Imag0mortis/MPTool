@@ -146,4 +146,7 @@ export class AppService {
   goCompanyPayment() {
     this.router.navigate(['/company-payment']);
   }
+  goTelegramBot() {
+    this.router.navigate(['/telegrambot']);
+  }
 }
