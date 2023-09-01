@@ -153,7 +153,9 @@
           <tbody tuiTbody>
             <tr *ngFor="let item of links">
               <td>
-                <a href="{{ item.link }}" target="blank">{{ item.link }}</a>
+                <span class="copy-link" (click)="copyTextToClipboard(item.link)">
+                  {{ item.link }}
+                </span>
               </td>
               <td>{{ item.hits }}</td>
               <td>{{ item.registers }}</td>

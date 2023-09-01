@@ -3,9 +3,10 @@ import { AppService } from '../../services/app.service';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { MenuConfiguration } from '../sidenav/sidenav-menu.conf';
-import { TuiDialogService } from '@taiga-ui/core';
+import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { PaymentModalComponent } from '../balance/payment-modal/payment-modal.component';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
 
 @Component({
   selector: 'app-toolbar',
@@ -66,4 +67,8 @@ export class ToolbarComponent implements OnInit {
   showDialog(): void {
     this.dialog.subscribe();
   }
+
+  showPaymentDialog(content: PolymorpheusContent<TuiDialogContext>): void {
+    this.dialogService.open(content).subscribe();
+}
 }

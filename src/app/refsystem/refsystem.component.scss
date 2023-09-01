@@ -247,6 +247,12 @@ a {
   width: auto;
 }
 
+.copy-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 1400px) {
   .footer_container {
     font-size: 14px;

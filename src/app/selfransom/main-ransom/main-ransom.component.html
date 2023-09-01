@@ -49,6 +49,17 @@
       СОЗДАТЬ ВЫКУП
     </button>
     <button
+      *ngIf="appService.isMobile"
+      (click)="showDialog(buy)"
+      tuiButton
+      type="button"
+      size="m"
+      appearance="secondary"
+      class="add_selfransom"
+    >
+      ПРИОБРЕСТИ ПАКЕТЫ ВЫКУПОВ
+    </button>
+    <button
       (click)="showVideoDialog()"
       tuiButton
       type="button"
@@ -494,3 +505,42 @@
     </p>
   </ng-template>
 </div>
+
+<ng-template #buy let-observer>
+  <p i18n class="modal_header">ПРИОБРЕСТИ ПАКЕТЫ ВЫКУПОВ</p>
+    <div class="header_button" (click)="showDialog(template2); observer.complete()">
+      <p class="rev">
+        1
+        <span>выкуп</span>
+        50 ₽ / шт
+      </p>
+    </div>
+    <div class="header_button" (click)="showDialog(template); observer.complete()">
+      <p class="rev">
+        300
+        <span>выкупов</span>
+        45 ₽ / шт
+      </p>
+    </div>
+    <div class="header_button" (click)="showDialog(template3); observer.complete()">
+      <p class="rev">
+        400
+        <span>выкупов</span>
+        40 ₽ / шт
+      </p>
+    </div>
+    <div class="header_button" (click)="showDialog(template4); observer.complete()">
+      <p class="rev">
+        500
+        <span>выкупов</span>
+        35 ₽ / шт
+      </p>
+    </div>
+    <div class="header_button" (click)="showDialog(template5); observer.complete()">
+      <p class="rev">
+        1000
+        <span>выкупов</span>
+        25₽ / шт
+      </p>
+    </div>
+</ng-template>

@@ -91,7 +91,23 @@
 .support {
   margin-top: 1rem;
   margin-left: 0.5rem;
-  width: 93%;
+  width: 16rem;
+  height: 3rem;
+  border-radius: 14px;
+  background-color: #389893;
+  cursor: pointer;
+}
+
+.button_inside{
+  display: flex;
+  padding: 0.8rem 1.5rem;
+}
+
+.button_inside span{
+  color: white;
+  font-size: 14px;
+  margin-left: 0.2rem;
+  font-weight: bold;
 }
 
 .button_container{

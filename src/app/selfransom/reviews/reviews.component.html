@@ -45,7 +45,17 @@
         </div>
       </div>
     </header>
-
+    <button
+      *ngIf="appService.isMobile"
+      (click)="showDialog(buy)"
+      tuiButton
+      type="button"
+      size="m"
+      appearance="secondary"
+      class="add_selfransom"
+    >
+      ПРИОБРЕСТИ ПАКЕТЫ ОТЗЫВОВ
+    </button>
     <nav>
       <div class="header_navigation">
         <tui-tabs
@@ -247,5 +257,44 @@
     >
       Оплатить&nbsp;
     </button>
+  </div>
+</ng-template>
+
+<ng-template #buy let-observer>
+  <p i18n class="modal_header">ПРИОБРЕСТИ ПАКЕТЫ ОТЗЫВОВ</p>
+  <div class="header_button" (click)="showDialog(template2); observer.complete()">
+    <p class="rev">
+      1
+      <span>отзыв</span>
+      50 ₽ / шт
+    </p>
+  </div>
+  <div class="header_button" (click)="showDialog(template); observer.complete()">
+    <p class="rev">
+      300
+      <span>отзывов</span>
+      45 ₽ / шт
+    </p>
+  </div>
+  <div class="header_button" (click)="showDialog(template3); observer.complete()">
+    <p class="rev">
+      400
+      <span>отзывов</span>
+      40 ₽ / шт
+    </p>
+  </div>
+  <div class="header_button" (click)="showDialog(template4); observer.complete()">
+    <p class="rev">
+      500
+      <span>отзывов</span>
+      35 ₽ / шт
+    </p>
+  </div>
+  <div class="header_button" (click)="showDialog(template5); observer.complete()">
+    <p class="rev">
+      1000
+      <span>отзывов</span>
+      25₽ / шт
+    </p>
   </div>
 </ng-template>

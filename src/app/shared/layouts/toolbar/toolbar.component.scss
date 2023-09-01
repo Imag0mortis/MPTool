@@ -82,6 +82,25 @@ ul {
   padding-left: 0 !important;
 }
 
+.button_container{
+  margin-top: 1rem;
+}
+
+.modal_header {
+  text-align: center;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  text-transform: uppercase;
+  color: #000000;
+  padding-bottom: 0.5rem;
+}
+
+.modal_middle{
+  text-align: center;
+}
+
 @media screen and (max-width: 768px) {
   .toolbar_container {
     display: block;

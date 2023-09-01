@@ -1,5 +1,5 @@
 <div class="available">
-  <div class="searchbar">
+  <!-- <div class="searchbar">
     <tui-input
       tuiTextfieldSize="s"
       class="search-input"
@@ -38,6 +38,40 @@
     >
       Очистить
     </button>
+  </div> -->
+  <div class="searchbar">
+    <tui-input tuiTextfieldSize="m">
+      Введите артикул.
+      <input tuiTextfield type="text" [(ngModel)]="searchSku" />
+    </tui-input>
+    <tui-input tuiTextfieldSize="m" class="item_name">
+      Введите название товара.
+      <input tuiTextfield type="text" [(ngModel)]="searchSku" />
+    </tui-input>
+
+    <div class="search_buttons">
+      <button
+        tuiButton
+        type="button"
+        size="m"
+        appearance="primary"
+        class="search"
+        (click)="searchReviews(1, searchSku, searchSkuName)"
+      >
+        Найти
+      </button>
+
+      <button
+        tuiButton
+        type="button"
+        appearance="secondary-destructive"
+        size="m"
+        class="clear"
+        (click)="searchReviews(1, 0, ''); searchSku = ''; searchSkuName = ''"
+      >
+        Очистить
+      </button>
+    </div>
   </div>
   <div *ngIf="cards.length; else noContent" class="review_card-container">
     <div class="review_card" *ngFor="let item of cards">

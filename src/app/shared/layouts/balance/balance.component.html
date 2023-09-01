@@ -26,11 +26,13 @@
     Пополнение
   </button>
 </div>
-<ng-template #icon>
-  <svg
+<p>
+    <div class="support" (click)="showPaymentDialog(supportModal)">
+      <div class="button_inside">
+        <svg
     fill="#FFFFFF"
-    height="800px"
-    width="800px"
+    height="20px"
+    width="20px"
     version="1.1"
     id="Capa_1"
     xmlns="http://www.w3.org/2000/svg"
@@ -61,6 +63,10 @@
       />
     </g>
   </svg>
+  <span>Связаться с поддержкой</span>
+      </div>
+    </div>
+<ng-template #icon>
 </ng-template>
 
 <div class="ransoms_and_reviews" *ngIf="user.userSubj$ | async as userInfo">
@@ -117,7 +123,7 @@
       type="button"
       class="tui-space_right-3 tui-space_bottom-3"
     >
-     Связаться с поддержкой 
+    Получить счет на оплату для юридических лиц
     </button>
   </a>
     <button
@@ -130,4 +136,43 @@
       Оплатить как физическое лицо
     </button>
   </div>
+</ng-template>
+
+<ng-template #supportModal let-observer>
+  <p i18n class="modal_header" style="padding-bottom: 1rem; 
+  margin-left: 1rem;">Свяжитесь с нами</p>
+  <p style="text-align: center; padding-bottom: 1rem;">Если у вас возникли проблемы при работе с нашим сервисом, вопросы или пожелания, вы можете связаться с нами любым удобным для вас способом</p>
+    <a href="https://t.me/annamptool_support" target="_blank">
+    <button
+      appearance="primary"
+      tuiButton
+      type="button"
+      class="tui-space_right-3 tui-space_bottom-3"
+      style="width: 100%;"
+    >
+    Напишите нам в telegram
+    </button>
+  </a>
+  <a href="https://wa.me/79856270105" target="_blank">
+    <button
+      appearance="primary"
+      tuiButton
+      type="button"
+      class="tui-space_right-3 tui-space_bottom-3"
+      style="width: 100%;"
+    >
+    Напишите нам в WhatsApp
+    </button>
+  </a>
+  <a href="mailto:support@mptool.pro" target="_blank">
+    <button
+      appearance="primary"
+      tuiButton
+      type="button"
+      class="tui-space_right-3 tui-space_bottom-3"
+      style="width: 100%;"
+    >
+    Напишите нам на почту
+    </button>
+  </a>
 </ng-template>

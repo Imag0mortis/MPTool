@@ -15,7 +15,7 @@ export class PaymentModalComponent {
     private request: RequestService
   ) {}
 
-  summ = 0;
+  summ: number;
   email: string = this.context.data;
 
   pay() {
