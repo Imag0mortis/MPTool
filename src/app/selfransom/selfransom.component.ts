@@ -25,24 +25,24 @@ export class SelfransomComponent implements OnInit {
     this.userId = localStorage.getItem('usetifulID')!;
     this.selfransomService.getUserGeoLocation();
     this.appService.init();
-    this.loadUsetifulScript(this.userId);
-    console.log('Айдишник', this.userId);
+    // this.loadUsetifulScript(this.userId);
+    // console.log('Айдишник', this.userId);
   }
 
-  private loadUsetifulScript(userId: string): void {
-    const usetifulTags = { userId };
+  // private loadUsetifulScript(userId: string): void {
+  //   const usetifulTags = { userId };
 
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.usetiful.com/dist/usetiful.js';
-    script.setAttribute('id', 'usetifulScript');
-    script.dataset['token'] = 'ff8f5b44ca52aed9b607ddfd7484bcac';
+  //   const script = document.createElement('script');
+  //   script.async = true;
+  //   script.src = 'https://www.usetiful.com/dist/usetiful.js';
+  //   script.setAttribute('id', 'usetifulScript');
+  //   script.dataset['token'] = 'ff8f5b44ca52aed9b607ddfd7484bcac';
 
-    script.textContent = `window.usetifulTags = ${JSON.stringify(
-      usetifulTags
-    )};`;
+  //   script.textContent = `window.usetifulTags = ${JSON.stringify(
+  //     usetifulTags
+  //   )};`;
 
-    const head = document.getElementsByTagName('head')[0];
-    head.appendChild(script);
-  }
+  //   const head = document.getElementsByTagName('head')[0];
+  //   head.appendChild(script);
+  // }
 }

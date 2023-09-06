@@ -48,7 +48,7 @@ export class TelegramBotComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.onCreateLinkClick();
+    // this.onCreateLinkClick();
     this.getData();
     this.generateLink('someType');
     console.log('код', this.link);
@@ -65,19 +65,19 @@ export class TelegramBotComponent implements OnInit {
     });
   }
 
-  test() {
-    this.onCreateLinkClick();
-    console.log('окно', this.popupActive);
-    console.log('код', this.link);
-  }
+  // test() {
+  //   this.onCreateLinkClick();
+  //   console.log('окно', this.popupActive);
+  //   console.log('код', this.link);
+  // }
 
-  onCreateLinkClick() {
-    const quantity = 1;
-    const type = 'someType';
-    this.request.createTgLink(type).subscribe((response: any) => {
-      console.log(response.tglink);
-    });
-  }
+  // onCreateLinkClick() {
+  //   const quantity = 1;
+  //   const type = 'someType';
+  //   this.request.createTgLink(type).subscribe((response: any) => {
+  //     console.log(response.tglink);
+  //   });
+  // }
 
   getData() {
     this.request.getUserInfo().subscribe((r: any) => {

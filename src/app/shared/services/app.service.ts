@@ -19,6 +19,12 @@ export class AppService {
     return isMobile;
   }
 
+  get isTablet() {
+    let isTablet: boolean;
+    document.body.clientWidth > 1180 ? (isTablet = false) : (isTablet = true);
+    return isTablet;
+  }
+
   init() {
     this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {

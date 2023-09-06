@@ -117,7 +117,7 @@ a {
   border-radius: 15px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1180px) {
   .token_header {
     flex-direction: column;
   }
@@ -147,5 +147,8 @@ a {
 
   h2 {
     margin-left: 0;
+  }
+  .video_container{
+    width: 95%;
   }
 }

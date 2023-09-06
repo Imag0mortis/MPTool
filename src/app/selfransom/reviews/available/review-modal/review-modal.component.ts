@@ -108,7 +108,9 @@ export class ReviewModalComponent implements OnInit {
 
     this.form = fb.group({
       skuName: new FormControl(''),
-      ransom: new FormControl(''),
+      ransom: new FormControl('', [
+        Validators.required,
+      ]),
       sku: new FormControl(''),
       feedback: new FormControl('', [
         Validators.required,
@@ -119,10 +121,14 @@ export class ReviewModalComponent implements OnInit {
         Validators.required
       ),
       article: new FormControl(),
-      sex: new FormControl(''),
+      sex: new FormControl('', [
+        Validators.required,
+      ]),
       rating: new FormControl(),
       is_any_for_task: new FormControl(true),
-      size_match: new FormControl(''),
+      size_match: new FormControl('', [
+        Validators.required,
+      ]),
       date: new FormControl(
         new TuiDay(
           currentDate.getFullYear(),

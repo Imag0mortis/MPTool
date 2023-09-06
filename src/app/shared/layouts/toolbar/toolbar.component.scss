@@ -101,6 +101,12 @@ ul {
   text-align: center;
 }
 
+@media screen and (max-width: 1180px) {
+  .toolbar_container {
+    display: block;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .toolbar_container {
     display: block;

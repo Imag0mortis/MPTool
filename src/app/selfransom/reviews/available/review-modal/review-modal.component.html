@@ -13,7 +13,8 @@
       <div class="ransom">
         <h2>Укажите выкуп</h2>
         <tui-select
-          tuiTextfieldSize="m"
+        [class.red-border]="!form.get('ransom')?.valid"
+        tuiTextfieldSize="m"
           [tuiTextfieldLabelOutside]="true"
           [(ngModel)]="ransom"
           formControlName="ransom"
@@ -54,7 +55,7 @@
       </div>
       <div class="feedback">
         <h2>Отзыв о товаре</h2>
-        <tui-text-area formControlName="feedback">
+        <tui-text-area formControlName="feedback" [class.red-border]="!form.get('feedback')?.valid">
           Например, отличный чехол (от 10 до 1000 символов)
           <textarea tuiTextfield minLength="10" maxlength="1000"></textarea>
         </tui-text-area>
@@ -62,6 +63,7 @@
       <div class="sex">
         <h2>Пол в отзыве (Обязательно)</h2>
         <tui-select
+          [class.red-border]="!form.get('sex')?.valid"
           tuiTextfieldSize="m"
           [tuiTextfieldLabelOutside]="true"
           formControlName="sex"
