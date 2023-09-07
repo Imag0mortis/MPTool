@@ -225,9 +225,9 @@ export class MainRansomComponent implements OnInit {
   }
 
   goToPage(event: number) {
-    this.index = event;
-    this.getDataRansoms(event + 1);
-  }
+    this.page = event;
+    this.getDataRansoms(this.page, this.filter);
+  }  
 
   base64ToData(base64String: string): Promise<string> {
     return new Promise((resolve, reject) => {

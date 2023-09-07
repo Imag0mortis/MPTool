@@ -23,7 +23,7 @@ export class WrapperComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.userService.userSubj$.subscribe(r => {
-      if (r?.user_id && !document.getElementById('usetifulScript')) {
+      if (localStorage.getItem('usetifulID') != null && !document.getElementById('usetifulScript')) {
         setUsetifulTags(r.user_id);
         this.initUsetiful(r.user_id);
       }

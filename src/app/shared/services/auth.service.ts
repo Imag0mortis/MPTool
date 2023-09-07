@@ -8,11 +8,12 @@ import { UserService } from './user.service';
 export class AuthService {
   constructor(private router: Router, private user: UserService) {}
 
-  public logout() {
+  public logout(): void {
     this.user.userSubj$.next(undefined);
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
+    localStorage.clear();
+    window.location.reload();
   }
+  
 
   public successLogin(response: any) {
     localStorage.setItem('token', response.authorization);
