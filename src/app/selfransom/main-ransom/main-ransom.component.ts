@@ -63,6 +63,7 @@ export class MainRansomComponent implements OnInit {
   id = 0;
   state = '';
   popupActive: boolean;
+  currentIndex = 0;
 
   dictionary: readonly FilterOption[] = [
     { id: -1, state: 'Все' },
@@ -162,11 +163,18 @@ export class MainRansomComponent implements OnInit {
       .subscribe();
   }
 
+  goToPage(event: number) {
+    this.page = event;
+    this.getDataRansoms(this.page + 1, this.filter);
+    this.currentIndex = this.page - 1; // Обновляем currentIndex
+  }
+
   onTabClick(arg?: number) {
     if (!arg) {
       arg = 0;
     }
 
+    this.page = 1;
     this.filter = arg;
 
     this.requestService
@@ -175,6 +183,7 @@ export class MainRansomComponent implements OnInit {
       .subscribe((r: any) => {
         this.cards = r.taskList;
         this.length = r.tableData.pagesTotal;
+        this.currentIndex = 0; // Обновляем currentIndex
       });
   }
 
@@ -222,11 +231,6 @@ export class MainRansomComponent implements OnInit {
     this.searchTaskIds = '';
 
     this.getDataRansoms(this.page, this.filter);
-  }
-
-  goToPage(event: number) {
-    this.index = event;
-    this.getDataRansoms(event + 1);
   }
 
   base64ToData(base64String: string): Promise<string> {

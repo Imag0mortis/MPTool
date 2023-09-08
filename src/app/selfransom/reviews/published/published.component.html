@@ -79,8 +79,9 @@
           <th class="tui-table__th tui-table__th_first"></th>
           <th class="tui-table__th">Товар</th>
           <th class="tui-table__th">Отзыв</th>
-          <th class="tui-table__th">Дата публикации</th>
-          <th class="tui-table__th tui-table__th_last">Статус</th>
+          <th class="tui-table__th">Дата и время публикации</th>
+          <th class="tui-table__th">Статус</th>
+          <th class="tui-table__th tui-table__th_last">Удалить отзыв</th>
         </tr>
 
         <tr
@@ -97,12 +98,16 @@
             <a href="/selfransom/{{ item.taskID }}">
               Группа выкупов №{{ item.taskID }}
             </a>
+
             <p class="rev_sku">Арт: {{ item.sku }}</p>
             <p class="rev_sku">Товар: {{ item.skuName }}</p>
           </td>
           <td class="tui-table__td">
-            <span class="username">{{ item.customerName }}</span>
+            <span class="username">
+              {{ item.customerName }}
+            </span>
             &nbsp;
+            <br />
             <span class="ransom_number">
               Выкуп №{{ item.buyID }}
               <br />
@@ -114,13 +119,54 @@
               <p class="rev_description">{{ item.text }}</p>
             </span>
           </td>
+
           <td class="tui-table__td">
             <p class="published_date">
               {{ item.timeCreated * 1000 | date : 'medium' }}
             </p>
           </td>
+          <td class="tui-table__td">
+            <p class="published_status">Ожидает публикации</p>
+          </td>
           <td class="tui-table__td tui-table__td_last">
-            <p class="published_status">Опубликован</p>
+            <button
+              (click)="showDialog(template)"
+              tuiButton
+              size="m"
+              type="button"
+              appearance="secondary-destructive"
+              class="task_button"
+            >
+              Удалить отзыв
+            </button>
+
+            <ng-template #template let-observer>
+              <p i18n class="modal_header">ВЫ УВЕРЕНЫ?</p>
+              <p class="modal_middle">
+                Вы действительно хотите отменить данную задачу?
+              </p>
+              <div class="button_container">
+                <button
+                  class="cancel"
+                  tuiButton
+                  appearance="secondary"
+                  type="button"
+                  size="m"
+                  (click)="observer.complete()"
+                >
+                  Нет
+                </button>
+                <button
+                  tuiButton
+                  type="button"
+                  size="m"
+                  class="pay"
+                  (click)="cancelTask(item.buyID); observer.complete()"
+                >
+                  Да&nbsp;
+                </button>
+              </div>
+            </ng-template>
           </td>
         </tr>
       </tbody>

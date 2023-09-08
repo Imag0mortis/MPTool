@@ -1,5 +1,5 @@
 <div class="toolbar_container" (tuiActiveZoneChange)="onActiveZone($event)">
-  <div class="toolbar_right" *ngIf="!appService.isMobile">
+  <div class="toolbar_right" *ngIf="!appService.isTablet">
     <div *ngIf="user.userSubj$ | async as user" class="toolbar_priceplan">
       <span>
         Тариф:
@@ -59,21 +59,23 @@
     </tui-marker-icon>
   </div>
 
-  <div *ngIf="appService.isMobile" class="mobile_menu">
-    <div style="position: relative" (click)="toggleMobile(true)">
-      <img
-        class="toolbar_logo"
-        src="../../../../assets/img/LogoCab.svg"
-        (click)="appService.goSelfRansom()"
-      />
-
-      <tui-marker-icon
-        #toggleMobileButton
-        mode="success"
-        size="s"
-        src="tuiIconAlignJustifyLarge"
-        class="toolbar_button tui-space_right-2 mob-right"
-      ></tui-marker-icon>
+  <div *ngIf="appService.isTablet" class="mobile_menu">
+    <div (click)="toggleMobile(true)">
+      <div class="mobile_header">
+        <img
+          class="toolbar_logo"
+          src="../../../../assets/img/LogoCab.svg"
+          (click)="appService.goSelfRansom()"
+        />
+  
+        <tui-marker-icon
+          #toggleMobileButton
+          mode="success"
+          size="s"
+          src="tuiIconAlignJustifyLarge"
+          class="toolbar_button tui-space_right-2 mob-right"
+        ></tui-marker-icon>
+      </div>
       <div
         *tuiSidebar="open; direction: 'left'"
         style="overflow: scroll; overflow-x: hidden"

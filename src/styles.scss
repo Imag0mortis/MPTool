@@ -159,6 +159,18 @@ ul {
   padding-left: 1rem;
 }
 
+@media screen and (max-width: 1180px) {
+  .header {
+    position: initial;
+  }
+  .mobile_header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+
 @media screen and (max-width: 768px) {
   .tui-container {
     width: 100%;

@@ -84,7 +84,7 @@ export class RequestService {
   ) {
     let url =
       environment.api +
-      `wb_liker_selfbuy_get_feedbacks.php?page=${1}&pageSize=${20}&filter_state=${filter_state}`;
+      `wb_liker_selfbuy_get_feedbacks.php?page=${page}&pageSize=${pageSize}&filter_state=${filter_state}`;
     if (searchValue) {
       switch (searchValue) {
         case 'по номеру выкупа':
