@@ -55,7 +55,7 @@
       </div>
       <div class="feedback">
         <h2>Отзыв о товаре</h2>
-        <tui-text-area formControlName="feedback" [class.red-border]="!form.get('feedback')?.valid">
+        <tui-text-area formControlName="feedback">
           Например, отличный чехол (от 10 до 1000 символов)
           <textarea tuiTextfield minLength="10" maxlength="1000"></textarea>
         </tui-text-area>

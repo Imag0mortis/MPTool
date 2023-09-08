@@ -113,8 +113,6 @@ export class ReviewModalComponent implements OnInit {
       ]),
       sku: new FormControl(''),
       feedback: new FormControl('', [
-        Validators.required,
-        Validators.minLength(10)
       ]),
       time: new FormControl(
         new TuiTime(currentDate.getHours(), currentDate.getMinutes()),

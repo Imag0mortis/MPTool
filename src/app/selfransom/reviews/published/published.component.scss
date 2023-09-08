@@ -95,6 +95,53 @@ tui-rating {
   gap: 0.5rem;
 }
 
+.modal_header {
+  text-align: center;
+  width: 500px;
+  height: 19px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  text-transform: uppercase;
+  color: #000000;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.modal_middle {
+  margin-top: 1rem;
+  width: 500px;
+  text-align: center;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+  padding-bottom: 0.5rem;
+}
+
+.cancel {
+  width: 147px;
+  height: 42px;
+  padding-right: 1rem;
+}
+
+.button_container {
+  margin-top: 2rem;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+}
+
+.pay {
+  width: 147px;
+  height: 42px;
+  padding-right: 1rem;
+}
+
 @media (max-width: 1450px) {
   .published {
     margin: 3rem 2rem 4rem 0;

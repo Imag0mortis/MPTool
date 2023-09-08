@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { RequestService } from 'src/app/shared/services/request.service';
@@ -7,6 +7,8 @@ import { BehaviorSubject, first, Observable } from 'rxjs';
 import { AppService } from 'src/app/shared/services/app.service';
 import { RansomTask } from '../../ransom-card/card-table/card-table.component';
 import { TuiDay } from '@taiga-ui/cdk';
+import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
+import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 
 @Component({
   selector: 'app-published',
@@ -58,7 +60,9 @@ export class PublishedComponent implements OnInit {
     private requestService: RequestService,
     private userService: UserService,
     public appService: AppService,
-    private request: RequestService
+    private request: RequestService,
+    @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   onTabClick(arg?: number) {
@@ -84,6 +88,27 @@ export class PublishedComponent implements OnInit {
     this.index = event;
     this.getData(event + 1);
   }
+
+  showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
+    this.dialogService.open(content).subscribe();
+  }
+
+  cancelTask = (arg: string) => {
+    const body = {
+      buy_id: arg
+    };
+    this.requestService.cancelReview(parseInt(arg)).subscribe(
+      (success) => {
+        this.getData(this.page);
+        this.cdr.detectChanges();
+      },
+      (error: any) => {
+        //alert(123);
+        const options: any = { label: 'Ошибка!', status: 'error' };
+        console.log(error.error.errorDesc, options);
+      }
+    );
+  };
 
   searchReviews(
     page: number,
