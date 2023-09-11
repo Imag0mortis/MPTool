@@ -1,23 +1,23 @@
 export const MenuConfiguration: MenuConf[] = [
-  {
-    name: 'Управление рекламой',
-    expanded: false,
-    icon: 'star.svg',
-    childs: [
-      {
-        name: 'Управление рекламной кампанией',
-        link: '/campaigns'
-      },
-      {
-        name: 'Узнать реальную рекламную ставку',
-        link: '/realprice'
-      },
-      {
-        name: 'Ввод API ключа Wildberries',
-        link: '/token'
-      }
-    ]
-  },
+  // {
+  //   name: 'Управление рекламой',
+  //   expanded: false,
+  //   icon: 'star.svg',
+  //   childs: [
+  //     {
+  //       name: 'Управление рекламной кампанией',
+  //       link: '/campaigns'
+  //     },
+  //     {
+  //       name: 'Узнать реальную рекламную ставку',
+  //       link: '/realprice'
+  //     },
+  //     {
+  //       name: 'Ввод API ключа Wildberries',
+  //       link: '/token'
+  //     }
+  //   ]
+  // },
   {
     name: 'Выкупы',
     expanded: false,

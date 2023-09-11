@@ -32,7 +32,7 @@
               ></tui-marker-icon>
               Редактировать
             </li>
-            <li
+            <!-- <li
               class="dropdown-el"
               (click)="this.open = false; appService.goTariffs()"
             >
@@ -43,7 +43,7 @@
                 class="toolbar_button tui-space_right-2"
               ></tui-marker-icon>
               Тарифы
-            </li>
+            </li> -->
             <li class="dropdown-el" (click)="authService.logout()">
               <tui-marker-icon
                 mode="success"
@@ -97,10 +97,10 @@
           class="toolbar_priceplan"
           (click)="appService.goTariffs()"
         >
-          <span>
+          <!-- <span>
             Тариф:
             <strong>{{ user.tariff_info.tariff_name }}</strong>
-          </span>
+          </span> -->
         </div>
 
         <!-- Вставим блок с отзывами и выкупами в меню -->
