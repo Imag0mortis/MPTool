@@ -102,7 +102,10 @@ export class SignUpComponent {
         },
         (error) => {
           console.log(error);
-          const options: any = { label: 'Ошибка!', status: 'error' };
+          const options: any = {
+            label: 'Ошибка, попытайтесь еще раз',
+            status: 'error'
+          };
           this.alertService.open(error.error.error, options).subscribe();
         }
       );
