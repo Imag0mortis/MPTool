@@ -1,10 +1,10 @@
 <div class="toolbar_container" (tuiActiveZoneChange)="onActiveZone($event)">
   <div class="toolbar_right" *ngIf="!appService.isTablet">
     <div *ngIf="user.userSubj$ | async as user" class="toolbar_priceplan">
-      <span>
+      <!-- <span>
         Тариф:
         <strong>{{ user.tariff_info.tariff_name }}</strong>
-      </span>
+      </span> -->
     </div>
     <tui-marker-icon
       #toggleButton
