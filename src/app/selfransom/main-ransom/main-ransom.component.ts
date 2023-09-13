@@ -258,7 +258,7 @@ export class MainRansomComponent implements OnInit {
 
   async getDataRansoms(
     page: number = this.page,
-    filter = 0,
+    filter = -1,
     searchTaskIds = ''
   ) {
     this.requestService
