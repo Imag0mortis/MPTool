@@ -12,7 +12,6 @@ import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { SelfransomService } from 'src/app/shared/services/selfransom.service';
 import { Address } from '../create-ransom/create-ransom.component';
 import { v4 as uuidv4 } from 'uuid';
-import { IndexedDbService } from 'src/app/shared/services/indexed-db-service.service';
 import { concat, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -36,7 +35,6 @@ export class MapModalComponent implements OnInit {
     public selfRansom: SelfransomService,
     private ref: ChangeDetectorRef,
     private renderer: Renderer2,
-    private indexedDbService: IndexedDbService,
     @Inject(POLYMORPHEUS_CONTEXT)
     private readonly context: TuiDialogContext<Address>
   ) {}
@@ -67,15 +65,15 @@ export class MapModalComponent implements OnInit {
                 geometry: el.coordinates,
                 options: {
                   preset: 'islands#greenDotIcon',
-                  iconColor: '#d020d6',
+                  iconColor: '#d020d6'
                 },
                 id: el.id,
                 properties: {
                   hintContent: `Содержание всплывающей подсказки, id: ${el.id}`,
-                  balloonContent: `Пункт выдачи с id: ${el.id}`,
+                  balloonContent: `Пункт выдачи с id: ${el.id}`
                 },
                 schedule: '',
-                address: '',
+                address: ''
               });
             });
             if (points.length < 50) {
@@ -89,36 +87,28 @@ export class MapModalComponent implements OnInit {
             this.showDetails = showDetailsType.loading;
             return of(null);
           }
-        }),
-        switchMap((result: any) => {
-          if (result?.value) {
-            this.showDetails = showDetailsType.ok;
-            for (let i = 0; i < idArray.length; i++) {
-              const detail = result.value[idArray[i]];
-              const placemark = this.placemarks.find(
-                (el) => el.id === idArray[i]
-              );
-              if (placemark) {
-                const button = `<button id="${placemark.id}" class="balloon-button">Выбрать</button>`;
-                placemark.schedule = detail.workTime;
-                placemark.address = detail.address;
-                placemark.properties = {
-                  hintContent: `Адрес: ${detail.address}`,
-                  balloonContent: `Адрес: ${detail.address},<br>время работы: ${detail.workTime}<br><br>${button}`,
-                };
-              }
-            }
-            return this.indexedDbService.saveData(this.placemarks, 86400);
-          }
-          return of(null);
-        }),
-        switchMap(() => this.indexedDbService.getData())
+        })
       )
-      .subscribe((cachedData) => {
-        if (cachedData) {
-          this.placemarks = cachedData;
-          this.ref.detectChanges();
+      .subscribe((result: any) => {
+        if (result?.value) {
+          this.showDetails = showDetailsType.ok;
+          for (let i = 0; i < idArray.length; i++) {
+            const detail = result.value[idArray[i]];
+            const placemark = this.placemarks.find(
+              (el) => el.id === idArray[i]
+            );
+            if (placemark) {
+              const button = `<button id="${placemark.id}" class="balloon-button">Выбрать</button>`;
+              placemark.schedule = detail.workTime;
+              placemark.address = detail.address;
+              placemark.properties = {
+                hintContent: `Адрес: ${detail.address}`,
+                balloonContent: `Адрес: ${detail.address},<br>время работы: ${detail.workTime}<br><br>${button}`
+              };
+            }
+          }
         }
+        this.ref.detectChanges();
       });
   }
 
