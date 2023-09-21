@@ -131,7 +131,6 @@
           >
             Получить код для оплаты
           </button>
-
           <div class="qr_search">
             <ng-template #paymentQR>
               <span *ngIf="item.paymentState === 'wait'" class="bot_search">
@@ -140,7 +139,7 @@
               <button
                 [showLoader]="item.paymentState === 'wait'"
                 tuiButton
-                (click)="showQR(qrModal, item.paymentQR!)"
+                (click)="showQR(qrModal, item.paymentQR!, item.deliveryCost)"
                 type="button"
                 [disabled]="item.paymentState === 'wait'"
                 class="tui-space_right-3 tui-space_bottom-3"
@@ -403,7 +402,7 @@
               <button
                 [showLoader]="item.paymentState === 'wait'"
                 tuiButton
-                (click)="showQR(qrModal, item.paymentQR!)"
+                (click)="showQR(qrModal, item.paymentQR!, item.deliveryCost)"
                 type="button"
                 [disabled]="item.paymentState === 'wait'"
                 class="mobile_qr_button"
@@ -427,6 +426,18 @@
   <p>QR-код для оплаты вашего выкупа по СБП</p>
   <img class="sbp_icon" src="../../../assets/img/sbp.png" />
   <div class="payment-qr" [innerHTML]="paymentQRsvg | safe"></div>
+  <!-- 1. Уважаемый пользователь! В данный момент этот ПВЗ перегружен и стоимость доставки на него составляет *Х* рублей. 
+
+   -->
+  <!-- <p>Стоимость доставки: <tui-money [value]="deliveryCost"></tui-money></p> -->
+  <div *ngIf="deliveryCost > 0">
+    <p>
+      Уважаемый пользователь! В данный момент этот ПВЗ перегружен и стоимость доставки на него составляет <tui-money [value]="deliveryCost"></tui-money>.
+    </p>
+    <p>
+      Советуем выбрать другой ПВЗ, если вам нужна бесплатная доставка, в противном случае товар будет стоить дороже.
+    </p>
+  </div>
   <button tuiButton type="button" size="m" (click)="observer.complete()">
     Закрыть
   </button>

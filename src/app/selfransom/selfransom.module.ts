@@ -67,6 +67,7 @@ import { AwaitingComponent } from './reviews/awaiting/awaiting.component';
 import { CanceledComponent } from './reviews/canceled/canceled.component';
 import { ErrorComponent } from './reviews/error/error.component';
 import { TourTuiDropdownModule } from 'ngx-ui-tour-tui-dropdown';
+import { TuiMoneyModule } from '@taiga-ui/addon-commerce';
 
 const mapConfig: YaConfig = {
   apikey: '136eb4f5-f723-42ba-bf7a-16d856667d78',
@@ -114,6 +115,7 @@ const mapConfig: YaConfig = {
     TuiComboBoxModule,
     TuiDataListWrapperModule,
     TuiSelectModule,
+    TuiMoneyModule,
     TuiDataListModule,
     TuiTextfieldControllerModule,
     TuiPaginationModule,

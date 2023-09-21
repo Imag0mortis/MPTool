@@ -18,8 +18,6 @@ import { AppService } from 'src/app/shared/services/app.service';
 import { AddressMapComponent } from './address-map/address-map.component';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { SelfransomService } from 'src/app/shared/services/selfransom.service';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-card-table',
@@ -39,6 +37,7 @@ export class CardTableComponent implements OnInit, OnDestroy {
   ) {}
 
   toogles: boolean[] = [];
+  deliveryCost = 0;
   subscription: Subscription[] = [];
   public paymentQRsvg = '';
   public deliveryQRsvg = '';
@@ -65,8 +64,13 @@ export class CardTableComponent implements OnInit, OnDestroy {
     }, 5000);
   }
 
-  showQR(content: PolymorpheusContent<TuiDialogContext>, svg: string): void {
+  showQR(
+    content: PolymorpheusContent<TuiDialogContext>,
+    svg: string,
+    cost: number
+  ): void {
     this.paymentQRsvg = svg;
+    this.deliveryCost = cost;
     this.dialogService.open(content).subscribe();
   }
 
@@ -94,6 +98,7 @@ export class CardTableComponent implements OnInit, OnDestroy {
           if (qr!.date + 1000 * 60 * 5 > Date.now()) {
             el.paymentQR = qr?.qr;
             el.paymentState = PaymentQRState.ready;
+            el.deliveryCost = qr!.deliveryCost;
           } else {
             el.paymentQR = undefined;
             el.paymentState = PaymentQRState.initial;
@@ -169,6 +174,8 @@ export class CardTableComponent implements OnInit, OnDestroy {
           next: (r: any) => {
             if (r.resultState !== 0) {
               this.data[index].paymentQR = r.paymentQR;
+              this.data[index].deliveryCost = r.deliveryCost;
+              this.deliveryCost = r.deliveryCost;
               let qrStorage: any = [];
               if (localStorage.getItem('paymentQRS')) {
                 qrStorage = JSON.parse(localStorage.getItem('paymentQRS')!);
@@ -176,7 +183,8 @@ export class CardTableComponent implements OnInit, OnDestroy {
               qrStorage.push({
                 qr: this.data[index].paymentQR,
                 date: Date.now(),
-                id: this.data[index].buyID
+                id: this.data[index].buyID,
+                deliveryCost: this.data[index].deliveryCost
               });
 
               localStorage.setItem('paymentQRS', JSON.stringify(qrStorage));
@@ -348,6 +356,7 @@ export interface RansomTask {
   userID: number;
   paymentState?: PaymentQRState;
   paymentQR?: string;
+  deliveryCost: number;
   searchState: string;
   errorReason: string;
   trackingStatus: Array<string> | any;
@@ -358,4 +367,5 @@ interface localQrStore {
   qr: string;
   date: number;
   id: number;
+  deliveryCost: number;
 }

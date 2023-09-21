@@ -11,7 +11,7 @@ import { catchError } from 'rxjs/operators';
 import {
   TuiAlertService,
   TuiDialogService,
-  TuiNotification
+  TuiNotificationT
 } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { PaymentModalComponent } from '../layouts/balance/payment-modal/payment-modal.component';
@@ -36,12 +36,13 @@ export class ErrorInterceptor implements HttpInterceptor {
               'С вашего устройства поступает слишком много запросов, попробуйте через 10 секунд',
               {
                 label: 'Ошибка!',
-                status: 'error' as TuiNotification
+                status: 'error' as TuiNotificationT
               }
             )
             .subscribe();
         }
 
+        const optionsErorr: any = { status: 'error' };
         // в скором времени буду обновлять ошибки
         // eslint-disable-next-line sonarjs/no-small-switch
         switch (error.error.errorID) {
@@ -49,7 +50,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             this.alertService
               .open('На счету недостаточно средств', {
                 label: 'Ошибка!',
-                status: 'error' as TuiNotification
+                status: 'error' as TuiNotificationT
               })
               .subscribe();
             this.dialogService
@@ -64,9 +65,24 @@ export class ErrorInterceptor implements HttpInterceptor {
               .subscribe();
             break;
           case 13:
-            const options: any = { status: 'error' };
             this.alertService
-              .open('Вы выбрали более ' + 5 + ' товаров на один ПВЗ!', options)
+              .open(
+                'Вы выбрали более ' + 5 + ' товаров на один ПВЗ!',
+                optionsErorr
+              )
+              .subscribe();
+            break;
+          case 28:
+            this.alertService
+              .open('Выбранный аккаунт занят другой задачей.', optionsErorr)
+              .subscribe();
+            break;
+          case 30:
+            this.alertService
+              .open(
+                'Фото уже использовалось для отзыва, загрузите другое.',
+                optionsErorr
+              )
               .subscribe();
             break;
           default:
