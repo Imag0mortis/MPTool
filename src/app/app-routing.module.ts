@@ -124,12 +124,6 @@ const routes: Routes = [
         canActivateChild: [AuthGuard]
       },
       {
-        path: 'faq',
-        loadChildren: () => import('./faq/faq.module').then((m) => m.FaqModule),
-        canActivate: [AuthGuard],
-        canActivateChild: [AuthGuard]
-      },
-      {
         path: 'token',
         loadChildren: () =>
           import('./token/token.module').then((m) => m.TokenModule),
@@ -179,7 +173,9 @@ const routes: Routes = [
       {
         path: 'company-payment',
         loadChildren: () =>
-          import('./company-payment/company-payment.module').then((m) => m.CompanyPaymentModule),
+          import('./company-payment/company-payment.module').then(
+            (m) => m.CompanyPaymentModule
+          ),
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard]
       }

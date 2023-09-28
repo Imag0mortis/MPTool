@@ -89,22 +89,7 @@ export const MenuConfiguration: MenuConf[] = [
         link: '/feedback-token'
       }
     ]
-  },
-  // {
-  //   name: 'Вопросы',
-  //   icon: 'questions.svg',
-  //   expanded: false,
-  //   childs: [
-  //     /*{
-  //               name: "Настройка кабинета",
-  //               link: "/faq/answers"
-  //           },*/
-  //     {
-  //       name: 'Привязка Telegram бота',
-  //       link: '/telegrambot'
-  //     }
-  //   ]
-  // }
+  }
 ];
 
 export const SupportConfiguration: SupportConf[] = [
