@@ -534,12 +534,11 @@ export class RequestService {
     return this.http.post(environment.api + 'wb_buy_packages.php', body);
   }
 
-  public referalWithdrawal() {
-    const body = {
-      action: 'string'
-    };
-    return this.http.put(environment.api + 'invite_links.php', body);
-  }
+  public referalWithdrawal(action: string) {
+    const body = { action };
+    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return this.http.put(environment.api + 'invite_links.php', JSON.stringify(body), options);
+}
 
   public postReferal(body: Referal) {
     return this.http.post(environment.api + 'invite_links.php', body);

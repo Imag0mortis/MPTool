@@ -4,6 +4,16 @@
   <!-- <p class="tui-island__paragraph tui-island__paragraph_button"> -->
   <div class="paid">
     <p class="descript">Кол-во товаров в выкупе: {{ item.products.length }}</p>
+    <button
+      class="copy_button"
+      tuiButton
+      type="button"
+      appearance="secondary"
+      size="s"
+      (click)="copyTask(item)"
+    >
+      Дублировать
+    </button>
     <!-- <p class="count">{{item.price}} / {{item.priceTotal}} ₽</p> -->
   </div>
   <div class="Completed_buyouts">

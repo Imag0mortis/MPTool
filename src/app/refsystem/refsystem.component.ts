@@ -55,19 +55,42 @@ export class RefsystemComponent implements OnInit {
     });
   }
 
-  onBalanceWithdrawal() {
-    this.request
-      .balanceWithdrawali({
-        action: 'string'
-      })
+  onBalanceWithdrawalToWallet() {
+    const action = 'to_wallet';
+    this.requestService
+      .referalWithdrawal(action)
       .subscribe(
-        (r) => this.userService.updateUserInfo(),
+        () => {
+          this.userService.updateUserInfo();
+          this.alertService.open('Средства выведены на баланс').subscribe();
+        },
         (e: unknown) => {
           const options: any = { status: 'error' };
-          this.alertService.open('Ошибка! на счету недостаточно средств!', options).subscribe();
+          this.alertService
+            .open('Ошибка! на счету недостаточно средств!', options)
+            .subscribe();
         }
       );
   }
+  
+  onBalanceWithdrawalToWithdrawal() {
+    const action = 'to_withdrawal';
+    this.requestService
+      .referalWithdrawal(action)
+      .subscribe(
+        () => {
+          this.userService.updateUserInfo();
+          this.alertService.open('Средства выведены на баланс').subscribe();
+        },
+        (e: unknown) => {
+          const options: any = { status: 'error' };
+          this.alertService
+            .open('Ошибка! на счету недостаточно средств!', options)
+            .subscribe();
+        }
+      );
+  }
+  
 
   getData(page: number) {
     this.requestService
