@@ -1,4 +1,10 @@
-import { Component, Inject, Injector, OnInit, ChangeDetectorRef} from '@angular/core';
+import {
+  Component,
+  Inject,
+  Injector,
+  OnInit,
+  ChangeDetectorRef
+} from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { RequestService } from 'src/app/shared/services/request.service';
@@ -75,7 +81,7 @@ export class AwaitingComponent implements OnInit {
     private request: RequestService,
     @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
     @Inject(Injector) private readonly injector: Injector,
-    private cdr: ChangeDetectorRef,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {

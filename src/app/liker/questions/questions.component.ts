@@ -81,7 +81,10 @@ export class QuestionsComponent implements OnInit, OnDestroy {
   }
 
   isCancelButtonEnabled(taskState: string): boolean {
-    return taskState === 'Ошибка(Неверные данные)' || taskState === 'Ожидание выполнения';
+    return (
+      taskState === 'Ошибка(Неверные данные)' ||
+      taskState === 'Ожидание выполнения'
+    );
   }
 
   cancelTask = (taskId: number) => {
@@ -95,10 +98,9 @@ export class QuestionsComponent implements OnInit, OnDestroy {
       },
       (error: unknown) => {
         const options: any = { label: 'Ошибка!', status: 'error' };
-        this.alertService.open(
-          'Что-то пошло не так! Повторите попытку позднее!',
-          options
-        ).subscribe();
+        this.alertService
+          .open('Что-то пошло не так! Повторите попытку позднее!', options)
+          .subscribe();
       }
     );
   };

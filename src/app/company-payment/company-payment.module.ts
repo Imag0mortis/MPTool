@@ -5,18 +5,14 @@ import { CompanyPaymentRoutes } from './company-payment.routing';
 import { TuiInputModule } from '@taiga-ui/kit';
 import { TuiButtonModule, TuiLoaderModule } from '@taiga-ui/core';
 
-
-
 @NgModule({
-  declarations: [
-    CompanyPaymentComponent
-  ],
+  declarations: [CompanyPaymentComponent],
   imports: [
     CommonModule,
     CompanyPaymentRoutes,
     TuiInputModule,
     TuiButtonModule,
-    TuiLoaderModule,
+    TuiLoaderModule
   ]
 })
-export class CompanyPaymentModule { }
+export class CompanyPaymentModule {}

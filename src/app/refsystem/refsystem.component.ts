@@ -34,7 +34,7 @@ export class RefsystemComponent implements OnInit {
     public appService: AppService,
     private request: RequestService,
     private user: UserService,
-    private clipboard: Clipboard,
+    private clipboard: Clipboard
   ) {}
 
   ngOnInit(): void {
@@ -57,40 +57,35 @@ export class RefsystemComponent implements OnInit {
 
   onBalanceWithdrawalToWallet() {
     const action = 'to_wallet';
-    this.requestService
-      .referalWithdrawal(action)
-      .subscribe(
-        () => {
-          this.userService.updateUserInfo();
-          this.alertService.open('Средства выведены на баланс').subscribe();
-        },
-        (e: unknown) => {
-          const options: any = { status: 'error' };
-          this.alertService
-            .open('Ошибка! на счету недостаточно средств!', options)
-            .subscribe();
-        }
-      );
+    this.requestService.referalWithdrawal(action).subscribe(
+      () => {
+        this.userService.updateUserInfo();
+        this.alertService.open('Средства выведены на баланс').subscribe();
+      },
+      (e: unknown) => {
+        const options: any = { status: 'error' };
+        this.alertService
+          .open('Ошибка! на счету недостаточно средств!', options)
+          .subscribe();
+      }
+    );
   }
-  
+
   onBalanceWithdrawalToWithdrawal() {
     const action = 'to_withdrawal';
-    this.requestService
-      .referalWithdrawal(action)
-      .subscribe(
-        () => {
-          this.userService.updateUserInfo();
-          this.alertService.open('Средства выведены на баланс').subscribe();
-        },
-        (e: unknown) => {
-          const options: any = { status: 'error' };
-          this.alertService
-            .open('Ошибка! на счету недостаточно средств!', options)
-            .subscribe();
-        }
-      );
+    this.requestService.referalWithdrawal(action).subscribe(
+      () => {
+        this.userService.updateUserInfo();
+        this.alertService.open('Средства выведены на баланс').subscribe();
+      },
+      (e: unknown) => {
+        const options: any = { status: 'error' };
+        this.alertService
+          .open('Ошибка! на счету недостаточно средств!', options)
+          .subscribe();
+      }
+    );
   }
-  
 
   getData(page: number) {
     this.requestService
@@ -124,11 +119,13 @@ export class RefsystemComponent implements OnInit {
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el);
-  
-    this.alertService.open('Текст скопирован в буфер обмена', {
-      status: TuiNotification.Success,
-    }).subscribe();
-  }  
+
+    this.alertService
+      .open('Текст скопирован в буфер обмена', {
+        status: TuiNotification.Success
+      })
+      .subscribe();
+  }
 }
 
 interface refinfo {

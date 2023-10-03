@@ -153,7 +153,10 @@
           <tbody tuiTbody>
             <tr *ngFor="let item of links">
               <td>
-                <span class="copy-link" (click)="copyTextToClipboard(item.link)">
+                <span
+                  class="copy-link"
+                  (click)="copyTextToClipboard(item.link)"
+                >
                   {{ item.link }}
                 </span>
               </td>

@@ -327,6 +327,14 @@ export class RequestService {
     return this.http.get(environment.api + 'wb_liker_selfbuy_get_task.php');
   }
 
+  // Для дублирования
+
+  public getSelfRansomDuplicate(id: number) {
+    return this.http.get(
+      environment.api + `wb_liker_selfbuy_get_task.php?task_id=${id}`
+    );
+  }
+
   public getSelfransomsExcel(params: HttpParams) {
     return this.http.get(environment.api + 'userRansoms.php', { params });
   }
@@ -536,9 +544,15 @@ export class RequestService {
 
   public referalWithdrawal(action: string) {
     const body = { action };
-    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put(environment.api + 'invite_links.php', JSON.stringify(body), options);
-}
+    const options = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.put(
+      environment.api + 'invite_links.php',
+      JSON.stringify(body),
+      options
+    );
+  }
 
   public postReferal(body: Referal) {
     return this.http.post(environment.api + 'invite_links.php', body);

@@ -24,7 +24,11 @@
             content="Укажите артикул, который необходимо добавлять в корзину."
           ></tui-tooltip>
         </h4>
-        <tui-input class="article-input" [(ngModel)]="sku" (keyup)="validateOnlyNumbers($event)">
+        <tui-input
+          class="article-input"
+          [(ngModel)]="sku"
+          (keyup)="validateOnlyNumbers($event)"
+        >
           Артикул
           <input tuiTextfield type="number" />
         </tui-input>

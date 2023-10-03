@@ -104,7 +104,7 @@ export class LikesComponent implements OnInit {
         this.tableData$.next(newData);
       },
       (error: any) => {
-        console.log('Ошибка', error)
+        console.log('Ошибка', error);
       }
     );
   }

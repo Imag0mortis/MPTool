@@ -108,25 +108,18 @@ export class ReviewModalComponent implements OnInit {
 
     this.form = fb.group({
       skuName: new FormControl(''),
-      ransom: new FormControl('', [
-        Validators.required,
-      ]),
+      ransom: new FormControl('', [Validators.required]),
       sku: new FormControl(''),
-      feedback: new FormControl('', [
-      ]),
+      feedback: new FormControl('', []),
       time: new FormControl(
         new TuiTime(currentDate.getHours(), currentDate.getMinutes()),
         Validators.required
       ),
       article: new FormControl(),
-      sex: new FormControl('', [
-        Validators.required,
-      ]),
+      sex: new FormControl('', [Validators.required]),
       rating: new FormControl(),
       is_any_for_task: new FormControl(true),
-      size_match: new FormControl('', [
-        Validators.required,
-      ]),
+      size_match: new FormControl('', [Validators.required]),
       date: new FormControl(
         new TuiDay(
           currentDate.getFullYear(),

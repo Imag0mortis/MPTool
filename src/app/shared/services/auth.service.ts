@@ -13,7 +13,6 @@ export class AuthService {
     localStorage.clear();
     window.location.reload();
   }
-  
 
   public successLogin(response: any) {
     localStorage.setItem('token', response.authorization);

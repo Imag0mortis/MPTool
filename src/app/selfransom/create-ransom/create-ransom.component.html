@@ -473,26 +473,42 @@
 
 <ng-template #templateExcel let-observer>
   <p i18n class="modal_header">ИМПОРТ ИЗ EXCEL</p>
-  <ol style="margin-top: 2rem;">
-    <li> 1. Скачайте шаблон </li>
-    <li> 2. Заполните таблицу в соответствии с шаблоном <br>
-      ВАЖНО!!! Не забудьте удалить примеры самовыкупов из шаблона</li>
-    <li> 3. Загрузите заполненный документ в MPTool</li>
+  <ol style="margin-top: 2rem">
+    <li>1. Скачайте шаблон</li>
+    <li>
+      2. Заполните таблицу в соответствии с шаблоном
+      <br />
+      ВАЖНО!!! Не забудьте удалить примеры самовыкупов из шаблона
+    </li>
+    <li>3. Загрузите заполненный документ в MPTool</li>
   </ol>
   <label for="excelFile">
-    <input id="excelFile" type="file" (change)="importFile($event)" hidden="hidden">
-    <button tuiButton type="button" size="m" class="pay" (click)="openFileInput()" appearance='secondary-destructive' style="width: 100%; margin-top: 1rem;">
-      Загрузить файл&nbsp;
-    </button>    
-  </label>
+    <input
+      id="excelFile"
+      type="file"
+      (change)="importFile($event)"
+      hidden="hidden"
+    />
     <button
-      appearance='secondary'
       tuiButton
       type="button"
       size="m"
-      class="download"
-      (click)="downloadFile()"
+      class="pay"
+      (click)="openFileInput()"
+      appearance="secondary-destructive"
+      style="width: 100%; margin-top: 1rem"
     >
-      Скачать шаблон&nbsp;
+      Загрузить файл&nbsp;
     </button>
+  </label>
+  <button
+    appearance="secondary"
+    tuiButton
+    type="button"
+    size="m"
+    class="download"
+    (click)="downloadFile()"
+  >
+    Скачать шаблон&nbsp;
+  </button>
 </ng-template>

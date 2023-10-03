@@ -163,13 +163,12 @@ ul {
   .header {
     position: initial;
   }
-  .mobile_header{
+  .mobile_header {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 }
-
 
 @media screen and (max-width: 768px) {
   .tui-container {

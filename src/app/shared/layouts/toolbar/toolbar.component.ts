@@ -6,7 +6,7 @@ import { MenuConfiguration } from '../sidenav/sidenav-menu.conf';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { PaymentModalComponent } from '../balance/payment-modal/payment-modal.component';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
-import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
+import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 
 @Component({
   selector: 'app-toolbar',
@@ -70,5 +70,5 @@ export class ToolbarComponent implements OnInit {
 
   showPaymentDialog(content: PolymorpheusContent<TuiDialogContext>): void {
     this.dialogService.open(content).subscribe();
-}
+  }
 }

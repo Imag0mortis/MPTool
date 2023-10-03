@@ -227,7 +227,7 @@
           <p class="pay_status">{{ item.taskState }}</p>
           <div class="tracking">
             <!--Трекинг-->
-  
+
             <button
               *ngIf="item.taskState === 'Товар доставляется'"
               tuiButton
@@ -240,7 +240,7 @@
             >
               Отследить свою доставку
             </button>
-  
+
             <button
               *ngIf="
                 item.taskState === 'Товар готов к выдаче' ||
@@ -254,22 +254,31 @@
             >
               Обновить статус
             </button>
-            <div class="delivery_mobile" *ngIf="
-            item.deliveryState === 'не оплачен' && item.taskState != 'Отменено';
-            else deliveryBlock
-          "></div>
+            <div
+              class="delivery_mobile"
+              *ngIf="
+                item.deliveryState === 'не оплачен' &&
+                  item.taskState != 'Отменено';
+                else deliveryBlock
+              "
+            ></div>
             <ng-template #deliveryBlock>
               <div
                 class="delivery-block"
                 *ngIf="
-                  item.deliveryState != 'Отменено' && item.deliveryState != 'Ошибка'
+                  item.deliveryState != 'Отменено' &&
+                  item.deliveryState != 'Ошибка'
                 "
               >
                 <button
                   *ngIf="item.deliveryQR.length > 0"
                   tuiButton
                   (click)="
-                    showDeliveryQR(qrDeliveryModal, item.deliveryQR!, item.address)
+                    showDeliveryQR(
+                      qrDeliveryModal,
+                      item.deliveryQR!,
+                      item.address
+                    )
                   "
                   type="button"
                   class="tui-space_right-3 tui-space_bottom-3"
@@ -281,7 +290,9 @@
                 </button>
                 <div
                   style="margin-right: 1rem"
-                  *ngIf="item.deliveryState === 'готов к выдаче' && item.customerCode"
+                  *ngIf="
+                    item.deliveryState === 'готов к выдаче' && item.customerCode
+                  "
                 ></div>
               </div>
             </ng-template>
@@ -336,8 +347,9 @@
     <!-- это для мобилок -->
     <div class="buttons_container">
       <div
-      *ngIf="
-      item.deliveryState === 'не оплачен' && item.taskState != 'Отменено';"
+        *ngIf="
+          item.deliveryState === 'не оплачен' && item.taskState != 'Отменено'
+        "
         class="table_buttons"
       >
         <!-- [disabled]="!!item.checkState" -->
@@ -432,10 +444,14 @@
   <!-- <p>Стоимость доставки: <tui-money [value]="deliveryCost"></tui-money></p> -->
   <div *ngIf="deliveryCost > 0">
     <p>
-      Уважаемый пользователь! В данный момент этот ПВЗ перегружен и стоимость доставки на него составляет <tui-money [value]="deliveryCost"></tui-money>.
+      Уважаемый пользователь! В данный момент этот ПВЗ перегружен и стоимость
+      доставки на него составляет
+      <tui-money [value]="deliveryCost"></tui-money>
+      .
     </p>
     <p>
-      Советуем выбрать другой ПВЗ, если вам нужна бесплатная доставка, в противном случае товар будет стоить дороже.
+      Советуем выбрать другой ПВЗ, если вам нужна бесплатная доставка, в
+      противном случае товар будет стоить дороже.
     </p>
   </div>
   <button tuiButton type="button" size="m" (click)="observer.complete()">

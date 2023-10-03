@@ -65,11 +65,10 @@ export class BasketComponent implements OnInit {
     this.requestService.createBasketTask(body).subscribe(
       () => this.getData(1),
       (error: any) => {
-        console.log('Ошибка', error)
+        console.log('Ошибка', error);
       }
     );
   }
-
 
   getData(page: number) {
     this.requestService.getBasketTask(page, 5).subscribe((r: any) => {
@@ -89,9 +88,12 @@ export class BasketComponent implements OnInit {
   }
 
   isCancelButtonEnabled(taskState: string): boolean {
-    return taskState === 'Ошибка(Неверные данные)' || taskState === 'Ожидание выполнения';
+    return (
+      taskState === 'Ошибка(Неверные данные)' ||
+      taskState === 'Ожидание выполнения'
+    );
   }
-  
+
   validateOnlyNumbers(event: any): void {
     const inputValue: string = event.value;
     const numbersOnly = inputValue.replace(/\D/g, '');
@@ -109,10 +111,9 @@ export class BasketComponent implements OnInit {
       },
       (error: unknown) => {
         const options: any = { label: 'Ошибка!', status: 'error' };
-        this.alertService.open(
-          'Что-то пошло не так! Повторите попытку позднее!',
-          options
-        ).subscribe();
+        this.alertService
+          .open('Что-то пошло не так! Повторите попытку позднее!', options)
+          .subscribe();
       }
     );
   };

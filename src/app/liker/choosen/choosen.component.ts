@@ -63,10 +63,12 @@ export class ChoosenComponent implements OnInit {
       () => this.getData(1),
       (error: any) => {
         if (error.error.errorDesc === 'insufficient_balance') {
-          console.log('Ошибка', error)
+          console.log('Ошибка', error);
         } else if (error.error.errorDesc === 'incorrect_query') {
           const options: any = { label: 'Ошибка!', status: 'error' };
-          this.alertService.open('Введите корректную ссылку', options).subscribe();
+          this.alertService
+            .open('Введите корректную ссылку', options)
+            .subscribe();
         }
       }
     );
