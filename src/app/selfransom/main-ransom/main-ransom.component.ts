@@ -81,7 +81,8 @@ export class MainRansomComponent implements OnInit {
   filterControl = new FormControl();
   stringify: TuiStringHandler<FilterOption> = (option) => option.state;
 
-  searchTaskIds: string;
+  searchTaskIds = '';
+  searchTaskSkus = '';
   page = 1;
   pageSize = 20;
 
@@ -165,7 +166,12 @@ export class MainRansomComponent implements OnInit {
 
   goToPage(event: number) {
     this.page = event;
-    this.getDataRansoms(this.page + 1, this.filter);
+    this.getDataRansoms(
+      this.page + 1,
+      this.filter,
+      this.searchTaskIds,
+      this.searchTaskSkus
+    );
     this.currentIndex = this.page - 1; // Обновляем currentIndex
   }
 
@@ -219,16 +225,18 @@ export class MainRansomComponent implements OnInit {
     });
   }
 
-  getTasksByIds(searchTaskIds: string) {
-    const searchTaskString = [];
-
-    this.getDataRansoms(this.page, this.filter, searchTaskIds);
-
-    // console.log(this.filter);
+  getTasksByIds(searchTaskSkus: string, searchTaskIds: string) {
+    if (searchTaskIds.length > 0) {
+      this.getDataRansoms(this.page, this.filter, searchTaskIds);
+    }
+    if (searchTaskSkus.length > 0) {
+      this.getDataRansoms(this.page, this.filter, '', searchTaskSkus);
+    }
   }
 
   clearTask() {
     this.searchTaskIds = '';
+    this.searchTaskSkus = '';
 
     this.getDataRansoms(this.page, this.filter);
   }
@@ -259,10 +267,19 @@ export class MainRansomComponent implements OnInit {
   async getDataRansoms(
     page: number = this.page,
     filter = -1,
-    searchTaskIds = ''
+    searchTaskIds = '',
+    skus = '',
+    isNegativeRansom = false
   ) {
     this.requestService
-      .getAllSelfransomItem(page, this.pageSize, filter, searchTaskIds)
+      .getAllSelfransomItem(
+        page,
+        this.pageSize,
+        filter,
+        searchTaskIds,
+        skus,
+        isNegativeRansom
+      )
       // eslint-disable-next-line rxjs/no-async-subscribe
       .subscribe(async (r: any) => {
         this.cards = r.taskList;

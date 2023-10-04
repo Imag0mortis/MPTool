@@ -42,7 +42,9 @@ export class RansomMainCardComponent {
           },
           (error: any) => {
             const options: any = { status: 'error' };
-            this.alertService.open('Ошибка при дублировании', options).subscribe();
+            this.alertService
+              .open('Ошибка при дублировании', options)
+              .subscribe();
           }
         );
       }

@@ -36,11 +36,12 @@ import { TuiAutoFocusModule } from '@taiga-ui/cdk';
 import { TuiInputCopyModule } from '@taiga-ui/kit';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
+import { ZpComponent } from './zp/zp.component';
 
 registerLocaleData(localeRu);
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ZpComponent],
   imports: [
     TuiButtonModule,
     TextMaskModule,

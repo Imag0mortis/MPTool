@@ -173,10 +173,25 @@
     </button>
   </tui-tabs>
 
+  <h3>Поиск по артикулам или по группам выкупов</h3>
   <div class="searchbar">
     <tui-input tuiTextfieldSize="m">
+      Введите артикулы через запятую
+      <input
+        [disabled]="searchTaskIds.length > 0 ? true : false"
+        tuiTextfield
+        type="text"
+        [(ngModel)]="searchTaskSkus"
+      />
+    </tui-input>
+    <tui-input tuiTextfieldSize="m">
       Введите номера групп выкупов через запятую
-      <input tuiTextfield type="text" [(ngModel)]="searchTaskIds" />
+      <input
+        [disabled]="searchTaskSkus.length > 0 ? true : false"
+        tuiTextfield
+        type="text"
+        [(ngModel)]="searchTaskIds"
+      />
     </tui-input>
 
     <div class="search_buttons">
@@ -186,7 +201,7 @@
         size="m"
         appearance="primary"
         class="search"
-        (click)="getTasksByIds(searchTaskIds)"
+        (click)="getTasksByIds(searchTaskSkus, searchTaskIds)"
       >
         Найти
       </button>

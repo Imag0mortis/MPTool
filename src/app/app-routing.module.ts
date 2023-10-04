@@ -8,6 +8,7 @@ import { WrapperComponent } from './shared/layouts/wrapper/wrapper.component';
 import { TariffsComponent } from './tariffs/tariffs.component';
 import { RestoreComponent } from './shared/authorization/restore/restore.component';
 import { RestoreChangeComponent } from './shared/authorization/restore-change/restore-change.component';
+import { ZpComponent } from './zp/zp.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/selfransom', pathMatch: 'full' },
@@ -178,6 +179,10 @@ const routes: Routes = [
           ),
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard]
+      },
+      {
+        path: 'zp',
+        component: ZpComponent
       }
     ]
   }

@@ -64,7 +64,16 @@ export class AccountComponent implements OnInit {
         this.account.get('phone')?.setValue(r.self_info.phone);
         this.account.get('telegram')?.setValue(r.self_info.telegram);
         this.account.get('company')?.setValue(r.self_info.company_name);
-        this.account.get('job')?.setValue(r.self_info.company_position);
+        if (this.user.isOwner.value) {
+          if (
+            r.self_info.company_position == '0' ||
+            r.self_info.company_position == '1'
+          ) {
+            this.account.get('job')?.setValue('');
+          } else {
+            this.account.get('job')?.setValue(r.self_info.company_position);
+          }
+        }
       }
     });
   }

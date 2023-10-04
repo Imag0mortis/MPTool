@@ -315,11 +315,13 @@ export class RequestService {
     page: number,
     pageSize: number,
     filter?: number,
-    ids = ''
+    ids = '',
+    skus = '',
+    isNegativeRansom = false
   ) {
     return this.http.get(
       environment.api +
-        `wb_liker_selfbuy.php?page=${page}&pageSize=${pageSize}&state_filter=${filter}&ids=[${ids}]`
+        `wb_liker_selfbuy.php?page=${page}&pageSize=${pageSize}&state_filter=${filter}&ids=[${ids}]&skus=[${skus}]&isNegativeRansom=${isNegativeRansom}`
     );
   }
 
