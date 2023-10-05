@@ -266,6 +266,10 @@ tui-select {
 .action_buttons {
   width: auto;
 }
+tui-loader {
+  margin-top: 5rem;
+  color: #389893;
+}
 
 @media screen and (min-width: 769px) {
   .tabs {

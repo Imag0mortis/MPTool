@@ -160,9 +160,9 @@
   </div>
 
   <tui-tabs
-    [underline]="false"
-    class="tabs"
-    [(activeItemIndex)]="activeItemIndex"
+  [underline]="false"
+  class="tabs"
+  [(activeItemIndex)]="activeItemIndex"
   >
     <button
       tuiTab
@@ -219,14 +219,19 @@
     </div>
   </div>
 
-  <div class="card_container" *ngIf="cards.length; else noCards">
+  <div *ngIf="isLoading">
+    <tui-loader [inheritColor]="true" size="xxl">
+    </tui-loader>
+  </div>
+
+  <div class="card_container" *ngIf="cards.length">
     <app-main-ransom-card
       *ngFor="let item of cards"
       [item]="item"
     ></app-main-ransom-card>
   </div>
 
-  <div class="pagination-container" *ngIf="cards.length > 0">
+  <div class="pagination-container" *ngIf="cards.length">
     <tui-pagination
       [length]="length"
       [index]="currentIndex"
@@ -234,9 +239,9 @@
     ></tui-pagination>
   </div>
 
-  <ng-template #noCards>
+  <div *ngIf="isLoading == false && !!!cards.length">
     <div class="noсards-placeholder">Нет выкупов для отображения...</div>
-  </ng-template>
+  </div>
 
   <ng-template #template let-observer>
     <p i18n class="modal_header">ПОДКЛЮЧЕНИЕ ПАКЕТА</p>

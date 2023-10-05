@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { AppService } from 'src/app/shared/services/app.service';
 import { RequestService } from 'src/app/shared/services/request.service';
 import { TuiAlertService } from '@taiga-ui/core';
@@ -17,6 +17,7 @@ export class RansomMainCardComponent {
   ) {}
 
   @Input() item: any;
+  @Output() refreshGetData = new EventEmitter();
   index: any = 0;
 
   getData(task_id: any) {
@@ -38,7 +39,7 @@ export class RansomMainCardComponent {
           (response: any) => {
             const options: any = { status: 'success' };
             this.alertService.open('Задание дублировано', options).subscribe();
-            location.reload();
+            this.refreshGetData.emit();
           },
           (error: any) => {
             const options: any = { status: 'error' };

@@ -154,7 +154,7 @@ const mapConfig: YaConfig = {
     TuiInputDateRangeModule,
     TuiLinkModule,
     TuiLabelModule,
-    TourTuiDropdownModule
+    TourTuiDropdownModule,
   ]
 })
 export class SelfransomModule {}

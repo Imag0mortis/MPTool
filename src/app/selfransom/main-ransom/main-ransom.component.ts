@@ -56,14 +56,13 @@ interface FilterOption {
 })
 export class MainRansomComponent implements OnInit {
   taskStates = [];
+  isLoading = true;
   cards: mainransom[] = [];
   activeItemIndex = 0;
   length = 0;
-  index = 0;
-  id = 0;
+  currentIndex = 0;
   state = '';
   popupActive: boolean;
-  currentIndex = 0;
 
   dictionary: readonly FilterOption[] = [
     { id: -1, state: 'Все' },
@@ -134,7 +133,7 @@ export class MainRansomComponent implements OnInit {
     }
   );
 
-  filter: any = 0;
+  filter: any = -1;
 
   constructor(
     @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
@@ -166,13 +165,15 @@ export class MainRansomComponent implements OnInit {
 
   goToPage(event: number) {
     this.page = event;
+    this.cards = [];
+    this.isLoading = true;
     this.getDataRansoms(
       this.page + 1,
       this.filter,
       this.searchTaskIds,
       this.searchTaskSkus
     );
-    this.currentIndex = this.page - 1; // Обновляем currentIndex
+    this.currentIndex = this.page; // Обновляем currentIndex
   }
 
   onTabClick(arg?: number) {
@@ -182,11 +183,14 @@ export class MainRansomComponent implements OnInit {
 
     this.page = 1;
     this.filter = arg;
+    this.cards = [];
+    this.isLoading = true;
 
     this.requestService
       .getAllSelfransomItem(this.page, this.pageSize, arg, '')
       .pipe(first())
       .subscribe((r: any) => {
+        this.isLoading = false;
         this.cards = r.taskList;
         this.length = r.tableData.pagesTotal;
         this.currentIndex = 0; // Обновляем currentIndex
@@ -194,7 +198,6 @@ export class MainRansomComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getData();
     this.getDataRansoms(this.page);
 
     // if (this.popupActive === false) {
@@ -213,17 +216,6 @@ export class MainRansomComponent implements OnInit {
   }
 
   //Модальное окно
-  getData() {
-    this.request.getUserInfo().subscribe((r: any) => {
-      // console.log('проверка', r);
-      this.popupActive = r.is_push_tg_enabled;
-      // if (this.popupActive === false) {
-      //   this.showBotDialog();
-      // } else {
-      //   // console.log('Модальное окно неактивно.');
-      // }
-    });
-  }
 
   getTasksByIds(searchTaskSkus: string, searchTaskIds: string) {
     if (searchTaskIds.length > 0) {
@@ -264,7 +256,7 @@ export class MainRansomComponent implements OnInit {
     });
   }
 
-  async getDataRansoms(
+  getDataRansoms(
     page: number = this.page,
     filter = -1,
     searchTaskIds = '',
@@ -280,11 +272,17 @@ export class MainRansomComponent implements OnInit {
         skus,
         isNegativeRansom
       )
-      // eslint-disable-next-line rxjs/no-async-subscribe
-      .subscribe(async (r: any) => {
-        this.cards = r.taskList;
-        this.length = r.tableData.pagesTotal;
-        this.taskStates = r.taskStates;
+      .subscribe({
+        next: (r: any) => {
+          console.log(r)
+          this.isLoading = false;
+          this.cards = r.taskList;
+          this.length = r.tableData.pagesTotal;
+          this.taskStates = r.taskStates;
+        },
+        error: (e) => {
+          this.isLoading = true;
+        }
       });
   }
 
