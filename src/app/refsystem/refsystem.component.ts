@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { RequestService } from 'src/app/shared/services/request.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { AppService } from 'src/app/shared/services/app.service';
 import { Referal } from 'src/app/shared/interfaces';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TuiAlertService, TuiNotification } from '@taiga-ui/core';
 import { Clipboard } from '@angular/cdk/clipboard';
+import {TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
+import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
 
 @Component({
   selector: 'app-refsystem',
@@ -21,7 +23,7 @@ export class RefsystemComponent implements OnInit {
   total_registrations: number;
   total_sum: number;
   index = 0;
-
+  cardNumber: string = '';
   page = 1;
   pageSize = 20;
 
@@ -34,11 +36,16 @@ export class RefsystemComponent implements OnInit {
     public appService: AppService,
     private request: RequestService,
     private user: UserService,
-    private clipboard: Clipboard
+    private clipboard: Clipboard,
+    @Inject(TuiDialogService) private readonly dialogs: TuiDialogService
   ) {}
 
   ngOnInit(): void {
     this.getData(this.page);
+  }
+
+  showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
+    this.dialogs.open(content).subscribe();
   }
 
   generateLink(quantity: number, type: string) {
@@ -72,7 +79,7 @@ export class RefsystemComponent implements OnInit {
   }
 
   onBalanceWithdrawalToWithdrawal() {
-    const action = 'to_withdrawal';
+    const action = 'to_wallet';
     this.requestService.referalWithdrawal(action).subscribe(
       () => {
         this.userService.updateUserInfo();
@@ -86,6 +93,32 @@ export class RefsystemComponent implements OnInit {
       }
     );
   }
+
+  onWithdrawalToCard() {
+  const action = 'to_withdrawal';
+  const cardNumber = this.cardNumber;
+  if (!cardNumber) {
+    const options: any = { status: 'error' };
+    this.alertService
+      .open('Введите номер карты!', options)
+      .subscribe();
+    return;
+  }
+
+  this.requestService.referalWithdrawaltoWallet(action, cardNumber).subscribe(
+    () => {
+      this.userService.updateUserInfo();
+      this.alertService.open('Средства будут выведены в течение от 1 до 3 дней').subscribe();
+    },
+    (e: unknown) => {
+      const options: any = { status: 'error' };
+      this.alertService
+        .open('Ошибка! на счету недостаточно средств!', options)
+        .subscribe();
+    }
+  );
+}
+
 
   getData(page: number) {
     this.requestService

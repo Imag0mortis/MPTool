@@ -142,7 +142,7 @@
 .tui-space_right-3 {
   margin-top: 1rem;
   margin-left: 3rem;
-  width: 391px;
+  width: 466px;
   border-radius: 10px !important;
 }
 
@@ -192,6 +192,7 @@ tui-input {
   display: flex;
   align-items: center;
 }
+
 .refs_withdrawal {
   width: 387px;
   height: 47px !important;
@@ -253,9 +254,36 @@ a {
   cursor: pointer;
 }
 
+tui-input-card{
+  margin-top: 1rem;
+}
+
+.attention {
+  font-size: 12px;
+  margin-left: 3px;
+}
+
+.pay_to_bank{
+  margin-top: 1rem;
+  width: 100%;
+  border-radius: 10px !important;
+}
+
+.right_buttons{
+  margin-left: 30%;
+}
+
 @media screen and (max-width: 1400px) {
   .footer_container {
     font-size: 14px;
+  }
+
+  .right_buttons{
+    margin-left: 0;
+  }
+
+  .modal{
+    height: 23rem;
   }
 
   .link {

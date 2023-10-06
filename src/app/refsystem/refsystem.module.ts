@@ -14,6 +14,8 @@ import {
   TuiTextfieldControllerModule,
   TUI_BUTTON_OPTIONS
 } from '@taiga-ui/core';
+import { TuiInputCardModule } from '@taiga-ui/addon-commerce';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   providers: [
@@ -36,7 +38,9 @@ import {
     TuiTextfieldControllerModule,
     refsystemRoutes,
     TuiPaginationModule,
-    TuiIslandModule
+    TuiIslandModule,
+    TuiInputCardModule,
+    FormsModule
   ]
 })
 export class RefsystemModule {}

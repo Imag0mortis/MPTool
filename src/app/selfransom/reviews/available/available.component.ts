@@ -20,6 +20,7 @@ import { LikerReviewsTask } from 'src/app/shared/interfaces';
   styleUrls: ['./available.component.scss']
 })
 export class AvailableComponent implements OnInit {
+  isLoading = true;
   form: FormGroup;
   data: RansomTask[] = [];
   taskStates = [];
@@ -91,6 +92,7 @@ export class AvailableComponent implements OnInit {
       .pipe(first())
       .subscribe((r: any) => {
         console.log(r);
+        this.isLoading = true;
         this.cards = r.taskList;
         this.length = r.tableData.pagesTotal;
         this.index = r.tableData.page - 1;

@@ -556,6 +556,18 @@ export class RequestService {
     );
   }
 
+  public referalWithdrawaltoWallet(action: string, cardNumber: string) {
+    const body = { action, cardNumber };
+    const options = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.put(
+      environment.api + 'invite_links.php',
+      JSON.stringify(body),
+      options
+    );
+  }
+
   public postReferal(body: Referal) {
     return this.http.post(environment.api + 'invite_links.php', body);
   }
