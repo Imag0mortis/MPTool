@@ -48,6 +48,9 @@
     >
       СОЗДАТЬ ВЫКУП
     </button>
+    <button tuiButton appearance="primary" size="m" class="add_selfransom" (click)="showDialog(cancelTask)">
+      Отменить неоплаченные
+    </button>
     <button
       *ngIf="appService.isMobile"
       (click)="showDialog(buy)"
@@ -175,7 +178,7 @@
 
   <h3>Поиск по артикулам или по группам выкупов</h3>
   <div class="searchbar">
-    <tui-input tuiTextfieldSize="m">
+    <tui-input class="tui-space_bottom-1" tuiTextfieldSize="m">
       Введите артикулы через запятую
       <input
         [disabled]="searchTaskIds.length > 0 ? true : false"
@@ -184,7 +187,7 @@
         [(ngModel)]="searchTaskSkus"
       />
     </tui-input>
-    <tui-input tuiTextfieldSize="m">
+    <tui-input class="tui-space_bottom-1" tuiTextfieldSize="m">
       Введите номера групп выкупов через запятую
       <input
         [disabled]="searchTaskSkus.length > 0 ? true : false"
@@ -538,6 +541,49 @@
     <p class="decline" (click)="observer.complete()">
       Нет, спасибо, я разберусь сам(а)
     </p>
+  </ng-template>
+
+  <ng-template #cancelTask let-observer>
+    <h1>Отменить неоплаченные выкупы</h1>
+    <p class="tui-space_bottom-3">При отмене неоплаченных выкупов,
+      средства вам вернутся в пакет выкупов.
+      Для отмены, введите нужный параметр на выбор:
+      дату и артикул</p>
+    <form [formGroup]="massCancel">
+
+      <div class="tui-space_bottom-3">
+        <p>Отменить неоплаченные выкупы до:</p>
+        <tui-input-date
+        formControlName="date"
+        >
+            Выберите дату
+        </tui-input-date>
+      </div>
+
+      <div>
+        <p>Отменить по артикулу</p>
+        <tui-input formControlName="sku">
+        </tui-input>
+      </div>
+      </form>
+    <div class="button_container">
+      <button
+        class="cancel"
+        tuiButton
+        appearance="secondary"
+        type="button"
+        size="m"
+        (click)="observer.complete()"
+      >
+        Отмена
+      </button>
+      <button
+      tuiButton
+      appearance="primary"
+      type="button"
+      size="m" (click)="cancelOldUnpaidRansom(); observer.complete()">Начать</button>
+
+    </div>
   </ng-template>
 </div>
 

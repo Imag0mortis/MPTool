@@ -341,6 +341,10 @@ export class RequestService {
     return this.http.get(environment.api + 'userRansoms.php', { params });
   }
 
+  public cancelOldUnpaidRansom(body: { sku: number; time: number }) {
+    return this.http.put(environment.api + 'wb/ransoms/massCancel.php', body);
+  }
+
   public reloadRansomStatus(body: any) {
     return this.http.post(environment.api + 'wb/ransoms/state.php', body);
   }

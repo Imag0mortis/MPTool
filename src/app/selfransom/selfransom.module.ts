@@ -68,6 +68,7 @@ import { CanceledComponent } from './reviews/canceled/canceled.component';
 import { ErrorComponent } from './reviews/error/error.component';
 import { TourTuiDropdownModule } from 'ngx-ui-tour-tui-dropdown';
 import { TuiMoneyModule } from '@taiga-ui/addon-commerce';
+import { TuiMobileCalendarDialogModule } from '@taiga-ui/addon-mobile';
 
 const mapConfig: YaConfig = {
   apikey: '136eb4f5-f723-42ba-bf7a-16d856667d78',
@@ -96,16 +97,17 @@ const mapConfig: YaConfig = {
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
+    ReactiveFormsModule,
     TuiExpandModule,
     CommonModule,
     AngularYandexMapsModule.forRoot(mapConfig),
     SelfransomRoutes,
     FormsModule,
     TuiTabsModule,
+    TuiMobileCalendarDialogModule,
     TuiIslandModule,
     TuiAvatarModule,
     TuiButtonModule,
-    ReactiveFormsModule,
     TuiInputModule,
     TuiTableModule,
     TuiTagModule,
@@ -154,7 +156,7 @@ const mapConfig: YaConfig = {
     TuiInputDateRangeModule,
     TuiLinkModule,
     TuiLabelModule,
-    TourTuiDropdownModule,
+    TourTuiDropdownModule
   ]
 })
 export class SelfransomModule {}

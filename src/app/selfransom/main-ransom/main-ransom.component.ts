@@ -27,7 +27,12 @@ import { saveAs } from 'file-saver';
 import * as ExcelJS from 'exceljs';
 import * as XLSX from 'xlsx';
 import { TuiFileLike } from '@taiga-ui/kit';
-import { FormControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 import { TuiStringHandler } from '@taiga-ui/cdk';
 
 interface mainransom {
@@ -63,6 +68,7 @@ export class MainRansomComponent implements OnInit {
   currentIndex = 0;
   state = '';
   popupActive: boolean;
+  filter: any = -1;
 
   dictionary: readonly FilterOption[] = [
     { id: -1, state: 'Все' },
@@ -85,6 +91,11 @@ export class MainRansomComponent implements OnInit {
   page = 1;
   pageSize = 20;
 
+  massCancel = new FormGroup({
+    date: new FormControl(null, [Validators.required]),
+    sku: new FormControl(null, [Validators.required, Validators.minLength(5)])
+  });
+
   readonly control = new FormControl();
 
   readonly rejectedFiles$ = new Subject<TuiFileLike | null>();
@@ -92,6 +103,41 @@ export class MainRansomComponent implements OnInit {
   readonly loadedFiles$ = this.control.valueChanges.pipe(
     switchMap((file) => (file ? this.makeRequest(file) : of(null)))
   );
+
+  constructor(
+    @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
+    private request: RequestService,
+    private http: HttpClient,
+    private user: UserService,
+    private fb: FormBuilder,
+    private readonly alertService: TuiAlertService,
+    @Inject(Injector) private readonly injector: Injector,
+    public appService: AppService,
+    private requestService: RequestService
+  ) {}
+
+  cancelOldUnpaidRansom() {
+    const body = {
+      sku: this.massCancel.get('sku')?.value,
+      time: this.massCancel.get('date')?.value
+    } as any;
+    const date = new Date(body.time.year, body.time.month, body.time.day);
+    this.requestService
+      .cancelOldUnpaidRansom({
+        sku: body.sku,
+        time: date.getTime()
+      })
+      .subscribe({
+        next: (value) => {
+          this.alertService.open('Готово!', { status: 'success' }).subscribe();
+        },
+        error: (err) => {
+          this.alertService
+            .open('Что-то пошло не так, попробуйте позже.', { status: 'error' })
+            .subscribe();
+        }
+      });
+  }
 
   onReject(file: TuiFileLike | readonly TuiFileLike[]): void {
     this.rejectedFiles$.next(file as TuiFileLike);
@@ -133,18 +179,6 @@ export class MainRansomComponent implements OnInit {
     }
   );
 
-  filter: any = -1;
-
-  constructor(
-    @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
-    private request: RequestService,
-    private http: HttpClient,
-    private user: UserService,
-    private readonly alertService: TuiAlertService,
-    @Inject(Injector) private readonly injector: Injector,
-    public appService: AppService,
-    private requestService: RequestService
-  ) {}
   ngAfterViewInit(): void {
     // this.showWelcomeModal();
   }
@@ -274,7 +308,6 @@ export class MainRansomComponent implements OnInit {
       )
       .subscribe({
         next: (r: any) => {
-          console.log(r)
           this.isLoading = false;
           this.cards = r.taskList;
           this.length = r.tableData.pagesTotal;
@@ -465,9 +498,4 @@ export class MainRansomComponent implements OnInit {
       .then((blob) => saveAs(blob, fileName))
       .catch((error) => console.error('Ошибка загрузки файла:', error));
   }
-}
-
-interface FilterOption {
-  id: number;
-  state: string;
 }
