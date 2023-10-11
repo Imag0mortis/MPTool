@@ -104,7 +104,7 @@ export const SupportConfiguration: SupportConf[] = [
       },
       {
         name: 'Напишите нам в WhatsApp',
-        link: 'https://wa.me/79856270105'
+        link: 'https://wa.me/79004955006'
       },
       {
         name: 'Написать нам на почту',

@@ -186,13 +186,42 @@ h2 {
   height: 2rem;
 }
 
+.photo_placeholder{
+  margin: 0.5rem 38px;
+}
+
 .cancel {
   cursor: pointer;
   height: 1rem;
 }
 .warning {
-  color: red;
-  font-size: 15px;
+  margin-top: 1rem;
+  width: 46rem;
+  border-radius: 0.625rem;
+  border: 1px solid #959595;
+background: #434242;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.attention{
+  color: #FF5959;
+  font-family: Montserrat;
+  font-size: 0.9rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 1rem 1rem 0.5rem 1rem; 
+}
+
+.attention_desc{
+  padding-bottom: 0.5rem;
+  color: #FFF;
+  font-family: Montserrat;
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0 1rem 1rem 1rem;
 }
 
 .invalid-input {
@@ -264,6 +293,21 @@ h2 {
   margin-left: 1rem;
 }
 
+td{
+  font-weight: bold;
+}
+
+tr, th, td {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  text-align: center;
+}
+
+.photo_placeholder{
+  margin-left: 2.5rem;
+}
+
 @media screen and (max-width: 1274px) {
   .mid_right {
     margin-bottom: 1rem;
@@ -288,9 +332,8 @@ h2 {
     width: 300%;
   }
   .warning {
-    color: red;
-    font-size: 15px;
-    white-space: normal;
+    margin-left: 1rem;
+    width: 91%;
   }
   .sku-input {
     width: 200%;
@@ -410,6 +453,9 @@ h2 {
   }
   .mid_right {
     margin-left: 0;
+  }
+  .imput_cell {
+    margin-top: 1rem;
   }
 }
 

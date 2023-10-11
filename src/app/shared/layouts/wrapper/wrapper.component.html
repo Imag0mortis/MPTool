@@ -1,11 +1,18 @@
 <div class="app_container">
   <div class="" style="display: flex">
     <div class="sidenav" *ngIf="!appService.isTablet">
-      <img
-        class="toolbar_logo"
-        src="../../../../assets/img/LogoCabWhite.svg"
-        (click)="appService.goSelfRansom()"
-      />
+      <div class="logo_wrapper">
+        <img
+          class="toolbar_logo"
+          src="../../../../assets/img/LogoCabWhite.svg"
+          (click)="appService.goSelfRansom()"
+        />
+        <div class="bell">
+        <img src="../../../../assets/icons/Group 406.svg" alt="" *ngIf="!IsPushActive">
+        <img src="../../../../assets/icons/Group 405.svg" alt="" *ngIf="IsPushActive">
+        </div>
+        
+      </div>
 
       <app-balance></app-balance>
       <app-sidenav></app-sidenav>

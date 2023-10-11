@@ -13,6 +13,7 @@ declare function setUsetifulTags(arg: any): void;
 })
 export class WrapperComponent implements OnInit, AfterViewInit {
   usetifulTags: { userId: string };
+  IsPushActive: boolean = true;
 
   constructor(
     public appService: AppService,
@@ -35,6 +36,10 @@ export class WrapperComponent implements OnInit, AfterViewInit {
         this.initUsetiful(r.user_id);
       }
     });
+  }
+
+  pushActivation() {
+    this.IsPushActive = !this.IsPushActive;
   }
 
   initUsetiful(uId: any) {

@@ -2,12 +2,6 @@
   <div class="create_header">
     <div class="left_head">
       <h2>Создать выкуп</h2>
-      <p class="warning">
-        Внимание! В целях безопасности нельзя отправлять сразу больше пяти
-        товаров на один ПВЗ
-        <br />
-        до приёма предыдущих заказов!
-      </p>
     </div>
   </div>
   <div class="mid_container">
@@ -100,6 +94,10 @@
       </button>
     </div>
   </div>
+  <div class="warning">
+    <p class="attention">Обратите внимание!</p>
+    <p class="attention_desc">В целях безопасности нельзя отправлять сразу больше пяти товаров на один ПВЗ до приёма предыдущих заказов!</p>
+  </div>
   <div class="ransom_table">
     <div class="table_container shadow(1)">
       <div class="table_header"></div>
@@ -136,7 +134,7 @@
               <th tuiTh>Отменить</th>
             </tr>
           </thead>
-          <tbody tuiTbody [data]="data">
+          <tbody tuiTbody [data]="data" tuiTextfieldAppearance="textfield">
             <tr tuiTr *ngFor="let item of data; index as i">
               <td tuiTd *tuiCell="'imgLink'">
                 <div
@@ -148,12 +146,13 @@
               <td tuiTd *tuiCell="'price'">{{ item.price }} ₽</td>
               <td tuiTd *tuiCell="'name'">{{ item.name }}</td>
               <td tuiTd *tuiCell="'quantity'">
-                <tui-input class="account-input" [(ngModel)]="item.quantity">
+                <tui-input class="account-input" appearance="primary">
                   <input tuiTextfield type="number" min="1" />
                 </tui-input>
               </td>
               <td
-                style="max-width: 120px; width: 120px"
+                style="max-width: 120px; width: 120px; padding-top: 1.65rem;
+                padding-right: 0.5rem;"
                 tuiTd
                 *tuiCell="'size'"
               >
@@ -166,10 +165,12 @@
                     [tuiTextfieldLabelOutside]="true"
                     [valueContent]="item.size!.name"
                     [(ngModel)]="item.size"
+                    tuiTextfieldAppearance="textfield"
                   >
                     <ng-template tuiDataList>
                       <tui-data-list>
                         <button
+                          tuiTextfieldAppearance="textfield"
                           *ngFor="let size of item.sizes"
                           tuiOption
                           [value]="{ name: size.Key, value: size.Value }"
@@ -183,19 +184,18 @@
               </td>
 
               <td
-                style="max-width: 120px; width: 120px"
+                style="max-width: 120px; width: 120px; margin-top: 1.65rem"
                 tuiTd
                 *tuiCell="'sex'"
                 tourAnchor="sex"
-                [ngStyle]="{
-                  border: item.sex === undefined ? '3px solid red' : null
-                }"
               >
                 <tui-select
                   tuiTextfieldSize="m"
                   [tuiTextfieldLabelOutside]="true"
                   [valueContent]="item.sex?.name"
                   [(ngModel)]="item.sex"
+                  style="margin-top: 1.65rem;
+                  padding-right: 0.8rem;"
                 >
                   <ng-template tuiDataList>
                     <tui-data-list>
@@ -215,11 +215,9 @@
                 tuiTd
                 *tuiCell="'request'"
                 style="max-width: 120px"
-                [ngStyle]="{
-                  border: item.request.length < 1 ? '3px solid red' : null
-                }"
               >
-                <tui-input class="account-input" [(ngModel)]="item.request">
+                <tui-input class="account-input" [(ngModel)]="item.request" style="margin-top: 1.60rem;
+                padding-right: 0.5rem;">
                   <input tuiTextfield type="text" />
                 </tui-input>
               </td>
