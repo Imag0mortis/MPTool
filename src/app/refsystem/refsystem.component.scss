@@ -241,6 +241,8 @@ a {
   text-overflow: ellipsis;
 }
 
+
+
 .pagination-container {
   margin-top: 1rem;
 }
@@ -272,6 +274,11 @@ tui-input-card{
 .right_buttons{
   margin-left: 30%;
 }
+
+.link_cell{
+  width: 21rem;
+}
+
 
 @media screen and (max-width: 1400px) {
   .footer_container {
@@ -389,6 +396,11 @@ tui-input-card{
   .tui-island__footer-button span {
     color: red;
   }
+
+  .copy_mobile{
+    color: #1a938e;
+  }
+
   .tui-island__title {
     border-bottom: 1px;
     border-bottom-color: gray;

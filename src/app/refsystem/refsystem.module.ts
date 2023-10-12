@@ -12,7 +12,8 @@ import {
   TuiButtonModule,
   TuiPrimitiveTextfieldModule,
   TuiTextfieldControllerModule,
-  TUI_BUTTON_OPTIONS
+  TUI_BUTTON_OPTIONS,
+  TuiHintModule
 } from '@taiga-ui/core';
 import { TuiInputCardModule } from '@taiga-ui/addon-commerce';
 import { FormsModule } from '@angular/forms';
@@ -40,7 +41,8 @@ import { FormsModule } from '@angular/forms';
     TuiPaginationModule,
     TuiIslandModule,
     TuiInputCardModule,
-    FormsModule
+    FormsModule,
+    TuiHintModule
   ]
 })
 export class RefsystemModule {}

@@ -111,7 +111,7 @@
       <div class="" *ngFor="let item of links">
         <tui-island [hoverable]="true">
           <h3 class="tui-island__title">
-            <a href="{{ item.link }}" target="blank">{{ item.link }}</a>
+            <a (click)="copyTextToClipboard(item.link)">{{ item.link }}</a>
           </h3>
           <div class="tui-island__paragraph">
             <ul>
@@ -121,6 +121,17 @@
               <li>Комиссия: {{ item.referral_comission }}</li>
             </ul>
           </div>
+          <button
+            class="copy_mobile"
+            tuiButton
+            type="button"
+            appearance="flat"
+            size="m"
+            class="tui-island__footer-button"
+            (click)="copyTextToClipboard(item.link)"
+          >
+            <span style="color: #1a938e;">Скопировать ссылку</span>
+          </button>
           <button
             tuiButton
             type="button"
@@ -143,7 +154,7 @@
           style="width: 100%"
         >
           <thead>
-            <th>Ссылка:</th>
+            <th class="link_cell">Ссылка <span *ngIf="!appService.isMobile">(нажмите, чтобы скопировать)</span>:</th>
             <th>Кликов:</th>
             <th>Регистраций:</th>
             <th>Оплат:</th>
@@ -156,6 +167,8 @@
                 <span
                   class="copy-link"
                   (click)="copyTextToClipboard(item.link)"
+                  tuiHintPointer
+                  tuiHint="нажмите, чтобы скопировать"
                 >
                   {{ item.link }}
                 </span>

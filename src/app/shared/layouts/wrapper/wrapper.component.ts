@@ -38,10 +38,6 @@ export class WrapperComponent implements OnInit, AfterViewInit {
     });
   }
 
-  pushActivation() {
-    this.IsPushActive = !this.IsPushActive;
-  }
-
   initUsetiful(uId: any) {
     let head = document.getElementsByTagName('head')[0];
     let script: any = document.createElement('script');

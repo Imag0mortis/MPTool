@@ -154,7 +154,7 @@ export class RefsystemComponent implements OnInit {
     document.body.removeChild(el);
 
     this.alertService
-      .open('Текст скопирован в буфер обмена', {
+      .open('Ссылка скопирована в буфер обмена', {
         status: TuiNotification.Success
       })
       .subscribe();
