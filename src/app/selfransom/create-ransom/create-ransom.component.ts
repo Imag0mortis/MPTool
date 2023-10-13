@@ -31,7 +31,7 @@ export class CreateRansomComponent implements OnInit {
 
   maxCountPositions = 100;
 
-  maxCountAddresses = 5;
+  maxCountAddresses = 3;
 
   columns = [
     'imgLink',
@@ -250,7 +250,7 @@ export class CreateRansomComponent implements OnInit {
         const valRes = result.get(el) as number;
         result.set(el, valRes + 1);
 
-        if (valRes > this.maxCountAddresses) {
+        if (valRes >= this.maxCountAddresses) {
           validateOkAddressCount = false;
         }
       } else {
@@ -265,7 +265,7 @@ export class CreateRansomComponent implements OnInit {
           .open(
             'Вы выбрали более ' +
               this.maxCountAddresses +
-              'товаров на один ПВЗ до приёма предыдущих заказов!',
+              ' товаров на один ПВЗ до приёма предыдущих заказов!',
             options
           )
           .subscribe();
