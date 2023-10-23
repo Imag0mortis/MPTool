@@ -96,7 +96,12 @@
   </div>
   <div class="warning">
     <p class="attention">Обратите внимание!</p>
-    <p class="attention_desc">В целях безопасности нельзя отправлять сразу больше трёх товаров на один ПВЗ до приёма предыдущих заказов!</p>
+    <div class="attention_desc">В целях безопасности нельзя отправлять сразу больше трёх товаров на один ПВЗ до приёма предыдущих заказов! <br> 
+      <div class="todo_container" (click)="showExcelDialog(todo)">
+          <img src="../../../assets/icons/Group 407.svg" alt="" style="width: 1.3125rem;">
+          <span>важные рекомендации</span>
+      </div>
+</div>
   </div>
   <div class="ransom_table">
     <div class="table_container shadow(1)">
@@ -144,14 +149,14 @@
               </td>
               <td tuiTd *tuiCell="'sku'">{{ item.sku }}</td>
               <td tuiTd *tuiCell="'price'">{{ item.price }} ₽</td>
-              <td tuiTd *tuiCell="'name'">{{ item.name }}</td>
+              <td tuiTd *tuiCell="'name'" style="text-align: start;">{{ item.name }}</td>
               <td tuiTd *tuiCell="'quantity'">
                 <tui-input class="account-input" appearance="primary">
                   <input tuiTextfield type="number" min="1" />
                 </tui-input>
               </td>
               <td
-                style="max-width: 120px; width: 120px; padding-top: 1.65rem;
+                style="max-width: 120px; width: 120px; padding-top: 1rem;
                 padding-right: 0.5rem;"
                 tuiTd
                 *tuiCell="'size'"
@@ -184,7 +189,7 @@
               </td>
 
               <td
-                style="max-width: 120px; width: 120px; margin-top: 1.65rem"
+                style="max-width: 120px; width: 120px; margin-top: 1rem"
                 tuiTd
                 *tuiCell="'sex'"
                 tourAnchor="sex"
@@ -194,7 +199,7 @@
                   [tuiTextfieldLabelOutside]="true"
                   [valueContent]="item.sex?.name"
                   [(ngModel)]="item.sex"
-                  style="margin-top: 1.65rem;
+                  style="margin-top: 1rem;
                   padding-right: 0.8rem;"
                 >
                   <ng-template tuiDataList>
@@ -216,7 +221,7 @@
                 *tuiCell="'request'"
                 style="max-width: 120px"
               >
-                <tui-input class="account-input" [(ngModel)]="item.request" style="margin-top: 1.60rem;
+                <tui-input class="account-input" [(ngModel)]="item.request" style="margin-top: 1rem;
                 padding-right: 0.5rem;">
                   <input tuiTextfield type="text" />
                 </tui-input>
@@ -509,4 +514,20 @@
   >
     Скачать шаблон&nbsp;
   </button>
+</ng-template>
+
+<ng-template #todo let-observer>
+  <div class="read_me">
+    <p class="pay_attention">ВНИМАНИЕ</p>
+    <ol>
+      <li>1. Все выкупы должны быть распределены равномерно в течение дня (нельзя создать 10+ выкупов и оплатить все сразу)</li>
+      <li>2. Общее количество выкупов в день должно учитывать продаваемость карточки, не более 50% от органических продаж (если 100 продаж в день в среднем за 2 недели, то можно сделать 50 выкупов/день). Если карточка новая - не более 10 выкупов в день. Карточку надо прокачивать постепенно, вариант сделать в новой сотню выкупов сразу не пройдет.</li>
+      <li>3. Используйте разные ключевые слова для поиска в каталоге. Если карточка раскручена, выкупаетесь по высокочастотным ключам, и она по ним хотя бы на 20 странице в каталоге, их можно использовать (например, носки мужские).</li>
+      <li>4. Используйте максимально широкую географию, выкупайте в разные города (например, не только Москва, но и область). Нельзя использовать только ПВЗ одного района, а тем более соседние по расположению.</li>
+      <li>5. Если на одном ПВЗ сразу несколько товаров рекомендуется не забирать все сразу (какие-то сегодня с утра, какие-то завтра вечером и т.д.). В идеале не забирать сразу более одного своего товара.</li>
+      <li>6. Отзыв на товар должен быть оставлен не ранее чем через 24 часа после получения. Если нужно закрыть единицу - держите в запасе доступные отзывы.</li>
+      <li>7. Если нужно оставить несколько отзывов на одну группу карточек, время между их публикацией должно быть не менее 15 минут (одновременно не публикуйте).</li>
+      <li>8. Общее количество отзывов не должно превышать 10% от количества выкупов.</li>
+  </ol>  
+  </div>
 </ng-template>

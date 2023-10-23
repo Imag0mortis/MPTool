@@ -203,15 +203,22 @@
       </div>
     </div>
     <div class="button_container">
-      <button
-        tuiButton
-        type="button"
-        (click)="onCreateLinkClick()"
-        appearance="primary"
-        class="tui-space_right-3 tui-space_bottom-3"
-      >
-        Создать ссылку
-      </button>
+      <div class="footer_left">
+        <ol>
+          <li class="status" *ngIf="sum > 0">Сумма: {{sum}}</li>
+          <li class="status" *ngIf="time > 0">Время: {{time}}</li>
+          <li class="status" *ngIf="status">Статус: {{status}}</li>
+        </ol>
+        <button
+          tuiButton
+          type="button"
+          (click)="onCreateLinkClick()"
+          appearance="primary"
+          class="tui-space_right-3 tui-space_bottom-3"
+        >
+          Создать ссылку
+        </button>
+      </div>
       <div class="right_buttons">
         <button
           tuiButton

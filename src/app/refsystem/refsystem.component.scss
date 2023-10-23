@@ -279,6 +279,19 @@ tui-input-card{
   width: 21rem;
 }
 
+.status{
+  list-style-type: none;
+  font-size: 16px;
+  line-height: 19px;
+  color: #2c7a77;
+  font-weight: bold;
+  padding-bottom: 0.5rem;
+  margin-left: 3rem;
+}
+
+ol {
+  height: 4.7rem;
+}
 
 @media screen and (max-width: 1400px) {
   .footer_container {

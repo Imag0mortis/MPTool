@@ -582,6 +582,12 @@ export class RequestService {
     );
   }
 
+  public getReferalStatus() {
+    return this.http.get(
+      environment.api + `ref/payments.php`
+    );
+  }
+
   public createLink(quantity: number, type: string) {
     const body = {
       date_created: quantity,

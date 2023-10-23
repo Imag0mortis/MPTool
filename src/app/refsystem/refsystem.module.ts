@@ -15,8 +15,9 @@ import {
   TUI_BUTTON_OPTIONS,
   TuiHintModule
 } from '@taiga-ui/core';
-import { TuiInputCardModule } from '@taiga-ui/addon-commerce';
+import { TuiInputCardGroupedModule, TuiInputCardModule, tuiCardNumberValidator } from '@taiga-ui/addon-commerce';
 import { FormsModule } from '@angular/forms';
+import { TuiValidatorModule } from '@taiga-ui/cdk';
 
 @NgModule({
   providers: [
@@ -42,7 +43,9 @@ import { FormsModule } from '@angular/forms';
     TuiIslandModule,
     TuiInputCardModule,
     FormsModule,
-    TuiHintModule
+    TuiHintModule,
+    TuiValidatorModule,
+    TuiInputCardGroupedModule
   ]
 })
 export class RefsystemModule {}

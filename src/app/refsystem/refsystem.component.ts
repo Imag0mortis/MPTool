@@ -26,6 +26,9 @@ export class RefsystemComponent implements OnInit {
   cardNumber: string = '';
   page = 1;
   pageSize = 20;
+  status: string;
+  sum: number;
+  time: number;
 
   links: refinfo[] = [];
 
@@ -42,6 +45,7 @@ export class RefsystemComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData(this.page);
+    this.getStatus();
   }
 
   showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
@@ -130,6 +134,17 @@ export class RefsystemComponent implements OnInit {
         this.total_registrations = r.total_registrations;
         this.total_sum = r.total_sum;
       });
+  }
+
+  getStatus() {
+    this.requestService
+      .getReferalStatus()
+      .subscribe((r: any) => {
+        this.status = r.status;
+        this.sum = r.sum;
+        this.time = r.time;
+      });
+      console.log ("Тест", this.status, this.sum, this.time)
   }
 
   goToPage(event: any) {

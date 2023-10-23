@@ -47,8 +47,8 @@
 @media screen and (max-width: 1180px) {
   .modal-content__container {
     flex-direction: column;
-    width: auto;
-    height: auto;
+    width: 600px;
+    height: max-content;
   }
 
   .modal-content-col1 {
@@ -63,6 +63,10 @@
   }
 
   .location-item {
+    width: auto;
+  }
+
+  ya-map{
     width: auto;
   }
 }
