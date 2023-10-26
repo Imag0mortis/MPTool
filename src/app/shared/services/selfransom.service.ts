@@ -6,6 +6,7 @@ import { RequestService } from './request.service';
   providedIn: 'root'
 })
 export class SelfransomService {
+  public ransomDataSubject: BehaviorSubject<any> = new BehaviorSubject(null);
   allPoints: any;
   nearPoints$: BehaviorSubject<any> = new BehaviorSubject(null);
   currentPosition: any;
@@ -15,6 +16,15 @@ export class SelfransomService {
   ]);
 
   constructor(private request: RequestService) {}
+
+  setRansomData(data: any) {
+    this.ransomDataSubject.next(data);
+  }
+
+  getRansomData() {
+    return this.ransomDataSubject.asObservable();
+  }
+
 
   //  ВЫЗЫВАЕТ
   getAllMapsPoints() {

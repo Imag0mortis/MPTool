@@ -44,6 +44,11 @@
           </div>
           <p class="ref_refrrals">Рефералы</p>
         </div>
+        <div class="history_button" (click)="toggleTable()" *ngIf="!appService.isMobile">
+          <img src="../../assets/icons/cil_history.svg" alt="history_button">
+          <span *ngIf="!showStatusTable">История выплат</span>
+          <span *ngIf="showStatusTable">Управление ссылками</span>
+        </div>
       </div>
     </div>
     <div class="line"></div>
@@ -146,72 +151,98 @@
       </div>
     </div>
     <div class="footer_container">
-      <div class="table_content" *ngIf="!appService.isMobile">
-        <table
-          *ngIf="links.length > 0"
-          tuiTable
-          class="table_content"
-          style="width: 100%"
-        >
-          <thead>
-            <th class="link_cell">Ссылка <span *ngIf="!appService.isMobile">(нажмите, чтобы скопировать)</span>:</th>
-            <th>Кликов:</th>
-            <th>Регистраций:</th>
-            <th>Оплат:</th>
-            <th>Комиссия:</th>
-            <th>Удаление:</th>
-          </thead>
-          <tbody tuiTbody>
-            <tr *ngFor="let item of links">
-              <td>
-                <span
-                  class="copy-link"
-                  (click)="copyTextToClipboard(item.link)"
-                  tuiHintPointer
-                  tuiHint="нажмите, чтобы скопировать"
-                >
-                  {{ item.link }}
-                </span>
-              </td>
-              <td>{{ item.hits }}</td>
-              <td>{{ item.registers }}</td>
-              <td>{{ item.sum_total }}</td>
-              <td>{{ item.referral_comission }}</td>
-              <td>
-                <button
-                  tuiButton
-                  type="button"
-                  (click)="deleteLink(item)"
-                  size="s"
-                  appearance="secondary-destructive"
-                  class="delete"
-                  style="width: max-content"
-                >
-                  <span>Удалить</span>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="pagination-container" *ngIf="links.length > 0">
+      <div class="table_content_wrapper">
+        <div class="table_content" *ngIf="!appService.isMobile && !showStatusTable">
+          <table
+            *ngIf="links.length > 0"
+            tuiTable
+            class="table_content"
+            style="width: 100%"
+          >
+            <thead>
+              <th class="link_cell">Ссылка <span *ngIf="!appService.isMobile">(нажмите, чтобы скопировать)</span>:</th>
+              <th>Кликов:</th>
+              <th>Регистраций:</th>
+              <th>Оплат:</th>
+              <th>Комиссия:</th>
+              <th>Удаление:</th>
+            </thead>
+            <tbody tuiTbody>
+              <tr *ngFor="let item of links">
+                <td>
+                  <span
+                    class="copy-link"
+                    (click)="copyTextToClipboard(item.link)"
+                    tuiHintPointer
+                    tuiHint="нажмите, чтобы скопировать"
+                  >
+                    {{ item.link }}
+                  </span>
+                </td>
+                <td>{{ item.hits }}</td>
+                <td>{{ item.registers }}</td>
+                <td>{{ item.sum_total }}</td>
+                <td>{{ item.referral_comission }}</td>
+                <td>
+                  <button
+                    tuiButton
+                    type="button"
+                    (click)="deleteLink(item)"
+                    size="s"
+                    appearance="secondary-destructive"
+                    class="delete"
+                    style="width: max-content"
+                  >
+                    <span>Удалить</span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination-container" *ngIf="links.length > 0 && !showStatusTable">
           <tui-pagination
             [length]="length"
             [index]="index"
             (indexChange)="goToPage($event)"
           ></tui-pagination>
         </div>
+        <div class="table_content" *ngIf="!appService.isMobile && showStatusTable">
+          <table
+          *ngIf="status.length > 0"
+            tuiTable
+            class="table_content"
+            style="width: 100%"
+          >
+            <thead>
+              <th>Дата:</th>
+              <th>Сумма:</th>
+              <th>Статус:</th>
+            </thead>
+            <tbody tuiTbody>
+              <tr>
+                <td>{{time}}</td>
+                <td>{{sum}}</td>
+                <td>{{status}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pagination-container" *ngIf="links.length > 0 && !showStatusTable">
+            <tui-pagination
+              [length]="length"
+              [index]="index"
+              (indexChange)="goToPage($event)"
+            ></tui-pagination>
+          </div>
+        </div>
       </div>
     </div>
     <div class="button_container">
       <div class="footer_left">
-        <ol>
-          <li class="status" *ngIf="sum > 0">Сумма: {{sum}}</li>
-          <li class="status" *ngIf="time > 0">Время: {{time}}</li>
-          <li class="status" *ngIf="status">Статус: {{status}}</li>
-        </ol>
         <button
           tuiButton
           type="button"
+          style="width: 177px;"
           (click)="onCreateLinkClick()"
           appearance="primary"
           class="tui-space_right-3 tui-space_bottom-3"

@@ -114,7 +114,7 @@
       >
         <table
           tuiTable
-          *ngIf="data.length > 0 && !appService.isMobile"
+          *ngIf="data && data.length > 0 && !appService.isMobile"
           class="table"
           [columns]="columns"
         >
@@ -142,10 +142,7 @@
           <tbody tuiTbody [data]="data" tuiTextfieldAppearance="textfield">
             <tr tuiTr *ngFor="let item of data; index as i">
               <td tuiTd *tuiCell="'imgLink'">
-                <div
-                  class="photo_placeholder"
-                  [style.background-image]="'url(' + item.imgLink + ')'"
-                ></div>
+                <div class="photo_placeholder" [style.background-image]="'url(' + item.imgLink + ')'" ></div>
               </td>
               <td tuiTd *tuiCell="'sku'">{{ item.sku }}</td>
               <td tuiTd *tuiCell="'price'">{{ item.price }} ₽</td>

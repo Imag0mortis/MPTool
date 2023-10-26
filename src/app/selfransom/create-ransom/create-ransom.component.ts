@@ -18,6 +18,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
+import { SelfransomService } from 'src/app/shared/services/selfransom.service';
 
 @Component({
   selector: 'app-create-ransom',
@@ -57,6 +58,7 @@ export class CreateRansomComponent implements OnInit {
   item: any;
 
   constructor(
+    private selfransomService: SelfransomService,
     public appService: AppService,
     public positions: PositionsService,
     private router: Router,
@@ -68,11 +70,36 @@ export class CreateRansomComponent implements OnInit {
     private fb: FormBuilder,
     @Inject(TuiAlertService)
     private readonly alertService: TuiAlertService
-  ) {}
-
-  ngOnInit(): void {
-    // this.item.sex = null;
+  ) {
+      this.selfransomService.getRansomData().subscribe((data) => {
+        if (data) {
+          const transformedData: WbPosition[] = data.task.map((item: any) => {
+            return {
+              imgLink: item.imgLink,
+              name: item.name,
+              price: item.price,
+              sizes: [
+                {
+                  Key: item.size,
+                  Value: item.size,
+                },
+              ],
+              sku: item.sku,
+              quantity: item.quantity,
+              request: item.query,
+              address: item.address,
+              sex: item.sex,
+              size: undefined,
+            };
+          });
+      
+          this.data = transformedData;
+        }
+      });
+      console.log('Test', this.data);
   }
+
+  ngOnInit(): void {}
 
   private readonly dialog = this.dialogService.open<Address>(
     new PolymorpheusComponent(MapModalComponent, this.injector),

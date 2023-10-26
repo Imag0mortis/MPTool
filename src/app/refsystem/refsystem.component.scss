@@ -134,6 +134,8 @@
   font-size: 16px;
   line-height: 19px;
   color: #2c7a77;
+  display: flex;
+  flex-direction: column;
 }
 .string2 {
   color: #000000;
@@ -215,6 +217,7 @@ tui-input {
   align-items: center;
   justify-content: space-between;
   margin-right: 5.5%;
+  margin-top: 4rem;
 }
 
 a {
@@ -226,6 +229,11 @@ a {
   text-align: center;
   width: 100%;
   overflow-x: auto;
+  max-height: 16rem;
+}
+
+.table_content_wrapper{
+  height: 16rem;
 }
 
 .table_content table {
@@ -271,10 +279,6 @@ tui-input-card{
   border-radius: 10px !important;
 }
 
-.right_buttons{
-  margin-left: 30%;
-}
-
 .link_cell{
   width: 21rem;
 }
@@ -291,6 +295,36 @@ tui-input-card{
 
 ol {
   height: 4.7rem;
+}
+
+.history_button{
+  margin-left: 4rem;
+  width: 7.375rem;
+  height: 7.375rem;
+  flex-shrink: 0;
+  border-radius: 0.625rem;
+  background: #2C7A77;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+  &:hover {
+    background: #2e8061;;
+  }
+}
+
+.history_button img{
+  height: 4rem;
+}
+
+.history_button span{
+  color: #FFF;
+  font-family: Montserrat;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-align: center;
 }
 
 @media screen and (max-width: 1400px) {

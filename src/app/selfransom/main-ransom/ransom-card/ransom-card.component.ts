@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AppService } from 'src/app/shared/services/app.service';
 import { RequestService } from 'src/app/shared/services/request.service';
-import { TuiAlertService } from '@taiga-ui/core';
+import { SelfransomService } from 'src/app/shared/services/selfransom.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-ransom-card',
@@ -11,17 +12,16 @@ import { TuiAlertService } from '@taiga-ui/core';
 export class RansomMainCardComponent {
   constructor(
     public appService: AppService,
+    private selfransomService: SelfransomService,
+    private router: Router,
     private requestService: RequestService,
-    @Inject(TuiAlertService)
-    private readonly alertService: TuiAlertService
   ) {}
 
   @Input() item: any;
-  @Output() refreshGetData = new EventEmitter();
   index: any = 0;
 
   getData(task_id: any) {
-    this.requestService.getSelfRansomDuplicate(task_id).subscribe((r: any) => {
+    this.requestService.getSelfransomTask(task_id).subscribe((r: any) => {
       if (r.tasks && r.tasks.length > 0) {
         const requestData = {
           task: r.tasks.map((task: any) => ({
@@ -32,23 +32,13 @@ export class RansomMainCardComponent {
             query: task.query,
             sex: task.sex,
             size: task.size,
-            address: task.address
+            address: task.address,
+            imgLink: task.imgLink,
           }))
         };
-        this.requestService.createSelfransomTask(requestData).subscribe(
-          (response: any) => {
-            const options: any = { status: 'success' };
-            this.alertService.open('Задание дублировано', options).subscribe();
-            this.refreshGetData.emit();
-          },
-          (error: any) => {
-            const options: any = { status: 'error' };
-            this.alertService
-              .open('Ошибка при дублировании', options)
-              .subscribe();
-          }
-        );
+        this.selfransomService.setRansomData(requestData);
+        this.router.navigate(['/create-ransom']);
       }
     });
-  }
+  }  
 }

@@ -29,6 +29,7 @@ export class RefsystemComponent implements OnInit {
   status: string;
   sum: number;
   time: number;
+  showStatusTable = false;
 
   links: refinfo[] = [];
 
@@ -56,6 +57,10 @@ export class RefsystemComponent implements OnInit {
     this.request.createLink(quantity, type).subscribe((response: any) => {
       this.link = response.link;
     });
+  }
+
+  toggleTable() {
+    this.showStatusTable = !this.showStatusTable;
   }
 
   onCreateLinkClick() {
@@ -137,15 +142,17 @@ export class RefsystemComponent implements OnInit {
   }
 
   getStatus() {
-    this.requestService
-      .getReferalStatus()
-      .subscribe((r: any) => {
-        this.status = r.status;
-        this.sum = r.sum;
-        this.time = r.time;
-      });
-      console.log ("Тест", this.status, this.sum, this.time)
-  }
+  this.requestService.getReferalStatus().subscribe((response: any) => {
+    if (response.length > 0) {
+      const firstItem = response[0];
+      this.status = firstItem.status;
+      this.sum = firstItem.sum;
+      this.time = firstItem.time;
+      console.log("Тест", this.status, this.sum, this.time);
+    }
+  });
+}
+
 
   goToPage(event: any) {
     this.index = event;
